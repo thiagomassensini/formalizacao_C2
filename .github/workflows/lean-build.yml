@@ -1,0 +1,38 @@
+name: Lean Build
+
+on:
+  push:
+    branches:
+      - main
+      - release/**
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - main
+  release:
+    types:
+      - published
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lean-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build LeanC2
+        uses: leanprover/lean-action@v1
+        with:
+          auto-config: false
+          build: true
+          build-args: LeanC2
+          use-mathlib-cache: true
