@@ -511,6 +511,13 @@ theorem riemannHypothesisC2_of_genuineFInfiniteContinuation
   exact riemannHypothesisC2_of_genuineRouteData
     (data.toGenuineRouteData hNonvanishing)
 
+theorem mathlibRiemannHypothesis_of_genuineFInfiniteContinuation
+    (data : GenuineFInfiniteContinuationData)
+    (hNonvanishing : offCriticalStripNonvanishing genuineFInfinite) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_genuineFInfiniteContinuation data hNonvanishing)
+
 noncomputable def GenuineFInfiniteContinuationData.toGenuineRouteDataOfCover
     (data : GenuineFInfiniteContinuationData)
     (cover : OffCriticalCoverData)
@@ -529,6 +536,14 @@ theorem riemannHypothesisC2_of_genuineFInfiniteContinuation_cover
   exact riemannHypothesisC2_of_genuineRouteData
     (data.toGenuineRouteDataOfCover cover hCoverF)
 
+theorem mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_cover
+    (data : GenuineFInfiniteContinuationData)
+    (cover : OffCriticalCoverData)
+    (hCoverF : cover.F = genuineFInfinite) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_genuineFInfiniteContinuation_cover data cover hCoverF)
+
 theorem riemannHypothesisC2_of_genuineFInfiniteContinuation_nearBulkEdge
     (data : GenuineFInfiniteContinuationData)
     (near : NearAxisRouteData)
@@ -545,6 +560,22 @@ theorem riemannHypothesisC2_of_genuineFInfiniteContinuation_nearBulkEdge
     (OffCriticalCoverData.ofNearBulkEdge near bulk edge hBulkF hEdgeF hcover)
     hNearF
 
+theorem mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_nearBulkEdge
+    (data : GenuineFInfiniteContinuationData)
+    (near : NearAxisRouteData)
+    (bulk : RegionalVerticalBulkRouteData)
+    (edge : EdgeRouteData)
+    (hNearF : near.F = genuineFInfinite)
+    (hBulkF : bulk.F = near.F)
+    (hEdgeF : edge.F = near.F)
+    (hcover : ∀ s : Complex, offCriticalStrip s →
+      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
+        s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_genuineFInfiniteContinuation_nearBulkEdge
+      data near bulk edge hNearF hBulkF hEdgeF hcover)
+
 theorem riemannHypothesisC2_of_genuineFInfiniteContinuation_nearBulkBoundsEdge
     (data : GenuineFInfiniteContinuationData)
     (near : NearAxisRouteData)
@@ -560,5 +591,21 @@ theorem riemannHypothesisC2_of_genuineFInfiniteContinuation_nearBulkBoundsEdge
   exact riemannHypothesisC2_of_genuineFInfiniteContinuation_cover data
     (OffCriticalCoverData.ofNearBulkBoundsEdge near bulk edge hBulkF hEdgeF hcover)
     hNearF
+
+theorem mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_nearBulkBoundsEdge
+    (data : GenuineFInfiniteContinuationData)
+    (near : NearAxisRouteData)
+    (bulk : RegionalVerticalBulkBoundsData)
+    (edge : EdgeRouteData)
+    (hNearF : near.F = genuineFInfinite)
+    (hBulkF : bulk.F = near.F)
+    (hEdgeF : edge.F = near.F)
+    (hcover : ∀ s : Complex, offCriticalStrip s →
+      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
+        s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_genuineFInfiniteContinuation_nearBulkBoundsEdge
+      data near bulk edge hNearF hBulkF hEdgeF hcover)
 
 end C2

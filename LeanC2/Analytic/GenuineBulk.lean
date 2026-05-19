@@ -250,6 +250,19 @@ theorem riemannHypothesisC2_of_genuineFInfiniteContinuation_regionalBulkCover
       edge := edge
       cover := cover }
 
+theorem mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_regionalBulkCover
+    (continuation : GenuineFInfiniteContinuationData)
+    (near : GenuineFInfiniteNearAxisData)
+    (bulk : GenuineFInfiniteRegionalBulkRouteData)
+    (edge : GenuineFInfiniteEdgeData)
+    (cover : ∀ s : ℂ, offCriticalStrip s →
+      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
+        s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_genuineFInfiniteContinuation_regionalBulkCover
+      continuation near bulk edge cover)
+
 theorem riemannHypothesisC2_of_genuineFInfiniteContinuation_regionalBulkBoundsCover
     (continuation : GenuineFInfiniteContinuationData)
     (near : GenuineFInfiniteNearAxisData)
@@ -265,5 +278,18 @@ theorem riemannHypothesisC2_of_genuineFInfiniteContinuation_regionalBulkBoundsCo
       bulk := bulk.toPinnedBulkBoundsData
       edge := edge
       cover := cover }
+
+theorem mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_regionalBulkBoundsCover
+    (continuation : GenuineFInfiniteContinuationData)
+    (near : GenuineFInfiniteNearAxisData)
+    (bulk : GenuineFInfiniteRegionalBulkBoundsData)
+    (edge : GenuineFInfiniteEdgeData)
+    (cover : ∀ s : ℂ, offCriticalStrip s →
+      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
+        s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_genuineFInfiniteContinuation_regionalBulkBoundsCover
+      continuation near bulk edge cover)
 
 end C2

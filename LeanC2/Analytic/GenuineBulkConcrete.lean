@@ -2348,6 +2348,27 @@ theorem
       edge
       cover
 
+theorem
+    mathlibRiemannHypothesis_of_c2OddTailContinuedBalancingSeedBulkModel_concreteCover
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {tiltConstant tiltScale
+      horizontalConstant horizontalScale horizontalRatio
+      cutoffConstant cutoffScale : ℂ → ℝ}
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M)
+    (cover : ∀ s : ℂ, offCriticalStrip s →
+      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
+        s ∈ c2OddTailContinuedBalancingSeedBulkConcreteRegion
+          coreCutoff K M
+          tiltConstant tiltScale
+          horizontalConstant horizontalScale horizontalRatio
+          cutoffConstant cutoffScale ∨
+        s ∈ edge.edgeRegion) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_concreteCover
+      near edge cover)
+
 theorem c2LiftBulkCover_of_subset
     {nearRegion bulkRegion targetRegion edgeRegion : Set ℂ}
     (hsubset : ∀ ⦃s : ℂ⦄, s ∈ bulkRegion → s ∈ targetRegion)
@@ -2384,6 +2405,30 @@ theorem
   exact
     riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_concreteCover
       near edge (c2LiftBulkCover_of_subset hsubset cover)
+
+theorem
+    mathlibRiemannHypothesis_of_c2OddTailContinuedBalancingSeedBulkModel_concreteSubsetCover
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {tiltConstant tiltScale
+      horizontalConstant horizontalScale horizontalRatio
+      cutoffConstant cutoffScale : ℂ → ℝ}
+    {bulkRegion : Set ℂ}
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M)
+    (hsubset : ∀ ⦃s : ℂ⦄, s ∈ bulkRegion →
+      s ∈ c2OddTailContinuedBalancingSeedBulkConcreteRegion
+        coreCutoff K M
+        tiltConstant tiltScale
+        horizontalConstant horizontalScale horizontalRatio
+        cutoffConstant cutoffScale)
+    (cover : ∀ s : ℂ, offCriticalStrip s →
+      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
+        s ∈ bulkRegion ∨
+        s ∈ edge.edgeRegion) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_concreteSubsetCover
+      near edge hsubset cover)
 
 /-!
 ## Quartet-refined concrete bulk package for the continued model
@@ -2655,6 +2700,27 @@ theorem
         cutoffConstant cutoffScale)
       edge
       cover
+
+theorem
+    mathlibRiemannHypothesis_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteCover
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {tiltConstant tiltScale
+      horizontalConstant horizontalScale horizontalRatio
+      cutoffConstant cutoffScale : ℂ → ℝ}
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M)
+    (cover : ∀ s : ℂ, offCriticalStrip s →
+      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
+        s ∈ c2OddTailContinuedBalancingSeedBulkQuartetConcreteRegion
+          coreCutoff K M
+          tiltConstant tiltScale
+          horizontalConstant horizontalScale horizontalRatio
+          cutoffConstant cutoffScale ∨
+        s ∈ edge.edgeRegion) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteCover
+      near edge cover)
 
 /-- Continuation data type specialized to the balancing-seed bulk model. -/
 abbrev C2OddTailBalancingSeedBulkModelContinuationData
@@ -2980,6 +3046,17 @@ theorem riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModelContinuation
   exact riemannHypothesisC2_of_genuineRouteData
     (data.toGenuineRouteData hNonvanishing)
 
+theorem mathlibRiemannHypothesis_of_c2OddTailBalancingSeedBulkModelContinuation
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (data : C2OddTailBalancingSeedBulkModelContinuationData coreCutoff K M)
+    (hNonvanishing :
+      offCriticalStripNonvanishing
+        (c2OddTailBalancingSeedBulkModel coreCutoff K M)) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModelContinuation
+      data hNonvanishing)
+
 theorem riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModelContinuation_cover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (data : C2OddTailBalancingSeedBulkModelContinuationData coreCutoff K M)
@@ -2988,6 +3065,16 @@ theorem riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModelContinuation_cover
     RiemannHypothesisC2 := by
   exact riemannHypothesisC2_of_genuineRouteData
     (data.toGenuineRouteDataOfCover cover hCoverF)
+
+theorem mathlibRiemannHypothesis_of_c2OddTailBalancingSeedBulkModelContinuation_cover
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (data : C2OddTailBalancingSeedBulkModelContinuationData coreCutoff K M)
+    (cover : OffCriticalCoverData)
+    (hCoverF : cover.F = c2OddTailBalancingSeedBulkModel coreCutoff K M) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModelContinuation_cover
+      data cover hCoverF)
 
 noncomputable def c2OddTailBalancingSeedBulkModelGenuineRouteData_of_analyticOnNhd_cover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -3034,6 +3121,22 @@ theorem riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_analyticOnNhd_cov
     (c2OddTailBalancingSeedBulkModelGenuineRouteData_of_analyticOnNhd_cover
       continuation hBulk hGenuine hEqAtOne cover hCoverF)
 
+theorem mathlibRiemannHypothesis_of_c2OddTailBalancingSeedBulkModel_analyticOnNhd_cover
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (continuation : GenuineFInfiniteContinuationData)
+    (hBulk : AnalyticOnNhd ℂ
+      (c2OddTailBalancingSeedBulkModel coreCutoff K M)
+      puncturedOpenRightHalfPlane)
+    (hGenuine : AnalyticOnNhd ℂ genuineFInfinite puncturedOpenRightHalfPlane)
+    (hEqAtOne :
+      c2OddTailBalancingSeedBulkModel coreCutoff K M 1 = genuineFInfinite 1)
+    (cover : OffCriticalCoverData)
+    (hCoverF : cover.F = c2OddTailBalancingSeedBulkModel coreCutoff K M) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_analyticOnNhd_cover
+      continuation hBulk hGenuine hEqAtOne cover hCoverF)
+
 theorem riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_continuation_cover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -3047,6 +3150,21 @@ theorem riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_continuation_cove
     RiemannHypothesisC2 := by
   exact riemannHypothesisC2_of_genuineRouteData
     (c2OddTailBalancingSeedBulkModelGenuineRouteData_of_continuation_cover
+      continuation hBulk hEqAtOne cover hCoverF)
+
+theorem mathlibRiemannHypothesis_of_c2OddTailBalancingSeedBulkModel_continuation_cover
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (continuation : GenuineFInfiniteContinuationData)
+    (hBulk : AnalyticOnNhd ℂ
+      (c2OddTailBalancingSeedBulkModel coreCutoff K M)
+      puncturedOpenRightHalfPlane)
+    (hEqAtOne :
+      c2OddTailBalancingSeedBulkModel coreCutoff K M 1 = genuineFInfinite 1)
+    (cover : OffCriticalCoverData)
+    (hCoverF : cover.F = c2OddTailBalancingSeedBulkModel coreCutoff K M) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_continuation_cover
       continuation hBulk hEqAtOne cover hCoverF)
 
 theorem riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_analyticOnNhd_cover_offCritical
@@ -3063,6 +3181,18 @@ theorem riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_analyticOnNhd_cov
         c2OddTailBalancingSeedBulkModel_fundamentalIdentity_offCritical_of_analyticOnNhd
           (coreCutoff := coreCutoff) (K := K) (M := M) hBulk)
 
+theorem mathlibRiemannHypothesis_of_c2OddTailBalancingSeedBulkModel_analyticOnNhd_cover_offCritical
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (hBulk : AnalyticOnNhd ℂ
+      (c2OddTailBalancingSeedBulkModel coreCutoff K M)
+      puncturedOpenRightHalfPlane)
+    (cover : OffCriticalCoverData)
+    (hCoverF : cover.F = c2OddTailBalancingSeedBulkModel coreCutoff K M) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_analyticOnNhd_cover_offCritical
+      hBulk cover hCoverF)
+
 theorem riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_central_bridge_cover_offCritical
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (hCentral : ∀ s : ℂ, s ∈ puncturedOpenRightHalfPlane →
@@ -3075,6 +3205,17 @@ theorem riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_central_bridge_co
       simpa [hCoverF] using
         c2OddTailBalancingSeedBulkModel_fundamentalIdentity_offCritical_of_central
           (coreCutoff := coreCutoff) (K := K) (M := M) hCentral)
+
+theorem mathlibRiemannHypothesis_of_c2OddTailBalancingSeedBulkModel_central_bridge_cover_offCritical
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (hCentral : ∀ s : ℂ, s ∈ puncturedOpenRightHalfPlane →
+      genuineCentralDoubleSeries s = continuedCentralOddChannel s)
+    (cover : OffCriticalCoverData)
+    (hCoverF : cover.F = c2OddTailBalancingSeedBulkModel coreCutoff K M) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_central_bridge_cover_offCritical
+      hCentral cover hCoverF)
 
 /--
 The existing concrete scaled-seeded bulk bounds data restricted to the stronger
@@ -9787,6 +9928,20 @@ theorem riemannHypothesisC2_of_c2ExpandedScalarCoverData
   riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_expandedScalarCover
     data.near data.edge data.cover
 
+theorem mathlibRiemannHypothesis_of_c2ExpandedScalarCoverData
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {tiltConstant tiltScale
+      horizontalConstant horizontalScale horizontalRatio
+      cutoffConstant cutoffScale : ℂ → ℝ}
+    (data : C2ExpandedScalarCoverData
+      coreCutoff K M
+      tiltConstant tiltScale
+      horizontalConstant horizontalScale horizontalRatio
+      cutoffConstant cutoffScale) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_c2ExpandedScalarCoverData data)
+
 theorem
   riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -9810,6 +9965,30 @@ theorem
   exact
     riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteCover
       near edge (c2LiftBulkCover_of_subset hsubset cover)
+
+theorem
+  mathlibRiemannHypothesis_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {tiltConstant tiltScale
+      horizontalConstant horizontalScale horizontalRatio
+      cutoffConstant cutoffScale : ℂ → ℝ}
+    {bulkRegion : Set ℂ}
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M)
+    (hsubset : ∀ ⦃s : ℂ⦄, s ∈ bulkRegion →
+      s ∈ c2OddTailContinuedBalancingSeedBulkQuartetConcreteRegion
+        coreCutoff K M
+        tiltConstant tiltScale
+        horizontalConstant horizontalScale horizontalRatio
+        cutoffConstant cutoffScale)
+    (cover : ∀ s : ℂ, offCriticalStrip s →
+      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
+        s ∈ bulkRegion ∨
+        s ∈ edge.edgeRegion) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
+      near edge hsubset cover)
 
 theorem
     riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetExactCover
@@ -9843,6 +10022,27 @@ theorem
       near edge ?_ cover
   intro s hs
   exact c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_exactRegion hs
+
+theorem
+    mathlibRiemannHypothesis_of_c2OddTailContinuedBalancingSeedBulkModel_quartetExactCover
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {tiltConstant tiltScale
+      horizontalConstant horizontalScale horizontalRatio
+      cutoffConstant cutoffScale : ℂ → ℝ}
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M)
+    (cover : ∀ s : ℂ, offCriticalStrip s →
+      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
+        s ∈ c2OddTailContinuedBalancingSeedBulkQuartetExactRegion
+          coreCutoff K M
+          tiltConstant tiltScale
+          horizontalConstant horizontalScale horizontalRatio
+          cutoffConstant cutoffScale ∨
+        s ∈ edge.edgeRegion) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetExactCover
+      near edge cover)
 
 theorem
     riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetTriangleCover
@@ -11010,6 +11210,23 @@ theorem riemannHypothesisC2_of_c2ExpandedScalarLocalChoice
   riemannHypothesisC2_of_c2ExpandedScalarCoverData
     (C2ExpandedScalarCoverData.ofLocalChoice near edge choose)
 
+theorem mathlibRiemannHypothesis_of_c2ExpandedScalarLocalChoice
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {tiltConstant tiltScale
+      horizontalConstant horizontalScale horizontalRatio
+      cutoffConstant cutoffScale : ℂ → ℝ}
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M)
+    (choose : ∀ s : ℂ, offCriticalStrip s →
+      C2ExpandedScalarCoverChoice
+        coreCutoff K M
+        tiltConstant tiltScale
+        horizontalConstant horizontalScale horizontalRatio
+        cutoffConstant cutoffScale near edge s) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_c2ExpandedScalarLocalChoice near edge choose)
+
 /--
 Abstract regional decomposition for the expanded scalar cover.
 
@@ -11154,6 +11371,23 @@ theorem riemannHypothesisC2_of_c2ExpandedScalarChoiceRegions
     RiemannHypothesisC2 :=
   riemannHypothesisC2_of_c2ExpandedScalarCoverData
     (C2ExpandedScalarCoverData.ofChoiceRegions near edge regions cover)
+
+theorem mathlibRiemannHypothesis_of_c2ExpandedScalarChoiceRegions
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {tiltConstant tiltScale
+      horizontalConstant horizontalScale horizontalRatio
+      cutoffConstant cutoffScale : ℂ → ℝ}
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M)
+    (regions : C2ExpandedScalarChoiceRegions
+      coreCutoff K M
+      tiltConstant tiltScale
+      horizontalConstant horizontalScale horizontalRatio
+      cutoffConstant cutoffScale near edge)
+    (cover : ∀ s : ℂ, offCriticalStrip s → s ∈ regions.combinedRegion) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_c2ExpandedScalarChoiceRegions near edge regions cover)
 
 /-- Concrete local-bulk region: points carrying the full local scalar-bulk data package. -/
 def c2ExpandedScalarLocalBulkRegion
