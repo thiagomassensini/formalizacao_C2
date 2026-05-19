@@ -49,7 +49,7 @@ theorem riemannHypothesisC2_of_mathlibRiemannHypothesis
       linarith)
     (by
       intro h
-      have hs_re : s.re = 1 := by simpa [h]
+      have hs_re : s.re = 1 := by simp [h]
       linarith)
 
 theorem mathlibRiemannHypothesis_of_riemannHypothesisC2
@@ -63,20 +63,23 @@ theorem mathlibRiemannHypothesis_of_riemannHypothesisC2
     · exact hRH s hz hs_pos hs_lt_one
     · have hs_nonpos : s.re ≤ 0 := le_of_not_gt hs_pos
       by_cases hs_zero : s = 0
-      · exact False.elim (by simpa [hs_zero, riemannZeta_zero] using hz)
+      · have hz0 : riemannZeta 0 = 0 := by simpa [hs_zero] using hz
+        norm_num [riemannZeta_zero] at hz0
       · have h_one_sub_re_ge_one : 1 ≤ (1 - s).re := by
           simp
           linarith
         have h_one_sub_ne_neg_nat : ∀ n : ℕ, 1 - s ≠ -n := by
           intro n h_eq
           have h_one_sub_re_nonpos : (1 - s).re ≤ 0 := by
-            simpa [h_eq]
+            rw [h_eq]
+            simp
           linarith
         have h_one_sub_ne_one : 1 - s ≠ 1 := by
           intro h_eq
           apply hs_zero
           have h_sub := congrArg (fun z : Complex => z - 1) h_eq
-          simpa [sub_eq_add_neg, add_assoc, add_left_comm, add_comm] using h_sub
+          exact neg_eq_zero.mp <| by
+            simpa [sub_eq_add_neg, add_assoc, add_left_comm, add_comm] using h_sub
         have h_func :
             riemannZeta s =
               2 * (2 * (Real.pi : Complex)) ^ (-(1 - s)) * Complex.Gamma (1 - s) *
@@ -99,8 +102,11 @@ theorem mathlibRiemannHypothesis_of_riemannHypothesisC2
           apply hs1
           exact (sub_eq_zero.mp (neg_eq_zero.mp h_zero)).symm
         have h_cpow_ne_zero : (2 * (Real.pi : Complex)) ^ (-(1 - s)) ≠ 0 := by
-          exact (Complex.cpow_ne_zero_iff_of_exponent_ne_zero h_exp_ne_zero).2 h_two_pi_ne_zero
-        have h_front_ne_zero : 2 * (2 * (Real.pi : Complex)) ^ (-(1 - s)) * Complex.Gamma (1 - s) ≠ 0 := by
+          exact
+            (Complex.cpow_ne_zero_iff_of_exponent_ne_zero h_exp_ne_zero).2
+              h_two_pi_ne_zero
+        have h_front_ne_zero :
+            2 * (2 * (Real.pi : Complex)) ^ (-(1 - s)) * Complex.Gamma (1 - s) ≠ 0 := by
           exact mul_ne_zero (mul_ne_zero two_ne_zero h_cpow_ne_zero) h_gamma_ne_zero
         have h_front_cos_zero :
             (2 * (2 * (Real.pi : Complex)) ^ (-(1 - s)) * Complex.Gamma (1 - s)) *
@@ -121,8 +127,7 @@ theorem mathlibRiemannHypothesis_of_riemannHypothesisC2
           simpa [div_eq_mul_inv, mul_assoc, mul_left_comm, mul_comm] using hk
         have h_s_eq_even_int : s = -(2 * k : Complex) := by
           have h_odd_cast : (((2 * k + 1 : ℤ) : Complex)) = 1 + 2 * (k : Complex) := by
-            simp [Int.cast_add, Int.cast_mul, add_comm, add_left_comm, add_assoc,
-              mul_comm, mul_left_comm, mul_assoc]
+            simp [Int.cast_add, Int.cast_mul, add_comm, mul_comm]
           calc
             s = (1 : Complex) - ((2 * k + 1 : ℤ) : Complex) := by
               apply eq_sub_iff_add_eq.mpr
@@ -140,17 +145,19 @@ theorem mathlibRiemannHypothesis_of_riemannHypothesisC2
         have h_k_ne_zero : k ≠ 0 := by
           intro hk_zero
           apply hs_zero
-          simpa [h_s_eq_even_int, hk_zero]
+          rw [h_s_eq_even_int, hk_zero]
+          norm_num
         have h_k_toNat_ne_zero : k.toNat ≠ 0 := by
           intro hk_toNat_zero
           apply h_k_ne_zero
-          simpa [hk_toNat_zero] using (Int.toNat_of_nonneg h_k_nonneg).symm
+          rw [← Int.toNat_of_nonneg h_k_nonneg, hk_toNat_zero]
+          norm_num
         cases h_toNat : k.toNat with
         | zero => exact False.elim (h_k_toNat_ne_zero h_toNat)
         | succ n =>
             exact False.elim <| htriv ⟨n, by
               have h_k_nat : ((n + 1 : ℕ) : ℤ) = k := by
-                simpa [h_toNat] using (Int.toNat_of_nonneg h_k_nonneg)
+                rw [← Int.toNat_of_nonneg h_k_nonneg, h_toNat]
               calc
                 s = -(2 * k : Complex) := h_s_eq_even_int
                 _ = -(2 * (((n + 1 : ℕ) : ℤ) : Complex)) := by

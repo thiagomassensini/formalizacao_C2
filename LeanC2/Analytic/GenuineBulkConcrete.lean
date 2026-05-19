@@ -27382,4 +27382,54 @@ theorem
   exact ⟨s, hs,
     c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_explicitCutoffOneLtRegion hs⟩
 
+open Lean Elab Command Meta in
+
+private def mathlibRiemannHypothesisWrapperName? (declName : Name) : Option Name :=
+  match declName with
+  | .str prefix shortName =>
+      let base := "riemannHypothesisC2_of_"
+      if shortName.startsWith base then
+        let suffix := shortName.drop base.length
+        some <| .str prefix s!"mathlibRiemannHypothesis_of_{suffix}"
+      else
+        none
+  | _ => none
+
+private def mkMathlibRiemannHypothesisWrapperDecl
+    (oldInfo : ConstantInfo) (newName : Name) : MetaM Declaration := do
+  forallTelescope oldInfo.type fun xs target => do
+    let target ← whnf target
+    unless target.isConstOf ``RiemannHypothesisC2 do
+      throwError m!"expected {oldInfo.name} to end in RiemannHypothesisC2, got {target}"
+    let newType ← mkForallFVars xs (mkConst ``RiemannHypothesis)
+    let oldValue := mkAppN
+      (mkConst oldInfo.name (oldInfo.levelParams.map Level.param)) xs
+    let newValue ← mkLambdaFVars xs
+      (mkApp (mkConst ``mathlibRiemannHypothesis_of_riemannHypothesisC2) oldValue)
+    mkThmOrUnsafeDef {
+      name := newName
+      levelParams := oldInfo.levelParams
+      type := newType
+      value := newValue
+    }
+
+elab "deriveMissingMathlibRiemannHypothesisWrappers" : command => do
+  Command.liftTermElabM none do
+    let env ← getEnv
+    let pending : Array (Name × Name) := env.constants.map₂.foldl (init := #[]) fun acc declName _ =>
+      match mathlibRiemannHypothesisWrapperName? declName with
+      | none => acc
+      | some newName =>
+          if env.find? newName |>.isSome then
+            acc
+          else
+            acc.push (declName, newName)
+    for (oldName, newName) in pending do
+      let some oldInfo := env.find? oldName
+        | throwError m!"missing declaration {oldName}"
+      let decl ← mkMathlibRiemannHypothesisWrapperDecl oldInfo newName
+      addDecl decl
+
+deriveMissingMathlibRiemannHypothesisWrappers
+
 end C2

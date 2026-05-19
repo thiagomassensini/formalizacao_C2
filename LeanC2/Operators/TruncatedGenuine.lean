@@ -88,9 +88,9 @@ theorem exponentialCutoffTaylorRemainderCoeff_norm_le_expUpper_succ
               _ = (((-1 : ℂ) * ((X : ℂ)⁻¹ * (n : ℂ))) ^ m) := by
                     rw [mul_pow, mul_pow]
               _ = z ^ m := by
-                  simpa [z, div_eq_mul_inv, mul_assoc, mul_left_comm, mul_comm]
+                  simp [z, div_eq_mul_inv, mul_comm]
       _ = z ^ m / m.factorial := by
-            simp [div_eq_mul_inv, mul_assoc, mul_left_comm, mul_comm]
+        simp [div_eq_mul_inv, mul_comm]
   have hsum :
       ∑ m ∈ Finset.range (J + 1), z ^ m / m.factorial =
         1 + exponentialCutoffTaylorPolynomial X (J + 1) n := by
@@ -99,14 +99,14 @@ theorem exponentialCutoffTaylorRemainderCoeff_norm_le_expUpper_succ
       (Finset.sum_Ioc_add_eq_sum_Icc
         (f := fun m : ℕ => z ^ m / m.factorial) (a := 0) (b := J) J.zero_le)
     simpa [exponentialCutoffTaylorPolynomial, hzterm, Finset.Icc_succ_left_eq_Ioc,
-      add_comm, add_left_comm, add_assoc, z] using hsplit.symm
+      add_comm, add_assoc, z] using hsplit.symm
   have hrewrite :
       exponentialCutoffTaylorRemainderCoeff X (J + 1) n =
         Complex.exp z - ∑ m ∈ Finset.range (J + 1), z ^ m / m.factorial := by
     unfold exponentialCutoffTaylorRemainderCoeff exponentialCutoffResidualWeight
       exponentialCutoffWeight
     rw [hsum]
-    simp [z, sub_eq_add_neg, add_assoc, add_left_comm, add_comm]
+    simp [z, sub_eq_add_neg, add_assoc, add_comm]
   rw [hrewrite]
   simpa [exponentialCutoffTaylorRemainderCoeffExpUpper, z] using
     (Complex.norm_exp_sub_sum_le_norm_mul_exp z (J + 1))
@@ -422,7 +422,7 @@ theorem rectangularExponentialTaylorMain_eq_pointwiseOscillatoryMain
           _ = coeff j * rectangularExponentialOscillatoryMoment s K M j := by
               rfl
     _ = rectangularExponentialPointwiseOscillatoryMain s K M J X := by
-      simpa [rectangularExponentialPointwiseOscillatoryMain, coeff]
+      simp [rectangularExponentialPointwiseOscillatoryMain, coeff]
 
 /--
 Finite remainder contribution left after replacing `e^{-n/X} - 1` by a Taylor
