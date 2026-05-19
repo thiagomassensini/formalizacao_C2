@@ -68,6 +68,14 @@ theorem riemannHypothesisC2_of_F_nonvanishing
   exact riemannHypothesisC2_of_offCriticalStripNonvanishing
     (offCriticalStrip_zeta_nonvanishing_of_F_nonvanishing hId hF)
 
+theorem mathlibRiemannHypothesis_of_F_nonvanishing
+    {F : Complex -> Complex}
+    (hId : FundamentalIdentityOnRightHalfPlane F riemannZeta)
+    (hF : offCriticalStripNonvanishing F) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_F_nonvanishing hId hF)
+
 /-- Roadmap spelling: transfer a genuine off-axis zero-free statement to RH. -/
 theorem RH_from_C2
     {F : Complex -> Complex}
@@ -86,5 +94,13 @@ theorem riemannHypothesisC2_of_F_nonvanishing_offCriticalIdentity
   have hEq := hId s hs
   rw [hz, mul_zero] at hEq
   exact hF s hs hEq
+
+theorem mathlibRiemannHypothesis_of_F_nonvanishing_offCriticalIdentity
+    {F : Complex -> Complex}
+    (hId : FundamentalIdentityOnOffCriticalStrip F riemannZeta)
+    (hF : offCriticalStripNonvanishing F) :
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
+    (riemannHypothesisC2_of_F_nonvanishing_offCriticalIdentity hId hF)
 
 end C2

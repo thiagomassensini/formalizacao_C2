@@ -1,0 +1,389 @@
+⚠ [8271/8283] Replayed LeanC2.Operators.TruncatedGenuine
+warning: LeanC2/Operators/TruncatedGenuine.lean:91:18: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: LeanC2/Operators/TruncatedGenuine.lean:93:34: This simp argument is unused:
+  mul_assoc
+
+Hint: Omit it from the simp argument list.
+  simp [div_eq_mul_inv, m̵u̵l̵_̵a̵s̵s̵o̵c̵,̵ ̵mul_left_comm, mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanC2/Operators/TruncatedGenuine.lean:93:45: This simp argument is unused:
+  mul_left_comm
+
+Hint: Omit it from the simp argument list.
+  simp [div_eq_mul_inv, mul_assoc, m̵u̵l̵_̵l̵e̵f̵t̵_̵c̵o̵m̵m̵,̵ ̵mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanC2/Operators/TruncatedGenuine.lean:109:40: This simp argument is unused:
+  add_left_comm
+
+Hint: Omit it from the simp argument list.
+  simp [z, sub_eq_add_neg, add_assoc, a̵d̵d̵_̵l̵e̵f̵t̵_̵c̵o̵m̵m̵,̵ ̵add_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: LeanC2/Operators/TruncatedGenuine.lean:425:6: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+⚠ [8283/8283] Replayed LeanC2.Analytic.GenuineBulkConcrete
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:6990:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7071:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7080:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7160:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7172:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7348:2: The following tactic starts with 2 goals and ends with 2 goals, 1 of which is not operated on.
+  unfold c2ExponentialPointwiseOscillatoryMain c2ExponentialPointwiseOscillatoryRemainderTerm
+Please focus on the current goal, for instance using `·` (typed as "\.").
+
+Note: This linter can be disabled with `set_option linter.style.multiGoal false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7391:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7423:5: unused variable `hhorizontalScale`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7424:5: unused variable `hhorizontalConstant_nonneg`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7477:5: unused variable `htiltConstant_nonneg`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7614:24: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7619:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7765:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7797:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7816:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7848:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7867:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7898:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7917:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7949:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7967:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:7998:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:8005:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:8019:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:8060:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:8077:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:8119:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:8490:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:8806:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:8853:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:8868:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:16128:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:16315:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:16394:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:16406:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:16496:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:16578:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:16659:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:17058:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:17148:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:17255:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:17351:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:17362:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:17434:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:17529:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:17611:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:17621:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:17712:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:17785:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:17868:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:17879:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:17943:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:17956:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:18032:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:18106:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:18135:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:18328:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:18538:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:18603:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:18617:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:18681:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:18896:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:18910:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19013:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19110:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19304:22: unused variable `s`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19244:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19400:22: unused variable `s`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19330:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19406:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19464:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19474:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19531:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19541:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19609:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19620:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19687:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19703:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19779:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19789:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19874:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19941:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:19956:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20022:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20037:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20111:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20120:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20196:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20211:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20293:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20368:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20383:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20457:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20464:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20484:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20557:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20564:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20584:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20670:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20674:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20680:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20765:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20769:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20775:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20862:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20872:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20958:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:20968:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:21046:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:21062:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:21139:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:21155:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:21232:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:21240:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:21316:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:21329:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:21405:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:21415:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: LeanC2/Analytic/GenuineBulkConcrete.lean:22996:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+Build completed successfully (8283 jobs).
