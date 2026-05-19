@@ -1703,7 +1703,7 @@ noncomputable def
     rfl
     data.cover
 
-theorem offCriticalStripNonvanishing_of_c2OddTailContinuedBalancingSeedBulkModelNearBulkEdgeData
+theorem offCriticalStripNonvanishing_of_oddTailContinuedBalancingSeedBulkModelNearBulkEdgeData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (data : C2OddTailContinuedBalancingSeedBulkModelNearBulkEdgeData coreCutoff K M) :
     offCriticalStripNonvanishing
@@ -1713,7 +1713,7 @@ theorem offCriticalStripNonvanishing_of_c2OddTailContinuedBalancingSeedBulkModel
     offCriticalStripNonvanishing_of_coverData data.toOffCriticalCoverData
 
 theorem
-    offCriticalStripNonvanishing_of_c2OddTailContinuedBalancingSeedBulkModelNearBulkBoundsEdgeData
+    offCriticalStripNonvanishing_of_oddTailContinuedBalancingSeedBulkModelNearBulkBoundsEdgeData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (data :
       C2OddTailContinuedBalancingSeedBulkModelNearBulkBoundsEdgeData coreCutoff K M) :
@@ -9757,7 +9757,7 @@ noncomputable def C2ExpandedScalarCoverData.toOffCriticalCoverData
           s ∈ data.edge.edgeRegion
       exact data.cover)
 
-theorem offCriticalStripNonvanishing_of_c2ExpandedScalarCoverData
+theorem offCriticalStripNonvanishing_of_expandedScalarCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -10975,7 +10975,7 @@ noncomputable def C2ExpandedScalarCoverData.ofLocalChoice
     intro s hs
     exact C2ExpandedScalarCoverChoice.toCover (choose s hs)
 
-theorem offCriticalStripNonvanishing_of_c2ExpandedScalarLocalChoice
+theorem offCriticalStripNonvanishing_of_expandedScalarLocalChoice
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -10990,7 +10990,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedScalarLocalChoice
         cutoffConstant cutoffScale near edge s) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2ExpandedScalarCoverData
+  offCriticalStripNonvanishing_of_expandedScalarCoverData
     (C2ExpandedScalarCoverData.ofLocalChoice near edge choose)
 
 theorem mathlibRiemannHypothesis_of_expandedScalarLocalChoice
@@ -11120,7 +11120,7 @@ noncomputable def C2ExpandedScalarCoverData.ofChoiceRegions
   C2ExpandedScalarCoverData.ofLocalChoice near edge
     (fun s hs => regions.toChoice (cover s hs))
 
-theorem offCriticalStripNonvanishing_of_c2ExpandedScalarChoiceRegions
+theorem offCriticalStripNonvanishing_of_expandedScalarChoiceRegions
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -11135,7 +11135,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedScalarChoiceRegions
     (cover : ∀ s : ℂ, offCriticalStrip s → s ∈ regions.combinedRegion) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2ExpandedScalarCoverData
+  offCriticalStripNonvanishing_of_expandedScalarCoverData
     (C2ExpandedScalarCoverData.ofChoiceRegions near edge regions cover)
 
 theorem mathlibRiemannHypothesis_of_expandedScalarChoiceRegions
@@ -11451,7 +11451,7 @@ noncomputable def C2ExpandedScalarCoverData.ofCanonicalRegions
       near edge)
     cover
 
-theorem offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalRegions
+theorem offCriticalStripNonvanishing_of_expandedScalarCanonicalRegions
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -11467,7 +11467,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalRegions
         near edge).combinedRegion) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2ExpandedScalarCoverData
+  offCriticalStripNonvanishing_of_expandedScalarCoverData
     (C2ExpandedScalarCoverData.ofCanonicalRegions near edge cover)
 
 theorem mathlibRiemannHypothesis_of_expandedScalarCanonicalRegions
@@ -11488,7 +11488,7 @@ theorem mathlibRiemannHypothesis_of_expandedScalarCanonicalRegions
   mathlibRiemannHypothesis_of_expandedScalarCoverData
     (C2ExpandedScalarCoverData.ofCanonicalRegions near edge cover)
 
-theorem offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalCover
+theorem offCriticalStripNonvanishing_of_expandedScalarCanonicalCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -11505,7 +11505,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalCover
         s ∈ edge.edgeRegion) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalRegions near edge
+  offCriticalStripNonvanishing_of_expandedScalarCanonicalRegions near edge
     (fun s hs => C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_cover (cover s hs))
 
 theorem mathlibRiemannHypothesis_of_expandedScalarCanonicalCover
@@ -11527,7 +11527,7 @@ theorem mathlibRiemannHypothesis_of_expandedScalarCanonicalCover
   mathlibRiemannHypothesis_of_expandedScalarCanonicalRegions near edge
     (fun s hs => C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_cover (cover s hs))
 
-theorem offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalScalarCover
+theorem offCriticalStripNonvanishing_of_expandedScalarCanonicalScalarCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -11544,7 +11544,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalScalarCover
         s ∈ edge.edgeRegion) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalRegions
+  offCriticalStripNonvanishing_of_expandedScalarCanonicalRegions
     (tiltConstant := tiltConstant) (tiltScale := tiltScale)
     (horizontalConstant := horizontalConstant) (horizontalScale := horizontalScale)
     (horizontalRatio := horizontalRatio)
@@ -11613,7 +11613,7 @@ theorem c2ExpandedScalarMiddleRegion_cover
     · exact Or.inr <| Or.inr hedge
     · exact Or.inr <| Or.inl <| hmiddle ⟨hs, hnear, hedge⟩
 
-theorem offCriticalStripNonvanishing_of_c2ExpandedScalarMiddleRegion
+theorem offCriticalStripNonvanishing_of_expandedScalarMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -11630,7 +11630,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedScalarMiddleRegion
         cutoffConstant cutoffScale) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalScalarCover near edge
+  offCriticalStripNonvanishing_of_expandedScalarCanonicalScalarCover near edge
     (fun s hs => by
       by_cases hnear : s ∈ nearAxisRegion riemannZeta near.near_axis.radius
       · exact Or.inl hnear
@@ -11698,7 +11698,7 @@ noncomputable def C2ExpandedScalarCanonicalCoverData.toCoverData
         C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_cover
           (data.cover s hs))
 
-theorem offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalCoverData
+theorem offCriticalStripNonvanishing_of_expandedScalarCanonicalCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -11710,7 +11710,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalCoverData
       cutoffConstant cutoffScale) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2ExpandedScalarCoverData data.toCoverData
+  offCriticalStripNonvanishing_of_expandedScalarCoverData data.toCoverData
 
 theorem mathlibRiemannHypothesis_of_expandedScalarCanonicalCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -11807,7 +11807,7 @@ noncomputable def C2ExpandedScalarMiddleRegionData.toCanonicalCoverData
       · exact Or.inr <| Or.inr hedge
       · exact Or.inr <| Or.inl <| data.mem_localBulkRegion ⟨hs, hnear, hedge⟩
 
-theorem offCriticalStripNonvanishing_of_c2ExpandedScalarMiddleRegionData
+theorem offCriticalStripNonvanishing_of_expandedScalarMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -11819,7 +11819,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedScalarMiddleRegionData
       cutoffConstant cutoffScale) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalCoverData
+  offCriticalStripNonvanishing_of_expandedScalarCanonicalCoverData
     data.toCanonicalCoverData
 
 theorem mathlibRiemannHypothesis_of_expandedScalarMiddleRegionData
@@ -11852,7 +11852,7 @@ theorem C2ExpandedScalarMiddleRegionData.mem_canonicalClosedScaledRegion
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio :=
   (data.middle_local hs).mem_canonicalClosedScaledRegion
 
-theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledMiddleRegionData
+theorem offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2ExpandedScalarMiddleRegionData
@@ -11865,7 +11865,7 @@ theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledMiddleRegionData
       (fun _ => (1 : ℝ))) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2ExpandedScalarMiddleRegionData data
+  offCriticalStripNonvanishing_of_expandedScalarMiddleRegionData data
 
 theorem mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -11881,7 +11881,7 @@ theorem mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleRegionData
     RiemannHypothesis :=
   mathlibRiemannHypothesis_of_expandedScalarMiddleRegionData data
 
-theorem offCriticalStripNonvanishing_of_c2ExpandedExactZetaMiddleRegion
+theorem offCriticalStripNonvanishing_of_expandedExactZetaMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -11897,7 +11897,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedExactZetaMiddleRegion
         cutoffConstant cutoffScale) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2ExpandedScalarMiddleRegion near edge
+  offCriticalStripNonvanishing_of_expandedScalarMiddleRegion near edge
     (fun _ hs =>
       c2ExpandedExactZetaScalarRegion_mem_of_mem_expandedExactZetaRegion (hmiddle hs))
 
@@ -11920,7 +11920,7 @@ theorem mathlibRiemannHypothesis_of_expandedExactZetaMiddleRegion
     (fun _ hs =>
       c2ExpandedExactZetaScalarRegion_mem_of_mem_expandedExactZetaRegion (hmiddle hs))
 
-theorem offCriticalStripNonvanishing_of_c2ExpandedDominanceMiddleRegion
+theorem offCriticalStripNonvanishing_of_expandedDominanceMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -11936,7 +11936,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedDominanceMiddleRegion
         cutoffConstant cutoffScale) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2ExpandedScalarMiddleRegion near edge
+  offCriticalStripNonvanishing_of_expandedScalarMiddleRegion near edge
     (fun _ hs =>
       c2ExpandedExactZetaScalarRegion_mem_of_mem_expandedDominanceRegion (hmiddle hs))
 
@@ -12015,7 +12015,7 @@ theorem mathlibRiemannHypothesis_of_quartetClosedMiddleRegion
   mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetClosedCover
     near edge (c2ExpandedScalarMiddleRegion_cover near edge hmiddle)
 
-theorem offCriticalStripNonvanishing_of_c2QuartetComponentMiddleRegion
+theorem offCriticalStripNonvanishing_of_quartetComponentMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
     {tiltConstant tiltScale
@@ -12167,7 +12167,7 @@ structure C2QuartetComponentTruncationMiddleRegionData
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale s
 
-theorem offCriticalStripNonvanishing_of_c2QuartetComponentTruncationMiddleRegionData
+theorem offCriticalStripNonvanishing_of_quartetComponentTruncationMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
     {oddTruncationUpper : ℂ → ℕ → ℝ}
@@ -12181,7 +12181,7 @@ theorem offCriticalStripNonvanishing_of_c2QuartetComponentTruncationMiddleRegion
       cutoffConstant cutoffScale) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2QuartetComponentMiddleRegion
+  offCriticalStripNonvanishing_of_quartetComponentMiddleRegion
     (continuedVerticalUpper := continuedVerticalUpper)
     (tiltConstant := tiltConstant) (tiltScale := tiltScale)
     (horizontalConstant := horizontalConstant)
@@ -12244,7 +12244,7 @@ theorem offCriticalStripNonvanishing_of_continuationAndQuartetComponentTruncatio
   let edgeC2 :=
     C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
       (coreCutoff := coreCutoff) (K := K) (M := M)
-  exact offCriticalStripNonvanishing_of_c2QuartetComponentTruncationMiddleRegionData {
+  exact offCriticalStripNonvanishing_of_quartetComponentTruncationMiddleRegionData {
     near := nearC2
     edge := edgeC2
     middle_local := fun _ hs => hmiddle hs
@@ -12512,7 +12512,7 @@ def C2QuartetComponentResolventNoteMiddleRegionData.toTruncationMiddleRegionData
   middle_local := fun {_} hs =>
     (data.middle_local hs).toTruncationLocalData
 
-theorem offCriticalStripNonvanishing_of_c2QuartetComponentResolventNoteMiddleRegionData
+theorem offCriticalStripNonvanishing_of_quartetComponentResolventNoteMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
     {oddTruncationUpper : ℂ → ℕ → ℝ}
@@ -12527,7 +12527,7 @@ theorem offCriticalStripNonvanishing_of_c2QuartetComponentResolventNoteMiddleReg
       cutoffConstant cutoffScale) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2QuartetComponentTruncationMiddleRegionData
+  offCriticalStripNonvanishing_of_quartetComponentTruncationMiddleRegionData
     data.toTruncationMiddleRegionData
 
 theorem mathlibRiemannHypothesis_of_quartetComponentResolventNoteMiddleRegionData
@@ -12581,7 +12581,7 @@ theorem offCriticalStripNonvanishing_of_continuationAndQuartetComponentResolvent
     C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
       (coreCutoff := coreCutoff) (K := K) (M := M)
   exact
-    offCriticalStripNonvanishing_of_c2QuartetComponentResolventNoteMiddleRegionData {
+    offCriticalStripNonvanishing_of_quartetComponentResolventNoteMiddleRegionData {
       near := nearC2
       edge := edgeC2
       middle_local := fun _ hs => hmiddle hs
@@ -13311,7 +13311,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndQuartetComponentExactScaleMat
       hcutoff
       hdominance
 
-theorem offCriticalStripNonvanishing_of_c2CanonicalClosedMiddleRegion
+theorem offCriticalStripNonvanishing_of_canonicalClosedMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -13379,7 +13379,7 @@ theorem mathlibRiemannHypothesis_of_canonicalClosedMiddleRegion
       c2OddTailContinuedBalancingSeedBulkQuartetClosed_mem_of_canonicalClosedRegion
         (hmiddle hs))
 
-theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledMiddleRegion
+theorem offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
@@ -13390,7 +13390,7 @@ theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledMiddleRegion
         coreCutoff K M horizontalConstant horizontalScale horizontalRatio) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2CanonicalClosedMiddleRegion
+  offCriticalStripNonvanishing_of_canonicalClosedMiddleRegion
     (tiltConstant := c2CanonicalClosedTiltConstant
       K M horizontalConstant horizontalScale horizontalRatio)
     (tiltScale := fun _ => (1 : ℝ))
@@ -13516,7 +13516,7 @@ noncomputable def C2CanonicalClosedScaledCoverData.toOffCriticalCoverData
             hmiddle
       · exact Or.inr <| Or.inr hedge)
 
-theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledCoverData
+theorem offCriticalStripNonvanishing_of_canonicalClosedScaledCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2CanonicalClosedScaledCoverData
@@ -13554,14 +13554,14 @@ noncomputable def C2CanonicalClosedScaledMiddleCoverData.toCoverData
   edge := data.edge
   cover := c2ExpandedScalarMiddleRegion_cover data.near data.edge data.middle_scaled
 
-theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledMiddleCoverData
+theorem offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2CanonicalClosedScaledMiddleCoverData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2CanonicalClosedScaledCoverData data.toCoverData
+  offCriticalStripNonvanishing_of_canonicalClosedScaledCoverData data.toCoverData
 
 theorem mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -13634,14 +13634,14 @@ noncomputable def C2CanonicalClosedScaledMiddleRegionData.toCoverData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio :=
   data.toMiddleCoverData.toCoverData
 
-theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledDirectMiddleRegionData
+theorem offCriticalStripNonvanishing_of_canonicalClosedScaledDirectMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2CanonicalClosedScaledMiddleRegionData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2CanonicalClosedScaledMiddleCoverData
+  offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleCoverData
     data.toMiddleCoverData
 
 theorem mathlibRiemannHypothesis_of_canonicalClosedScaledDirectMiddleRegionData
@@ -14014,7 +14014,7 @@ def C2CanonicalClosedScaledVerticalBudgetMiddleRegionData.toCanonicalClosedScale
         localData
     exact C2CanonicalClosedScaledLocalData.toEstimates localData.offCritical hcanonical
 
-theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledVerticalBudgetMiddleRegionData
+theorem offCriticalStripNonvanishing_of_canonicalClosedScaledVerticalBudgetMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {verticalUpper horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2CanonicalClosedScaledVerticalBudgetMiddleRegionData
@@ -14022,7 +14022,7 @@ theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledVerticalBudgetMid
       verticalUpper horizontalConstant horizontalScale horizontalRatio) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2CanonicalClosedScaledDirectMiddleRegionData
+  offCriticalStripNonvanishing_of_canonicalClosedScaledDirectMiddleRegionData
     data.toCanonicalClosedScaledMiddleRegionData
 
 theorem mathlibRiemannHypothesis_of_canonicalClosedScaledVerticalBudgetMiddleRegionData
@@ -14133,7 +14133,7 @@ def
     exact C2CanonicalClosedScaledLocalData.toEstimates localData.offCritical hcanonical
 
 theorem
-    offCriticalStripNonvanishing_of_c2CanonicalClosedScaledVerticalTruncationMiddleRegionData
+    offCriticalStripNonvanishing_of_canonicalClosedScaledVerticalTruncationMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {verticalUpper : ℂ → ℝ}
     {oddTruncationUpper : ℂ → ℕ → ℝ}
@@ -14143,7 +14143,7 @@ theorem
       horizontalConstant horizontalScale horizontalRatio) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2CanonicalClosedScaledDirectMiddleRegionData
+  offCriticalStripNonvanishing_of_canonicalClosedScaledDirectMiddleRegionData
     data.toCanonicalClosedScaledMiddleRegionData
 
 theorem mathlibRiemannHypothesis_of_canonicalClosedScaledVerticalTruncationMiddleRegionData
@@ -14263,7 +14263,7 @@ def C2CanonicalClosedScaledResidualBudgetMiddleRegionData.toCanonicalClosedScale
     exact C2CanonicalClosedScaledLocalData.toEstimates localData.offCritical hcanonical
 
 
-theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledResidualBudgetMiddleRegionData
+theorem offCriticalStripNonvanishing_of_canonicalClosedScaledResidualBudgetMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio
       tiltBudget horizontalBudget cutoffBudget : ℂ → ℝ}
@@ -14273,7 +14273,7 @@ theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledResidualBudgetMid
       tiltBudget horizontalBudget cutoffBudget) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2CanonicalClosedScaledDirectMiddleRegionData
+  offCriticalStripNonvanishing_of_canonicalClosedScaledDirectMiddleRegionData
     data.toCanonicalClosedScaledMiddleRegionData
 
 
@@ -14519,14 +14519,14 @@ noncomputable def C2CanonicalClosedScaledMiddleLocalData.toCoverData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio :=
   data.toMiddleRegionData.toCoverData
 
-theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledMiddleLocalData
+theorem offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleLocalData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2CanonicalClosedScaledMiddleLocalData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2CanonicalClosedScaledDirectMiddleRegionData
+  offCriticalStripNonvanishing_of_canonicalClosedScaledDirectMiddleRegionData
     data.toMiddleRegionData
 
 theorem mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleLocalData
@@ -14572,7 +14572,7 @@ theorem offCriticalStripNonvanishing_of_terminalData
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel
         data.coreCutoff data.K data.M) :=
-  offCriticalStripNonvanishing_of_c2CanonicalClosedScaledMiddleLocalData
+  offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleLocalData
     data.middle
 
 theorem mathlibRiemannHypothesis_of_terminalData
@@ -15111,7 +15111,7 @@ def C2ExplicitScalarExactZetaMiddleRegionData.toExpandedScalarMiddleRegionData
     C2ExpandedScalarLocalBulkData.of_mem_explicitScalarExactZetaRegion
       (data.mem_explicitScalarExactZetaRegion hs)
 
-theorem offCriticalStripNonvanishing_of_c2ExplicitScalarExactZetaMiddleRegionData
+theorem offCriticalStripNonvanishing_of_explicitScalarExactZetaMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -15123,7 +15123,7 @@ theorem offCriticalStripNonvanishing_of_c2ExplicitScalarExactZetaMiddleRegionDat
       cutoffConstant cutoffScale) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2ExpandedScalarMiddleRegionData
+  offCriticalStripNonvanishing_of_expandedScalarMiddleRegionData
     data.toExpandedScalarMiddleRegionData
 
 theorem mathlibRiemannHypothesis_of_explicitScalarExactZetaMiddleRegionData
@@ -15230,7 +15230,7 @@ def C2ExpandedExactZetaMiddleRegionData.toExpandedScalarMiddleRegionData
     C2ExpandedScalarLocalBulkData.of_mem_expandedExactZetaRegion
       (data.mem_expandedExactZetaRegion hs)
 
-theorem offCriticalStripNonvanishing_of_c2ExpandedExactZetaMiddleRegionData
+theorem offCriticalStripNonvanishing_of_expandedExactZetaMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -15242,7 +15242,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedExactZetaMiddleRegionData
       cutoffConstant cutoffScale) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2ExpandedScalarMiddleRegionData
+  offCriticalStripNonvanishing_of_expandedScalarMiddleRegionData
     data.toExpandedScalarMiddleRegionData
 
 theorem mathlibRiemannHypothesis_of_expandedExactZetaMiddleRegionData
@@ -15599,7 +15599,7 @@ theorem offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMidd
           c2QuartetBulkK2Lower s * ((1 - ‖q s‖) * (1 + ‖q s‖ ^ 2))) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) := by
-  exact offCriticalStripNonvanishing_of_c2CanonicalClosedScaledMiddleLocalData {
+  exact offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleLocalData {
     near :=
       C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
         (coreCutoff := coreCutoff) (K := K) (M := M)
@@ -17394,7 +17394,7 @@ theorem offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegio
         cutoffConstant cutoffScale s) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) := by
-  exact offCriticalStripNonvanishing_of_c2ExpandedScalarMiddleRegionData
+  exact offCriticalStripNonvanishing_of_expandedScalarMiddleRegionData
     (C2ExpandedScalarMiddleRegionData.ofContinuation
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
@@ -19869,7 +19869,7 @@ structure C2AntiMiracleGenuineCentralMiddleRegionData
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale genuineCentralUpper s
 
-theorem offCriticalStripNonvanishing_of_c2AntiMiracleGenuineCentralMiddleRegionData
+theorem offCriticalStripNonvanishing_of_antiMiracleGenuineCentralMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -20163,7 +20163,7 @@ theorem
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) := by
   exact
-    offCriticalStripNonvanishing_of_c2AntiMiracleGenuineCentralMiddleRegionData
+    offCriticalStripNonvanishing_of_antiMiracleGenuineCentralMiddleRegionData
       (C2AntiMiracleGenuineCentralMiddleRegionData.ofContinuationAndExpandedScalarMiddleRegionGenuineCentralBoundSplitAtOneScaledBoundsCombinedResidualDominance
         (coreCutoff := coreCutoff) (K := K) (M := M)
         (tiltConstant := tiltConstant) (tiltScale := tiltScale)
@@ -22435,7 +22435,7 @@ structure C2AntiMiracleExactGenuineCentralMiddleRegionData
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale s
 
-theorem offCriticalStripNonvanishing_of_c2AntiMiracleExactGenuineCentralMiddleRegionData
+theorem offCriticalStripNonvanishing_of_antiMiracleExactGenuineCentralMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -22602,7 +22602,7 @@ theorem
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) := by
   exact
-    offCriticalStripNonvanishing_of_c2AntiMiracleExactGenuineCentralMiddleRegionData
+    offCriticalStripNonvanishing_of_antiMiracleExactGenuineCentralMiddleRegionData
       (C2AntiMiracleExactGenuineCentralMiddleRegionData.ofContinuationAndExpandedScalarMiddleRegion
         (coreCutoff := coreCutoff) (K := K) (M := M)
         (tiltConstant := tiltConstant) (tiltScale := tiltScale)
@@ -22898,7 +22898,7 @@ theorem
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) := by
   exact
-    offCriticalStripNonvanishing_of_c2AntiMiracleExactGenuineCentralMiddleRegionData
+    offCriticalStripNonvanishing_of_antiMiracleExactGenuineCentralMiddleRegionData
       (C2AntiMiracleExactGenuineCentralMiddleRegionData.ofContinuationAndExpandedScalarMiddleRegionCombinedResidualDominance
         (coreCutoff := coreCutoff) (K := K) (M := M)
         (tiltConstant := tiltConstant) (tiltScale := tiltScale)
@@ -23043,7 +23043,7 @@ theorem
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) := by
   exact
-    offCriticalStripNonvanishing_of_c2AntiMiracleExactGenuineCentralMiddleRegionData
+    offCriticalStripNonvanishing_of_antiMiracleExactGenuineCentralMiddleRegionData
       (C2AntiMiracleExactGenuineCentralMiddleRegionData.ofContinuationAndExpandedScalarMiddleRegionMajorantCombinedResidualDominance
         (coreCutoff := coreCutoff) (K := K) (M := M)
         (tiltConstant := tiltConstant) (tiltScale := tiltScale)
@@ -26442,7 +26442,7 @@ theorem mathlibRiemannHypothesis_of_explicitScalarMiddleRegion
   mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_explicitScalarCover
     near edge (c2ExpandedScalarMiddleRegion_cover near edge hmiddle)
 
-theorem offCriticalStripNonvanishing_of_c2ExplicitScalarExactZetaMiddleRegion
+theorem offCriticalStripNonvanishing_of_explicitScalarExactZetaMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -26458,7 +26458,7 @@ theorem offCriticalStripNonvanishing_of_c2ExplicitScalarExactZetaMiddleRegion
         cutoffConstant cutoffScale) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
-  offCriticalStripNonvanishing_of_c2ExpandedScalarMiddleRegion near edge
+  offCriticalStripNonvanishing_of_expandedScalarMiddleRegion near edge
     (fun _ hs =>
       c2ExpandedExactZetaScalarRegion_mem_of_mem_explicitScalarExactZetaRegion
         (hmiddle hs))
