@@ -1352,12 +1352,12 @@ theorem c2OddTailContinuedBalancingSeedBulkModel_fundamentalIdentity_offCritical
   FundamentalIdentityOnRightHalfPlane.toOffCriticalStrip
     (c2OddTailContinuedBalancingSeedBulkModel_fundamentalIdentity coreCutoff K M)
 
-theorem riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_cover_offCritical
+theorem mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_cover_offCritical
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (cover : OffCriticalCoverData)
     (hCoverF : cover.F = c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_coverData_offCriticalIdentity cover
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_coverData_offCriticalIdentity cover
     (by
       simpa [hCoverF] using
         c2OddTailContinuedBalancingSeedBulkModel_fundamentalIdentity_offCritical
@@ -1389,7 +1389,7 @@ noncomputable def c2OddTailContinuedBalancingSeedBulkModelCoverData_of_nearBulkB
     OffCriticalCoverData :=
   OffCriticalCoverData.ofNearBulkBoundsEdge near bulk edge hBulkF hEdgeF hcover
 
-theorem riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_nearBulkEdge
+theorem mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_nearBulkEdge
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (near : NearAxisRouteData)
     (bulk : RegionalVerticalBulkRouteData)
@@ -1400,8 +1400,8 @@ theorem riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_nearBulk
     (hcover : ∀ s : ℂ, offCriticalStrip s →
       s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
         s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_nearBulkEdge_offCriticalIdentity
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_nearBulkEdge_offCriticalIdentity
     near bulk edge hBulkF hEdgeF hcover
     (by
       simpa [hNearF] using
@@ -1409,7 +1409,7 @@ theorem riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_nearBulk
           coreCutoff K M)
 
 theorem
-  riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_nearBulkBoundsEdge
+  mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_nearBulkBoundsEdge
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (near : NearAxisRouteData)
     (bulk : RegionalVerticalBulkBoundsData)
@@ -1420,8 +1420,8 @@ theorem
     (hcover : ∀ s : ℂ, offCriticalStrip s →
       s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
         s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_nearBulkBoundsEdge_offCriticalIdentity
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_nearBulkBoundsEdge_offCriticalIdentity
     near bulk edge hBulkF hEdgeF hcover
     (by
       simpa [hNearF] using
@@ -1724,20 +1724,20 @@ theorem
     offCriticalStripNonvanishing_of_coverData data.toOffCriticalCoverData
 
 theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_pinnedNearBulkEdge
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_pinnedNearBulkEdge
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (data : C2OddTailContinuedBalancingSeedBulkModelNearBulkEdgeData coreCutoff K M) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_cover_offCritical
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_cover_offCritical
     data.toOffCriticalCoverData rfl
 
 theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_pinnedNearBulkBoundsEdge
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_pinnedNearBulkBoundsEdge
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (data :
       C2OddTailContinuedBalancingSeedBulkModelNearBulkBoundsEdgeData coreCutoff K M) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_cover_offCritical
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_cover_offCritical
     data.toOffCriticalCoverData rfl
 
 /-!
@@ -1974,7 +1974,7 @@ theorem c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_quartetBoundsDa
   simpa [data.F_eq] using regionalVerticalQuartetBulk_nonvanishing_of_bounds data.bounds hs
 
 theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_bulkRegionCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_bulkRegionCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
     (bulk : C2OddTailContinuedBalancingSeedBulkModelBulkRegionData coreCutoff K M)
@@ -1982,8 +1982,8 @@ theorem
     (cover : ∀ s : ℂ, offCriticalStrip s →
       s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
         s ∈ bulk.bulk.bulkRegion ∨ s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_cover_offCritical
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_cover_offCritical
     (OffCriticalCoverData.ofNearBulkRegionEdge
       near.toNearAxisRouteData
       bulk.bulk
@@ -1996,7 +1996,7 @@ theorem
     rfl
 
 theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetBulkCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetBulkCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
     (bulk :
@@ -2005,9 +2005,9 @@ theorem
     (cover : ∀ s : ℂ, offCriticalStrip s →
       s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
         s ∈ bulk.route.bulkRegion ∨ s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_bulkRegionCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_bulkRegionCover
       near
       bulk.toBulkRegionData
       edge
@@ -2018,7 +2018,7 @@ theorem
         exact cover)
 
 theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetBoundsCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetBoundsCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
     (bulk :
@@ -2027,9 +2027,9 @@ theorem
     (cover : ∀ s : ℂ, offCriticalStrip s →
       s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
         s ∈ bulk.bounds.bulkRegion ∨ s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetBulkCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetBulkCover
       near
       bulk.toQuartetBulkRouteData
       edge
@@ -2040,7 +2040,7 @@ theorem
         exact cover)
 
 theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_regionalBulkCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_regionalBulkCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
     (bulk : C2OddTailContinuedBalancingSeedBulkModelRegionalBulkRouteData coreCutoff K M)
@@ -2048,7 +2048,7 @@ theorem
     (cover : ∀ s : ℂ, offCriticalStrip s →
       s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
         s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   have hcover : ∀ s : ℂ, offCriticalStrip s →
       s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
         s ∈ bulk.toPinnedBulkRouteData.route.bulkRegion ∨ s ∈ edge.edgeRegion := by
@@ -2056,7 +2056,7 @@ theorem
       s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
         s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion
     exact cover
-  exact riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_pinnedNearBulkEdge
+  exact mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_pinnedNearBulkEdge
     {
       near := near
       bulk := bulk.toPinnedBulkRouteData
@@ -2065,7 +2065,7 @@ theorem
     }
 
 theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_regionalBulkBoundsCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_regionalBulkBoundsCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
     (bulk :
@@ -2074,7 +2074,7 @@ theorem
     (cover : ∀ s : ℂ, offCriticalStrip s →
       s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
         s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   have hcover : ∀ s : ℂ, offCriticalStrip s →
       s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
         s ∈ bulk.toPinnedBulkBoundsData.bounds.bulkRegion ∨ s ∈ edge.edgeRegion := by
@@ -2083,7 +2083,7 @@ theorem
         s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion
     exact cover
   exact
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_pinnedNearBulkBoundsEdge
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_pinnedNearBulkBoundsEdge
       {
         near := near
         bulk := bulk.toPinnedBulkBoundsData
@@ -2092,7 +2092,7 @@ theorem
       }
 
 theorem
-  riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_regional_genericNearEdge
+  mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_regional_genericNearEdge
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (near : NearAxisRouteData)
     (bulk : C2OddTailContinuedBalancingSeedBulkModelRegionalBulkRouteData coreCutoff K M)
@@ -2102,15 +2102,15 @@ theorem
     (cover : ∀ s : ℂ, offCriticalStrip s →
       s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
         s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_regionalBulkCover
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_regionalBulkCover
     (C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofNearAxisRouteData near hNearF)
     bulk
     (C2OddTailContinuedBalancingSeedBulkModelEdgeData.ofEdgeRouteData edge hEdgeF)
     cover
 
 theorem
-  riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_regionalBounds_genericNearEdge
+  mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_regionalBounds_genericNearEdge
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (near : NearAxisRouteData)
     (bulk :
@@ -2121,9 +2121,9 @@ theorem
     (cover : ∀ s : ℂ, offCriticalStrip s →
       s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
         s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_regionalBulkBoundsCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_regionalBulkBoundsCover
       (C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofNearAxisRouteData near hNearF)
       bulk
       (C2OddTailContinuedBalancingSeedBulkModelEdgeData.ofEdgeRouteData edge hEdgeF)
@@ -2321,35 +2321,7 @@ theorem
     c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_concreteRegion hs⟩
 
 theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_concreteCover
-    {coreCutoff : ℕ → ℕ} {K M : ℕ}
-    {tiltConstant tiltScale
-      horizontalConstant horizontalScale horizontalRatio
-      cutoffConstant cutoffScale : ℂ → ℝ}
-    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
-    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M)
-    (cover : ∀ s : ℂ, offCriticalStrip s →
-      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
-        s ∈ c2OddTailContinuedBalancingSeedBulkConcreteRegion
-          coreCutoff K M
-          tiltConstant tiltScale
-          horizontalConstant horizontalScale horizontalRatio
-          cutoffConstant cutoffScale ∨
-        s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
-  exact
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_regionalBulkBoundsCover
-      near
-      (c2OddTailContinuedBalancingSeedBulkConcreteBoundsData
-        coreCutoff K M
-        tiltConstant tiltScale
-        horizontalConstant horizontalScale horizontalRatio
-        cutoffConstant cutoffScale)
-      edge
-      cover
-
-theorem
-    mathlibRiemannHypothesis_of_c2OddTailContinuedBalancingSeedBulkModel_concreteCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_concreteCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -2365,9 +2337,16 @@ theorem
           cutoffConstant cutoffScale ∨
         s ∈ edge.edgeRegion) :
     RiemannHypothesis := by
-  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
-    (riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_concreteCover
-      near edge cover)
+  exact
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_regionalBulkBoundsCover
+      near
+      (c2OddTailContinuedBalancingSeedBulkConcreteBoundsData
+        coreCutoff K M
+        tiltConstant tiltScale
+        horizontalConstant horizontalScale horizontalRatio
+        cutoffConstant cutoffScale)
+      edge
+      cover
 
 theorem c2LiftBulkCover_of_subset
     {nearRegion bulkRegion targetRegion edgeRegion : Set ℂ}
@@ -2383,31 +2362,7 @@ theorem c2LiftBulkCover_of_subset
   · exact Or.inr <| Or.inr hedge
 
 theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_concreteSubsetCover
-    {coreCutoff : ℕ → ℕ} {K M : ℕ}
-    {tiltConstant tiltScale
-      horizontalConstant horizontalScale horizontalRatio
-      cutoffConstant cutoffScale : ℂ → ℝ}
-    {bulkRegion : Set ℂ}
-    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
-    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M)
-    (hsubset : ∀ ⦃s : ℂ⦄, s ∈ bulkRegion →
-      s ∈ c2OddTailContinuedBalancingSeedBulkConcreteRegion
-        coreCutoff K M
-        tiltConstant tiltScale
-        horizontalConstant horizontalScale horizontalRatio
-        cutoffConstant cutoffScale)
-    (cover : ∀ s : ℂ, offCriticalStrip s →
-      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
-        s ∈ bulkRegion ∨
-        s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
-  exact
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_concreteCover
-      near edge (c2LiftBulkCover_of_subset hsubset cover)
-
-theorem
-    mathlibRiemannHypothesis_of_c2OddTailContinuedBalancingSeedBulkModel_concreteSubsetCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_concreteSubsetCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -2426,9 +2381,9 @@ theorem
         s ∈ bulkRegion ∨
         s ∈ edge.edgeRegion) :
     RiemannHypothesis := by
-  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
-    (riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_concreteSubsetCover
-      near edge hsubset cover)
+  exact
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_concreteCover
+      near edge (c2LiftBulkCover_of_subset hsubset cover)
 
 /-!
 ## Quartet-refined concrete bulk package for the continued model
@@ -2674,35 +2629,7 @@ noncomputable def c2OddTailContinuedBalancingSeedBulkQuartetConcreteBulkRegionDa
   F_eq := rfl
 
 theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteCover
-    {coreCutoff : ℕ → ℕ} {K M : ℕ}
-    {tiltConstant tiltScale
-      horizontalConstant horizontalScale horizontalRatio
-      cutoffConstant cutoffScale : ℂ → ℝ}
-    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
-    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M)
-    (cover : ∀ s : ℂ, offCriticalStrip s →
-      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
-        s ∈ c2OddTailContinuedBalancingSeedBulkQuartetConcreteRegion
-          coreCutoff K M
-          tiltConstant tiltScale
-          horizontalConstant horizontalScale horizontalRatio
-          cutoffConstant cutoffScale ∨
-        s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
-  exact
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_bulkRegionCover
-      near
-      (c2OddTailContinuedBalancingSeedBulkQuartetConcreteBulkRegionData
-        coreCutoff K M
-        tiltConstant tiltScale
-        horizontalConstant horizontalScale horizontalRatio
-        cutoffConstant cutoffScale)
-      edge
-      cover
-
-theorem
-    mathlibRiemannHypothesis_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -2718,9 +2645,16 @@ theorem
           cutoffConstant cutoffScale ∨
         s ∈ edge.edgeRegion) :
     RiemannHypothesis := by
-  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
-    (riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteCover
-      near edge cover)
+  exact
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_bulkRegionCover
+      near
+      (c2OddTailContinuedBalancingSeedBulkQuartetConcreteBulkRegionData
+        coreCutoff K M
+        tiltConstant tiltScale
+        horizontalConstant horizontalScale horizontalRatio
+        cutoffConstant cutoffScale)
+      edge
+      cover
 
 /-- Continuation data type specialized to the balancing-seed bulk model. -/
 abbrev C2OddTailBalancingSeedBulkModelContinuationData
@@ -3036,45 +2970,24 @@ noncomputable def C2OddTailBalancingSeedBulkModelContinuationData.toGenuineRoute
     (c2OddTailBalancingSeed_bulkModel_identity_on_oneLtHalfPlane coreCutoff K M)
     cover hCoverF
 
-theorem riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModelContinuation
+theorem mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModelContinuation
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (data : C2OddTailBalancingSeedBulkModelContinuationData coreCutoff K M)
     (hNonvanishing :
       offCriticalStripNonvanishing
         (c2OddTailBalancingSeedBulkModel coreCutoff K M)) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_genuineRouteData
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_genuineRouteData
     (data.toGenuineRouteData hNonvanishing)
 
-theorem mathlibRiemannHypothesis_of_c2OddTailBalancingSeedBulkModelContinuation
-    {coreCutoff : ℕ → ℕ} {K M : ℕ}
-    (data : C2OddTailBalancingSeedBulkModelContinuationData coreCutoff K M)
-    (hNonvanishing :
-      offCriticalStripNonvanishing
-        (c2OddTailBalancingSeedBulkModel coreCutoff K M)) :
-    RiemannHypothesis := by
-  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
-    (riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModelContinuation
-      data hNonvanishing)
-
-theorem riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModelContinuation_cover
+theorem mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModelContinuation_cover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (data : C2OddTailBalancingSeedBulkModelContinuationData coreCutoff K M)
     (cover : OffCriticalCoverData)
     (hCoverF : cover.F = c2OddTailBalancingSeedBulkModel coreCutoff K M) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_genuineRouteData
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_genuineRouteData
     (data.toGenuineRouteDataOfCover cover hCoverF)
-
-theorem mathlibRiemannHypothesis_of_c2OddTailBalancingSeedBulkModelContinuation_cover
-    {coreCutoff : ℕ → ℕ} {K M : ℕ}
-    (data : C2OddTailBalancingSeedBulkModelContinuationData coreCutoff K M)
-    (cover : OffCriticalCoverData)
-    (hCoverF : cover.F = c2OddTailBalancingSeedBulkModel coreCutoff K M) :
-    RiemannHypothesis := by
-  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
-    (riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModelContinuation_cover
-      data cover hCoverF)
 
 noncomputable def c2OddTailBalancingSeedBulkModelGenuineRouteData_of_analyticOnNhd_cover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -3105,7 +3018,7 @@ noncomputable def c2OddTailBalancingSeedBulkModelGenuineRouteData_of_continuatio
   (c2OddTailBalancingSeedBulkModelContinuationData_of_continuation
     continuation hBulk hEqAtOne).toGenuineRouteDataOfCover cover hCoverF
 
-theorem riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_analyticOnNhd_cover
+theorem mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModel_analyticOnNhd_cover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     (hBulk : AnalyticOnNhd ℂ
@@ -3116,106 +3029,52 @@ theorem riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_analyticOnNhd_cov
       c2OddTailBalancingSeedBulkModel coreCutoff K M 1 = genuineFInfinite 1)
     (cover : OffCriticalCoverData)
     (hCoverF : cover.F = c2OddTailBalancingSeedBulkModel coreCutoff K M) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_genuineRouteData
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_genuineRouteData
     (c2OddTailBalancingSeedBulkModelGenuineRouteData_of_analyticOnNhd_cover
       continuation hBulk hGenuine hEqAtOne cover hCoverF)
 
-theorem mathlibRiemannHypothesis_of_c2OddTailBalancingSeedBulkModel_analyticOnNhd_cover
+theorem mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModel_continuation_cover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     (hBulk : AnalyticOnNhd ℂ
       (c2OddTailBalancingSeedBulkModel coreCutoff K M)
       puncturedOpenRightHalfPlane)
-    (hGenuine : AnalyticOnNhd ℂ genuineFInfinite puncturedOpenRightHalfPlane)
     (hEqAtOne :
       c2OddTailBalancingSeedBulkModel coreCutoff K M 1 = genuineFInfinite 1)
     (cover : OffCriticalCoverData)
     (hCoverF : cover.F = c2OddTailBalancingSeedBulkModel coreCutoff K M) :
     RiemannHypothesis := by
-  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
-    (riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_analyticOnNhd_cover
-      continuation hBulk hGenuine hEqAtOne cover hCoverF)
-
-theorem riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_continuation_cover
-    {coreCutoff : ℕ → ℕ} {K M : ℕ}
-    (continuation : GenuineFInfiniteContinuationData)
-    (hBulk : AnalyticOnNhd ℂ
-      (c2OddTailBalancingSeedBulkModel coreCutoff K M)
-      puncturedOpenRightHalfPlane)
-    (hEqAtOne :
-      c2OddTailBalancingSeedBulkModel coreCutoff K M 1 = genuineFInfinite 1)
-    (cover : OffCriticalCoverData)
-    (hCoverF : cover.F = c2OddTailBalancingSeedBulkModel coreCutoff K M) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_genuineRouteData
+  exact mathlibRiemannHypothesis_of_genuineRouteData
     (c2OddTailBalancingSeedBulkModelGenuineRouteData_of_continuation_cover
       continuation hBulk hEqAtOne cover hCoverF)
 
-theorem mathlibRiemannHypothesis_of_c2OddTailBalancingSeedBulkModel_continuation_cover
+theorem mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModel_analyticOnNhd_cover_offCritical
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
-    (continuation : GenuineFInfiniteContinuationData)
     (hBulk : AnalyticOnNhd ℂ
       (c2OddTailBalancingSeedBulkModel coreCutoff K M)
       puncturedOpenRightHalfPlane)
-    (hEqAtOne :
-      c2OddTailBalancingSeedBulkModel coreCutoff K M 1 = genuineFInfinite 1)
     (cover : OffCriticalCoverData)
     (hCoverF : cover.F = c2OddTailBalancingSeedBulkModel coreCutoff K M) :
     RiemannHypothesis := by
-  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
-    (riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_continuation_cover
-      continuation hBulk hEqAtOne cover hCoverF)
-
-theorem riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_analyticOnNhd_cover_offCritical
-    {coreCutoff : ℕ → ℕ} {K M : ℕ}
-    (hBulk : AnalyticOnNhd ℂ
-      (c2OddTailBalancingSeedBulkModel coreCutoff K M)
-      puncturedOpenRightHalfPlane)
-    (cover : OffCriticalCoverData)
-    (hCoverF : cover.F = c2OddTailBalancingSeedBulkModel coreCutoff K M) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_coverData_offCriticalIdentity cover
+  exact mathlibRiemannHypothesis_of_coverData_offCriticalIdentity cover
     (by
       simpa [hCoverF] using
         c2OddTailBalancingSeedBulkModel_fundamentalIdentity_offCritical_of_analyticOnNhd
           (coreCutoff := coreCutoff) (K := K) (M := M) hBulk)
 
-theorem mathlibRiemannHypothesis_of_c2OddTailBalancingSeedBulkModel_analyticOnNhd_cover_offCritical
-    {coreCutoff : ℕ → ℕ} {K M : ℕ}
-    (hBulk : AnalyticOnNhd ℂ
-      (c2OddTailBalancingSeedBulkModel coreCutoff K M)
-      puncturedOpenRightHalfPlane)
-    (cover : OffCriticalCoverData)
-    (hCoverF : cover.F = c2OddTailBalancingSeedBulkModel coreCutoff K M) :
-    RiemannHypothesis := by
-  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
-    (riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_analyticOnNhd_cover_offCritical
-      hBulk cover hCoverF)
-
-theorem riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_central_bridge_cover_offCritical
+theorem mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModel_central_bridge_cover_offCritical
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (hCentral : ∀ s : ℂ, s ∈ puncturedOpenRightHalfPlane →
       genuineCentralDoubleSeries s = continuedCentralOddChannel s)
     (cover : OffCriticalCoverData)
     (hCoverF : cover.F = c2OddTailBalancingSeedBulkModel coreCutoff K M) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_coverData_offCriticalIdentity cover
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_coverData_offCriticalIdentity cover
     (by
       simpa [hCoverF] using
         c2OddTailBalancingSeedBulkModel_fundamentalIdentity_offCritical_of_central
           (coreCutoff := coreCutoff) (K := K) (M := M) hCentral)
-
-theorem mathlibRiemannHypothesis_of_c2OddTailBalancingSeedBulkModel_central_bridge_cover_offCritical
-    {coreCutoff : ℕ → ℕ} {K M : ℕ}
-    (hCentral : ∀ s : ℂ, s ∈ puncturedOpenRightHalfPlane →
-      genuineCentralDoubleSeries s = continuedCentralOddChannel s)
-    (cover : OffCriticalCoverData)
-    (hCoverF : cover.F = c2OddTailBalancingSeedBulkModel coreCutoff K M) :
-    RiemannHypothesis := by
-  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
-    (riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_central_bridge_cover_offCritical
-      hCentral cover hCoverF)
 
 /--
 The existing concrete scaled-seeded bulk bounds data restricted to the stronger
@@ -9808,7 +9667,7 @@ noncomputable def c2ExpandedScalarBulkRegionData
   F_eq := rfl
 
 theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_expandedScalarCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_expandedScalarCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -9823,9 +9682,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale ∨
         s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_bulkRegionCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_bulkRegionCover
       near
       (c2ExpandedScalarBulkRegionData
         coreCutoff K M
@@ -9914,7 +9773,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedScalarCoverData
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.toNearAxisRouteData] using
     offCriticalStripNonvanishing_of_coverData data.toOffCriticalCoverData
 
-theorem riemannHypothesisC2_of_c2ExpandedScalarCoverData
+theorem mathlibRiemannHypothesis_of_expandedScalarCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -9924,26 +9783,12 @@ theorem riemannHypothesisC2_of_c2ExpandedScalarCoverData
       tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_expandedScalarCover
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_expandedScalarCover
     data.near data.edge data.cover
 
-theorem mathlibRiemannHypothesis_of_c2ExpandedScalarCoverData
-    {coreCutoff : ℕ → ℕ} {K M : ℕ}
-    {tiltConstant tiltScale
-      horizontalConstant horizontalScale horizontalRatio
-      cutoffConstant cutoffScale : ℂ → ℝ}
-    (data : C2ExpandedScalarCoverData
-      coreCutoff K M
-      tiltConstant tiltScale
-      horizontalConstant horizontalScale horizontalRatio
-      cutoffConstant cutoffScale) :
-    RiemannHypothesis := by
-  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
-    (riemannHypothesisC2_of_c2ExpandedScalarCoverData data)
-
 theorem
-  riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
+  mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -9961,37 +9806,13 @@ theorem
       s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
         s ∈ bulkRegion ∨
         s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteCover
       near edge (c2LiftBulkCover_of_subset hsubset cover)
 
 theorem
-  mathlibRiemannHypothesis_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
-    {coreCutoff : ℕ → ℕ} {K M : ℕ}
-    {tiltConstant tiltScale
-      horizontalConstant horizontalScale horizontalRatio
-      cutoffConstant cutoffScale : ℂ → ℝ}
-    {bulkRegion : Set ℂ}
-    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
-    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M)
-    (hsubset : ∀ ⦃s : ℂ⦄, s ∈ bulkRegion →
-      s ∈ c2OddTailContinuedBalancingSeedBulkQuartetConcreteRegion
-        coreCutoff K M
-        tiltConstant tiltScale
-        horizontalConstant horizontalScale horizontalRatio
-        cutoffConstant cutoffScale)
-    (cover : ∀ s : ℂ, offCriticalStrip s →
-      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
-        s ∈ bulkRegion ∨
-        s ∈ edge.edgeRegion) :
-    RiemannHypothesis := by
-  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
-    (riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
-      near edge hsubset cover)
-
-theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetExactCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetExactCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -10006,9 +9827,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale ∨
         s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   refine
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant) (horizontalScale := horizontalScale)
       (horizontalRatio := horizontalRatio)
@@ -10024,28 +9845,7 @@ theorem
   exact c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_exactRegion hs
 
 theorem
-    mathlibRiemannHypothesis_of_c2OddTailContinuedBalancingSeedBulkModel_quartetExactCover
-    {coreCutoff : ℕ → ℕ} {K M : ℕ}
-    {tiltConstant tiltScale
-      horizontalConstant horizontalScale horizontalRatio
-      cutoffConstant cutoffScale : ℂ → ℝ}
-    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
-    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M)
-    (cover : ∀ s : ℂ, offCriticalStrip s →
-      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
-        s ∈ c2OddTailContinuedBalancingSeedBulkQuartetExactRegion
-          coreCutoff K M
-          tiltConstant tiltScale
-          horizontalConstant horizontalScale horizontalRatio
-          cutoffConstant cutoffScale ∨
-        s ∈ edge.edgeRegion) :
-    RiemannHypothesis := by
-  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
-    (riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetExactCover
-      near edge cover)
-
-theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetTriangleCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetTriangleCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -10060,9 +9860,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale ∨
         s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   refine
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant) (horizontalScale := horizontalScale)
       (horizontalRatio := horizontalRatio)
@@ -10078,7 +9878,7 @@ theorem
   exact c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_triangleRegion hs
 
 theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetClosedCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetClosedCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {rectangularUpper centralUpper : ℂ → ℝ}
     {tiltConstant tiltScale
@@ -10094,9 +9894,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale ∨
         s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   refine
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant) (horizontalScale := horizontalScale)
       (horizontalRatio := horizontalRatio)
@@ -10112,7 +9912,7 @@ theorem
   exact c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_closedRegion hs
 
 theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_zetaDepthCoreCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_zetaDepthCoreCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {depthUpper coreUpper oddFactorUpper zetaUpper : ℂ → ℝ}
     {tiltConstant tiltScale
@@ -10128,9 +9928,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale ∨
         s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   refine
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant) (horizontalScale := horizontalScale)
       (horizontalRatio := horizontalRatio)
@@ -10146,7 +9946,7 @@ theorem
   exact c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_zetaDepthCoreRegion hs
 
 theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_explicitFiniteCoreCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_explicitFiniteCoreCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {zetaUpper : ℂ → ℝ}
     {tiltConstant tiltScale
@@ -10162,9 +9962,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale ∨
         s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   refine
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant) (horizontalScale := horizontalScale)
       (horizontalRatio := horizontalRatio)
@@ -10180,7 +9980,7 @@ theorem
   exact c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_explicitFiniteCoreRegion hs
 
 theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_explicitScalarCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_explicitScalarCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {zetaUpper : ℂ → ℝ}
     {tiltConstant tiltScale
@@ -10196,9 +9996,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale ∨
         s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   refine
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant) (horizontalScale := horizontalScale)
       (horizontalRatio := horizontalRatio)
@@ -10214,7 +10014,7 @@ theorem
   exact c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_explicitScalarRegion hs
 
 theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_explicitScalarExactZetaCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_explicitScalarExactZetaCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -10229,9 +10029,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale ∨
         s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   refine
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant) (horizontalScale := horizontalScale)
       (horizontalRatio := horizontalRatio)
@@ -10247,7 +10047,7 @@ theorem
   exact c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_explicitScalarExactZetaRegion hs
 
 theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_expandedExactZetaCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_expandedExactZetaCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -10262,9 +10062,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale ∨
         s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   refine
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant) (horizontalScale := horizontalScale)
       (horizontalRatio := horizontalRatio)
@@ -10280,7 +10080,7 @@ theorem
   exact c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_expandedExactZetaRegion hs
 
 theorem
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_expandedDominanceCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_expandedDominanceCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -10295,9 +10095,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale ∨
         s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   refine
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant) (horizontalScale := horizontalScale)
       (horizontalRatio := horizontalRatio)
@@ -11193,7 +10993,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedScalarLocalChoice
   offCriticalStripNonvanishing_of_c2ExpandedScalarCoverData
     (C2ExpandedScalarCoverData.ofLocalChoice near edge choose)
 
-theorem riemannHypothesisC2_of_c2ExpandedScalarLocalChoice
+theorem mathlibRiemannHypothesis_of_expandedScalarLocalChoice
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -11206,26 +11006,9 @@ theorem riemannHypothesisC2_of_c2ExpandedScalarLocalChoice
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale near edge s) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2ExpandedScalarCoverData
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_expandedScalarCoverData
     (C2ExpandedScalarCoverData.ofLocalChoice near edge choose)
-
-theorem mathlibRiemannHypothesis_of_c2ExpandedScalarLocalChoice
-    {coreCutoff : ℕ → ℕ} {K M : ℕ}
-    {tiltConstant tiltScale
-      horizontalConstant horizontalScale horizontalRatio
-      cutoffConstant cutoffScale : ℂ → ℝ}
-    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
-    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M)
-    (choose : ∀ s : ℂ, offCriticalStrip s →
-      C2ExpandedScalarCoverChoice
-        coreCutoff K M
-        tiltConstant tiltScale
-        horizontalConstant horizontalScale horizontalRatio
-        cutoffConstant cutoffScale near edge s) :
-    RiemannHypothesis := by
-  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
-    (riemannHypothesisC2_of_c2ExpandedScalarLocalChoice near edge choose)
 
 /--
 Abstract regional decomposition for the expanded scalar cover.
@@ -11355,7 +11138,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedScalarChoiceRegions
   offCriticalStripNonvanishing_of_c2ExpandedScalarCoverData
     (C2ExpandedScalarCoverData.ofChoiceRegions near edge regions cover)
 
-theorem riemannHypothesisC2_of_c2ExpandedScalarChoiceRegions
+theorem mathlibRiemannHypothesis_of_expandedScalarChoiceRegions
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -11368,26 +11151,9 @@ theorem riemannHypothesisC2_of_c2ExpandedScalarChoiceRegions
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale near edge)
     (cover : ∀ s : ℂ, offCriticalStrip s → s ∈ regions.combinedRegion) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2ExpandedScalarCoverData
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_expandedScalarCoverData
     (C2ExpandedScalarCoverData.ofChoiceRegions near edge regions cover)
-
-theorem mathlibRiemannHypothesis_of_c2ExpandedScalarChoiceRegions
-    {coreCutoff : ℕ → ℕ} {K M : ℕ}
-    {tiltConstant tiltScale
-      horizontalConstant horizontalScale horizontalRatio
-      cutoffConstant cutoffScale : ℂ → ℝ}
-    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
-    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M)
-    (regions : C2ExpandedScalarChoiceRegions
-      coreCutoff K M
-      tiltConstant tiltScale
-      horizontalConstant horizontalScale horizontalRatio
-      cutoffConstant cutoffScale near edge)
-    (cover : ∀ s : ℂ, offCriticalStrip s → s ∈ regions.combinedRegion) :
-    RiemannHypothesis := by
-  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
-    (riemannHypothesisC2_of_c2ExpandedScalarChoiceRegions near edge regions cover)
 
 /-- Concrete local-bulk region: points carrying the full local scalar-bulk data package. -/
 def c2ExpandedScalarLocalBulkRegion
@@ -11704,7 +11470,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalRegions
   offCriticalStripNonvanishing_of_c2ExpandedScalarCoverData
     (C2ExpandedScalarCoverData.ofCanonicalRegions near edge cover)
 
-theorem riemannHypothesisC2_of_c2ExpandedScalarCanonicalRegions
+theorem mathlibRiemannHypothesis_of_expandedScalarCanonicalRegions
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -11718,8 +11484,8 @@ theorem riemannHypothesisC2_of_c2ExpandedScalarCanonicalRegions
         (horizontalRatio := horizontalRatio)
         (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
         near edge).combinedRegion) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2ExpandedScalarCoverData
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_expandedScalarCoverData
     (C2ExpandedScalarCoverData.ofCanonicalRegions near edge cover)
 
 theorem offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalCover
@@ -11742,7 +11508,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalCover
   offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalRegions near edge
     (fun s hs => C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_cover (cover s hs))
 
-theorem riemannHypothesisC2_of_c2ExpandedScalarCanonicalCover
+theorem mathlibRiemannHypothesis_of_expandedScalarCanonicalCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -11757,8 +11523,8 @@ theorem riemannHypothesisC2_of_c2ExpandedScalarCanonicalCover
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale ∨
         s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2ExpandedScalarCanonicalRegions near edge
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_expandedScalarCanonicalRegions near edge
     (fun s hs => C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_cover (cover s hs))
 
 theorem offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalScalarCover
@@ -11791,7 +11557,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalScalarCover
         · exact C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_scalarRegion hbulk
         · exact C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_edge hedge)
 
-theorem riemannHypothesisC2_of_c2ExpandedScalarCanonicalScalarCover
+theorem mathlibRiemannHypothesis_of_expandedScalarCanonicalScalarCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -11806,8 +11572,8 @@ theorem riemannHypothesisC2_of_c2ExpandedScalarCanonicalScalarCover
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale ∨
         s ∈ edge.edgeRegion) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2ExpandedScalarCanonicalRegions
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_expandedScalarCanonicalRegions
     (tiltConstant := tiltConstant) (tiltScale := tiltScale)
     (horizontalConstant := horizontalConstant) (horizontalScale := horizontalScale)
     (horizontalRatio := horizontalRatio)
@@ -11872,7 +11638,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedScalarMiddleRegion
         · exact Or.inr <| Or.inr hedge
         · exact Or.inr <| Or.inl <| hmiddle ⟨hs, hnear, hedge⟩)
 
-theorem riemannHypothesisC2_of_c2ExpandedScalarMiddleRegion
+theorem mathlibRiemannHypothesis_of_expandedScalarMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -11887,8 +11653,8 @@ theorem riemannHypothesisC2_of_c2ExpandedScalarMiddleRegion
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2ExpandedScalarCanonicalScalarCover near edge
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_expandedScalarCanonicalScalarCover near edge
     (fun s hs => by
       by_cases hnear : s ∈ nearAxisRegion riemannZeta near.near_axis.radius
       · exact Or.inl hnear
@@ -11946,7 +11712,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalCoverData
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
   offCriticalStripNonvanishing_of_c2ExpandedScalarCoverData data.toCoverData
 
-theorem riemannHypothesisC2_of_c2ExpandedScalarCanonicalCoverData
+theorem mathlibRiemannHypothesis_of_expandedScalarCanonicalCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -11956,8 +11722,8 @@ theorem riemannHypothesisC2_of_c2ExpandedScalarCanonicalCoverData
       tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2ExpandedScalarCoverData data.toCoverData
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_expandedScalarCoverData data.toCoverData
 
 /--
 Regional middle-strip package: every off-critical point outside near-axis and edge
@@ -12056,7 +11822,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedScalarMiddleRegionData
   offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalCoverData
     data.toCanonicalCoverData
 
-theorem riemannHypothesisC2_of_c2ExpandedScalarMiddleRegionData
+theorem mathlibRiemannHypothesis_of_expandedScalarMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -12066,8 +11832,8 @@ theorem riemannHypothesisC2_of_c2ExpandedScalarMiddleRegionData
       tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2ExpandedScalarCanonicalCoverData data.toCanonicalCoverData
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_expandedScalarCanonicalCoverData data.toCanonicalCoverData
 
 theorem C2ExpandedScalarMiddleRegionData.mem_canonicalClosedScaledRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -12101,7 +11867,7 @@ theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledMiddleRegionData
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
   offCriticalStripNonvanishing_of_c2ExpandedScalarMiddleRegionData data
 
-theorem riemannHypothesisC2_of_c2CanonicalClosedScaledMiddleRegionData
+theorem mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2ExpandedScalarMiddleRegionData
@@ -12112,8 +11878,8 @@ theorem riemannHypothesisC2_of_c2CanonicalClosedScaledMiddleRegionData
       horizontalConstant horizontalScale horizontalRatio
       (c2CanonicalClosedCutoffConstant K M)
       (fun _ => (1 : ℝ))) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2ExpandedScalarMiddleRegionData data
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_expandedScalarMiddleRegionData data
 
 theorem offCriticalStripNonvanishing_of_c2ExpandedExactZetaMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -12135,7 +11901,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedExactZetaMiddleRegion
     (fun _ hs =>
       c2ExpandedExactZetaScalarRegion_mem_of_mem_expandedExactZetaRegion (hmiddle hs))
 
-theorem riemannHypothesisC2_of_c2ExpandedExactZetaMiddleRegion
+theorem mathlibRiemannHypothesis_of_expandedExactZetaMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -12149,8 +11915,8 @@ theorem riemannHypothesisC2_of_c2ExpandedExactZetaMiddleRegion
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2ExpandedScalarMiddleRegion near edge
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_expandedScalarMiddleRegion near edge
     (fun _ hs =>
       c2ExpandedExactZetaScalarRegion_mem_of_mem_expandedExactZetaRegion (hmiddle hs))
 
@@ -12174,7 +11940,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedDominanceMiddleRegion
     (fun _ hs =>
       c2ExpandedExactZetaScalarRegion_mem_of_mem_expandedDominanceRegion (hmiddle hs))
 
-theorem riemannHypothesisC2_of_c2ExpandedDominanceMiddleRegion
+theorem mathlibRiemannHypothesis_of_expandedDominanceMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -12188,13 +11954,13 @@ theorem riemannHypothesisC2_of_c2ExpandedDominanceMiddleRegion
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2ExpandedScalarMiddleRegion near edge
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_expandedScalarMiddleRegion near edge
     (fun _ hs =>
       c2ExpandedExactZetaScalarRegion_mem_of_mem_expandedDominanceRegion
         (hmiddle hs))
 
-theorem riemannHypothesisC2_of_c2QuartetExactMiddleRegion
+theorem mathlibRiemannHypothesis_of_quartetExactMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -12208,11 +11974,11 @@ theorem riemannHypothesisC2_of_c2QuartetExactMiddleRegion
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetExactCover
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetExactCover
     near edge (c2ExpandedScalarMiddleRegion_cover near edge hmiddle)
 
-theorem riemannHypothesisC2_of_c2QuartetTriangleMiddleRegion
+theorem mathlibRiemannHypothesis_of_quartetTriangleMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -12226,11 +11992,11 @@ theorem riemannHypothesisC2_of_c2QuartetTriangleMiddleRegion
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetTriangleCover
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetTriangleCover
     near edge (c2ExpandedScalarMiddleRegion_cover near edge hmiddle)
 
-theorem riemannHypothesisC2_of_c2QuartetClosedMiddleRegion
+theorem mathlibRiemannHypothesis_of_quartetClosedMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {rectangularUpper centralUpper : ℂ → ℝ}
     {tiltConstant tiltScale
@@ -12245,8 +12011,8 @@ theorem riemannHypothesisC2_of_c2QuartetClosedMiddleRegion
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetClosedCover
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetClosedCover
     near edge (c2ExpandedScalarMiddleRegion_cover near edge hmiddle)
 
 theorem offCriticalStripNonvanishing_of_c2QuartetComponentMiddleRegion
@@ -12274,7 +12040,7 @@ theorem offCriticalStripNonvanishing_of_c2QuartetComponentMiddleRegion
       hbulk
   · exact edge.edge_nonvanishing hedge
 
-theorem riemannHypothesisC2_of_c2QuartetComponentMiddleRegion
+theorem mathlibRiemannHypothesis_of_quartetComponentMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
     {tiltConstant tiltScale
@@ -12289,8 +12055,8 @@ theorem riemannHypothesisC2_of_c2QuartetComponentMiddleRegion
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
     (bulkRegion :=
       c2OddTailContinuedBalancingSeedBulkQuartetComponentRegion
         coreCutoff K M continuedVerticalUpper
@@ -12424,7 +12190,7 @@ theorem offCriticalStripNonvanishing_of_c2QuartetComponentTruncationMiddleRegion
     (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
     data.near data.edge (fun _ hs => (data.middle_local hs).mem_componentRegion)
 
-theorem riemannHypothesisC2_of_c2QuartetComponentTruncationMiddleRegionData
+theorem mathlibRiemannHypothesis_of_quartetComponentTruncationMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
     {oddTruncationUpper : ℂ → ℕ → ℝ}
@@ -12436,8 +12202,8 @@ theorem riemannHypothesisC2_of_c2QuartetComponentTruncationMiddleRegionData
       tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2QuartetComponentMiddleRegion
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_quartetComponentMiddleRegion
     (continuedVerticalUpper := continuedVerticalUpper)
     (tiltConstant := tiltConstant) (tiltScale := tiltScale)
     (horizontalConstant := horizontalConstant)
@@ -12485,7 +12251,7 @@ theorem offCriticalStripNonvanishing_of_continuationAndQuartetComponentTruncatio
   }
 
 
-theorem riemannHypothesisC2_of_continuationAndQuartetComponentTruncationLocalData
+theorem mathlibRiemannHypothesis_of_continuationAndQuartetComponentTruncationLocalData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
     {oddTruncationUpper : ℂ → ℕ → ℝ}
@@ -12506,7 +12272,7 @@ theorem riemannHypothesisC2_of_continuationAndQuartetComponentTruncationLocalDat
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   let nearC2 :=
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
       (coreCutoff := coreCutoff) (K := K) (M := M)
@@ -12515,7 +12281,7 @@ theorem riemannHypothesisC2_of_continuationAndQuartetComponentTruncationLocalDat
   let edgeC2 :=
     C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
       (coreCutoff := coreCutoff) (K := K) (M := M)
-  exact riemannHypothesisC2_of_c2QuartetComponentTruncationMiddleRegionData {
+  exact mathlibRiemannHypothesis_of_quartetComponentTruncationMiddleRegionData {
     near := nearC2
     edge := edgeC2
     middle_local := fun _ hs => hmiddle hs
@@ -12764,7 +12530,7 @@ theorem offCriticalStripNonvanishing_of_c2QuartetComponentResolventNoteMiddleReg
   offCriticalStripNonvanishing_of_c2QuartetComponentTruncationMiddleRegionData
     data.toTruncationMiddleRegionData
 
-theorem riemannHypothesisC2_of_c2QuartetComponentResolventNoteMiddleRegionData
+theorem mathlibRiemannHypothesis_of_quartetComponentResolventNoteMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
     {oddTruncationUpper : ℂ → ℕ → ℝ}
@@ -12777,8 +12543,8 @@ theorem riemannHypothesisC2_of_c2QuartetComponentResolventNoteMiddleRegionData
       tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2QuartetComponentTruncationMiddleRegionData
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_quartetComponentTruncationMiddleRegionData
     data.toTruncationMiddleRegionData
 
 
@@ -12822,7 +12588,7 @@ theorem offCriticalStripNonvanishing_of_continuationAndQuartetComponentResolvent
     }
 
 
-theorem riemannHypothesisC2_of_continuationAndQuartetComponentResolventNoteLocalData
+theorem mathlibRiemannHypothesis_of_continuationAndQuartetComponentResolventNoteLocalData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
     {oddTruncationUpper : ℂ → ℕ → ℝ}
@@ -12844,7 +12610,7 @@ theorem riemannHypothesisC2_of_continuationAndQuartetComponentResolventNoteLocal
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   let nearC2 :=
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
       (coreCutoff := coreCutoff) (K := K) (M := M)
@@ -12853,7 +12619,7 @@ theorem riemannHypothesisC2_of_continuationAndQuartetComponentResolventNoteLocal
   let edgeC2 :=
     C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
       (coreCutoff := coreCutoff) (K := K) (M := M)
-  exact riemannHypothesisC2_of_c2QuartetComponentResolventNoteMiddleRegionData {
+  exact mathlibRiemannHypothesis_of_quartetComponentResolventNoteMiddleRegionData {
     near := nearC2
     edge := edgeC2
     middle_local := fun _ hs => hmiddle hs
@@ -13032,7 +12798,7 @@ theorem offCriticalStripNonvanishing_of_continuationAndQuartetComponentResolvent
           (hdominance hs))
 
 
-theorem riemannHypothesisC2_of_continuationAndQuartetComponentResolventNoteBounds
+theorem mathlibRiemannHypothesis_of_continuationAndQuartetComponentResolventNoteBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
     {oddTruncationUpper : ℂ → ℕ → ℝ}
@@ -13172,9 +12938,9 @@ theorem riemannHypothesisC2_of_continuationAndQuartetComponentResolventNoteBound
               horizontalConstant horizontalScale horizontalRatio)) s +
         c2BulkEUpper (c2CutoffUpperFromScale cutoffConstant cutoffScale) s <
           c2QuartetBulkK2Lower s * ((1 - ‖q s‖) * (1 + ‖q s‖ ^ 2))) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndQuartetComponentResolventNoteLocalData
+    mathlibRiemannHypothesis_of_continuationAndQuartetComponentResolventNoteLocalData
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (continuedVerticalUpper := continuedVerticalUpper)
       (oddTruncationUpper := oddTruncationUpper)
@@ -13391,7 +13157,7 @@ theorem
       hdominance
 
 
-theorem riemannHypothesisC2_of_continuationAndQuartetComponentExactScaleMatchedResolventBounds
+theorem mathlibRiemannHypothesis_of_continuationAndQuartetComponentExactScaleMatchedResolventBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {oddTruncationUpper : ℂ → ℕ → ℝ}
     {tiltConstant tiltScale
@@ -13502,9 +13268,9 @@ theorem riemannHypothesisC2_of_continuationAndQuartetComponentExactScaleMatchedR
               horizontalConstant cutoffScale horizontalRatio)) s +
         c2BulkEUpper (c2CutoffUpperFromScale cutoffConstant cutoffScale) s <
           c2QuartetBulkK2Lower s * ((1 - ‖q s‖) * (1 + ‖q s‖ ^ 2))) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndQuartetComponentResolventNoteBounds
+    mathlibRiemannHypothesis_of_continuationAndQuartetComponentResolventNoteBounds
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (continuedVerticalUpper := c2ContinuedVerticalResidualExactUpper K M)
       (oddTruncationUpper := oddTruncationUpper)
@@ -13590,7 +13356,7 @@ theorem offCriticalStripNonvanishing_of_c2CanonicalClosedMiddleRegion
         rfl
         hcover)
 
-theorem riemannHypothesisC2_of_c2CanonicalClosedMiddleRegion
+theorem mathlibRiemannHypothesis_of_canonicalClosedMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -13604,8 +13370,8 @@ theorem riemannHypothesisC2_of_c2CanonicalClosedMiddleRegion
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2QuartetClosedMiddleRegion
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_quartetClosedMiddleRegion
     (rectangularUpper := c2RectangularGenuineDirectBracketUpper K M)
     (centralUpper := c2ContinuedCentralExactUpper)
     near edge
@@ -13638,7 +13404,7 @@ theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledMiddleRegion
       c2OddTailContinuedBalancingSeedBulkQuartetCanonicalClosed_mem_of_scaledRegion
         (hmiddle hs))
 
-theorem riemannHypothesisC2_of_c2CanonicalClosedScaledMiddleRegion
+theorem mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
@@ -13647,8 +13413,8 @@ theorem riemannHypothesisC2_of_c2CanonicalClosedScaledMiddleRegion
       s ∈ c2ExpandedScalarMiddleRegion near edge →
       s ∈ c2OddTailContinuedBalancingSeedBulkQuartetCanonicalClosedScaledRegion
         coreCutoff K M horizontalConstant horizontalScale horizontalRatio) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2CanonicalClosedMiddleRegion
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_canonicalClosedMiddleRegion
     (tiltConstant := c2CanonicalClosedTiltConstant
       K M horizontalConstant horizontalScale horizontalRatio)
     (tiltScale := fun _ => (1 : ℝ))
@@ -13761,13 +13527,13 @@ theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledCoverData
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.toNearAxisRouteData] using
     offCriticalStripNonvanishing_of_coverData data.toOffCriticalCoverData
 
-theorem riemannHypothesisC2_of_c2CanonicalClosedScaledCoverData
+theorem mathlibRiemannHypothesis_of_canonicalClosedScaledCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2CanonicalClosedScaledCoverData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteCover
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteCover
     data.near data.edge
     (fun s hs => by
       rcases data.cover s hs with hnear | hmiddle | hedge
@@ -13797,13 +13563,13 @@ theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledMiddleCoverData
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
   offCriticalStripNonvanishing_of_c2CanonicalClosedScaledCoverData data.toCoverData
 
-theorem riemannHypothesisC2_of_c2CanonicalClosedScaledMiddleCoverData
+theorem mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2CanonicalClosedScaledMiddleCoverData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2CanonicalClosedScaledCoverData data.toCoverData
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_canonicalClosedScaledCoverData data.toCoverData
 
 /--
 Regional middle-strip package directly in the preferred `canonicalClosedScaled`
@@ -13878,13 +13644,13 @@ theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledDirectMiddleRegio
   offCriticalStripNonvanishing_of_c2CanonicalClosedScaledMiddleCoverData
     data.toMiddleCoverData
 
-theorem riemannHypothesisC2_of_c2CanonicalClosedScaledDirectMiddleRegionData
+theorem mathlibRiemannHypothesis_of_canonicalClosedScaledDirectMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2CanonicalClosedScaledMiddleRegionData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2CanonicalClosedScaledMiddleCoverData
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleCoverData
     data.toMiddleCoverData
 
 /--
@@ -14259,14 +14025,14 @@ theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledVerticalBudgetMid
   offCriticalStripNonvanishing_of_c2CanonicalClosedScaledDirectMiddleRegionData
     data.toCanonicalClosedScaledMiddleRegionData
 
-theorem riemannHypothesisC2_of_c2CanonicalClosedScaledVerticalBudgetMiddleRegionData
+theorem mathlibRiemannHypothesis_of_canonicalClosedScaledVerticalBudgetMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {verticalUpper horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2CanonicalClosedScaledVerticalBudgetMiddleRegionData
       coreCutoff K M
       verticalUpper horizontalConstant horizontalScale horizontalRatio) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2CanonicalClosedScaledDirectMiddleRegionData
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_canonicalClosedScaledDirectMiddleRegionData
     data.toCanonicalClosedScaledMiddleRegionData
 
 /--
@@ -14380,7 +14146,7 @@ theorem
   offCriticalStripNonvanishing_of_c2CanonicalClosedScaledDirectMiddleRegionData
     data.toCanonicalClosedScaledMiddleRegionData
 
-theorem riemannHypothesisC2_of_c2CanonicalClosedScaledVerticalTruncationMiddleRegionData
+theorem mathlibRiemannHypothesis_of_canonicalClosedScaledVerticalTruncationMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {verticalUpper : ℂ → ℝ}
     {oddTruncationUpper : ℂ → ℕ → ℝ}
@@ -14388,8 +14154,8 @@ theorem riemannHypothesisC2_of_c2CanonicalClosedScaledVerticalTruncationMiddleRe
     (data : C2CanonicalClosedScaledVerticalTruncationMiddleRegionData
       coreCutoff K M verticalUpper oddTruncationUpper
       horizontalConstant horizontalScale horizontalRatio) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2CanonicalClosedScaledDirectMiddleRegionData
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_canonicalClosedScaledDirectMiddleRegionData
     data.toCanonicalClosedScaledMiddleRegionData
 
 /--
@@ -14511,7 +14277,7 @@ theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledResidualBudgetMid
     data.toCanonicalClosedScaledMiddleRegionData
 
 
-theorem riemannHypothesisC2_of_c2CanonicalClosedScaledResidualBudgetMiddleRegionData
+theorem mathlibRiemannHypothesis_of_canonicalClosedScaledResidualBudgetMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio
       tiltBudget horizontalBudget cutoffBudget : ℂ → ℝ}
@@ -14519,8 +14285,8 @@ theorem riemannHypothesisC2_of_c2CanonicalClosedScaledResidualBudgetMiddleRegion
       coreCutoff K M
       horizontalConstant horizontalScale horizontalRatio
       tiltBudget horizontalBudget cutoffBudget) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2CanonicalClosedScaledDirectMiddleRegionData
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_canonicalClosedScaledDirectMiddleRegionData
     data.toCanonicalClosedScaledMiddleRegionData
 
 theorem C2CanonicalClosedScaledLocalData.of_mem_zetaDepthCoreRegion
@@ -14763,21 +14529,21 @@ theorem offCriticalStripNonvanishing_of_c2CanonicalClosedScaledMiddleLocalData
   offCriticalStripNonvanishing_of_c2CanonicalClosedScaledDirectMiddleRegionData
     data.toMiddleRegionData
 
-theorem riemannHypothesisC2_of_c2CanonicalClosedScaledMiddleLocalData
+theorem mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleLocalData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2CanonicalClosedScaledMiddleLocalData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2CanonicalClosedScaledDirectMiddleRegionData
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_canonicalClosedScaledDirectMiddleRegionData
     data.toMiddleRegionData
 
 /--
 Terminal placeholder package for a fully formal C2 proof of RH.
 Once an inhabitant of this structure is constructed, Lean accepts
-`RiemannHypothesisC2` with no further analytic plumbing.
+`RiemannHypothesis` with no further analytic plumbing.
 -/
-structure C2RiemannHypothesisTerminalData where
+structure RiemannHypothesisTerminalData where
   coreCutoff : ℕ → ℕ
   K : ℕ
   M : ℕ
@@ -14787,40 +14553,40 @@ structure C2RiemannHypothesisTerminalData where
   middle : C2CanonicalClosedScaledMiddleLocalData
     coreCutoff K M horizontalConstant horizontalScale horizontalRatio
 
-def C2RiemannHypothesisTerminalData.toMiddleLocalData
-    (data : C2RiemannHypothesisTerminalData) :
+def RiemannHypothesisTerminalData.toMiddleLocalData
+    (data : RiemannHypothesisTerminalData) :
     C2CanonicalClosedScaledMiddleLocalData
       data.coreCutoff data.K data.M
       data.horizontalConstant data.horizontalScale data.horizontalRatio :=
   data.middle
 
-noncomputable def C2RiemannHypothesisTerminalData.toCoverData
-    (data : C2RiemannHypothesisTerminalData) :
+noncomputable def RiemannHypothesisTerminalData.toCoverData
+    (data : RiemannHypothesisTerminalData) :
     C2CanonicalClosedScaledCoverData
       data.coreCutoff data.K data.M
       data.horizontalConstant data.horizontalScale data.horizontalRatio :=
   data.middle.toCoverData
 
-theorem offCriticalStripNonvanishing_of_c2RiemannHypothesisTerminalData
-    (data : C2RiemannHypothesisTerminalData) :
+theorem offCriticalStripNonvanishing_of_terminalData
+    (data : RiemannHypothesisTerminalData) :
     offCriticalStripNonvanishing
       (c2OddTailContinuedBalancingSeedBulkModel
         data.coreCutoff data.K data.M) :=
   offCriticalStripNonvanishing_of_c2CanonicalClosedScaledMiddleLocalData
     data.middle
 
-theorem riemannHypothesisC2_of_c2RiemannHypothesisTerminalData
-    (data : C2RiemannHypothesisTerminalData) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2CanonicalClosedScaledMiddleLocalData
+theorem mathlibRiemannHypothesis_of_terminalData
+    (data : RiemannHypothesisTerminalData) :
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleLocalData
     data.middle
 
-def C2RiemannHypothesisTerminalData.ofMiddleLocalData
+def RiemannHypothesisTerminalData.ofMiddleLocalData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2CanonicalClosedScaledMiddleLocalData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio) :
-    C2RiemannHypothesisTerminalData where
+    RiemannHypothesisTerminalData where
   coreCutoff := coreCutoff
   K := K
   M := M
@@ -14836,7 +14602,7 @@ Unlike the canonical terminal package above, this version keeps the bulk-bound
 functions `tiltConstant`, `tiltScale`, `cutoffConstant`, and `cutoffScale`
 fully parametric.
 -/
-theorem riemannHypothesisC2_of_continuationAndExplicitScalarExactZetaMiddleRegionWithBounds
+theorem mathlibRiemannHypothesis_of_continuationAndExplicitScalarExactZetaMiddleRegionWithBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -14855,7 +14621,7 @@ theorem riemannHypothesisC2_of_continuationAndExplicitScalarExactZetaMiddleRegio
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   let nearC2 :=
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
       (coreCutoff := coreCutoff) (K := K) (M := M)
@@ -14864,12 +14630,12 @@ theorem riemannHypothesisC2_of_continuationAndExplicitScalarExactZetaMiddleRegio
   let edgeC2 :=
     C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
       (coreCutoff := coreCutoff) (K := K) (M := M)
-  exact riemannHypothesisC2_of_c2ExpandedScalarMiddleRegion nearC2 edgeC2
+  exact mathlibRiemannHypothesis_of_expandedScalarMiddleRegion nearC2 edgeC2
     (fun _ hs =>
       c2ExpandedExactZetaScalarRegion_mem_of_mem_explicitScalarExactZetaRegion
         (hmiddle hs))
 
-theorem riemannHypothesisC2_of_continuationAndExpandedExactZetaMiddleRegionWithBounds
+theorem mathlibRiemannHypothesis_of_continuationAndExpandedExactZetaMiddleRegionWithBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -14888,7 +14654,7 @@ theorem riemannHypothesisC2_of_continuationAndExpandedExactZetaMiddleRegionWithB
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   let nearC2 :=
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
       (coreCutoff := coreCutoff) (K := K) (M := M)
@@ -14897,7 +14663,7 @@ theorem riemannHypothesisC2_of_continuationAndExpandedExactZetaMiddleRegionWithB
   let edgeC2 :=
     C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
       (coreCutoff := coreCutoff) (K := K) (M := M)
-  exact riemannHypothesisC2_of_c2ExpandedExactZetaMiddleRegion
+  exact mathlibRiemannHypothesis_of_expandedExactZetaMiddleRegion
     (coreCutoff := coreCutoff) (K := K) (M := M)
     (tiltConstant := tiltConstant) (tiltScale := tiltScale)
     (horizontalConstant := horizontalConstant)
@@ -14985,7 +14751,7 @@ theorem
       continuation s hsPunctured
   simpa [hEq] using hcontinued
 
-theorem riemannHypothesisC2_of_continuationAndBulkConcreteMiddleRegionWithBounds
+theorem mathlibRiemannHypothesis_of_continuationAndBulkConcreteMiddleRegionWithBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -15004,7 +14770,7 @@ theorem riemannHypothesisC2_of_continuationAndBulkConcreteMiddleRegionWithBounds
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   let nearC2 :=
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
       (coreCutoff := coreCutoff) (K := K) (M := M)
@@ -15014,7 +14780,7 @@ theorem riemannHypothesisC2_of_continuationAndBulkConcreteMiddleRegionWithBounds
     C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
       (coreCutoff := coreCutoff) (K := K) (M := M)
   exact
-    riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_concreteCover
+    mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_concreteCover
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant)
@@ -15025,7 +14791,7 @@ theorem riemannHypothesisC2_of_continuationAndBulkConcreteMiddleRegionWithBounds
       (c2ExpandedScalarMiddleRegion_cover nearC2 edgeC2 (fun _ hs => hmiddle hs))
 
 theorem
-  riemannHypothesisC2_of_genuineFInfiniteContinuationAndBulkConcreteMiddle
+  mathlibRiemannHypothesis_of_genuineFInfiniteContinuationAndBulkConcreteMiddle
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -15044,8 +14810,8 @@ theorem
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_genuineFInfiniteContinuation continuation
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_genuineFInfiniteContinuation continuation
     (offCriticalStripNonvanishing_of_genuineFInfinite_of_continuationAndBulkConcreteMiddle
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
@@ -15055,7 +14821,7 @@ theorem
       (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
       continuation hmiddle)
 
-theorem riemannHypothesisC2_of_continuationAndBulkConcreteMiddlePointwiseBounds
+theorem mathlibRiemannHypothesis_of_continuationAndBulkConcreteMiddlePointwiseBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -15117,7 +14883,7 @@ theorem
       continuation (fun _ hs => hmiddle hs)
 
 theorem
-  riemannHypothesisC2_of_genuineFInfiniteContinuationAndBulkConcretePointwiseBounds
+  mathlibRiemannHypothesis_of_genuineFInfiniteContinuationAndBulkConcretePointwiseBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -15136,9 +14902,9 @@ theorem
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_genuineFInfiniteContinuationAndBulkConcreteMiddle
+    mathlibRiemannHypothesis_of_genuineFInfiniteContinuationAndBulkConcreteMiddle
     (coreCutoff := coreCutoff) (K := K) (M := M)
     (tiltConstant := tiltConstant) (tiltScale := tiltScale)
     (horizontalConstant := horizontalConstant)
@@ -15151,16 +14917,16 @@ def C2CanonicalClosedScaledMiddleLocalData.toTerminalData
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2CanonicalClosedScaledMiddleLocalData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio) :
-    C2RiemannHypothesisTerminalData :=
-  C2RiemannHypothesisTerminalData.ofMiddleLocalData data
+    RiemannHypothesisTerminalData :=
+  RiemannHypothesisTerminalData.ofMiddleLocalData data
 
-def C2RiemannHypothesisTerminalData.ofMiddleRegionData
+def RiemannHypothesisTerminalData.ofMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2CanonicalClosedScaledMiddleRegionData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio) :
-    C2RiemannHypothesisTerminalData :=
-  C2RiemannHypothesisTerminalData.ofMiddleLocalData
+    RiemannHypothesisTerminalData :=
+  RiemannHypothesisTerminalData.ofMiddleLocalData
     (C2CanonicalClosedScaledMiddleLocalData.ofMiddleRegionData data)
 
 def C2CanonicalClosedScaledMiddleRegionData.toTerminalData
@@ -15168,16 +14934,16 @@ def C2CanonicalClosedScaledMiddleRegionData.toTerminalData
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2CanonicalClosedScaledMiddleRegionData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio) :
-    C2RiemannHypothesisTerminalData :=
-  C2RiemannHypothesisTerminalData.ofMiddleRegionData data
+    RiemannHypothesisTerminalData :=
+  RiemannHypothesisTerminalData.ofMiddleRegionData data
 
-def C2RiemannHypothesisTerminalData.ofMiddleCoverData
+def RiemannHypothesisTerminalData.ofMiddleCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2CanonicalClosedScaledMiddleCoverData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio) :
-    C2RiemannHypothesisTerminalData :=
-  C2RiemannHypothesisTerminalData.ofMiddleLocalData {
+    RiemannHypothesisTerminalData :=
+  RiemannHypothesisTerminalData.ofMiddleLocalData {
     near := data.near
     edge := data.edge
     middle_local := fun _ hs =>
@@ -15190,16 +14956,16 @@ def C2CanonicalClosedScaledMiddleCoverData.toTerminalData
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2CanonicalClosedScaledMiddleCoverData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio) :
-    C2RiemannHypothesisTerminalData :=
-  C2RiemannHypothesisTerminalData.ofMiddleCoverData data
+    RiemannHypothesisTerminalData :=
+  RiemannHypothesisTerminalData.ofMiddleCoverData data
 
-def C2RiemannHypothesisTerminalData.ofCoverData
+def RiemannHypothesisTerminalData.ofCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2CanonicalClosedScaledCoverData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio) :
-    C2RiemannHypothesisTerminalData :=
-  C2RiemannHypothesisTerminalData.ofMiddleLocalData {
+    RiemannHypothesisTerminalData :=
+  RiemannHypothesisTerminalData.ofMiddleLocalData {
     near := data.near
     edge := data.edge
     middle_local := fun s hs => by
@@ -15214,10 +14980,10 @@ def C2CanonicalClosedScaledCoverData.toTerminalData
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2CanonicalClosedScaledCoverData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio) :
-    C2RiemannHypothesisTerminalData :=
-  C2RiemannHypothesisTerminalData.ofCoverData data
+    RiemannHypothesisTerminalData :=
+  RiemannHypothesisTerminalData.ofCoverData data
 
-def C2RiemannHypothesisTerminalData.ofExpandedScalarMiddleRegionData
+def RiemannHypothesisTerminalData.ofExpandedScalarMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2ExpandedScalarMiddleRegionData
@@ -15228,8 +14994,8 @@ def C2RiemannHypothesisTerminalData.ofExpandedScalarMiddleRegionData
       horizontalConstant horizontalScale horizontalRatio
       (c2CanonicalClosedCutoffConstant K M)
       (fun _ => (1 : ℝ))) :
-    C2RiemannHypothesisTerminalData :=
-  C2RiemannHypothesisTerminalData.ofMiddleLocalData
+    RiemannHypothesisTerminalData :=
+  RiemannHypothesisTerminalData.ofMiddleLocalData
     (C2CanonicalClosedScaledMiddleLocalData.ofExpandedScalarMiddleRegionData data)
 
 def C2ExpandedScalarMiddleRegionData.toTerminalData
@@ -15243,10 +15009,10 @@ def C2ExpandedScalarMiddleRegionData.toTerminalData
       horizontalConstant horizontalScale horizontalRatio
       (c2CanonicalClosedCutoffConstant K M)
       (fun _ => (1 : ℝ))) :
-    C2RiemannHypothesisTerminalData :=
-  C2RiemannHypothesisTerminalData.ofExpandedScalarMiddleRegionData data
+    RiemannHypothesisTerminalData :=
+  RiemannHypothesisTerminalData.ofExpandedScalarMiddleRegionData data
 
-def C2RiemannHypothesisTerminalData.ofExpandedScalarCanonicalCoverData
+def RiemannHypothesisTerminalData.ofExpandedScalarCanonicalCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (data : C2ExpandedScalarCanonicalCoverData
@@ -15257,8 +15023,8 @@ def C2RiemannHypothesisTerminalData.ofExpandedScalarCanonicalCoverData
       horizontalConstant horizontalScale horizontalRatio
       (c2CanonicalClosedCutoffConstant K M)
       (fun _ => (1 : ℝ))) :
-    C2RiemannHypothesisTerminalData :=
-  C2RiemannHypothesisTerminalData.ofMiddleLocalData {
+    RiemannHypothesisTerminalData :=
+  RiemannHypothesisTerminalData.ofMiddleLocalData {
     near := data.near
     edge := data.edge
     middle_local := fun s hs => by
@@ -15282,8 +15048,8 @@ def C2ExpandedScalarCanonicalCoverData.toTerminalData
       horizontalConstant horizontalScale horizontalRatio
       (c2CanonicalClosedCutoffConstant K M)
       (fun _ => (1 : ℝ))) :
-    C2RiemannHypothesisTerminalData :=
-  C2RiemannHypothesisTerminalData.ofExpandedScalarCanonicalCoverData data
+    RiemannHypothesisTerminalData :=
+  RiemannHypothesisTerminalData.ofExpandedScalarCanonicalCoverData data
 
 /--
 Regional middle-strip package directly in the explicit-scalar exact-zeta route.
@@ -15360,7 +15126,7 @@ theorem offCriticalStripNonvanishing_of_c2ExplicitScalarExactZetaMiddleRegionDat
   offCriticalStripNonvanishing_of_c2ExpandedScalarMiddleRegionData
     data.toExpandedScalarMiddleRegionData
 
-theorem riemannHypothesisC2_of_c2ExplicitScalarExactZetaMiddleRegionData
+theorem mathlibRiemannHypothesis_of_explicitScalarExactZetaMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -15370,8 +15136,8 @@ theorem riemannHypothesisC2_of_c2ExplicitScalarExactZetaMiddleRegionData
       tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2ExpandedScalarMiddleRegionData
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_expandedScalarMiddleRegionData
     data.toExpandedScalarMiddleRegionData
 
 def C2ExplicitScalarExactZetaMiddleRegionData.toCanonicalClosedScaledMiddleLocalData
@@ -15401,7 +15167,7 @@ def C2ExplicitScalarExactZetaMiddleRegionData.toTerminalData
       horizontalConstant horizontalScale horizontalRatio
       (c2CanonicalClosedCutoffConstant K M)
       (fun _ => (1 : ℝ))) :
-    C2RiemannHypothesisTerminalData :=
+    RiemannHypothesisTerminalData :=
   data.toCanonicalClosedScaledMiddleLocalData.toTerminalData
 
 /--
@@ -15479,7 +15245,7 @@ theorem offCriticalStripNonvanishing_of_c2ExpandedExactZetaMiddleRegionData
   offCriticalStripNonvanishing_of_c2ExpandedScalarMiddleRegionData
     data.toExpandedScalarMiddleRegionData
 
-theorem riemannHypothesisC2_of_c2ExpandedExactZetaMiddleRegionData
+theorem mathlibRiemannHypothesis_of_expandedExactZetaMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -15489,8 +15255,8 @@ theorem riemannHypothesisC2_of_c2ExpandedExactZetaMiddleRegionData
       tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2ExpandedScalarMiddleRegionData
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_expandedScalarMiddleRegionData
     data.toExpandedScalarMiddleRegionData
 
 def C2ExpandedExactZetaMiddleRegionData.toExplicitScalarExactZetaMiddleRegionData
@@ -15562,10 +15328,10 @@ noncomputable def C2ExpandedExactZetaMiddleRegionData.toTerminalData
       horizontalConstant horizontalScale horizontalRatio
       (c2CanonicalClosedCutoffConstant K M)
       (fun _ => (1 : ℝ))) :
-    C2RiemannHypothesisTerminalData :=
+    RiemannHypothesisTerminalData :=
   data.toCanonicalClosedScaledMiddleLocalData.toTerminalData
 
-noncomputable def C2RiemannHypothesisTerminalData.ofExpandedExactZetaMiddleRegion
+noncomputable def RiemannHypothesisTerminalData.ofExpandedExactZetaMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
@@ -15580,14 +15346,14 @@ noncomputable def C2RiemannHypothesisTerminalData.ofExpandedExactZetaMiddleRegio
         horizontalConstant horizontalScale horizontalRatio
         (c2CanonicalClosedCutoffConstant K M)
         (fun _ => (1 : ℝ))) :
-    C2RiemannHypothesisTerminalData :=
+    RiemannHypothesisTerminalData :=
   (C2ExpandedExactZetaMiddleRegionData.toTerminalData {
     near := near
     edge := edge
     middle_local := fun _ hs => hmiddle hs
   })
 
-def C2RiemannHypothesisTerminalData.ofZetaDepthCoreMiddleRegion
+def RiemannHypothesisTerminalData.ofZetaDepthCoreMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {depthUpper coreUpper oddFactorUpper zetaUpper : ℂ → ℝ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -15604,11 +15370,11 @@ def C2RiemannHypothesisTerminalData.ofZetaDepthCoreMiddleRegion
         horizontalConstant horizontalScale horizontalRatio
         (c2CanonicalClosedCutoffConstant K M)
         (fun _ => (1 : ℝ))) :
-    C2RiemannHypothesisTerminalData :=
+    RiemannHypothesisTerminalData :=
   (C2CanonicalClosedScaledMiddleLocalData.ofZetaDepthCoreMiddleRegion
     near edge hmiddle).toTerminalData
 
-def C2RiemannHypothesisTerminalData.ofExplicitFiniteCoreMiddleRegion
+def RiemannHypothesisTerminalData.ofExplicitFiniteCoreMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {zetaUpper : ℂ → ℝ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -15624,11 +15390,11 @@ def C2RiemannHypothesisTerminalData.ofExplicitFiniteCoreMiddleRegion
         horizontalConstant horizontalScale horizontalRatio
         (c2CanonicalClosedCutoffConstant K M)
         (fun _ => (1 : ℝ))) :
-    C2RiemannHypothesisTerminalData :=
+    RiemannHypothesisTerminalData :=
   (C2CanonicalClosedScaledMiddleLocalData.ofExplicitFiniteCoreMiddleRegion
     near edge hmiddle).toTerminalData
 
-def C2RiemannHypothesisTerminalData.ofExplicitScalarExactZetaMiddleRegion
+def RiemannHypothesisTerminalData.ofExplicitScalarExactZetaMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
@@ -15643,12 +15409,12 @@ def C2RiemannHypothesisTerminalData.ofExplicitScalarExactZetaMiddleRegion
         horizontalConstant horizontalScale horizontalRatio
         (c2CanonicalClosedCutoffConstant K M)
         (fun _ => (1 : ℝ))) :
-    C2RiemannHypothesisTerminalData :=
+    RiemannHypothesisTerminalData :=
   (C2CanonicalClosedScaledMiddleLocalData.ofExplicitScalarExactZetaMiddleRegion
     near edge hmiddle).toTerminalData
 
 noncomputable def
-    C2RiemannHypothesisTerminalData.ofGenuineFInfiniteNearAxisAndExplicitScalarExactZetaMiddleRegion
+    RiemannHypothesisTerminalData.ofGenuineFInfiniteNearAxisAndExplicitScalarExactZetaMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -15667,18 +15433,18 @@ noncomputable def
         horizontalConstant horizontalScale horizontalRatio
         (c2CanonicalClosedCutoffConstant K M)
         (fun _ => (1 : ℝ))) :
-    C2RiemannHypothesisTerminalData := by
+    RiemannHypothesisTerminalData := by
   let nearC2 :=
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
       (coreCutoff := coreCutoff) (K := K) (M := M) continuation near
   let edgeC2 :=
     C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
       (coreCutoff := coreCutoff) (K := K) (M := M)
-  exact C2RiemannHypothesisTerminalData.ofExplicitScalarExactZetaMiddleRegion
+  exact RiemannHypothesisTerminalData.ofExplicitScalarExactZetaMiddleRegion
     nearC2 edgeC2 (fun _ hs => hmiddle hs)
 
 theorem
-    riemannHypothesisC2_of_genuineFInfiniteNearAxisAndExplicitScalarExactZetaMiddleRegion
+    mathlibRiemannHypothesis_of_genuineFInfiniteNearAxisAndExplicitScalarExactZetaMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -15697,17 +15463,17 @@ theorem
         horizontalConstant horizontalScale horizontalRatio
         (c2CanonicalClosedCutoffConstant K M)
         (fun _ => (1 : ℝ))) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   let terminalData :=
-    C2RiemannHypothesisTerminalData.ofGenuineFInfiniteNearAxisAndExplicitScalarExactZetaMiddleRegion
+    RiemannHypothesisTerminalData.ofGenuineFInfiniteNearAxisAndExplicitScalarExactZetaMiddleRegion
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (horizontalConstant := horizontalConstant)
       (horizontalScale := horizontalScale)
       (horizontalRatio := horizontalRatio)
       continuation near hmiddle
-  exact riemannHypothesisC2_of_c2RiemannHypothesisTerminalData terminalData
+  exact mathlibRiemannHypothesis_of_terminalData terminalData
 
-noncomputable def C2RiemannHypothesisTerminalData.ofContinuationAndMiddleLocal
+noncomputable def RiemannHypothesisTerminalData.ofContinuationAndMiddleLocal
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -15721,7 +15487,7 @@ noncomputable def C2RiemannHypothesisTerminalData.ofContinuationAndMiddleLocal
           (coreCutoff := coreCutoff) (K := K) (M := M)) →
       C2CanonicalClosedScaledLocalData
         coreCutoff K M horizontalConstant horizontalScale horizontalRatio s) :
-    C2RiemannHypothesisTerminalData := by
+    RiemannHypothesisTerminalData := by
   let nearC2 :=
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
       (coreCutoff := coreCutoff) (K := K) (M := M)
@@ -15730,13 +15496,13 @@ noncomputable def C2RiemannHypothesisTerminalData.ofContinuationAndMiddleLocal
   let edgeC2 :=
     C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
       (coreCutoff := coreCutoff) (K := K) (M := M)
-  exact (C2RiemannHypothesisTerminalData.ofMiddleLocalData {
+  exact (RiemannHypothesisTerminalData.ofMiddleLocalData {
     near := nearC2
     edge := edgeC2
     middle_local := fun _ hs => hmiddle hs
   })
 
-theorem riemannHypothesisC2_of_continuationAndMiddleLocal
+theorem mathlibRiemannHypothesis_of_continuationAndMiddleLocal
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -15750,15 +15516,15 @@ theorem riemannHypothesisC2_of_continuationAndMiddleLocal
           (coreCutoff := coreCutoff) (K := K) (M := M)) →
       C2CanonicalClosedScaledLocalData
         coreCutoff K M horizontalConstant horizontalScale horizontalRatio s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   let terminalData :=
-    C2RiemannHypothesisTerminalData.ofContinuationAndMiddleLocal
+    RiemannHypothesisTerminalData.ofContinuationAndMiddleLocal
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (horizontalConstant := horizontalConstant)
       (horizontalScale := horizontalScale)
       (horizontalRatio := horizontalRatio)
       continuation hmiddle
-  exact riemannHypothesisC2_of_c2RiemannHypothesisTerminalData terminalData
+  exact mathlibRiemannHypothesis_of_terminalData terminalData
 
 theorem offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddlePointwiseBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -15852,7 +15618,7 @@ theorem offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMidd
     }
   }
 
-theorem riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddlePointwiseBounds
+theorem mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddlePointwiseBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -15923,8 +15689,8 @@ theorem riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddlePointwi
             (c2CanonicalClosedCutoffConstant K M)
             (fun _ => (1 : ℝ))) s <
           c2QuartetBulkK2Lower s * ((1 - ‖q s‖) * (1 + ‖q s‖ ^ 2))) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_c2CanonicalClosedScaledMiddleLocalData {
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleLocalData {
     near :=
       C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
         (coreCutoff := coreCutoff) (K := K) (M := M)
@@ -16334,7 +16100,7 @@ theorem
         (hdominance hs)).quartet_dominance)
 
 theorem
-  riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleSeparatedDominanceBounds
+  mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleSeparatedDominanceBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     {quartetTailBudget tiltBudget horizontalBudget cutoffBudget : ℂ → ℝ}
@@ -16437,8 +16203,8 @@ theorem
           (coreCutoff := coreCutoff) (K := K) (M := M)) →
       quartetTailBudget s + tiltBudget s + horizontalBudget s + cutoffBudget s <
         c2ExpandedQuartetK2Margin s) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddlePointwiseBounds
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddlePointwiseBounds
     (coreCutoff := coreCutoff) (K := K) (M := M)
     (horizontalConstant := horizontalConstant)
     (horizontalScale := horizontalScale)
@@ -16453,7 +16219,7 @@ theorem
         (hbudgetDominance hs))
 
 theorem
-  riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleResidualDominanceBounds
+  mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualDominanceBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     {tiltBudget horizontalBudget cutoffBudget : ℂ → ℝ}
@@ -16547,8 +16313,8 @@ theorem
           (coreCutoff := coreCutoff) (K := K) (M := M)) →
       tiltBudget s + horizontalBudget s + cutoffBudget s <
         c2ExpandedQuartetResidualMargin s) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddlePointwiseBounds
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddlePointwiseBounds
     (coreCutoff := coreCutoff) (K := K) (M := M)
     (horizontalConstant := horizontalConstant)
     (horizontalScale := horizontalScale)
@@ -16562,7 +16328,7 @@ theorem
         (hbudgetDominance hs))
 
 theorem
-  riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleResidualPointwiseBounds
+  mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualPointwiseBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -16623,8 +16389,8 @@ theorem
       c2CanonicalClosedScaledResidualUpper
         K M horizontalConstant horizontalScale horizontalRatio s <
         c2ExpandedQuartetResidualMargin s) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_continuationAndMiddleLocal
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_continuationAndMiddleLocal
     (coreCutoff := coreCutoff) (K := K) (M := M)
     (horizontalConstant := horizontalConstant)
     (horizontalScale := horizontalScale)
@@ -16640,7 +16406,7 @@ theorem
         (hdominance hs))
 
 theorem
-  riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleResidualAnalyticBounds
+  mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualAnalyticBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -16701,8 +16467,8 @@ theorem
       c2CanonicalClosedScaledResidualUpper
         K M horizontalConstant horizontalScale horizontalRatio s <
         c2AnalyticBulkAllowance s - c2ExpandedQuartetResidualReserve s) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_continuationAndMiddleLocal
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_continuationAndMiddleLocal
     (coreCutoff := coreCutoff) (K := K) (M := M)
     (horizontalConstant := horizontalConstant)
     (horizontalScale := horizontalScale)
@@ -16799,7 +16565,7 @@ theorem
         (hdominance hs)).quartet_dominance)
 
 theorem
-  riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleResidualMajorantBounds
+  mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualMajorantBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -16860,8 +16626,8 @@ theorem
       c2CanonicalClosedScaledResidualMajorant
         K M horizontalConstant horizontalScale horizontalRatio s <
         c2AnalyticBulkAllowance s - c2ExpandedQuartetResidualReserve s) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_continuationAndMiddleLocal
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_continuationAndMiddleLocal
     (coreCutoff := coreCutoff) (K := K) (M := M)
     (horizontalConstant := horizontalConstant)
     (horizontalScale := horizontalScale)
@@ -16973,7 +16739,7 @@ theorem
 
 
 theorem
-  riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleResidualVerticalBudgetBounds
+  mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualVerticalBudgetBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {verticalUpper horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -17046,8 +16812,8 @@ theorem
       c2CanonicalClosedScaledResidualVerticalBudgetUpper
         K M verticalUpper horizontalConstant horizontalScale horizontalRatio s <
         c2AnalyticBulkAllowance s - c2ExpandedQuartetResidualReserve s) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_continuationAndMiddleLocal
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_continuationAndMiddleLocal
     (coreCutoff := coreCutoff) (K := K) (M := M)
     (horizontalConstant := horizontalConstant)
     (horizontalScale := horizontalScale)
@@ -17157,7 +16923,7 @@ theorem
 
 
 theorem
-  riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleResidualVerticalBudgetTruncationBounds
+  mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualVerticalBudgetTruncationBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {verticalUpper : ℂ → ℝ}
     {oddTruncationUpper : ℂ → ℕ → ℝ}
@@ -17233,9 +16999,9 @@ theorem
       c2CanonicalClosedScaledResidualVerticalBudgetUpper
         K M verticalUpper horizontalConstant horizontalScale horizontalRatio s <
         c2AnalyticBulkAllowance s - c2ExpandedQuartetResidualReserve s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleResidualVerticalBudgetBounds
+    mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualVerticalBudgetBounds
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (verticalUpper := verticalUpper)
       (horizontalConstant := horizontalConstant)
@@ -17329,7 +17095,7 @@ theorem
 
 
 theorem
-  riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleResidualFiniteExactZetaVerticalBounds
+  mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualFiniteExactZetaVerticalBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -17391,8 +17157,8 @@ theorem
         K M (c2CanonicalClosedVerticalFiniteExactZetaUpper K M)
         horizontalConstant horizontalScale horizontalRatio s <
         c2AnalyticBulkAllowance s - c2ExpandedQuartetResidualReserve s) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_continuationAndMiddleLocal
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_continuationAndMiddleLocal
     (coreCutoff := coreCutoff) (K := K) (M := M)
     (horizontalConstant := horizontalConstant)
     (horizontalScale := horizontalScale)
@@ -17491,7 +17257,7 @@ theorem
 
 
 theorem
-  riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleResidualFiniteExactZetaBounds
+  mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualFiniteExactZetaBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -17552,8 +17318,8 @@ theorem
       c2CanonicalClosedScaledResidualFiniteExactZetaUpper
         K M horizontalConstant horizontalScale horizontalRatio s <
         c2AnalyticBulkAllowance s - c2ExpandedQuartetResidualReserve s) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_continuationAndMiddleLocal
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_continuationAndMiddleLocal
     (coreCutoff := coreCutoff) (K := K) (M := M)
     (horizontalConstant := horizontalConstant)
     (horizontalScale := horizontalScale)
@@ -17638,7 +17404,7 @@ theorem offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegio
       (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
       continuation hmiddle)
 
-theorem riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegionWithBounds
+theorem mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegionWithBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -17657,8 +17423,8 @@ theorem riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegionWithBoun
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale s) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_c2ExpandedScalarMiddleRegionData
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_expandedScalarMiddleRegionData
     (C2ExpandedScalarMiddleRegionData.ofContinuation
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
@@ -17668,7 +17434,7 @@ theorem riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegionWithBoun
       (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
       continuation hmiddle)
 
-theorem riemannHypothesisC2_of_continuationAndExpandedScalarMiddlePointwiseBounds
+theorem mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddlePointwiseBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -17710,8 +17476,8 @@ theorem riemannHypothesisC2_of_continuationAndExpandedScalarMiddlePointwiseBound
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale s) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegionWithBounds
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegionWithBounds
     (coreCutoff := coreCutoff) (K := K) (M := M)
     (tiltConstant := tiltConstant) (tiltScale := tiltScale)
     (horizontalConstant := horizontalConstant)
@@ -17727,7 +17493,7 @@ theorem riemannHypothesisC2_of_continuationAndExpandedScalarMiddlePointwiseBound
       main := hmain hs
     })
 
-theorem riemannHypothesisC2_of_continuationAndExpandedScalarMiddleSeparatedMainBounds
+theorem mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleSeparatedMainBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -17788,8 +17554,8 @@ theorem riemannHypothesisC2_of_continuationAndExpandedScalarMiddleSeparatedMainB
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale s) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_continuationAndExpandedScalarMiddlePointwiseBounds
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddlePointwiseBounds
     (coreCutoff := coreCutoff) (K := K) (M := M)
     (tiltConstant := tiltConstant) (tiltScale := tiltScale)
     (horizontalConstant := horizontalConstant)
@@ -18025,7 +17791,7 @@ theorem
 
 
 theorem
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -18098,8 +17864,8 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale s -
         residualUpper s > 0) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_F_nonvanishing_offCriticalIdentity
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_F_nonvanishing_offCriticalIdentity
     (c2OddTailContinuedBalancingSeedBulkModel_fundamentalIdentity_offCritical
       coreCutoff K M)
     (offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound
@@ -18197,7 +17963,7 @@ theorem
         simpa [c2ConcreteAntiMiracleAdjustedAnalyticMargin] using hdominance hs)
 
 theorem
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_centralDefectBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_centralDefectBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -18266,9 +18032,9 @@ theorem
           tiltConstant tiltScale
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale centralDefectUpper s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (residualUpper := centralDefectUpper)
       continuation hscale hhorizontal hseed hcutoff
@@ -18373,7 +18139,7 @@ theorem
       hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_separatedCentralBounds
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_separatedCentralBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -18452,9 +18218,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale
           (c2CentralDefectTriangleUpper genuineCentralUpper continuedCentralUpper) s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_centralDefectBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_centralDefectBound
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (centralDefectUpper :=
         c2CentralDefectTriangleUpper genuineCentralUpper continuedCentralUpper)
@@ -18549,7 +18315,7 @@ theorem
       hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -18619,9 +18385,9 @@ theorem
           cutoffConstant cutoffScale
           (c2CentralDefectTriangleUpper
             genuineCentralUpper c2ExplicitFiniteCoreCentralExactZetaScalarUpper) s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_separatedCentralBounds
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_separatedCentralBounds
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (genuineCentralUpper := genuineCentralUpper)
       (continuedCentralUpper := c2ExplicitFiniteCoreCentralExactZetaScalarUpper)
@@ -18709,7 +18475,7 @@ theorem
       hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exactGenuineCentralBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exactGenuineCentralBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -18770,9 +18536,9 @@ theorem
           cutoffConstant cutoffScale
           (c2CentralDefectTriangleUpper
             c2GenuineCentralExactUpper c2ExplicitFiniteCoreCentralExactZetaScalarUpper) s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralBound
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant)
@@ -18888,7 +18654,7 @@ theorem
           (hhorizontal hs).layer_bound (hdominance hs))
 
 theorem
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralCombinedResidualDominance
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -18959,9 +18725,9 @@ theorem
           genuineCentralUpper
           c2ExplicitFiniteCoreCentralExactZetaScalarUpper s <
       c2ExpandedQuartetResidualMargin s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralBound
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant)
@@ -19254,7 +19020,7 @@ theorem
             (hgenuineCombined hs) (hdominance hs))
 
 theorem
-    riemannHypothesisC2_of_continuationAndAntiMiracleGenuineCentralMiddleRegionWithBounds
+    mathlibRiemannHypothesis_of_continuationAndAntiMiracleGenuineCentralMiddleRegionWithBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -19273,9 +19039,9 @@ theorem
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale genuineCentralUpper s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralBound
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant)
@@ -19292,7 +19058,7 @@ theorem
       (fun _ hs => (hmiddle hs).dominance)
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -19353,9 +19119,9 @@ theorem
           cutoffConstant cutoffScale
           (c2CentralDefectTriangleUpper
             genuineCentralUpper c2ExplicitFiniteCoreCentralExactZetaScalarUpper) s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndAntiMiracleGenuineCentralMiddleRegionWithBounds
+    mathlibRiemannHypothesis_of_continuationAndAntiMiracleGenuineCentralMiddleRegionWithBounds
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant)
@@ -19813,7 +19579,7 @@ theorem
       hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound_splitAtOne
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound_splitAtOne
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -19894,7 +19660,7 @@ theorem
           (c2CentralDefectTriangleUpper
             (c2GenuineCentralSplitAtOneUpper genuineCentralUpper)
             c2ExplicitFiniteCoreCentralExactZetaScalarUpper) s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   have hseed : ∀ ⦃s : ℂ⦄,
       s ∈ c2ExpandedScalarMiddleRegion
         (C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
@@ -19939,7 +19705,7 @@ theorem
         (hupper := hgenuineCombined hs)
         hle
   exact
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant)
@@ -20127,7 +19893,7 @@ theorem offCriticalStripNonvanishing_of_c2AntiMiracleGenuineCentralMiddleRegionD
       data.continuation
       (fun _ hs => data.middle_local hs)
 
-theorem riemannHypothesisC2_of_c2AntiMiracleGenuineCentralMiddleRegionData
+theorem mathlibRiemannHypothesis_of_antiMiracleGenuineCentralMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -20137,9 +19903,9 @@ theorem riemannHypothesisC2_of_c2AntiMiracleGenuineCentralMiddleRegionData
       tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale genuineCentralUpper) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndAntiMiracleGenuineCentralMiddleRegionWithBounds
+    mathlibRiemannHypothesis_of_continuationAndAntiMiracleGenuineCentralMiddleRegionWithBounds
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant)
@@ -20410,7 +20176,7 @@ theorem
         hgenuineLeOne hexactLeOne hdominance)
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound_splitAtOneScaledBoundsCombinedResidualDominance
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound_splitAtOneScaledBoundsCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -20498,9 +20264,9 @@ theorem
           cutoffConstant cutoffScale s +
         2 * c2GenuineCentralSplitAtOneUpper genuineCentralUpper s <
       c2ExpandedQuartetResidualMargin s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_c2AntiMiracleGenuineCentralMiddleRegionData
+    mathlibRiemannHypothesis_of_antiMiracleGenuineCentralMiddleRegionData
       (C2AntiMiracleGenuineCentralMiddleRegionData.ofContinuationAndExpandedScalarMiddleRegionGenuineCentralBoundSplitAtOneScaledBoundsCombinedResidualDominance
         (coreCutoff := coreCutoff) (K := K) (M := M)
         (tiltConstant := tiltConstant) (tiltScale := tiltScale)
@@ -20513,7 +20279,7 @@ theorem
         hgenuineLeOne hexactLeOne hdominance)
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound_splitAtOneScaledBounds
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound_splitAtOneScaledBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -20592,7 +20358,7 @@ theorem
           (c2CentralDefectTriangleUpper
             (c2GenuineCentralSplitAtOneUpper genuineCentralUpper)
             c2ExplicitFiniteCoreCentralExactZetaScalarUpper) s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   have hseed : ∀ ⦃s : ℂ⦄,
       s ∈ c2ExpandedScalarMiddleRegion
         (C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
@@ -20621,7 +20387,7 @@ theorem
       (hdefect := hdefectSplitAtOne hs)
       (hscaled := hcutoffSplitAtOne hs)
   exact
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant)
@@ -20716,7 +20482,7 @@ theorem
       hseed hcutoff hgenuine hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralCombinedResidualDominance
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -20778,9 +20544,9 @@ theorem
           genuineCentralUpper
           c2ExplicitFiniteCoreCentralExactZetaScalarUpper s <
       c2ExpandedQuartetResidualMargin s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralCombinedResidualDominance
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralCombinedResidualDominance
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant)
@@ -20937,7 +20703,7 @@ theorem
       hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralCombinedResidualDominance_splitAtOne
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralCombinedResidualDominance_splitAtOne
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -21018,7 +20784,7 @@ theorem
           (c2GenuineCentralSplitAtOneUpper genuineCentralUpper)
           c2ExplicitFiniteCoreCentralExactZetaScalarUpper s <
       c2ExpandedQuartetResidualMargin s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   have hseed : ∀ ⦃s : ℂ⦄,
       s ∈ c2ExpandedScalarMiddleRegion
         (C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
@@ -21063,7 +20829,7 @@ theorem
         (hupper := hgenuineCombined hs)
         hle
   exact
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralCombinedResidualDominance
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralCombinedResidualDominance
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant)
@@ -21169,7 +20935,7 @@ theorem
           (hseed hs) (hcutoff hs) (hgenuine hs) (hmajorant hs) (hdominance hs))
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -21241,9 +21007,9 @@ theorem
           cutoffConstant cutoffScale s +
         centralDefectMajorant s <
       c2ExpandedQuartetResidualMargin s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndAntiMiracleGenuineCentralMiddleRegionWithBounds
+    mathlibRiemannHypothesis_of_continuationAndAntiMiracleGenuineCentralMiddleRegionWithBounds
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant)
@@ -21413,7 +21179,7 @@ theorem
       hmajorant hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance_splitAtOne
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance_splitAtOne
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -21505,7 +21271,7 @@ theorem
           cutoffConstant cutoffScale s +
         centralDefectMajorant s <
       c2ExpandedQuartetResidualMargin s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   have hseed : ∀ ⦃s : ℂ⦄,
       s ∈ c2ExpandedScalarMiddleRegion
         (C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
@@ -21550,7 +21316,7 @@ theorem
         (hupper := hgenuineCombined hs)
         hle
   exact
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant)
@@ -21670,7 +21436,7 @@ theorem
       hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralSplitAtOneDoubleUpperCombinedResidualDominance
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralSplitAtOneDoubleUpperCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -21749,9 +21515,9 @@ theorem
           cutoffConstant cutoffScale s +
         2 * c2GenuineCentralSplitAtOneUpper genuineCentralUpper s <
       c2ExpandedQuartetResidualMargin s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance_splitAtOne
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance_splitAtOne
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant)
@@ -21920,7 +21686,7 @@ theorem
       hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralSplitAtOneUpperBoundsCombinedResidualDominance
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralSplitAtOneUpperBoundsCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -22000,7 +21766,7 @@ theorem
           cutoffConstant cutoffScale s +
         2 * c2GenuineCentralSplitAtOneUpper genuineCentralUpper s <
       c2ExpandedQuartetResidualMargin s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   have hseed : ∀ ⦃s : ℂ⦄,
       s ∈ c2ExpandedScalarMiddleRegion
         (C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
@@ -22048,7 +21814,7 @@ theorem
           (hupper := hgenuineCombined hs)
           hle)
   exact
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant)
@@ -22216,7 +21982,7 @@ theorem
       hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralSplitAtOneScaledBoundsCombinedResidualDominance
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralSplitAtOneScaledBoundsCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -22296,7 +22062,7 @@ theorem
           cutoffConstant cutoffScale s +
         2 * c2GenuineCentralSplitAtOneUpper genuineCentralUpper s <
       c2ExpandedQuartetResidualMargin s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   have hseed : ∀ ⦃s : ℂ⦄,
       s ∈ c2ExpandedScalarMiddleRegion
         (C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
@@ -22345,7 +22111,7 @@ theorem
           (hupper := hgenuineCombined hs)
           hle)
   exact
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant)
@@ -22613,7 +22379,7 @@ theorem
       (fun _ hs => (hmiddle hs).toGenuineCentralLocalData)
 
 theorem
-    riemannHypothesisC2_of_continuationAndAntiMiracleExactGenuineCentralMiddleRegionWithBounds
+    mathlibRiemannHypothesis_of_continuationAndAntiMiracleExactGenuineCentralMiddleRegionWithBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -22632,9 +22398,9 @@ theorem
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndAntiMiracleGenuineCentralMiddleRegionWithBounds
+    mathlibRiemannHypothesis_of_continuationAndAntiMiracleGenuineCentralMiddleRegionWithBounds
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant)
@@ -22692,7 +22458,7 @@ theorem offCriticalStripNonvanishing_of_c2AntiMiracleExactGenuineCentralMiddleRe
       data.continuation
       (fun _ hs => data.middle_local hs)
 
-theorem riemannHypothesisC2_of_c2AntiMiracleExactGenuineCentralMiddleRegionData
+theorem mathlibRiemannHypothesis_of_antiMiracleExactGenuineCentralMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -22702,9 +22468,9 @@ theorem riemannHypothesisC2_of_c2AntiMiracleExactGenuineCentralMiddleRegionData
       tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndAntiMiracleExactGenuineCentralMiddleRegionWithBounds
+    mathlibRiemannHypothesis_of_continuationAndAntiMiracleExactGenuineCentralMiddleRegionWithBounds
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant)
@@ -22847,7 +22613,7 @@ theorem
         continuation hmiddle hseed hcutoff hdominance)
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_exactGenuineCentralBound
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exactGenuineCentralBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -22901,9 +22667,9 @@ theorem
           (c2CentralDefectTriangleUpper
             c2GenuineCentralExactUpper
             c2ExplicitFiniteCoreCentralExactZetaScalarUpper) s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_c2AntiMiracleExactGenuineCentralMiddleRegionData
+    mathlibRiemannHypothesis_of_antiMiracleExactGenuineCentralMiddleRegionData
       (C2AntiMiracleExactGenuineCentralMiddleRegionData.ofContinuationAndExpandedScalarMiddleRegion
         (coreCutoff := coreCutoff) (K := K) (M := M)
         (tiltConstant := tiltConstant) (tiltScale := tiltScale)
@@ -23143,7 +22909,7 @@ theorem
         continuation hmiddle hseed hcutoff hdominance)
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_exactGenuineCentralCombinedResidualDominance
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exactGenuineCentralCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -23197,9 +22963,9 @@ theorem
           c2GenuineCentralExactUpper
           c2ExplicitFiniteCoreCentralExactZetaScalarUpper s <
       c2ExpandedQuartetResidualMargin s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_c2AntiMiracleExactGenuineCentralMiddleRegionData
+    mathlibRiemannHypothesis_of_antiMiracleExactGenuineCentralMiddleRegionData
       (C2AntiMiracleExactGenuineCentralMiddleRegionData.ofContinuationAndExpandedScalarMiddleRegionCombinedResidualDominance
         (coreCutoff := coreCutoff) (K := K) (M := M)
         (tiltConstant := tiltConstant) (tiltScale := tiltScale)
@@ -23289,7 +23055,7 @@ theorem
         continuation hmiddle hseed hcutoff hmajorant hdominance)
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_exactGenuineCentralMajorantCombinedResidualDominance
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exactGenuineCentralMajorantCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -23353,9 +23119,9 @@ theorem
           cutoffConstant cutoffScale s +
         centralDefectMajorant s <
       c2ExpandedQuartetResidualMargin s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_c2AntiMiracleExactGenuineCentralMiddleRegionData
+    mathlibRiemannHypothesis_of_antiMiracleExactGenuineCentralMiddleRegionData
       (C2AntiMiracleExactGenuineCentralMiddleRegionData.ofContinuationAndExpandedScalarMiddleRegionMajorantCombinedResidualDominance
         (coreCutoff := coreCutoff) (K := K) (M := M)
         (tiltConstant := tiltConstant) (tiltScale := tiltScale)
@@ -23458,7 +23224,7 @@ theorem
           c2ConcreteAntiMiracleAdjustedAnalyticMargin] using hdominance hs)
 
 theorem
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryResidualBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryResidualBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -23531,9 +23297,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale remainderUpper
           oscillatoryMoment J s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (residualUpper := c2ConcreteAntiMiraclePointwiseOscillatoryResidualUpper
         oscillatoryMoment J cutoffScale remainderUpper)
@@ -23625,7 +23391,7 @@ theorem
       hseed hcutoff hresidual hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_pointwiseOscillatoryResidualBound
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_pointwiseOscillatoryResidualBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -23689,9 +23455,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale remainderUpper
           oscillatoryMoment J s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryResidualBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryResidualBound
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant)
@@ -23880,7 +23646,7 @@ theorem
           (hdominance hs))
 
 theorem
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryResidualBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryResidualBound
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -23951,9 +23717,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale
           K M J X s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (residualUpper := c2ExponentialCutoffErrorPointwiseOscillatoryUpper K M J X)
       continuation hscale hhorizontal hseed hcutoff hresidual
@@ -23962,7 +23728,7 @@ theorem
           c2ConcreteAntiMiracleAdjustedAnalyticMargin] using hdominance hs)
 
 theorem
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryDominance
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryDominance
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -24035,9 +23801,9 @@ theorem
             tiltConstant tiltScale
             horizontalConstant horizontalScale horizontalRatio
             cutoffConstant cutoffScale s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryResidualBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryResidualBound
       (coreCutoff := coreCutoff) (K := K) (M := M) (J := J) (X := X)
       continuation hscale hhorizontal hseed hcutoff hresidual
       (fun {s} hs =>
@@ -24153,7 +23919,7 @@ theorem
             (hdominance hs))
 
 theorem
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryCombinedResidualDominance
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -24224,9 +23990,9 @@ theorem
           cutoffConstant cutoffScale s +
         c2ExponentialCutoffErrorPointwiseOscillatoryUpper K M J X s <
       c2ExpandedQuartetResidualMargin s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryResidualBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryResidualBound
       (coreCutoff := coreCutoff) (K := K) (M := M) (J := J) (X := X)
       continuation hscale hhorizontal hseed hcutoff hresidual
       (fun {s} hs => by
@@ -24349,7 +24115,7 @@ theorem
       hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryExpansion
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryExpansion
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -24432,9 +24198,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale
           K M J X s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryResidualBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryResidualBound
       (coreCutoff := coreCutoff) (K := K) (M := M) (J := J) (X := X)
       continuation hscale hhorizontal hseed hcutoff
       (fun {s} hs =>
@@ -24541,7 +24307,7 @@ theorem
       hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryExpansion
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryExpansion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -24625,9 +24391,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale remainderUpper
           oscillatoryMoment J s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryResidualBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryResidualBound
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (oscillatoryMoment := oscillatoryMoment) (J := J)
       continuation hscale hhorizontal hseed hcutoff
@@ -24731,7 +24497,7 @@ theorem
       hseed hcutoff hexpansion hremainder hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_pointwiseOscillatoryExpansion
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_pointwiseOscillatoryExpansion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -24806,9 +24572,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale remainderUpper
           oscillatoryMoment J s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryExpansion
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryExpansion
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (tiltConstant := tiltConstant) (tiltScale := tiltScale)
       (horizontalConstant := horizontalConstant)
@@ -24909,7 +24675,7 @@ theorem
       hseed hcutoff hexpansion hremainder hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryExpansion
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryExpansion
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -24983,9 +24749,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale
           K M J X s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryExpansion
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryExpansion
       (coreCutoff := coreCutoff) (K := K) (M := M) (J := J) (X := X)
       continuation
       (fun _ hs => (hmiddle hs).scale)
@@ -25072,7 +24838,7 @@ theorem
       hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansion
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansion
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -25136,9 +24902,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale
           K M J X s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryExpansion
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryExpansion
       (coreCutoff := coreCutoff) (K := K) (M := M) (J := J) (X := X)
       continuation
       (fun _ hs => (hmiddle hs).scale)
@@ -25229,7 +24995,7 @@ theorem
       hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansionCombinedResidualDominance
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansionCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -25293,9 +25059,9 @@ theorem
           cutoffConstant cutoffScale s +
         c2ExponentialCutoffErrorPointwiseOscillatoryUpper K M J X s <
       c2ExpandedQuartetResidualMargin s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryCombinedResidualDominance
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryCombinedResidualDominance
       (coreCutoff := coreCutoff) (K := K) (M := M) (J := J) (X := X)
       continuation
       (fun _ hs => (hmiddle hs).scale)
@@ -25378,7 +25144,7 @@ theorem
       continuation (hJ := by decide) hmiddle hseed hcutoff hexpansion hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansion_three
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansion_three
     {coreCutoff : ℕ → ℕ} {K M : ℕ} {X : ℝ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -25441,9 +25207,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale
           K M 3 X s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansion
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansion
       (coreCutoff := coreCutoff) (K := K) (M := M) (J := 3) (X := X)
       continuation (hJ := by decide) hmiddle hseed hcutoff hexpansion hdominance
 
@@ -25519,7 +25285,7 @@ theorem
       continuation (hJ := by decide) hmiddle hseed hcutoff hexpansion hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansionCombinedResidualDominance_three
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansionCombinedResidualDominance_three
     {coreCutoff : ℕ → ℕ} {K M : ℕ} {X : ℝ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -25582,9 +25348,9 @@ theorem
           cutoffConstant cutoffScale s +
         c2ExponentialCutoffErrorPointwiseOscillatoryUpper K M 3 X s <
       c2ExpandedQuartetResidualMargin s) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansionCombinedResidualDominance
+    mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansionCombinedResidualDominance
       (coreCutoff := coreCutoff) (K := K) (M := M) (J := 3) (X := X)
       continuation (hJ := by decide) hmiddle hseed hcutoff hexpansion hdominance
 
@@ -25680,7 +25446,7 @@ theorem
           c2ConcreteAntiMiracleAdjustedAnalyticMargin] using hdominance hs)
 
 theorem
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialResidualBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialResidualBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     {tiltConstant tiltScale
@@ -25753,9 +25519,9 @@ theorem
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale
           mellinGammaUpper dirichletShiftUpper secondOrderUpper s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (residualUpper := c2ConcreteAntiMiracleExponentialResidualUpper
         mellinGammaUpper dirichletShiftUpper secondOrderUpper cutoffScale)
@@ -25765,7 +25531,7 @@ theorem
           c2ConcreteAntiMiracleAdjustedAnalyticMargin] using hdominance hs)
 
 theorem
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     (comparison :
@@ -25828,9 +25594,9 @@ theorem
           tiltConstant tiltScale
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (residualUpper := fun _ => 0)
       continuation hscale hhorizontal hseed hcutoff
@@ -25920,7 +25686,7 @@ theorem
       hscale hhorizontal hseed hcutoff hdominance
 
 theorem
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_atOne
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_atOne
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
     (comparison :
@@ -25983,15 +25749,15 @@ theorem
           tiltConstant tiltScale
           horizontalConstant horizontalScale horizontalRatio
           cutoffConstant cutoffScale s > 0) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   exact
-    riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle
+    mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle
       (coreCutoff := coreCutoff) (K := K) (M := M)
       continuation
       (c2OddTailBalancingSeedBulkModelComparisonFromOneLtData_of_atOne comparison)
       hscale hhorizontal hseed hcutoff hdominance
 
-theorem riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleSeparatedBounds
+theorem mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleSeparatedBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (hK : 2 ≤ K)
@@ -26081,8 +25847,8 @@ theorem riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleSeparat
         horizontalConstant horizontalScale horizontalRatio
         (c2CanonicalClosedCutoffConstant K M)
         (fun _ => (1 : ℝ)) s) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_continuationAndExpandedScalarMiddleSeparatedMainBounds
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleSeparatedMainBounds
     (coreCutoff := coreCutoff) (K := K) (M := M)
     (tiltConstant := c2CanonicalClosedTiltConstant
       K M horizontalConstant horizontalScale horizontalRatio)
@@ -26112,7 +25878,7 @@ theorem riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleSeparat
     (fun _ hs => hdominance hs)
 
 noncomputable def
-    C2RiemannHypothesisTerminalData.ofContinuationAndExplicitScalarExactZetaMiddleRegion
+    RiemannHypothesisTerminalData.ofContinuationAndExplicitScalarExactZetaMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -26132,8 +25898,8 @@ noncomputable def
         horizontalConstant horizontalScale horizontalRatio
         (c2CanonicalClosedCutoffConstant K M)
         (fun _ => (1 : ℝ))) :
-    C2RiemannHypothesisTerminalData :=
-  C2RiemannHypothesisTerminalData.ofGenuineFInfiniteNearAxisAndExplicitScalarExactZetaMiddleRegion
+    RiemannHypothesisTerminalData :=
+  RiemannHypothesisTerminalData.ofGenuineFInfiniteNearAxisAndExplicitScalarExactZetaMiddleRegion
     (coreCutoff := coreCutoff) (K := K) (M := M)
     (horizontalConstant := horizontalConstant)
     (horizontalScale := horizontalScale)
@@ -26142,7 +25908,7 @@ noncomputable def
     (GenuineFInfiniteNearAxisData.of_continuation continuation)
     hmiddle
 
-theorem riemannHypothesisC2_of_continuationAndExplicitScalarExactZetaMiddleRegion
+theorem mathlibRiemannHypothesis_of_continuationAndExplicitScalarExactZetaMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -26162,17 +25928,17 @@ theorem riemannHypothesisC2_of_continuationAndExplicitScalarExactZetaMiddleRegio
         horizontalConstant horizontalScale horizontalRatio
         (c2CanonicalClosedCutoffConstant K M)
         (fun _ => (1 : ℝ))) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   let terminalData :=
-    C2RiemannHypothesisTerminalData.ofContinuationAndExplicitScalarExactZetaMiddleRegion
+    RiemannHypothesisTerminalData.ofContinuationAndExplicitScalarExactZetaMiddleRegion
       (coreCutoff := coreCutoff) (K := K) (M := M)
       (horizontalConstant := horizontalConstant)
       (horizontalScale := horizontalScale)
       (horizontalRatio := horizontalRatio)
       continuation hmiddle
-  exact riemannHypothesisC2_of_c2RiemannHypothesisTerminalData terminalData
+  exact mathlibRiemannHypothesis_of_terminalData terminalData
 
-theorem riemannHypothesisC2_of_continuationAndExpandedDominanceMiddleRegion
+theorem mathlibRiemannHypothesis_of_continuationAndExpandedDominanceMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -26191,7 +25957,7 @@ theorem riemannHypothesisC2_of_continuationAndExpandedDominanceMiddleRegion
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   let nearC2 :=
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
       (coreCutoff := coreCutoff) (K := K) (M := M)
@@ -26200,7 +25966,7 @@ theorem riemannHypothesisC2_of_continuationAndExpandedDominanceMiddleRegion
   let edgeC2 :=
     C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
       (coreCutoff := coreCutoff) (K := K) (M := M)
-  exact riemannHypothesisC2_of_c2ExpandedDominanceMiddleRegion
+  exact mathlibRiemannHypothesis_of_expandedDominanceMiddleRegion
     (tiltConstant := tiltConstant) (tiltScale := tiltScale)
     (horizontalConstant := horizontalConstant)
     (horizontalScale := horizontalScale)
@@ -26208,7 +25974,7 @@ theorem riemannHypothesisC2_of_continuationAndExpandedDominanceMiddleRegion
     (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
     nearC2 edgeC2 (fun _ hs => hmiddle hs)
 
-theorem riemannHypothesisC2_of_continuationAndQuartetExactMiddleRegion
+theorem mathlibRiemannHypothesis_of_continuationAndQuartetExactMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -26227,7 +25993,7 @@ theorem riemannHypothesisC2_of_continuationAndQuartetExactMiddleRegion
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   let nearC2 :=
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
       (coreCutoff := coreCutoff) (K := K) (M := M)
@@ -26236,7 +26002,7 @@ theorem riemannHypothesisC2_of_continuationAndQuartetExactMiddleRegion
   let edgeC2 :=
     C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
       (coreCutoff := coreCutoff) (K := K) (M := M)
-  exact riemannHypothesisC2_of_c2QuartetExactMiddleRegion
+  exact mathlibRiemannHypothesis_of_quartetExactMiddleRegion
     (tiltConstant := tiltConstant) (tiltScale := tiltScale)
     (horizontalConstant := horizontalConstant)
     (horizontalScale := horizontalScale)
@@ -26244,7 +26010,7 @@ theorem riemannHypothesisC2_of_continuationAndQuartetExactMiddleRegion
     (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
     nearC2 edgeC2 (fun _ hs => hmiddle hs)
 
-theorem riemannHypothesisC2_of_continuationAndQuartetTriangleMiddleRegion
+theorem mathlibRiemannHypothesis_of_continuationAndQuartetTriangleMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -26263,7 +26029,7 @@ theorem riemannHypothesisC2_of_continuationAndQuartetTriangleMiddleRegion
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   let nearC2 :=
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
       (coreCutoff := coreCutoff) (K := K) (M := M)
@@ -26272,7 +26038,7 @@ theorem riemannHypothesisC2_of_continuationAndQuartetTriangleMiddleRegion
   let edgeC2 :=
     C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
       (coreCutoff := coreCutoff) (K := K) (M := M)
-  exact riemannHypothesisC2_of_c2QuartetTriangleMiddleRegion
+  exact mathlibRiemannHypothesis_of_quartetTriangleMiddleRegion
     (tiltConstant := tiltConstant) (tiltScale := tiltScale)
     (horizontalConstant := horizontalConstant)
     (horizontalScale := horizontalScale)
@@ -26280,7 +26046,7 @@ theorem riemannHypothesisC2_of_continuationAndQuartetTriangleMiddleRegion
     (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
     nearC2 edgeC2 (fun _ hs => hmiddle hs)
 
-theorem riemannHypothesisC2_of_continuationAndQuartetClosedMiddleRegion
+theorem mathlibRiemannHypothesis_of_continuationAndQuartetClosedMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {rectangularUpper centralUpper : ℂ → ℝ}
     {tiltConstant tiltScale
@@ -26300,7 +26066,7 @@ theorem riemannHypothesisC2_of_continuationAndQuartetClosedMiddleRegion
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   let nearC2 :=
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
       (coreCutoff := coreCutoff) (K := K) (M := M)
@@ -26309,7 +26075,7 @@ theorem riemannHypothesisC2_of_continuationAndQuartetClosedMiddleRegion
   let edgeC2 :=
     C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
       (coreCutoff := coreCutoff) (K := K) (M := M)
-  exact riemannHypothesisC2_of_c2QuartetClosedMiddleRegion
+  exact mathlibRiemannHypothesis_of_quartetClosedMiddleRegion
     (rectangularUpper := rectangularUpper) (centralUpper := centralUpper)
     (tiltConstant := tiltConstant) (tiltScale := tiltScale)
     (horizontalConstant := horizontalConstant)
@@ -26318,7 +26084,7 @@ theorem riemannHypothesisC2_of_continuationAndQuartetClosedMiddleRegion
     (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
     nearC2 edgeC2 (fun _ hs => hmiddle hs)
 
-theorem riemannHypothesisC2_of_continuationAndQuartetComponentMiddleRegion
+theorem mathlibRiemannHypothesis_of_continuationAndQuartetComponentMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
     {tiltConstant tiltScale
@@ -26338,7 +26104,7 @@ theorem riemannHypothesisC2_of_continuationAndQuartetComponentMiddleRegion
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   let nearC2 :=
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
       (coreCutoff := coreCutoff) (K := K) (M := M)
@@ -26347,7 +26113,7 @@ theorem riemannHypothesisC2_of_continuationAndQuartetComponentMiddleRegion
   let edgeC2 :=
     C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
       (coreCutoff := coreCutoff) (K := K) (M := M)
-  exact riemannHypothesisC2_of_c2QuartetComponentMiddleRegion
+  exact mathlibRiemannHypothesis_of_quartetComponentMiddleRegion
     (continuedVerticalUpper := continuedVerticalUpper)
     (tiltConstant := tiltConstant) (tiltScale := tiltScale)
     (horizontalConstant := horizontalConstant)
@@ -26357,7 +26123,7 @@ theorem riemannHypothesisC2_of_continuationAndQuartetComponentMiddleRegion
     nearC2 edgeC2 (fun _ hs => hmiddle hs)
 
 
-theorem riemannHypothesisC2_of_continuationAndQuartetComponentTruncationBounds
+theorem mathlibRiemannHypothesis_of_continuationAndQuartetComponentTruncationBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
     {oddTruncationUpper : ℂ → ℕ → ℝ}
@@ -26487,8 +26253,8 @@ theorem riemannHypothesisC2_of_continuationAndQuartetComponentTruncationBounds
               horizontalConstant horizontalScale horizontalRatio)) s +
         c2BulkEUpper (c2CutoffUpperFromScale cutoffConstant cutoffScale) s <
           c2QuartetBulkK2Lower s * ((1 - ‖q s‖) * (1 + ‖q s‖ ^ 2))) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_continuationAndQuartetComponentMiddleRegion
+    RiemannHypothesis := by
+  exact mathlibRiemannHypothesis_of_continuationAndQuartetComponentMiddleRegion
     (coreCutoff := coreCutoff) (K := K) (M := M)
     (continuedVerticalUpper := continuedVerticalUpper)
     (tiltConstant := tiltConstant) (tiltScale := tiltScale)
@@ -26513,7 +26279,7 @@ theorem riemannHypothesisC2_of_continuationAndQuartetComponentTruncationBounds
         (hcutoff hs)
         (hdominance hs))
 
-theorem riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleRegion
+theorem mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -26527,7 +26293,7 @@ theorem riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleRegion
           (coreCutoff := coreCutoff) (K := K) (M := M)) →
       s ∈ c2OddTailContinuedBalancingSeedBulkQuartetCanonicalClosedScaledRegion
         coreCutoff K M horizontalConstant horizontalScale horizontalRatio) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   let nearC2 :=
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
       (coreCutoff := coreCutoff) (K := K) (M := M)
@@ -26536,13 +26302,13 @@ theorem riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleRegion
   let edgeC2 :=
     C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
       (coreCutoff := coreCutoff) (K := K) (M := M)
-  exact riemannHypothesisC2_of_c2CanonicalClosedScaledMiddleRegion
+  exact mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleRegion
     (horizontalConstant := horizontalConstant)
     (horizontalScale := horizontalScale)
     (horizontalRatio := horizontalRatio)
     nearC2 edgeC2 (fun _ hs => hmiddle hs)
 
-theorem riemannHypothesisC2_of_continuationAndExplicitFiniteCoreMiddleRegion
+theorem mathlibRiemannHypothesis_of_continuationAndExplicitFiniteCoreMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {zetaUpper : ℂ → ℝ}
     {tiltConstant tiltScale
@@ -26562,7 +26328,7 @@ theorem riemannHypothesisC2_of_continuationAndExplicitFiniteCoreMiddleRegion
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   let nearC2 :=
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
       (coreCutoff := coreCutoff) (K := K) (M := M)
@@ -26571,7 +26337,7 @@ theorem riemannHypothesisC2_of_continuationAndExplicitFiniteCoreMiddleRegion
   let edgeC2 :=
     C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
       (coreCutoff := coreCutoff) (K := K) (M := M)
-  exact riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_explicitFiniteCoreCover
+  exact mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_explicitFiniteCoreCover
     (zetaUpper := zetaUpper)
     (tiltConstant := tiltConstant) (tiltScale := tiltScale)
     (horizontalConstant := horizontalConstant)
@@ -26580,7 +26346,7 @@ theorem riemannHypothesisC2_of_continuationAndExplicitFiniteCoreMiddleRegion
     (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
     nearC2 edgeC2 (c2ExpandedScalarMiddleRegion_cover nearC2 edgeC2 hmiddle)
 
-theorem riemannHypothesisC2_of_continuationAndExplicitScalarMiddleRegion
+theorem mathlibRiemannHypothesis_of_continuationAndExplicitScalarMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {zetaUpper : ℂ → ℝ}
     {tiltConstant tiltScale
@@ -26600,7 +26366,7 @@ theorem riemannHypothesisC2_of_continuationAndExplicitScalarMiddleRegion
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 := by
+    RiemannHypothesis := by
   let nearC2 :=
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
       (coreCutoff := coreCutoff) (K := K) (M := M)
@@ -26609,7 +26375,7 @@ theorem riemannHypothesisC2_of_continuationAndExplicitScalarMiddleRegion
   let edgeC2 :=
     C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
       (coreCutoff := coreCutoff) (K := K) (M := M)
-  exact riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_explicitScalarCover
+  exact mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_explicitScalarCover
     (zetaUpper := zetaUpper)
     (tiltConstant := tiltConstant) (tiltScale := tiltScale)
     (horizontalConstant := horizontalConstant)
@@ -26618,7 +26384,7 @@ theorem riemannHypothesisC2_of_continuationAndExplicitScalarMiddleRegion
     (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
     nearC2 edgeC2 (c2ExpandedScalarMiddleRegion_cover nearC2 edgeC2 hmiddle)
 
-theorem riemannHypothesisC2_of_c2ZetaDepthCoreMiddleRegion
+theorem mathlibRiemannHypothesis_of_zetaDepthCoreMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {depthUpper coreUpper oddFactorUpper zetaUpper : ℂ → ℝ}
     {tiltConstant tiltScale
@@ -26634,11 +26400,11 @@ theorem riemannHypothesisC2_of_c2ZetaDepthCoreMiddleRegion
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_zetaDepthCoreCover
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_zetaDepthCoreCover
     near edge (c2ExpandedScalarMiddleRegion_cover near edge hmiddle)
 
-theorem riemannHypothesisC2_of_c2ExplicitFiniteCoreMiddleRegion
+theorem mathlibRiemannHypothesis_of_explicitFiniteCoreMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {zetaUpper : ℂ → ℝ}
     {tiltConstant tiltScale
@@ -26653,11 +26419,11 @@ theorem riemannHypothesisC2_of_c2ExplicitFiniteCoreMiddleRegion
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_explicitFiniteCoreCover
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_explicitFiniteCoreCover
     near edge (c2ExpandedScalarMiddleRegion_cover near edge hmiddle)
 
-theorem riemannHypothesisC2_of_c2ExplicitScalarMiddleRegion
+theorem mathlibRiemannHypothesis_of_explicitScalarMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {zetaUpper : ℂ → ℝ}
     {tiltConstant tiltScale
@@ -26672,8 +26438,8 @@ theorem riemannHypothesisC2_of_c2ExplicitScalarMiddleRegion
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_explicitScalarCover
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_explicitScalarCover
     near edge (c2ExpandedScalarMiddleRegion_cover near edge hmiddle)
 
 theorem offCriticalStripNonvanishing_of_c2ExplicitScalarExactZetaMiddleRegion
@@ -26697,7 +26463,7 @@ theorem offCriticalStripNonvanishing_of_c2ExplicitScalarExactZetaMiddleRegion
       c2ExpandedExactZetaScalarRegion_mem_of_mem_explicitScalarExactZetaRegion
         (hmiddle hs))
 
-theorem riemannHypothesisC2_of_c2ExplicitScalarExactZetaMiddleRegion
+theorem mathlibRiemannHypothesis_of_explicitScalarExactZetaMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -26711,8 +26477,8 @@ theorem riemannHypothesisC2_of_c2ExplicitScalarExactZetaMiddleRegion
         tiltConstant tiltScale
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_c2ExpandedScalarMiddleRegion near edge
+    RiemannHypothesis :=
+  mathlibRiemannHypothesis_of_expandedScalarMiddleRegion near edge
     (fun _ hs =>
       c2ExpandedExactZetaScalarRegion_mem_of_mem_explicitScalarExactZetaRegion
         (hmiddle hs))
@@ -27382,54 +27148,5 @@ theorem
   exact ⟨s, hs,
     c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_explicitCutoffOneLtRegion hs⟩
 
-open Lean Elab Command Meta in
-
-private def mathlibRiemannHypothesisWrapperName? (declName : Name) : Option Name :=
-  match declName with
-  | .str prefix shortName =>
-      let base := "riemannHypothesisC2_of_"
-      if shortName.startsWith base then
-        let suffix := shortName.drop base.length
-        some <| .str prefix s!"mathlibRiemannHypothesis_of_{suffix}"
-      else
-        none
-  | _ => none
-
-private def mkMathlibRiemannHypothesisWrapperDecl
-    (oldInfo : ConstantInfo) (newName : Name) : MetaM Declaration := do
-  forallTelescope oldInfo.type fun xs target => do
-    let target ← whnf target
-    unless target.isConstOf ``RiemannHypothesisC2 do
-      throwError m!"expected {oldInfo.name} to end in RiemannHypothesisC2, got {target}"
-    let newType ← mkForallFVars xs (mkConst ``RiemannHypothesis)
-    let oldValue := mkAppN
-      (mkConst oldInfo.name (oldInfo.levelParams.map Level.param)) xs
-    let newValue ← mkLambdaFVars xs
-      (mkApp (mkConst ``mathlibRiemannHypothesis_of_riemannHypothesisC2) oldValue)
-    mkThmOrUnsafeDef {
-      name := newName
-      levelParams := oldInfo.levelParams
-      type := newType
-      value := newValue
-    }
-
-elab "deriveMissingMathlibRiemannHypothesisWrappers" : command => do
-  Command.liftTermElabM none do
-    let env ← getEnv
-    let pending : Array (Name × Name) := env.constants.map₂.foldl (init := #[]) fun acc declName _ =>
-      match mathlibRiemannHypothesisWrapperName? declName with
-      | none => acc
-      | some newName =>
-          if env.find? newName |>.isSome then
-            acc
-          else
-            acc.push (declName, newName)
-    for (oldName, newName) in pending do
-      let some oldInfo := env.find? oldName
-        | throwError m!"missing declaration {oldName}"
-      let decl ← mkMathlibRiemannHypothesisWrapperDecl oldInfo newName
-      addDecl decl
-
-deriveMissingMathlibRiemannHypothesisWrappers
 
 end C2

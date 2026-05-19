@@ -557,11 +557,6 @@ structure GenuineRouteData where
   identity : FundamentalIdentityOnRightHalfPlane F riemannZeta
   genuine_nonvanishing : offCriticalStripNonvanishing F
 
-theorem riemannHypothesisC2_of_genuineRouteData
-    (data : GenuineRouteData) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_F_nonvanishing data.identity data.genuine_nonvanishing
-
 theorem mathlibRiemannHypothesis_of_genuineRouteData
     (data : GenuineRouteData) :
     RiemannHypothesis := by
@@ -574,12 +569,6 @@ def BulkRouteData.toGenuineRouteData
   F := data.F
   identity := identity
   genuine_nonvanishing := offCriticalStripNonvanishing_of_bulkRouteData data
-
-theorem riemannHypothesisC2_of_bulkRouteData
-    (data : BulkRouteData)
-    (identity : FundamentalIdentityOnRightHalfPlane data.F riemannZeta) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_genuineRouteData (data.toGenuineRouteData identity)
 
 theorem mathlibRiemannHypothesis_of_bulkRouteData
     (data : BulkRouteData)
@@ -595,12 +584,6 @@ def VerticalBulkRouteData.toGenuineRouteData
   identity := identity
   genuine_nonvanishing := offCriticalStripNonvanishing_of_verticalBulkRouteData data
 
-theorem riemannHypothesisC2_of_verticalBulkRouteData
-    (data : VerticalBulkRouteData)
-    (identity : FundamentalIdentityOnRightHalfPlane data.F riemannZeta) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_genuineRouteData (data.toGenuineRouteData identity)
-
 theorem mathlibRiemannHypothesis_of_verticalBulkRouteData
     (data : VerticalBulkRouteData)
     (identity : FundamentalIdentityOnRightHalfPlane data.F riemannZeta) :
@@ -615,24 +598,11 @@ def OffCriticalCoverData.toGenuineRouteData
   identity := identity
   genuine_nonvanishing := offCriticalStripNonvanishing_of_coverData data
 
-theorem riemannHypothesisC2_of_coverData
-    (data : OffCriticalCoverData)
-    (identity : FundamentalIdentityOnRightHalfPlane data.F riemannZeta) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_genuineRouteData (data.toGenuineRouteData identity)
-
 theorem mathlibRiemannHypothesis_of_coverData
     (data : OffCriticalCoverData)
     (identity : FundamentalIdentityOnRightHalfPlane data.F riemannZeta) :
     RiemannHypothesis := by
   exact mathlibRiemannHypothesis_of_genuineRouteData (data.toGenuineRouteData identity)
-
-theorem riemannHypothesisC2_of_coverData_offCriticalIdentity
-    (data : OffCriticalCoverData)
-    (identity : FundamentalIdentityOnOffCriticalStrip data.F riemannZeta) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_F_nonvanishing_offCriticalIdentity
-    identity (offCriticalStripNonvanishing_of_coverData data)
 
 theorem mathlibRiemannHypothesis_of_coverData_offCriticalIdentity
     (data : OffCriticalCoverData)
@@ -640,21 +610,6 @@ theorem mathlibRiemannHypothesis_of_coverData_offCriticalIdentity
     RiemannHypothesis := by
   exact mathlibRiemannHypothesis_of_F_nonvanishing_offCriticalIdentity
     identity (offCriticalStripNonvanishing_of_coverData data)
-
-theorem riemannHypothesisC2_of_nearBulkRegionEdge
-    (near : NearAxisRouteData)
-    (bulk : BulkRegionRouteData)
-    (edge : EdgeRouteData)
-    (hBulkF : bulk.F = near.F)
-    (hEdgeF : edge.F = near.F)
-    (hcover : ∀ s : Complex, offCriticalStrip s →
-      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
-        s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion)
-    (identity : FundamentalIdentityOnRightHalfPlane near.F riemannZeta) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_coverData
-    (OffCriticalCoverData.ofNearBulkRegionEdge near bulk edge hBulkF hEdgeF hcover)
-    identity
 
 theorem mathlibRiemannHypothesis_of_nearBulkRegionEdge
     (near : NearAxisRouteData)
@@ -671,21 +626,6 @@ theorem mathlibRiemannHypothesis_of_nearBulkRegionEdge
     (OffCriticalCoverData.ofNearBulkRegionEdge near bulk edge hBulkF hEdgeF hcover)
     identity
 
-theorem riemannHypothesisC2_of_nearBulkEdge
-    (near : NearAxisRouteData)
-    (bulk : RegionalVerticalBulkRouteData)
-    (edge : EdgeRouteData)
-    (hBulkF : bulk.F = near.F)
-    (hEdgeF : edge.F = near.F)
-    (hcover : ∀ s : Complex, offCriticalStrip s →
-      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
-        s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion)
-    (identity : FundamentalIdentityOnRightHalfPlane near.F riemannZeta) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_nearBulkRegionEdge near bulk.toBulkRegionRouteData edge
-    hBulkF hEdgeF hcover
-    identity
-
 theorem mathlibRiemannHypothesis_of_nearBulkEdge
     (near : NearAxisRouteData)
     (bulk : RegionalVerticalBulkRouteData)
@@ -698,21 +638,6 @@ theorem mathlibRiemannHypothesis_of_nearBulkEdge
     (identity : FundamentalIdentityOnRightHalfPlane near.F riemannZeta) :
     RiemannHypothesis := by
   exact mathlibRiemannHypothesis_of_nearBulkRegionEdge near bulk.toBulkRegionRouteData edge
-    hBulkF hEdgeF hcover
-    identity
-
-theorem riemannHypothesisC2_of_nearBulkBoundsEdge
-    (near : NearAxisRouteData)
-    (bulk : RegionalVerticalBulkBoundsData)
-    (edge : EdgeRouteData)
-    (hBulkF : bulk.F = near.F)
-    (hEdgeF : edge.F = near.F)
-    (hcover : ∀ s : Complex, offCriticalStrip s →
-      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
-        s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion)
-    (identity : FundamentalIdentityOnRightHalfPlane near.F riemannZeta) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_nearBulkRegionEdge near bulk.toBulkRegionRouteData edge
     hBulkF hEdgeF hcover
     identity
 
@@ -731,20 +656,6 @@ theorem mathlibRiemannHypothesis_of_nearBulkBoundsEdge
     hBulkF hEdgeF hcover
     identity
 
-theorem riemannHypothesisC2_of_nearQuartetBulkEdge
-    (near : NearAxisRouteData)
-    (bulk : RegionalVerticalQuartetBulkRouteData)
-    (edge : EdgeRouteData)
-    (hBulkF : bulk.F = near.F)
-    (hEdgeF : edge.F = near.F)
-    (hcover : ∀ s : Complex, offCriticalStrip s →
-      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
-        s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion)
-    (identity : FundamentalIdentityOnRightHalfPlane near.F riemannZeta) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_nearBulkRegionEdge near bulk.toBulkRegionRouteData edge
-    hBulkF hEdgeF hcover identity
-
 theorem mathlibRiemannHypothesis_of_nearQuartetBulkEdge
     (near : NearAxisRouteData)
     (bulk : RegionalVerticalQuartetBulkRouteData)
@@ -757,20 +668,6 @@ theorem mathlibRiemannHypothesis_of_nearQuartetBulkEdge
     (identity : FundamentalIdentityOnRightHalfPlane near.F riemannZeta) :
     RiemannHypothesis := by
   exact mathlibRiemannHypothesis_of_nearBulkRegionEdge near bulk.toBulkRegionRouteData edge
-    hBulkF hEdgeF hcover identity
-
-theorem riemannHypothesisC2_of_nearQuartetBulkBoundsEdge
-    (near : NearAxisRouteData)
-    (bulk : RegionalVerticalQuartetBulkBoundsData)
-    (edge : EdgeRouteData)
-    (hBulkF : bulk.F = near.F)
-    (hEdgeF : edge.F = near.F)
-    (hcover : ∀ s : Complex, offCriticalStrip s →
-      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
-        s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion)
-    (identity : FundamentalIdentityOnRightHalfPlane near.F riemannZeta) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_nearBulkRegionEdge near bulk.toBulkRegionRouteData edge
     hBulkF hEdgeF hcover identity
 
 theorem mathlibRiemannHypothesis_of_nearQuartetBulkBoundsEdge
@@ -787,22 +684,6 @@ theorem mathlibRiemannHypothesis_of_nearQuartetBulkBoundsEdge
   exact mathlibRiemannHypothesis_of_nearBulkRegionEdge near bulk.toBulkRegionRouteData edge
     hBulkF hEdgeF hcover identity
 
-theorem riemannHypothesisC2_of_nearBulkEdge_offCriticalIdentity
-    (near : NearAxisRouteData)
-    (bulk : RegionalVerticalBulkRouteData)
-    (edge : EdgeRouteData)
-    (hBulkF : bulk.F = near.F)
-    (hEdgeF : edge.F = near.F)
-    (hcover : ∀ s : Complex, offCriticalStrip s →
-      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
-        s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion)
-    (identity : FundamentalIdentityOnOffCriticalStrip near.F riemannZeta) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_coverData_offCriticalIdentity
-    (OffCriticalCoverData.ofNearBulkRegionEdge near bulk.toBulkRegionRouteData edge
-      hBulkF hEdgeF hcover)
-    identity
-
 theorem mathlibRiemannHypothesis_of_nearBulkEdge_offCriticalIdentity
     (near : NearAxisRouteData)
     (bulk : RegionalVerticalBulkRouteData)
@@ -815,22 +696,6 @@ theorem mathlibRiemannHypothesis_of_nearBulkEdge_offCriticalIdentity
     (identity : FundamentalIdentityOnOffCriticalStrip near.F riemannZeta) :
     RiemannHypothesis := by
   exact mathlibRiemannHypothesis_of_coverData_offCriticalIdentity
-    (OffCriticalCoverData.ofNearBulkRegionEdge near bulk.toBulkRegionRouteData edge
-      hBulkF hEdgeF hcover)
-    identity
-
-theorem riemannHypothesisC2_of_nearBulkBoundsEdge_offCriticalIdentity
-    (near : NearAxisRouteData)
-    (bulk : RegionalVerticalBulkBoundsData)
-    (edge : EdgeRouteData)
-    (hBulkF : bulk.F = near.F)
-    (hEdgeF : edge.F = near.F)
-    (hcover : ∀ s : Complex, offCriticalStrip s →
-      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
-        s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion)
-    (identity : FundamentalIdentityOnOffCriticalStrip near.F riemannZeta) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_coverData_offCriticalIdentity
     (OffCriticalCoverData.ofNearBulkRegionEdge near bulk.toBulkRegionRouteData edge
       hBulkF hEdgeF hcover)
     identity
@@ -851,22 +716,6 @@ theorem mathlibRiemannHypothesis_of_nearBulkBoundsEdge_offCriticalIdentity
       hBulkF hEdgeF hcover)
     identity
 
-theorem riemannHypothesisC2_of_nearQuartetBulkEdge_offCriticalIdentity
-    (near : NearAxisRouteData)
-    (bulk : RegionalVerticalQuartetBulkRouteData)
-    (edge : EdgeRouteData)
-    (hBulkF : bulk.F = near.F)
-    (hEdgeF : edge.F = near.F)
-    (hcover : ∀ s : Complex, offCriticalStrip s →
-      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
-        s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion)
-    (identity : FundamentalIdentityOnOffCriticalStrip near.F riemannZeta) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_coverData_offCriticalIdentity
-    (OffCriticalCoverData.ofNearBulkRegionEdge near bulk.toBulkRegionRouteData edge
-      hBulkF hEdgeF hcover)
-    identity
-
 theorem mathlibRiemannHypothesis_of_nearQuartetBulkEdge_offCriticalIdentity
     (near : NearAxisRouteData)
     (bulk : RegionalVerticalQuartetBulkRouteData)
@@ -879,22 +728,6 @@ theorem mathlibRiemannHypothesis_of_nearQuartetBulkEdge_offCriticalIdentity
     (identity : FundamentalIdentityOnOffCriticalStrip near.F riemannZeta) :
     RiemannHypothesis := by
   exact mathlibRiemannHypothesis_of_coverData_offCriticalIdentity
-    (OffCriticalCoverData.ofNearBulkRegionEdge near bulk.toBulkRegionRouteData edge
-      hBulkF hEdgeF hcover)
-    identity
-
-theorem riemannHypothesisC2_of_nearQuartetBulkBoundsEdge_offCriticalIdentity
-    (near : NearAxisRouteData)
-    (bulk : RegionalVerticalQuartetBulkBoundsData)
-    (edge : EdgeRouteData)
-    (hBulkF : bulk.F = near.F)
-    (hEdgeF : edge.F = near.F)
-    (hcover : ∀ s : Complex, offCriticalStrip s →
-      s ∈ nearAxisRegion riemannZeta near.near_axis.radius ∨
-        s ∈ bulk.bulkRegion ∨ s ∈ edge.edgeRegion)
-    (identity : FundamentalIdentityOnOffCriticalStrip near.F riemannZeta) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_coverData_offCriticalIdentity
     (OffCriticalCoverData.ofNearBulkRegionEdge near bulk.toBulkRegionRouteData edge
       hBulkF hEdgeF hcover)
     identity

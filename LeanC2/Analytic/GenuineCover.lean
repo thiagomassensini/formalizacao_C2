@@ -99,34 +99,18 @@ theorem offCriticalStripNonvanishing_of_genuineFInfiniteNearBulkBoundsEdgeData
     GenuineFInfiniteNearAxisData.toNearAxisRouteData] using
     offCriticalStripNonvanishing_of_coverData data.toOffCriticalCoverData
 
-theorem riemannHypothesisC2_of_genuineFInfiniteContinuation_pinnedNearBulkEdge
-    (continuation : GenuineFInfiniteContinuationData)
-    (data : GenuineFInfiniteNearBulkEdgeData) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_genuineFInfiniteContinuation continuation
-    (offCriticalStripNonvanishing_of_genuineFInfiniteNearBulkEdgeData data)
-
 theorem mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_pinnedNearBulkEdge
     (continuation : GenuineFInfiniteContinuationData)
     (data : GenuineFInfiniteNearBulkEdgeData) :
     RiemannHypothesis := by
-  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
-    (riemannHypothesisC2_of_genuineFInfiniteContinuation_pinnedNearBulkEdge
-      continuation data)
-
-theorem riemannHypothesisC2_of_genuineFInfiniteContinuation_pinnedNearBulkBoundsEdge
-    (continuation : GenuineFInfiniteContinuationData)
-    (data : GenuineFInfiniteNearBulkBoundsEdgeData) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_genuineFInfiniteContinuation continuation
-    (offCriticalStripNonvanishing_of_genuineFInfiniteNearBulkBoundsEdgeData data)
+  exact mathlibRiemannHypothesis_of_genuineFInfiniteContinuation continuation
+    (offCriticalStripNonvanishing_of_genuineFInfiniteNearBulkEdgeData data)
 
 theorem mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_pinnedNearBulkBoundsEdge
     (continuation : GenuineFInfiniteContinuationData)
     (data : GenuineFInfiniteNearBulkBoundsEdgeData) :
     RiemannHypothesis := by
-  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
-    (riemannHypothesisC2_of_genuineFInfiniteContinuation_pinnedNearBulkBoundsEdge
-      continuation data)
+  exact mathlibRiemannHypothesis_of_genuineFInfiniteContinuation continuation
+    (offCriticalStripNonvanishing_of_genuineFInfiniteNearBulkBoundsEdgeData data)
 
 end C2

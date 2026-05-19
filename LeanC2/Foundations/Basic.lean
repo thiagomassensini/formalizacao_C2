@@ -26,41 +26,17 @@ lemma false_of_one_lt_re_offCritical {s : Complex}
 def offCriticalStripNonvanishing (f : Complex -> Complex) : Prop :=
   ∀ s : Complex, offCriticalStrip s -> f s ≠ 0
 
-/-- C2-facing formulation of RH: every zero in the critical strip is on the critical line. -/
-def RiemannHypothesisC2 : Prop :=
-  ∀ s : Complex, riemannZeta s = 0 -> 0 < s.re -> s.re < 1 -> s.re = (1 : ℝ) / 2
-
-theorem riemannHypothesisC2_of_offCriticalStripNonvanishing
+/-- Transfer off-critical nonvanishing of `ζ` to the official mathlib RH surface. -/
+theorem mathlibRiemannHypothesis_of_offCriticalStripNonvanishing
     (hζ : offCriticalStripNonvanishing riemannZeta) :
-    RiemannHypothesisC2 := by
-  intro s hz hs0 hs1
-  by_contra hhalf
-  exact hζ s ⟨hs0, hs1, hhalf⟩ hz
-
-theorem riemannHypothesisC2_of_mathlibRiemannHypothesis
-    (hRH : RiemannHypothesis) :
-    RiemannHypothesisC2 := by
-  intro s hz hs0 hs1
-  exact hRH s hz
-    (by
-      rintro ⟨n, rfl⟩
-      norm_num at hs0
-      have hpos : (0 : ℝ) < 2 * (↑n + 1) := by positivity
-      linarith)
-    (by
-      intro h
-      have hs_re : s.re = 1 := by simp [h]
-      linarith)
-
-theorem mathlibRiemannHypothesis_of_riemannHypothesisC2
-    (hRH : RiemannHypothesisC2) :
     RiemannHypothesis := by
   intro s hz htriv hs1
   by_cases hs_ge_one : 1 ≤ s.re
   · exact False.elim ((riemannZeta_ne_zero_of_one_le_re hs_ge_one) hz)
   · have hs_lt_one : s.re < 1 := lt_of_not_ge hs_ge_one
     by_cases hs_pos : 0 < s.re
-    · exact hRH s hz hs_pos hs_lt_one
+    · by_contra hhalf
+      exact hζ s ⟨hs_pos, hs_lt_one, hhalf⟩ hz
     · have hs_nonpos : s.re ≤ 0 := le_of_not_gt hs_pos
       by_cases hs_zero : s = 0
       · have hz0 : riemannZeta 0 = 0 := by simpa [hs_zero] using hz
@@ -168,11 +144,5 @@ theorem mathlibRiemannHypothesis_of_riemannHypothesisC2
                 _ = -2 * (((n : ℕ) : Complex) + 1) := by
                   ring
             ⟩
-
-theorem riemannHypothesisC2_iff_mathlibRiemannHypothesis :
-    RiemannHypothesisC2 ↔ RiemannHypothesis := by
-  constructor
-  · exact mathlibRiemannHypothesis_of_riemannHypothesisC2
-  · exact riemannHypothesisC2_of_mathlibRiemannHypothesis
 
 end C2

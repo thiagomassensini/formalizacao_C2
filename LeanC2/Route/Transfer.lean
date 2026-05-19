@@ -60,47 +60,23 @@ theorem offCriticalStrip_zeta_nonvanishing_of_F_nonvanishing
   intro s hs
   exact zeta_nonzero_of_F_nonzero hId hs.1 (hF s hs)
 
-theorem riemannHypothesisC2_of_F_nonvanishing
-    {F : Complex -> Complex}
-    (hId : FundamentalIdentityOnRightHalfPlane F riemannZeta)
-    (hF : offCriticalStripNonvanishing F) :
-    RiemannHypothesisC2 := by
-  exact riemannHypothesisC2_of_offCriticalStripNonvanishing
-    (offCriticalStrip_zeta_nonvanishing_of_F_nonvanishing hId hF)
-
 theorem mathlibRiemannHypothesis_of_F_nonvanishing
     {F : Complex -> Complex}
     (hId : FundamentalIdentityOnRightHalfPlane F riemannZeta)
     (hF : offCriticalStripNonvanishing F) :
     RiemannHypothesis := by
-  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
-    (riemannHypothesisC2_of_F_nonvanishing hId hF)
-
-/-- Roadmap spelling: transfer a genuine off-axis zero-free statement to RH. -/
-theorem RH_from_C2
-    {F : Complex -> Complex}
-    (hId : FundamentalIdentityOnRightHalfPlane F riemannZeta)
-    (hF : offCriticalStripNonvanishing F) :
-    RiemannHypothesisC2 :=
-  riemannHypothesisC2_of_F_nonvanishing hId hF
-
-theorem riemannHypothesisC2_of_F_nonvanishing_offCriticalIdentity
-    {F : Complex -> Complex}
-    (hId : FundamentalIdentityOnOffCriticalStrip F riemannZeta)
-    (hF : offCriticalStripNonvanishing F) :
-    RiemannHypothesisC2 := by
-  refine riemannHypothesisC2_of_offCriticalStripNonvanishing ?_
-  intro s hs hz
-  have hEq := hId s hs
-  rw [hz, mul_zero] at hEq
-  exact hF s hs hEq
+  exact mathlibRiemannHypothesis_of_offCriticalStripNonvanishing
+    (offCriticalStrip_zeta_nonvanishing_of_F_nonvanishing hId hF)
 
 theorem mathlibRiemannHypothesis_of_F_nonvanishing_offCriticalIdentity
     {F : Complex -> Complex}
     (hId : FundamentalIdentityOnOffCriticalStrip F riemannZeta)
     (hF : offCriticalStripNonvanishing F) :
     RiemannHypothesis := by
-  exact mathlibRiemannHypothesis_of_riemannHypothesisC2
-    (riemannHypothesisC2_of_F_nonvanishing_offCriticalIdentity hId hF)
+  refine mathlibRiemannHypothesis_of_offCriticalStripNonvanishing ?_
+  intro s hs hz
+  have hEq := hId s hs
+  rw [hz, mul_zero] at hEq
+  exact hF s hs hEq
 
 end C2
