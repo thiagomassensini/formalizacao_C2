@@ -1,0 +1,379 @@
+# Mapa dos teoremas da rota formal ate a RH do mathlib
+
+Escopo: este arquivo lista os teoremas que compoem a rota formal atual ate `RiemannHypothesis`, com arquivo e linha inicial. Ele prioriza a cadeia da prova e os conectores estruturais finais, nao todos os lemas auxiliares de bounds do repositorio.
+
+## 1. Fundacoes
+
+- `mathlibRiemannHypothesis_of_offCriticalStripNonvanishing` — `LeanC2/Foundations/Basic.lean:30`
+
+## 2. Transferencia
+
+- `FundamentalIdentityOnRightHalfPlane.toOffCriticalStrip` — `LeanC2/Route/Transfer.lean:23`
+- `F_nonzero_iff_zeta_nonzero_of_identity` — `LeanC2/Route/Transfer.lean:30`
+- `zeta_nonzero_of_F_nonzero` — `LeanC2/Route/Transfer.lean:45`
+- `offCriticalStrip_zeta_nonvanishing_of_F_nonvanishing` — `LeanC2/Route/Transfer.lean:55`
+- `mathlibRiemannHypothesis_of_F_nonvanishing` — `LeanC2/Route/Transfer.lean:63`
+- `mathlibRiemannHypothesis_of_F_nonvanishing_offCriticalIdentity` — `LeanC2/Route/Transfer.lean:71`
+
+## 3. Roadmap abstrato
+
+- `nearAxis_nonvanishing_of_nearAxisRouteData` — `LeanC2/Roadmap.lean:30`
+- `offCriticalStrip_of_nearAxisRouteData` — `LeanC2/Roadmap.lean:36`
+- `bulk_nonvanishing_of_bulkRouteData` — `LeanC2/Roadmap.lean:62`
+- `offCriticalStripNonvanishing_of_bulkRouteData` — `LeanC2/Roadmap.lean:71`
+- `verticalBulk_nonvanishing_of_verticalBulkRouteData` — `LeanC2/Roadmap.lean:118`
+- `offCriticalStripNonvanishing_of_verticalBulkRouteData` — `LeanC2/Roadmap.lean:123`
+- `regionalVerticalBulk_nonvanishing` — `LeanC2/Roadmap.lean:148`
+- `regionalVerticalBulk_dominance_of_bounds` — `LeanC2/Roadmap.lean:189`
+- `regionalVerticalBulk_nonvanishing_of_bounds` — `LeanC2/Roadmap.lean:217`
+- `regionalVerticalQuartetBulk_nonvanishing` — `LeanC2/Roadmap.lean:238`
+- `regionalVerticalQuartetBulk_dominance_of_bounds` — `LeanC2/Roadmap.lean:298`
+- `regionalVerticalQuartetBulk_nonvanishing_of_bounds` — `LeanC2/Roadmap.lean:336`
+- `offCriticalStripNonvanishing_of_coverData` — `LeanC2/Roadmap.lean:398`
+- `offCriticalStripNonvanishing_of_nearBulkRegionEdge` — `LeanC2/Roadmap.lean:484`
+- `offCriticalStripNonvanishing_of_nearBulkEdge` — `LeanC2/Roadmap.lean:497`
+- `offCriticalStripNonvanishing_of_nearBulkBoundsEdge` — `LeanC2/Roadmap.lean:510`
+- `offCriticalStripNonvanishing_of_nearQuartetBulkEdge` — `LeanC2/Roadmap.lean:523`
+- `offCriticalStripNonvanishing_of_nearQuartetBulkBoundsEdge` — `LeanC2/Roadmap.lean:536`
+- `mathlibRiemannHypothesis_of_genuineRouteData` — `LeanC2/Roadmap.lean:560`
+- `mathlibRiemannHypothesis_of_bulkRouteData` — `LeanC2/Roadmap.lean:573`
+- `mathlibRiemannHypothesis_of_verticalBulkRouteData` — `LeanC2/Roadmap.lean:587`
+- `mathlibRiemannHypothesis_of_coverData` — `LeanC2/Roadmap.lean:601`
+- `mathlibRiemannHypothesis_of_coverData_offCriticalIdentity` — `LeanC2/Roadmap.lean:607`
+- `mathlibRiemannHypothesis_of_nearBulkRegionEdge` — `LeanC2/Roadmap.lean:614`
+- `mathlibRiemannHypothesis_of_nearBulkEdge` — `LeanC2/Roadmap.lean:629`
+- `mathlibRiemannHypothesis_of_nearBulkBoundsEdge` — `LeanC2/Roadmap.lean:644`
+- `mathlibRiemannHypothesis_of_nearQuartetBulkEdge` — `LeanC2/Roadmap.lean:659`
+- `mathlibRiemannHypothesis_of_nearQuartetBulkBoundsEdge` — `LeanC2/Roadmap.lean:673`
+- `mathlibRiemannHypothesis_of_nearBulkEdge_offCriticalIdentity` — `LeanC2/Roadmap.lean:687`
+- `mathlibRiemannHypothesis_of_nearBulkBoundsEdge_offCriticalIdentity` — `LeanC2/Roadmap.lean:703`
+- `mathlibRiemannHypothesis_of_nearQuartetBulkEdge_offCriticalIdentity` — `LeanC2/Roadmap.lean:719`
+- `mathlibRiemannHypothesis_of_nearQuartetBulkBoundsEdge_offCriticalIdentity` — `LeanC2/Roadmap.lean:735`
+
+## 4. Continuacao analitica
+
+- `puncturedOpenRightHalfPlane_isOpen` — `LeanC2/Analytic/GenuineContinuation.lean:40`
+- `complexDirichletCoeff_analyticOnNhd` — `LeanC2/Analytic/GenuineContinuation.lean:44`
+- `riemannZeta_analyticOnNhd_punctured` — `LeanC2/Analytic/GenuineContinuation.lean:52`
+- `q_analyticOnNhd_punctured` — `LeanC2/Analytic/GenuineContinuation.lean:57`
+- `verticalDepthTailFromTwo_analyticOnNhd_punctured` — `LeanC2/Analytic/GenuineContinuation.lean:67`
+- `continuedOddDirichletChannel_analyticOnNhd_punctured` — `LeanC2/Analytic/GenuineContinuation.lean:82`
+- `continuedCentralOddChannel_analyticOnNhd_punctured` — `LeanC2/Analytic/GenuineContinuation.lean:90`
+- `c0_analyticOnNhd_punctured` — `LeanC2/Analytic/GenuineContinuation.lean:97`
+- `continuedOddDirichletChannel_eq_oddDirichletChannel_on_oneLtHalfPlane` — `LeanC2/Analytic/GenuineContinuation.lean:110`
+- `continuedCentralOddChannel_eq_genuineCentralDoubleSeries_on_oneLtHalfPlane` — `LeanC2/Analytic/GenuineContinuation.lean:116`
+- `genuineFInfinite_eq_continuedCentralOddChannel_on_oneLtHalfPlane` — `LeanC2/Analytic/GenuineContinuation.lean:125`
+- `continuedCentralOddChannel_fundamentalIdentity` — `LeanC2/Analytic/GenuineContinuation.lean:135`
+- `puncturedOpenRightHalfPlane_isPreconnected` — `LeanC2/Analytic/GenuineContinuation.lean:140`
+- `C2IdentityOn.to_rightHalfPlane` — `LeanC2/Analytic/GenuineContinuation.lean:221`
+- `C2IdentityOn.of_fundamentalRightHalfPlane` — `LeanC2/Analytic/GenuineContinuation.lean:228`
+- `ComparisonFromOneLtPuncturedData.eqOnPuncturedOpenRightHalfPlane` — `LeanC2/Analytic/GenuineContinuation.lean:332`
+- `ComparisonFromOneLtData.eqOnOpenRightHalfPlane` — `LeanC2/Analytic/GenuineContinuation.lean:339`
+- `ComparisonFromOneLtPuncturedData.transferOffCriticalIdentity` — `LeanC2/Analytic/GenuineContinuation.lean:346`
+- `ContinuationFromOneLtData.to_fundamentalRightHalfPlane` — `LeanC2/Analytic/GenuineContinuation.lean:392`
+- `FundamentalIdentityOnRightHalfPlane.analyticOnNhd_punctured` — `LeanC2/Analytic/GenuineContinuation.lean:399`
+- `mathlibRiemannHypothesis_of_continuationFromOneLt` — `LeanC2/Analytic/GenuineContinuation.lean:422`
+- `mathlibRiemannHypothesis_of_continuationFromOneLt_cover` — `LeanC2/Analytic/GenuineContinuation.lean:443`
+- `genuineFInfinite_identity_on_oneLtHalfPlane` — `LeanC2/Analytic/GenuineContinuation.lean:453`
+- `GenuineFInfiniteContinuationData.fundamentalIdentity` — `LeanC2/Analytic/GenuineContinuation.lean:462`
+- `GenuineFInfiniteContinuationData.analyticOnNhd_punctured` — `LeanC2/Analytic/GenuineContinuation.lean:467`
+- `GenuineFInfiniteContinuationData.eq_continuedCentralOddChannel_on_punctured` — `LeanC2/Analytic/GenuineContinuation.lean:474`
+- `F_eq_c0_mul_zeta_sigma_gt_zero` — `LeanC2/Analytic/GenuineContinuation.lean:488`
+- `C2_identity_sigma_gt_zero` — `LeanC2/Analytic/GenuineContinuation.lean:494`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteContinuation` — `LeanC2/Analytic/GenuineContinuation.lean:507`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_cover` — `LeanC2/Analytic/GenuineContinuation.lean:524`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_nearBulkEdge` — `LeanC2/Analytic/GenuineContinuation.lean:532`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_nearBulkBoundsEdge` — `LeanC2/Analytic/GenuineContinuation.lean:548`
+
+## 5. Near-axis e suporte Taylor
+
+- `IsCriticalZero.mem_puncturedOpenRightHalfPlane` — `LeanC2/Analytic/GenuineG11.lean:17`
+- `genuineFInfinite_analyticAt_of_analyticOnNhd_punctured` — `LeanC2/Analytic/GenuineG11.lean:26`
+- `genuineFInfinite_nonzero_at_two_of_continuation` — `LeanC2/Analytic/GenuineG11.lean:43`
+- `not_eventually_zero_of_continuation` — `LeanC2/Analytic/GenuineG11.lean:52`
+- `eventually_ne_zero_of_continuation` — `LeanC2/Analytic/GenuineG11.lean:68`
+- `near_axis_nonzero` — `LeanC2/Analytic/GenuineG11.lean:278`
+
+Itens estruturais usados na etapa near-axis:
+
+- `GenuineFInfiniteNearAxisData.of_continuation` (def) — `LeanC2/Analytic/GenuineG11.lean:78`
+- `NearAxisCertificate.of_leibnizJet_c0` (def) — `LeanC2/Route/NearAxisTaylor.lean:313`
+- `NearAxisCertificate.of_eventually_ne_zero` (def) — `LeanC2/Route/NearAxisTaylor.lean:353`
+
+## 6. Cover e bulk regional
+
+- `offCriticalStripNonvanishing_of_genuineFInfiniteNearBulkEdgeData` — `LeanC2/Analytic/GenuineCover.lean:88`
+- `offCriticalStripNonvanishing_of_genuineFInfiniteNearBulkBoundsEdgeData` — `LeanC2/Analytic/GenuineCover.lean:95`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_pinnedNearBulkEdge` — `LeanC2/Analytic/GenuineCover.lean:102`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_pinnedNearBulkBoundsEdge` — `LeanC2/Analytic/GenuineCover.lean:109`
+- `genuineFInfinite_nonvanishing_of_regionalBulkRouteData` — `LeanC2/Analytic/GenuineBulk.lean:226`
+- `genuineFInfinite_nonvanishing_of_regionalBulkBoundsData` — `LeanC2/Analytic/GenuineBulk.lean:231`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_regionalBulkCover` — `LeanC2/Analytic/GenuineBulk.lean:237`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_regionalBulkBoundsCover` — `LeanC2/Analytic/GenuineBulk.lean:253`
+
+## 7. Arquivo terminal concreto
+
+### 7.1. Pontes concretas de identidade e continuacao
+
+- `c2OddTailBalancingSeed_bulkModel_identity_on_oneLtHalfPlane` — `LeanC2/Analytic/GenuineBulkConcrete.lean:823`
+- `c2OddTailBalancingSeedBulkModel_eq_genuineFInfinite_on_oneLtHalfPlane` — `LeanC2/Analytic/GenuineBulkConcrete.lean:837`
+- `c2OddTailContinuedBalancingSeedBulkModel_fundamentalIdentity` — `LeanC2/Analytic/GenuineBulkConcrete.lean:1334`
+- `c2OddTailContinuedBalancingSeedBulkModel_fundamentalIdentity_offCritical` — `LeanC2/Analytic/GenuineBulkConcrete.lean:1348`
+- `c2OddTailContinuedBalancingSeedBulkModel_eq_genuineFInfinite_on_punctured` — `LeanC2/Analytic/GenuineBulkConcrete.lean:1461`
+- `c2OddTailBalancingSeedBulkModel_fundamentalIdentity_of_continuation` — `LeanC2/Analytic/GenuineBulkConcrete.lean:2930`
+- `C2OddTailBalancingSeedBulkModelContinuationData.fundamentalIdentity` — `LeanC2/Analytic/GenuineBulkConcrete.lean:2944`
+
+### 7.2. Fechos off-critical e endpoints RH
+
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_cover_offCritical` — `LeanC2/Analytic/GenuineBulkConcrete.lean:1355`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_nearBulkEdge` — `LeanC2/Analytic/GenuineBulkConcrete.lean:1392`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_nearBulkBoundsEdge` — `LeanC2/Analytic/GenuineBulkConcrete.lean:1411`
+- `offCriticalStripNonvanishing_of_oddTailContinuedBalancingSeedBulkModelNearBulkEdgeData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:1706`
+- `offCriticalStripNonvanishing_of_oddTailContinuedBalancingSeedBulkModelNearBulkBoundsEdgeData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:1715`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_pinnedNearBulkEdge` — `LeanC2/Analytic/GenuineBulkConcrete.lean:1726`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_pinnedNearBulkBoundsEdge` — `LeanC2/Analytic/GenuineBulkConcrete.lean:1734`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_bulkRegionCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:1976`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetBulkCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:1998`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetBoundsCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:2020`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_regionalBulkCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:2042`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_regionalBulkBoundsCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:2067`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_regional_genericNearEdge` — `LeanC2/Analytic/GenuineBulkConcrete.lean:2094`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_regionalBounds_genericNearEdge` — `LeanC2/Analytic/GenuineBulkConcrete.lean:2112`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_concreteCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:2323`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_concreteSubsetCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:2364`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:2631`
+- `mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModelContinuation` — `LeanC2/Analytic/GenuineBulkConcrete.lean:2973`
+- `mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModelContinuation_cover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:2983`
+- `mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModel_analyticOnNhd_cover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:3021`
+- `mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModel_continuation_cover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:3037`
+- `mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModel_analyticOnNhd_cover_offCritical` — `LeanC2/Analytic/GenuineBulkConcrete.lean:3052`
+- `mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModel_central_bridge_cover_offCritical` — `LeanC2/Analytic/GenuineBulkConcrete.lean:3066`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_expandedScalarCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:9669`
+- `offCriticalStripNonvanishing_of_expandedScalarCoverData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:9760`
+- `mathlibRiemannHypothesis_of_expandedScalarCoverData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:9776`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:9790`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetExactCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:9814`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetTriangleCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:9847`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetClosedCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:9880`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_zetaDepthCoreCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:9914`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_explicitFiniteCoreCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:9948`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_explicitScalarCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:9982`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_explicitScalarExactZetaCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:10016`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_expandedExactZetaCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:10049`
+- `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_expandedDominanceCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:10082`
+- `offCriticalStripNonvanishing_of_expandedScalarLocalChoice` — `LeanC2/Analytic/GenuineBulkConcrete.lean:10978`
+- `mathlibRiemannHypothesis_of_expandedScalarLocalChoice` — `LeanC2/Analytic/GenuineBulkConcrete.lean:10996`
+- `offCriticalStripNonvanishing_of_expandedScalarChoiceRegions` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11123`
+- `mathlibRiemannHypothesis_of_expandedScalarChoiceRegions` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11141`
+- `offCriticalStripNonvanishing_of_expandedScalarCanonicalRegions` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11454`
+- `mathlibRiemannHypothesis_of_expandedScalarCanonicalRegions` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11473`
+- `offCriticalStripNonvanishing_of_expandedScalarCanonicalCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11491`
+- `mathlibRiemannHypothesis_of_expandedScalarCanonicalCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11511`
+- `offCriticalStripNonvanishing_of_expandedScalarCanonicalScalarCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11530`
+- `mathlibRiemannHypothesis_of_expandedScalarCanonicalScalarCover` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11560`
+- `offCriticalStripNonvanishing_of_expandedScalarMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11616`
+- `mathlibRiemannHypothesis_of_expandedScalarMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11641`
+- `offCriticalStripNonvanishing_of_expandedScalarCanonicalCoverData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11701`
+- `mathlibRiemannHypothesis_of_expandedScalarCanonicalCoverData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11715`
+- `offCriticalStripNonvanishing_of_expandedScalarMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11810`
+- `mathlibRiemannHypothesis_of_expandedScalarMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11825`
+- `offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11855`
+- `mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11870`
+- `offCriticalStripNonvanishing_of_expandedExactZetaMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11884`
+- `mathlibRiemannHypothesis_of_expandedExactZetaMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11904`
+- `offCriticalStripNonvanishing_of_expandedDominanceMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11923`
+- `mathlibRiemannHypothesis_of_expandedDominanceMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11943`
+- `mathlibRiemannHypothesis_of_quartetExactMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11963`
+- `mathlibRiemannHypothesis_of_quartetTriangleMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11981`
+- `mathlibRiemannHypothesis_of_quartetClosedMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:11999`
+- `offCriticalStripNonvanishing_of_quartetComponentMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:12018`
+- `mathlibRiemannHypothesis_of_quartetComponentMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:12043`
+- `offCriticalStripNonvanishing_of_quartetComponentTruncationMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:12170`
+- `mathlibRiemannHypothesis_of_quartetComponentTruncationMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:12193`
+- `offCriticalStripNonvanishing_of_continuationAndQuartetComponentTruncationLocalData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:12216`
+- `mathlibRiemannHypothesis_of_continuationAndQuartetComponentTruncationLocalData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:12254`
+- `offCriticalStripNonvanishing_of_quartetComponentResolventNoteMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:12515`
+- `mathlibRiemannHypothesis_of_quartetComponentResolventNoteMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:12533`
+- `offCriticalStripNonvanishing_of_continuationAndQuartetComponentResolventNoteLocalData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:12551`
+- `mathlibRiemannHypothesis_of_continuationAndQuartetComponentResolventNoteLocalData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:12591`
+- `offCriticalStripNonvanishing_of_continuationAndQuartetComponentResolventNoteBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:12629`
+- `mathlibRiemannHypothesis_of_continuationAndQuartetComponentResolventNoteBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:12801`
+- `offCriticalStripNonvanishing_of_continuationAndQuartetComponentExactScaleMatchedResolventBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:13003`
+- `mathlibRiemannHypothesis_of_continuationAndQuartetComponentExactScaleMatchedResolventBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:13160`
+- `offCriticalStripNonvanishing_of_canonicalClosedMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:13314`
+- `mathlibRiemannHypothesis_of_canonicalClosedMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:13359`
+- `offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:13382`
+- `mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:13407`
+- `offCriticalStripNonvanishing_of_canonicalClosedScaledCoverData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:13519`
+- `mathlibRiemannHypothesis_of_canonicalClosedScaledCoverData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:13530`
+- `offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleCoverData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:13557`
+- `mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleCoverData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:13566`
+- `offCriticalStripNonvanishing_of_canonicalClosedScaledDirectMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:13637`
+- `mathlibRiemannHypothesis_of_canonicalClosedScaledDirectMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:13647`
+- `offCriticalStripNonvanishing_of_canonicalClosedScaledVerticalBudgetMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:14017`
+- `mathlibRiemannHypothesis_of_canonicalClosedScaledVerticalBudgetMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:14028`
+- `offCriticalStripNonvanishing_of_canonicalClosedScaledVerticalTruncationMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:14135`
+- `mathlibRiemannHypothesis_of_canonicalClosedScaledVerticalTruncationMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:14149`
+- `offCriticalStripNonvanishing_of_canonicalClosedScaledResidualBudgetMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:14266`
+- `mathlibRiemannHypothesis_of_canonicalClosedScaledResidualBudgetMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:14280`
+- `offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleLocalData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:14522`
+- `mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleLocalData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:14532`
+- `offCriticalStripNonvanishing_of_terminalData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:14570`
+- `mathlibRiemannHypothesis_of_terminalData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:14578`
+- `mathlibRiemannHypothesis_of_continuationAndExplicitScalarExactZetaMiddleRegionWithBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:14605`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedExactZetaMiddleRegionWithBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:14638`
+- `offCriticalStripNonvanishing_of_continuationAndBulkConcreteMiddleRegionWithBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:14675`
+- `offCriticalStripNonvanishing_of_genuineFInfinite_of_continuationAndBulkConcreteMiddle` — `LeanC2/Analytic/GenuineBulkConcrete.lean:14711`
+- `mathlibRiemannHypothesis_of_continuationAndBulkConcreteMiddleRegionWithBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:14754`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteContinuationAndBulkConcreteMiddle` — `LeanC2/Analytic/GenuineBulkConcrete.lean:14793`
+- `mathlibRiemannHypothesis_of_continuationAndBulkConcreteMiddlePointwiseBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:14824`
+- `offCriticalStripNonvanishing_of_genuineFInfinite_of_continuationAndBulkConcretePointwiseBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:14854`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteContinuationAndBulkConcretePointwiseBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:14885`
+- `offCriticalStripNonvanishing_of_explicitScalarExactZetaMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:15114`
+- `mathlibRiemannHypothesis_of_explicitScalarExactZetaMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:15129`
+- `offCriticalStripNonvanishing_of_expandedExactZetaMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:15233`
+- `mathlibRiemannHypothesis_of_expandedExactZetaMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:15248`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteNearAxisAndExplicitScalarExactZetaMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:15446`
+- `mathlibRiemannHypothesis_of_continuationAndMiddleLocal` — `LeanC2/Analytic/GenuineBulkConcrete.lean:15505`
+- `offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddlePointwiseBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:15529`
+- `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddlePointwiseBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:15621`
+- `offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddleSeparatedDominanceBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:15712`
+- `offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddleResidualDominanceBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:15832`
+- `offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddleResidualPointwiseBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:15942`
+- `offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddleResidualAnalyticBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:16022`
+- `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleSeparatedDominanceBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:16102`
+- `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualDominanceBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:16221`
+- `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualPointwiseBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:16330`
+- `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualAnalyticBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:16408`
+- `offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddleResidualMajorantBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:16487`
+- `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualMajorantBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:16567`
+- `offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddleResidualVerticalBudgetBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:16647`
+- `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualVerticalBudgetBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:16741`
+- `offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddleResidualVerticalBudgetTruncationBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:16834`
+- `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualVerticalBudgetTruncationBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:16925`
+- `offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddleResidualFiniteExactZetaVerticalBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:17015`
+- `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualFiniteExactZetaVerticalBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:17097`
+- `offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddleResidualFiniteExactZetaBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:17178`
+- `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualFiniteExactZetaBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:17259`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegionWithBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:17376`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegionWithBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:17407`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddlePointwiseBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:17437`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleSeparatedMainBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:17496`
+- `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:17577`
+- `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle` — `LeanC2/Analytic/GenuineBulkConcrete.lean:17708`
+- `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:17793`
+- `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_centralDefectBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:17881`
+- `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_centralDefectBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:17965`
+- `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_separatedCentralBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:18048`
+- `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_separatedCentralBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:18141`
+- `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:18233`
+- `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:18317`
+- `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exactGenuineCentralBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:18400`
+- `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exactGenuineCentralBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:18477`
+- `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:18553`
+- `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:18656`
+- `offCriticalStripNonvanishing_of_continuationAndAntiMiracleGenuineCentralMiddleRegionWithBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:18904`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:18943`
+- `mathlibRiemannHypothesis_of_continuationAndAntiMiracleGenuineCentralMiddleRegionWithBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:19022`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:19060`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound_splitAtOne` — `LeanC2/Analytic/GenuineBulkConcrete.lean:19438`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound_splitAtOne` — `LeanC2/Analytic/GenuineBulkConcrete.lean:19581`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound_splitAtOneScaledBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:19723`
+- `offCriticalStripNonvanishing_of_antiMiracleGenuineCentralMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:19872`
+- `mathlibRiemannHypothesis_of_antiMiracleGenuineCentralMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:19896`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound_splitAtOneScaledBoundsCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:20074`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound_splitAtOneScaledBoundsCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:20178`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound_splitAtOneScaledBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:20281`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:20405`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:20484`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralCombinedResidualDominance_splitAtOne` — `LeanC2/Analytic/GenuineBulkConcrete.lean:20562`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralCombinedResidualDominance_splitAtOne` — `LeanC2/Analytic/GenuineBulkConcrete.lean:20705`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:20847`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:20937`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance_splitAtOne` — `LeanC2/Analytic/GenuineBulkConcrete.lean:21026`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance_splitAtOne` — `LeanC2/Analytic/GenuineBulkConcrete.lean:21181`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralSplitAtOneDoubleUpperCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:21335`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralSplitAtOneDoubleUpperCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:21438`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralSplitAtOneUpperBoundsCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:21540`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralSplitAtOneUpperBoundsCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:21688`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralSplitAtOneScaledBoundsCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:21835`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralSplitAtOneScaledBoundsCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:21984`
+- `offCriticalStripNonvanishing_of_continuationAndAntiMiracleExactGenuineCentralMiddleRegionWithBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:22347`
+- `mathlibRiemannHypothesis_of_continuationAndAntiMiracleExactGenuineCentralMiddleRegionWithBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:22381`
+- `offCriticalStripNonvanishing_of_antiMiracleExactGenuineCentralMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:22438`
+- `mathlibRiemannHypothesis_of_antiMiracleExactGenuineCentralMiddleRegionData` — `LeanC2/Analytic/GenuineBulkConcrete.lean:22461`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_exactGenuineCentralBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:22547`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exactGenuineCentralBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:22615`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_exactGenuineCentralCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:22843`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exactGenuineCentralCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:22911`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_exactGenuineCentralMajorantCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:22978`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exactGenuineCentralMajorantCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:23057`
+- `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryResidualBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:23140`
+- `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryResidualBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:23226`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_pointwiseOscillatoryResidualBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:23311`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_pointwiseOscillatoryResidualBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:23393`
+- `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryResidualBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:23474`
+- `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:23557`
+- `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryResidualBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:23648`
+- `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:23730`
+- `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:23820`
+- `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:23921`
+- `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryExpansion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:24021`
+- `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryExpansion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:24117`
+- `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryExpansion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:24212`
+- `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryExpansion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:24309`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_pointwiseOscillatoryExpansion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:24405`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_pointwiseOscillatoryExpansion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:24499`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryExpansion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:24592`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryExpansion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:24677`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:24761`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:24840`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansionCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:24918`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansionCombinedResidualDominance` — `LeanC2/Analytic/GenuineBulkConcrete.lean:24997`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansion_three` — `LeanC2/Analytic/GenuineBulkConcrete.lean:25075`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansion_three` — `LeanC2/Analytic/GenuineBulkConcrete.lean:25146`
+- `offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansionCombinedResidualDominance_three` — `LeanC2/Analytic/GenuineBulkConcrete.lean:25216`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansionCombinedResidualDominance_three` — `LeanC2/Analytic/GenuineBulkConcrete.lean:25287`
+- `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialResidualBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:25362`
+- `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialResidualBound` — `LeanC2/Analytic/GenuineBulkConcrete.lean:25448`
+- `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle` — `LeanC2/Analytic/GenuineBulkConcrete.lean:25533`
+- `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_atOne` — `LeanC2/Analytic/GenuineBulkConcrete.lean:25615`
+- `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_atOne` — `LeanC2/Analytic/GenuineBulkConcrete.lean:25688`
+- `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleSeparatedBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:25760`
+- `mathlibRiemannHypothesis_of_continuationAndExplicitScalarExactZetaMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:25911`
+- `mathlibRiemannHypothesis_of_continuationAndExpandedDominanceMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:25941`
+- `mathlibRiemannHypothesis_of_continuationAndQuartetExactMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:25977`
+- `mathlibRiemannHypothesis_of_continuationAndQuartetTriangleMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:26013`
+- `mathlibRiemannHypothesis_of_continuationAndQuartetClosedMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:26049`
+- `mathlibRiemannHypothesis_of_continuationAndQuartetComponentMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:26087`
+- `mathlibRiemannHypothesis_of_continuationAndQuartetComponentTruncationBounds` — `LeanC2/Analytic/GenuineBulkConcrete.lean:26126`
+- `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:26282`
+- `mathlibRiemannHypothesis_of_continuationAndExplicitFiniteCoreMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:26311`
+- `mathlibRiemannHypothesis_of_continuationAndExplicitScalarMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:26349`
+- `mathlibRiemannHypothesis_of_zetaDepthCoreMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:26387`
+- `mathlibRiemannHypothesis_of_explicitFiniteCoreMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:26407`
+- `mathlibRiemannHypothesis_of_explicitScalarMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:26426`
+- `offCriticalStripNonvanishing_of_explicitScalarExactZetaMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:26445`
+- `mathlibRiemannHypothesis_of_explicitScalarExactZetaMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:26466`
+
+### 7.3. Pacote terminal estrutural
+
+- `RiemannHypothesisTerminalData` (structure) — `LeanC2/Analytic/GenuineBulkConcrete.lean:14546`
+- `RiemannHypothesisTerminalData.toMiddleLocalData` (def) — `LeanC2/Analytic/GenuineBulkConcrete.lean:14556`
+- `RiemannHypothesisTerminalData.toCoverData` (def) — `LeanC2/Analytic/GenuineBulkConcrete.lean:14563`
+- `RiemannHypothesisTerminalData.ofMiddleLocalData` (def) — `LeanC2/Analytic/GenuineBulkConcrete.lean:14584`
+- `RiemannHypothesisTerminalData.ofMiddleRegionData` (def) — `LeanC2/Analytic/GenuineBulkConcrete.lean:14923`
+- `RiemannHypothesisTerminalData.ofMiddleCoverData` (def) — `LeanC2/Analytic/GenuineBulkConcrete.lean:14940`
+- `RiemannHypothesisTerminalData.ofCoverData` (def) — `LeanC2/Analytic/GenuineBulkConcrete.lean:14962`
+- `RiemannHypothesisTerminalData.ofExpandedScalarMiddleRegionData` (def) — `LeanC2/Analytic/GenuineBulkConcrete.lean:14986`
+- `RiemannHypothesisTerminalData.ofExpandedScalarCanonicalCoverData` (def) — `LeanC2/Analytic/GenuineBulkConcrete.lean:15015`
+- `RiemannHypothesisTerminalData.ofExpandedExactZetaMiddleRegion` (def) — `LeanC2/Analytic/GenuineBulkConcrete.lean:15334`
+- `RiemannHypothesisTerminalData.ofZetaDepthCoreMiddleRegion` (def) — `LeanC2/Analytic/GenuineBulkConcrete.lean:15356`
+- `RiemannHypothesisTerminalData.ofExplicitFiniteCoreMiddleRegion` (def) — `LeanC2/Analytic/GenuineBulkConcrete.lean:15377`
+- `RiemannHypothesisTerminalData.ofExplicitScalarExactZetaMiddleRegion` (def) — `LeanC2/Analytic/GenuineBulkConcrete.lean:15397`
+- `RiemannHypothesisTerminalData.ofGenuineFInfiniteNearAxisAndExplicitScalarExactZetaMiddleRegion` (def) — `LeanC2/Analytic/GenuineBulkConcrete.lean:15417`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteNearAxisAndExplicitScalarExactZetaMiddleRegion` — `LeanC2/Analytic/GenuineBulkConcrete.lean:15446`
+- `RiemannHypothesisTerminalData.ofContinuationAndMiddleLocal` (def) — `LeanC2/Analytic/GenuineBulkConcrete.lean:15476`
+- `RiemannHypothesisTerminalData.ofContinuationAndExplicitScalarExactZetaMiddleRegion` (def) — `LeanC2/Analytic/GenuineBulkConcrete.lean:25880`
+
+Gerado a partir das declaracoes atuais dos arquivos de rota.
