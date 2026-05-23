@@ -1,8 +1,9 @@
-# Report de Formalização Lean C2 e Fechamento até RH
+# Report de Formalização Lean C2 e Fechamento até a RH oficial do mathlib
 
 ## Estado Atual do Código
 
 Leitura direta do código em 19/05/2026. Este bloco e a referencia normativa do estado atual do projeto.
+O endpoint final atual e a `RiemannHypothesis` oficial do mathlib; a rota vigente nao usa mais uma proposicao local separada para RH.
 Os itens numerados abaixo devem ser lidos como historico cumulativo de desenvolvimento. Quando mencionarem “gargalo”, “pendencia” ou “proximo passo”, isso descreve o momento em que foram escritos, nao o estado final atual do Lean.
 
 Build atual verificado:
@@ -19,18 +20,18 @@ Build completed successfully (8289 jobs).
 
 Conclusao executiva atual e pecas efetivamente operacionais:
 
-- A rota atual fecha ate RH no Lean. O funil `near-axis -> bulk -> edge -> colagem -> transferencia` ja possui endpoints formais ate `RiemannHypothesisC2`.
-- Entre os endpoints finais hoje presentes no codigo estao `riemannHypothesisC2_of_c2ExpandedScalarMiddleRegion`, `riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegionWithBounds`, `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteCover` e `riemannHypothesisC2_of_F_nonvanishing_offCriticalIdentity`.
+- A rota atual fecha ate a `RiemannHypothesis` oficial do mathlib no Lean. O funil `near-axis -> bulk -> edge -> colagem -> transferencia` ja possui endpoints formais ate `RiemannHypothesis`.
+- Entre os endpoints finais hoje presentes no codigo estao `mathlibRiemannHypothesis_of_expandedScalarMiddleRegion`, `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegionWithBounds`, `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteCover` e `mathlibRiemannHypothesis_of_F_nonvanishing_offCriticalIdentity`.
 
 - A arquitetura abstrata do roteiro RH já está fechada em `LeanC2/Roadmap.lean`: `NearAxisRouteData`, `RegionalVerticalBulkBoundsData`, `EdgeRouteData`, `OffCriticalCoverData` e `offCriticalStripNonvanishing_of_coverData` formalizam o funil near/bulk/edge até não-anulação off-critical.
-- A transferência final para RH já está fechada em `LeanC2/Route/Transfer.lean`: `FundamentalIdentityOnRightHalfPlane`, `FundamentalIdentityOnOffCriticalStrip`, `RH_from_C2` e `riemannHypothesisC2_of_F_nonvanishing_offCriticalIdentity`.
+- A transferência final para RH já está fechada em `LeanC2/Route/Transfer.lean`: `FundamentalIdentityOnRightHalfPlane`, `FundamentalIdentityOnOffCriticalStrip`, `mathlibRiemannHypothesis_of_F_nonvanishing` e `mathlibRiemannHypothesis_of_F_nonvanishing_offCriticalIdentity`.
 - A continuação para o alvo genuíno já está empacotada em `LeanC2/Analytic/GenuineContinuation.lean` via `GenuineFInfiniteContinuationData`, com `GenuineFInfiniteContinuationData.analyticOnNhd_punctured` e `GenuineFInfiniteContinuationData.eq_continuedCentralOddChannel_on_punctured`.
 - O bloco `near` já não é um gargalo independente no caminho atual: `LeanC2/Analytic/GenuineG11.lean` contém `GenuineFInfiniteNearAxisData.of_continuation`, construído a partir de `eventually_ne_zero_of_continuation`.
 - O bloco `edge` já foi descarregado no modelo continuado por `C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty` em `LeanC2/Analytic/GenuineBulkConcrete.lean`.
 - A hierarquia forte da faixa média já está toda formalizada em `LeanC2/Analytic/GenuineBulkConcrete.lean`, incluindo as rotas `quartetExact`, `quartetTriangle`, `quartetClosed`, `quartetComponent`, `explicitFiniteCore`, `explicitScalar`, `explicitScalarExactZeta`, `expandedExactZeta` e `expandedDominance`, com corolários de RH correspondentes.
-- A montagem terminal também já está fechada no arquivo `LeanC2/Analytic/GenuineBulkConcrete.lean`: existem os endpoints `C2RiemannHypothesisTerminalData.ofContinuationAndMiddleLocal`, `...ofContinuationAndExplicitScalarExactZetaMiddleRegion`, `riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegionWithBounds`, `riemannHypothesisC2_of_continuationAndExpandedScalarMiddlePointwiseBounds` e `riemannHypothesisC2_of_continuationAndExpandedScalarMiddleSeparatedMainBounds`.
-- A rota Anti-Milagre do seed natural agora já admite fechamento regional tanto com resíduo analítico real quanto no caso zero-proxy em `LeanC2/Analytic/GenuineBulkConcrete.lean`: os endpoints `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound` / `riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound` transportam `‖F_∞ - F_X‖ ≤ residualUpper`, enquanto `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle`, `riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle` e as variantes `..._of_atOne` ficam como a especialização zero-proxy `residualUpper = 0`. A primeira instância concreta desse formato agora também já está nomeada: `c2ConcreteAntiMiracleExponentialResidualUpper`, com margem `c2ConcreteAntiMiracleAdjustedExponentialMargin` e wrappers regionais `...AntiMiracleMiddle_of_exponentialResidualBound` para o ansatz exponencial `C_Γ X^(1-σ) + C₁/X + C₂/X²`. Além disso, o rebasing local do residual natural para o seed continued já está isolado exatamente por `c2ConcreteAntiMiracleCentralRebasingError`, `c2ConcreteAntiMiracleResidual_eq_rebased_continuedSeed_of_re_pos` e `c2ConcreteAntiMiracleResidual_norm_le_rebased_continuedSeed_of_re_pos`, a camada regional correspondente já pode ser alimentada diretamente por um bound do defeito central via `...AntiMiracleMiddle_of_centralDefectBound`, esse defeito agora também já está empacotado por triângulo a partir de bounds separados de `genuineCentralDoubleSeries` e `continuedCentralOddChannel` via `..._of_separatedCentralBounds`, e a porta residual fiel à nota já ganhou sua API própria: `c2ConcreteAntiMiraclePointwiseOscillatoryMain`, `c2ConcreteAntiMiraclePointwiseOscillatoryResidualUpper`, `c2ConcreteAntiMiracleAdjustedPointwiseOscillatoryMargin` e os wrappers `...AntiMiracleMiddle_of_pointwiseOscillatoryResidualBound` deixam explícita a estratégia “termo principal complexo + resto real” para substituir o proxy sem destruir o cancelamento.
-- A rota concreta pelo resolvente vertical completo também já está plugada no fechamento regional em `LeanC2/Analytic/GenuineBulkConcrete.lean`: `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_concreteCover`, `..._concreteSubsetCover`, `offCriticalStripNonvanishing_of_continuationAndBulkConcreteMiddleRegionWithBounds`, `offCriticalStripNonvanishing_of_genuineFInfinite_of_continuationAndBulkConcreteMiddle`, `riemannHypothesisC2_of_continuationAndBulkConcreteMiddleRegionWithBounds` e `riemannHypothesisC2_of_genuineFInfiniteContinuationAndBulkConcreteMiddle` agora empurram pertinência ao `c2OddTailContinuedBalancingSeedBulkConcreteRegion` no `c2ExpandedScalarMiddleRegion` até não-anulação off-critical do modelo, não-anulação off-critical de `genuineFInfinite` e RH.
+- A montagem terminal também já está fechada no arquivo `LeanC2/Analytic/GenuineBulkConcrete.lean`: existem os endpoints `RiemannHypothesisTerminalData.ofContinuationAndMiddleLocal`, `...ofContinuationAndExplicitScalarExactZetaMiddleRegion`, `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegionWithBounds`, `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddlePointwiseBounds` e `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleSeparatedMainBounds`.
+- A rota Anti-Milagre do seed natural agora já admite fechamento regional tanto com resíduo analítico real quanto no caso zero-proxy em `LeanC2/Analytic/GenuineBulkConcrete.lean`: os endpoints `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound` / `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound` transportam `‖F_∞ - F_X‖ ≤ residualUpper`, enquanto `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle`, `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle` e as variantes `..._of_atOne` ficam como a especialização zero-proxy `residualUpper = 0`. A primeira instância concreta desse formato agora também já está nomeada: `c2ConcreteAntiMiracleExponentialResidualUpper`, com margem `c2ConcreteAntiMiracleAdjustedExponentialMargin` e wrappers regionais `...AntiMiracleMiddle_of_exponentialResidualBound` para o ansatz exponencial `C_Γ X^(1-σ) + C₁/X + C₂/X²`. Além disso, o rebasing local do residual natural para o seed continued já está isolado exatamente por `c2ConcreteAntiMiracleCentralRebasingError`, `c2ConcreteAntiMiracleResidual_eq_rebased_continuedSeed_of_re_pos` e `c2ConcreteAntiMiracleResidual_norm_le_rebased_continuedSeed_of_re_pos`, a camada regional correspondente já pode ser alimentada diretamente por um bound do defeito central via `...AntiMiracleMiddle_of_centralDefectBound`, esse defeito agora também já está empacotado por triângulo a partir de bounds separados de `genuineCentralDoubleSeries` e `continuedCentralOddChannel` via `..._of_separatedCentralBounds`, e a porta residual fiel à nota já ganhou sua API própria: `c2ConcreteAntiMiraclePointwiseOscillatoryMain`, `c2ConcreteAntiMiraclePointwiseOscillatoryResidualUpper`, `c2ConcreteAntiMiracleAdjustedPointwiseOscillatoryMargin` e os wrappers `...AntiMiracleMiddle_of_pointwiseOscillatoryResidualBound` deixam explícita a estratégia “termo principal complexo + resto real” para substituir o proxy sem destruir o cancelamento.
+- A rota concreta pelo resolvente vertical completo também já está plugada no fechamento regional em `LeanC2/Analytic/GenuineBulkConcrete.lean`: `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_concreteCover`, `..._concreteSubsetCover`, `offCriticalStripNonvanishing_of_continuationAndBulkConcreteMiddleRegionWithBounds`, `offCriticalStripNonvanishing_of_genuineFInfinite_of_continuationAndBulkConcreteMiddle`, `mathlibRiemannHypothesis_of_continuationAndBulkConcreteMiddleRegionWithBounds` e `mathlibRiemannHypothesis_of_genuineFInfiniteContinuationAndBulkConcreteMiddle` agora empurram pertinência ao `c2OddTailContinuedBalancingSeedBulkConcreteRegion` no `c2ExpandedScalarMiddleRegion` até não-anulação off-critical do modelo, não-anulação off-critical de `genuineFInfinite` e RH.
 
 O que não falta mais no caminho atual:
 
@@ -52,34 +53,34 @@ O que sobra apenas como refinamento opcional das rotas fortes da faixa média:
   `C2ExpandedQuartetDominance`.
 - Equivalente: pode-se fornecer diretamente `C2ExpandedScalarMainInequalities`, `C2ExpandedScalarLocalBulkData`, ou ainda um witness mais forte como `c2OddTailContinuedBalancingSeedBulkQuartetExplicitScalarExactZetaRegion`; mas isso já é só escolha de empacotamento. O conteúdo matemático restante é a faixa média forte.
 - Após a última redução da rota direta, existe também o endpoint canônico
-  `riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleSeparatedBounds`,
+  `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleSeparatedBounds`,
   que fixa as constantes/escala canônicas e deixa explícitas apenas as peças horizontais/positividade mais
   `hseed`, `hcutoff` e `hdominance` na faixa média.
 - Mais diretamente ainda, existe agora o endpoint
-  `riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddlePointwiseBounds`,
+  `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddlePointwiseBounds`,
   que trabalha já na interface `C2CanonicalClosedScaledLocalData`: na prática ele deixa como conteúdo local apenas
   positividade/controle horizontal e a desigualdade `quartet_dominance` ponto a ponto.
 - A `quartet_dominance` também já foi quebrada em lemas de montagem locais:
   `c2ExpandedQuartetDominance_of_fourTermBound` e
   `c2ExpandedQuartetDominance_of_budgetBounds`.
   Com isso, a forma mais modular da opção 1 passa a ser o endpoint
-  `riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleSeparatedDominanceBounds`,
+  `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleSeparatedDominanceBounds`,
   onde a parte de dominância pode ser atacada por quatro budgets separados:
   `quartet tail`, `tilt`, `horizontal`, `cutoff`.
 - Há agora também a variante residual
-  `riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleResidualDominanceBounds`,
+  `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualDominanceBounds`,
   que remove o `quartet tail` da obrigação restante e deixa apenas três budgets
   `tilt/horizontal/cutoff` contra a margem residual explícita
   `c2ExpandedQuartetResidualMargin`.
 - E há agora a formulação residual exata mais enxuta,
-  `riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleResidualPointwiseBounds`,
+  `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualPointwiseBounds`,
   que empacota o lado esquerdo restante como
   `c2CanonicalClosedScaledResidualUpper` e elimina todos os budgets auxiliares:
   sobra apenas a desigualdade pontual
   `c2CanonicalClosedScaledResidualUpper < c2ExpandedQuartetResidualMargin`
   junto do orçamento geométrico horizontal usual.
 - A versão analítica mais explícita dessa mesma redução também já está isolada:
-  `riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleResidualAnalyticBounds`
+  `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualAnalyticBounds`
   troca a margem residual abstrata pela identidade
   `c2ExpandedQuartetResidualMargin = c2AnalyticBulkAllowance - c2ExpandedQuartetResidualReserve`,
   então a obrigação final pode ser lida diretamente como uma comparação entre
@@ -87,14 +88,14 @@ O que sobra apenas como refinamento opcional das rotas fortes da faixa média:
   reserva explícita de quarteto.
 - E o lado esquerdo canônico agora também tem uma majorante operacional explícita:
   `c2CanonicalClosedScaledResidualMajorant`, com endpoint final
-  `riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleResidualMajorantBounds`.
+  `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualMajorantBounds`.
   Isso reduz o subalvo analítico imediato a majorar
   `c2CanonicalClosedScaledResidualUpper` por uma combinação mais transparente dos
   termos vertical/horizontal/cutoff já fechados no modelo canônico.
 - Além disso, a majorante residual canônica agora admite uma camada intermediária
   parametrizada apenas por uma cota externa para o termo vertical:
   `c2CanonicalClosedScaledResidualVerticalBudgetUpper`, com endpoint
-  `riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleResidualVerticalBudgetBounds`.
+  `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualVerticalBudgetBounds`.
   Na prática, isso separa o próximo gargalo real em duas partes: primeiro provar
   `c2ContinuedVerticalResidualClosedUpper ... ≤ verticalUpper`, e só depois comparar
   essa nova expressão residual com `c2AnalyticBulkAllowance - c2ExpandedQuartetResidualReserve`.
@@ -104,7 +105,7 @@ O que sobra apenas como refinamento opcional das rotas fortes da faixa média:
   `C2ExpandedHorizontalLayerBudget`, e isso alimenta diretamente os endpoints
   `offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddleResidualVerticalBudgetTruncationBounds`
   e
-  `riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleResidualVerticalBudgetTruncationBounds`.
+  `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualVerticalBudgetTruncationBounds`.
   Com isso, o gargalo atual dessa rota ficou exatamente isolado como:
   `oddTruncationUpper` off-axis + `verticalUpper` + a desigualdade residual final.
 - Os dois externos agora também já foram empacotados numa unica interface local/regional:
@@ -115,26 +116,26 @@ O que sobra apenas como refinamento opcional das rotas fortes da faixa média:
   e RH pela rota canônica comprimida.
 - Em paralelo, a rota concreta do resolvente completo tambem ganhou o endpoint
   intermediario que faltava entre `quartetClosed` e a versao canônica: agora
-  existem `riemannHypothesisC2_of_c2QuartetComponentMiddleRegion`,
+  existem `mathlibRiemannHypothesis_of_quartetComponentMiddleRegion`,
   `offCriticalStripNonvanishing_of_c2QuartetComponentMiddleRegion`,
-  `riemannHypothesisC2_of_continuationAndQuartetComponentMiddleRegion` e o
+  `mathlibRiemannHypothesis_of_continuationAndQuartetComponentMiddleRegion` e o
   wrapper pontual
-  `riemannHypothesisC2_of_continuationAndQuartetComponentTruncationBounds`.
+  `mathlibRiemannHypothesis_of_continuationAndQuartetComponentTruncationBounds`.
   A familia agora tambem tem empacotamento local/regional proprio via
   `C2QuartetComponentTruncationLocalData` e
   `C2QuartetComponentTruncationMiddleRegionData`, alem dos wrappers
   `offCriticalStripNonvanishing_of_continuationAndQuartetComponentTruncationLocalData`
-  e `riemannHypothesisC2_of_continuationAndQuartetComponentTruncationLocalData`.
+  e `mathlibRiemannHypothesis_of_continuationAndQuartetComponentTruncationLocalData`.
   Alem disso, agora existe a variante explicitamente no formato da nota do
   resolvente: `c2ResolventNoteUpper`,
   `C2QuartetComponentResolventNoteLocalData`,
   `C2QuartetComponentResolventNoteMiddleRegionData`,
   `offCriticalStripNonvanishing_of_continuationAndQuartetComponentResolventNoteLocalData`
-  e `riemannHypothesisC2_of_continuationAndQuartetComponentResolventNoteLocalData`.
+  e `mathlibRiemannHypothesis_of_continuationAndQuartetComponentResolventNoteLocalData`.
   Essa mesma interface agora tambem existe no estilo “passa as hipoteses e fecha”
   via `C2QuartetComponentResolventNoteLocalData.of_noteBounds`,
   `offCriticalStripNonvanishing_of_continuationAndQuartetComponentResolventNoteBounds`
-  e `riemannHypothesisC2_of_continuationAndQuartetComponentResolventNoteBounds`.
+  e `mathlibRiemannHypothesis_of_continuationAndQuartetComponentResolventNoteBounds`.
   Nessa apresentacao, o bloco de seed entra como uma unica desigualdade do tipo
   `continuedVerticalUpper + horizontalRegularizedUpper <= C_R / X`, com `X`
   identificado a `cutoffScale`.
@@ -143,7 +144,7 @@ O que sobra apenas como refinamento opcional das rotas fortes da faixa média:
   rota `quartetComponent`, `c2QuartetComponentExactScaleMatchedResolventConstant`.
   Com isso, os wrappers
   `offCriticalStripNonvanishing_of_continuationAndQuartetComponentExactScaleMatchedResolventBounds`
-  e `riemannHypothesisC2_of_continuationAndQuartetComponentExactScaleMatchedResolventBounds`
+  e `mathlibRiemannHypothesis_of_continuationAndQuartetComponentExactScaleMatchedResolventBounds`
   fecham a apresentacao da nota diretamente a partir do upper vertical exato
   `c2ContinuedVerticalResidualExactUpper`, sem precisar postular `C_R` como dado
   externo separado.
@@ -155,12 +156,12 @@ O que sobra apenas como refinamento opcional das rotas fortes da faixa média:
   `c2CanonicalClosedVerticalFiniteExactZetaUpper`, que combina envelopes finitos para
   `rectangularDirect` e `rectangularBracket` com a cota exata-zeta do canal central.
   Com isso, já existe também o endpoint
-  `riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleResidualFiniteExactZetaVerticalBounds`,
+  `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualFiniteExactZetaVerticalBounds`,
   e o próximo subalvo honesto vira uma única desigualdade residual explícita.
 - Esse último empacotamento também já foi feito: o `cutoff` canônico agora admite a cota
   `c2CanonicalClosedCutoffFiniteExactZetaUpper`, e isso produz a upper totalmente explícita
   `c2CanonicalClosedScaledResidualFiniteExactZetaUpper`, com endpoint final
-  `riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleResidualFiniteExactZetaBounds`.
+  `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualFiniteExactZetaBounds`.
   Mas essa rota totalmente explícita não é mais um alvo honesto: o próprio Lean agora certifica
   a obstrução via
   `c2ExpandedQuartetResidualMargin_lt_scaledVerticalDepthTail_of_offCriticalStrip`,
@@ -174,13 +175,13 @@ O que sobra apenas como refinamento opcional das rotas fortes da faixa média:
 Refinamentos opcionais mais honestos:
 
 1. Trabalhar diretamente no teorema final
-   `riemannHypothesisC2_of_continuationAndExpandedScalarMiddleSeparatedMainBounds`.
+   `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleSeparatedMainBounds`.
 2. Se quiser reduzir ruído de parâmetros antes da prova analítica, trabalhar no endpoint canônico
-  `riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleSeparatedBounds`.
+  `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleSeparatedBounds`.
 3. Se quiser a formulação mais enxuta da opção 1, trabalhar em
-  `riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddlePointwiseBounds`.
+  `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddlePointwiseBounds`.
 4. Se quiser a formulação canônica mais enxuta da opção 1, trabalhar em
-  `riemannHypothesisC2_of_continuationAndCanonicalClosedScaledMiddleResidualPointwiseBounds`.
+  `mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualPointwiseBounds`.
 5. Provar, para cada `s` na `c2ExpandedScalarMiddleRegion`, as cinco peças locais acima, ou a variante canônica equivalente.
 6. Na formulação canônica residual exata, isso se reduz a controlar o orçamento horizontal e provar a desigualdade pontual
   `c2CanonicalClosedScaledResidualUpper < c2ExpandedQuartetResidualMargin`.
@@ -199,7 +200,7 @@ Refinamentos opcionais mais honestos:
   Essa opção agora já está empacotada diretamente no Lean via
   `C2CanonicalClosedScaledResidualBudgetLocalData`,
   `C2CanonicalClosedScaledResidualBudgetMiddleRegionData` e
-  `riemannHypothesisC2_of_c2CanonicalClosedScaledResidualBudgetMiddleRegionData`.
+  `mathlibRiemannHypothesis_of_canonicalClosedScaledResidualBudgetMiddleRegionData`.
   Em termos práticos, o alvo local deixa de ser uma única upper residual colapsada e passa a ser
   fornecer separadamente os budgets `tilt`, `horizontal`, `cutoff` e a desigualdade
   `tiltBudget + horizontalBudget + cutoffBudget < c2ExpandedQuartetResidualMargin`.
@@ -287,13 +288,13 @@ Refinamentos opcionais mais honestos:
   e `..._of_atOne` reduzem o bulk ajustado diretamente a tail upper escalada + positividade.
   22. A rota com resíduo analítico real já foi colada ao endpoint regional do middle strip:
     `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound`
-    e `riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound`
+    e `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound`
     agora transportam diretamente um bound pointwise
     `‖F_∞ - F_X‖ ≤ residualUpper` no `c2ExpandedScalarMiddleRegion` até não-anulação
     off-critical e RH.
     Para o formato exponencial da nota, já existem as especializações
     `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialResidualBound`
-    e `riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialResidualBound`.
+    e `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialResidualBound`.
     O rebasing local do residual natural para o seed continued também já ficou
     explícito: `c2OddTailBalancingSeed_eq_continued_add_rebasingError`,
     `c2OddTailRegularizedResidual_eq_continued_add_rebasingError_of_re_pos`,
@@ -304,7 +305,7 @@ Refinamentos opcionais mais honestos:
     `2 * ‖genuineCentralDoubleSeries - continuedCentralOddChannel‖`.
     E a camada regional correspondente já ficou empacotada: os wrappers
     `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_centralDefectBound`
-    e `riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_centralDefectBound`
+    e `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_centralDefectBound`
     substituem a hipótese bruta de residual por um bound pointwise direto para
     `‖genuineCentralDoubleSeries - continuedCentralOddChannel‖` no
     `c2ExpandedScalarMiddleRegion`.
@@ -317,7 +318,7 @@ Refinamentos opcionais mais honestos:
     `‖genuineCentralDoubleSeries‖` na região média.
     A rota antiga zero-proxy virou apenas a especialização `residualUpper = 0`:
   `offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle`,
-  `riemannHypothesisC2_of_continuationAndOddTailBalancingAntiMiracleMiddle`
+  `mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle`
   e as variantes `..._of_atOne` mostram que, uma vez dadas as hipóteses pointwise de
   `C2ExpandedScalarScaleData`, budget horizontal, bound do seed, cutoff escalado e
   positividade final no `c2ExpandedScalarMiddleRegion`, o modelo continuado fecha
@@ -390,6 +391,8 @@ LeanC2/Route/VerticalBulkReal.lean
 
 Nota de leitura do restante do documento: os itens numerados abaixo registram a evolucao da formalizacao. Varias entradas usam a linguagem de “pendencia”, “gargalo” ou “proximo passo” porque foram escritas no momento em que cada camada ainda estava sendo aberta. A situacao normativa continua sendo a da secao `Estado Atual do Codigo`: a rota atual esta fechada ate RH, e essas mencoes devem ser lidas apenas como contexto historico ou como refinamentos opcionais.
 
+Nota adicional de nomenclatura: varias entradas historicas abaixo ainda mencionam `RiemannHypothesisC2`, `riemannHypothesisC2_of_*` e `C2RiemannHypothesisTerminalData`. No estado atual do codigo, essas referencias correspondem respectivamente a `RiemannHypothesis`, `mathlibRiemannHypothesis_of_*` e `RiemannHypothesisTerminalData`, isto e, ao endpoint oficial do mathlib e aos wrappers atuais da rota C2.
+
 ## 1. Base C2/RH
 
 Arquivo: `LeanC2/Foundations/Basic.lean`
@@ -401,10 +404,9 @@ Formalizado:
 - `criticalOffset s = Re(s) - 1/2`
 - `offCriticalStrip s`
 - `offCriticalStripNonvanishing f`
-- `RiemannHypothesisC2`
-- `riemannHypothesisC2_of_offCriticalStripNonvanishing`
+- `mathlibRiemannHypothesis_of_offCriticalStripNonvanishing`
 
-Papel: interface lógica mínima. Se provarmos não-anulação off-critical da zeta, obtemos `RiemannHypothesisC2`.
+Papel: interface lógica mínima atual. Se provarmos não-anulação off-critical da zeta, obtemos `RiemannHypothesis`, isto é, a RH oficial do mathlib.
 
 ## 2. Aritmética diádica e K.5
 
@@ -1372,11 +1374,11 @@ Formalizado como interface condicional:
 - `F_nonzero_iff_zeta_nonzero_of_identity`
 - `zeta_nonzero_of_F_nonzero`
 - `offCriticalStrip_zeta_nonvanishing_of_F_nonvanishing`
-- `riemannHypothesisC2_of_F_nonvanishing`
+- `mathlibRiemannHypothesis_of_F_nonvanishing`
 
 Papel:
 
-se houver uma identidade fundamental `F = c0 * ζ` e uma prova de não-anulação de `F` no off-critical strip, então obtemos não-anulação de `ζ` e depois `RiemannHypothesisC2`.
+se houver uma identidade fundamental `F = c0 * ζ` e uma prova de não-anulação de `F` no off-critical strip, então obtemos não-anulação de `ζ` e depois `RiemannHypothesis`.
 
 ## 25. Roadmap Lean
 
@@ -1412,12 +1414,12 @@ Formalizado:
 - `BulkRouteData.toGenuineRouteData`
 - `VerticalBulkRouteData.toGenuineRouteData`
 - `OffCriticalCoverData.toGenuineRouteData`
-- `riemannHypothesisC2_of_genuineRouteData`
-- `riemannHypothesisC2_of_bulkRouteData`
-- `riemannHypothesisC2_of_verticalBulkRouteData`
-- `riemannHypothesisC2_of_coverData`
-- `riemannHypothesisC2_of_nearBulkEdge`
-- `riemannHypothesisC2_of_nearBulkBoundsEdge`
+- `mathlibRiemannHypothesis_of_genuineRouteData`
+- `mathlibRiemannHypothesis_of_bulkRouteData`
+- `mathlibRiemannHypothesis_of_verticalBulkRouteData`
+- `mathlibRiemannHypothesis_of_coverData`
+- `mathlibRiemannHypothesis_of_nearBulkEdge`
+- `mathlibRiemannHypothesis_of_nearBulkBoundsEdge`
 
 `NearAxisRouteData` isola a peça local da rota antes da entrada do bulk e dos edges:
 
@@ -1482,8 +1484,8 @@ OffCriticalCoverData.ofNearBulkBoundsEdge
 e teoremas finais que pulam direto da colagem regional para a conclusão:
 
 ```lean
-riemannHypothesisC2_of_nearBulkEdge
-riemannHypothesisC2_of_nearBulkBoundsEdge
+mathlibRiemannHypothesis_of_nearBulkEdge
+mathlibRiemannHypothesis_of_nearBulkBoundsEdge
 ```
 
 `GenuineRouteData` empacota:
@@ -2511,11 +2513,11 @@ Formalizado:
 - `GenuineFInfiniteContinuationData`
 - `GenuineFInfiniteContinuationData.fundamentalIdentity`
 - `GenuineFInfiniteContinuationData.toGenuineRouteData`
-- `riemannHypothesisC2_of_genuineFInfiniteContinuation`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteContinuation`
 - `GenuineFInfiniteContinuationData.toGenuineRouteDataOfCover`
-- `riemannHypothesisC2_of_genuineFInfiniteContinuation_cover`
-- `riemannHypothesisC2_of_genuineFInfiniteContinuation_nearBulkEdge`
-- `riemannHypothesisC2_of_genuineFInfiniteContinuation_nearBulkBoundsEdge`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_cover`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_nearBulkEdge`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_nearBulkBoundsEdge`
 
 Papel: transformar a continuação analítica em uma interface explícita, sem introduzir `axiom`, `constant` ou `sorry`.
 
@@ -2546,13 +2548,13 @@ FundamentalIdentityOnRightHalfPlane genuineFInfinite riemannZeta.
 Com isso, se no futuro for fornecido o certificado de continuação e a não-anulação off-axis de `genuineFInfinite`, o Lean já fecha:
 
 ```lean
-riemannHypothesisC2_of_genuineFInfiniteContinuation
+mathlibRiemannHypothesis_of_genuineFInfiniteContinuation
 ```
 
 Também há uma versão conectada à colagem near/bulk/edge:
 
 ```lean
-riemannHypothesisC2_of_genuineFInfiniteContinuation_cover
+mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_cover
 ```
 
 que aceita um `OffCriticalCoverData` cujo `F` seja `genuineFInfinite`.
@@ -2560,8 +2562,8 @@ que aceita um `OffCriticalCoverData` cujo `F` seja `genuineFInfinite`.
 Além disso, a interface já possui duas entradas diretas para os pacotes do roadmap:
 
 ```lean
-riemannHypothesisC2_of_genuineFInfiniteContinuation_nearBulkEdge
-riemannHypothesisC2_of_genuineFInfiniteContinuation_nearBulkBoundsEdge
+mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_nearBulkEdge
+mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_nearBulkBoundsEdge
 ```
 
 Essas versões recebem `NearAxisRouteData`, `RegionalVerticalBulkRouteData` ou `RegionalVerticalBulkBoundsData`, `EdgeRouteData`, a cobertura off-axis e as igualdades que identificam o `F` da colagem com `genuineFInfinite`.
@@ -2587,8 +2589,8 @@ Formalizado:
 - `GenuineFInfiniteNearBulkBoundsEdgeData.toOffCriticalCoverData`
 - `offCriticalStripNonvanishing_of_genuineFInfiniteNearBulkEdgeData`
 - `offCriticalStripNonvanishing_of_genuineFInfiniteNearBulkBoundsEdgeData`
-- `riemannHypothesisC2_of_genuineFInfiniteContinuation_pinnedNearBulkEdge`
-- `riemannHypothesisC2_of_genuineFInfiniteContinuation_pinnedNearBulkBoundsEdge`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_pinnedNearBulkEdge`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_pinnedNearBulkBoundsEdge`
 
 Papel: remover da etapa final as igualdades repetidas do tipo `F = genuineFInfinite`.
 
@@ -2620,8 +2622,8 @@ GenuineFInfiniteContinuationData
 o Lean já fecha:
 
 ```lean
-riemannHypothesisC2_of_genuineFInfiniteContinuation_pinnedNearBulkEdge
-riemannHypothesisC2_of_genuineFInfiniteContinuation_pinnedNearBulkBoundsEdge
+mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_pinnedNearBulkEdge
+mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_pinnedNearBulkBoundsEdge
 ```
 
 Interpretação: a rota final agora tem uma porta dedicada ao operador genuine infinito completo. O trabalho restante não é mais adaptar o `F` genérico do roadmap; é construir dados concretos diretamente nos tipos pinados.
@@ -2647,8 +2649,8 @@ Formalizado:
 - `GenuineFInfiniteRegionalBulkBoundsData.toPinnedBulkBoundsData`
 - `genuineFInfinite_nonvanishing_of_regionalBulkRouteData`
 - `genuineFInfinite_nonvanishing_of_regionalBulkBoundsData`
-- `riemannHypothesisC2_of_genuineFInfiniteContinuation_regionalBulkCover`
-- `riemannHypothesisC2_of_genuineFInfiniteContinuation_regionalBulkBoundsCover`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_regionalBulkCover`
+- `mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_regionalBulkBoundsCover`
 
 Papel: criar uma porta de bulk cuja decomposição já tem alvo definicionalmente igual a `genuineFInfinite`.
 
@@ -3106,7 +3108,7 @@ Já está formalizado e compilando:
     - `c2OddTailBalancingSeedBulkModelGenuineRouteData_of_analyticOnNhd_cover`, que combina
       `c2OddTailBalancingSeedBulkModelContinuationData_of_analyticOnNhd`
       com `C2OddTailBalancingSeedBulkModelContinuationData.toGenuineRouteDataOfCover`;
-    - `riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_analyticOnNhd_cover`, que entrega RH diretamente a partir de
+    - `mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModel_analyticOnNhd_cover`, que entrega RH diretamente a partir de
       `AnalyticOnNhd` do bulk model no domínio furado,
       `AnalyticOnNhd` de `genuineFInfinite` no mesmo domínio,
       a igualdade em `s = 1`,
@@ -3124,25 +3126,25 @@ Já está formalizado e compilando:
     Em `Route/Transfer.lean` foram adicionados:
     - `FundamentalIdentityOnOffCriticalStrip`;
     - `FundamentalIdentityOnRightHalfPlane.toOffCriticalStrip`;
-    - `riemannHypothesisC2_of_F_nonvanishing_offCriticalIdentity`.
+    - `mathlibRiemannHypothesis_of_F_nonvanishing_offCriticalIdentity`.
     Em `Roadmap.lean` foram adicionados os empacotamentos correspondentes para a colagem final:
-    - `riemannHypothesisC2_of_coverData_offCriticalIdentity`;
-    - `riemannHypothesisC2_of_nearBulkEdge_offCriticalIdentity`;
-    - `riemannHypothesisC2_of_nearBulkBoundsEdge_offCriticalIdentity`.
+    - `mathlibRiemannHypothesis_of_coverData_offCriticalIdentity`;
+    - `mathlibRiemannHypothesis_of_nearBulkEdge_offCriticalIdentity`;
+    - `mathlibRiemannHypothesis_of_nearBulkBoundsEdge_offCriticalIdentity`.
     Em `Analytic/GenuineContinuation.lean` foi adicionada a interface `ComparisonFromOneLtPuncturedData`, com o construtor `ComparisonFromOneLtPuncturedData.of_analyticOnNhd_punctured` e o transporte `ComparisonFromOneLtPuncturedData.transferOffCriticalIdentity`.
     Em `Analytic/GenuineBulkConcrete.lean`, o bulk model do balancing seed foi ligado ao alvo continuado honesto por:
     - `c2OddTailBalancingSeedBulkModel_eq_continuedCentralOddChannel_on_oneLtHalfPlane`;
     - `c2OddTailBalancingSeedBulkModelComparisonToContinuedCentralData_of_analyticOnNhd`;
     - `c2OddTailBalancingSeedBulkModel_fundamentalIdentity_offCritical_of_analyticOnNhd`;
-    - `riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_analyticOnNhd_cover_offCritical`.
-    Interpretação: a continuação necessária para RH não precisa mais passar artificialmente por uma igualdade pontual em `s = 1`. Se o bulk model for analítico no domínio furado e a colagem near/bulk/edge for fornecida, a identidade off-critical e a conclusão `RiemannHypothesisC2` já podem ser obtidas diretamente via o alvo continuado `continuedCentralOddChannel`, sem assumir ainda a continuação literal de `genuineFInfinite` até o ponto `1`.
+    - `mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModel_analyticOnNhd_cover_offCritical`.
+    Interpretação: a continuação necessária para RH não precisa mais passar artificialmente por uma igualdade pontual em `s = 1`. Se o bulk model for analítico no domínio furado e a colagem near/bulk/edge for fornecida, a identidade off-critical e a conclusão `RiemannHypothesis` já podem ser obtidas diretamente via o alvo continuado `continuedCentralOddChannel`, sem assumir ainda a continuação literal de `genuineFInfinite` até o ponto `1`.
   69. redução final do bridge remanescente ao canal central literal: depois de isolar a nova rota off-critical, o Lean agora também identificou com precisão máxima qual igualdade ainda falta para fazer o bulk entrar nela sem provar `AnalyticOnNhd` do modelo inteiro por força bruta. Em `Analytic/GenuineContinuation.lean` foi adicionado o construtor genérico `ComparisonFromOneLtPuncturedData.of_eqOnPuncturedOpenRightHalfPlane`, que permite usar uma igualdade explícita no domínio furado em vez de reconstruí-la por Teorema da Identidade. Em `Analytic/GenuineBulkConcrete.lean`, foram adicionados:
     - `c2OddTailBalancingSeedBulkModel_eq_continuedCentral_on_punctured_of_central`, que reduz a igualdade do bulk model com o alvo continuado à igualdade
       `genuineCentralDoubleSeries = continuedCentralOddChannel`
       no domínio furado;
     - `c2OddTailBalancingSeedBulkModelComparisonToContinuedCentral_of_central`, que empacota essa redução na nova interface pontual;
     - `c2OddTailBalancingSeedBulkModel_fundamentalIdentity_offCritical_of_central`, que produz a identidade off-critical do bulk model a partir desse bridge central;
-    - `riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_central_bridge_cover_offCritical`, que combina esse bridge com a colagem final near/bulk/edge.
+    - `mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModel_central_bridge_cover_offCritical`, que combina esse bridge com a colagem final near/bulk/edge.
     Interpretação: o gargalo deixou de ser “provar que o bulk inteiro é analítico” de forma cega. O problema remanescente foi comprimido a uma única peça conceitual: identificar a série central literal `genuineCentralDoubleSeries` com o alvo continuado honesto `continuedCentralOddChannel` em `puncturedOpenRightHalfPlane`.
 
   70. rota direta pelo alvo continuado, alinhada às notas de continuação: ao reler `c2_prova_continuacao_Z_zeta.md`, `algebra_Z_igual_zeta.md`, `fechamento_unificado.md` e o esboço concatenado do paper, ficou claro que o objeto honestamente continuado na literatura do workspace é o alvo central meromorfo `continuedCentralOddChannel`, não o `tsum` literal. Em `Analytic/GenuineBulkConcrete.lean`, foram adicionados:
@@ -3150,14 +3152,14 @@ Já está formalizado e compilando:
     - `c2OddTailContinuedBalancingSeed`, calibrando a seed diretamente contra o residual vertical-retangular do alvo continuado;
     - `c2OddTailContinuedBalancingSeedBulkModel_eq_continuedCentral_of_re_pos`, que fecha algebricamente o bulk model novo no alvo continuado em todo `0 < Re(s)`;
     - `c2OddTailContinuedBalancingSeedBulkModel_fundamentalIdentity` e `c2OddTailContinuedBalancingSeedBulkModel_fundamentalIdentity_offCritical`, que dão a identidade `F = c0 * ζ` sem passar pelo bridge literal;
-    - `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_cover_offCritical`, que reduz RH diretamente a uma `OffCriticalCoverData` para esse novo modelo.
+    - `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_cover_offCritical`, que reduz RH diretamente a uma `OffCriticalCoverData` para esse novo modelo.
     Interpretação: as notas do workspace não sustentam apenas a rota antiga via “bridge central literal”; elas sustentam uma rota mais honesta, em que o bulk é calibrado desde o início contra o alvo continuado. Com isso, a igualdade `genuineCentralDoubleSeries = continuedCentralOddChannel` no domínio furado deixa de ser um bloqueio obrigatório para a rota off-critical final.
 
   71. especialização da opção 1 para a colagem final near/bulk/edge: com a rota continuada já fechada no nível da identidade off-critical, o Lean agora também empacota diretamente a colagem final para esse modelo. Em `Analytic/GenuineBulkConcrete.lean`, foram adicionados:
     - `c2OddTailContinuedBalancingSeedBulkModelCoverData_of_nearBulkEdge`;
     - `c2OddTailContinuedBalancingSeedBulkModelCoverData_of_nearBulkBoundsEdge`;
-    - `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_nearBulkEdge`;
-    - `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_nearBulkBoundsEdge`.
+    - `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_nearBulkEdge`;
+    - `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_nearBulkBoundsEdge`.
     Interpretação: a opção 1 deixou de ser apenas “usar `OffCriticalCoverData` depois”. A API final da colagem já está especializada ao modelo continuado do balancing seed; assim que houver dados near-axis, bulk e edge com `F` identificado a esse modelo, RH cai diretamente sem precisar reescrever a cola genérica nem repetir plumbing de identidades.
 
   72. tipagem pinada da colagem para o modelo continuado: depois da especialização da API, o Lean passou a carregar também a versão “fully pinned” da colagem, no mesmo espírito de `GenuineCover`. Em `Analytic/GenuineBulkConcrete.lean`, foram adicionados:
@@ -3169,7 +3171,7 @@ Já está formalizado e compilando:
     - `C2OddTailContinuedBalancingSeedBulkModelNearBulkBoundsEdgeData`;
     - os conversores `...toNearAxisRouteData`, `...toBulkRouteData`, `...toEdgeRouteData` e `...toOffCriticalCoverData`;
     - `offCriticalStripNonvanishing_of_c2OddTailContinuedBalancingSeedBulkModelNearBulkEdgeData` e sua versão com bulk bounds;
-    - `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_pinnedNearBulkEdge` e `..._pinnedNearBulkBoundsEdge`.
+    - `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_pinnedNearBulkEdge` e `..._pinnedNearBulkBoundsEdge`.
     Interpretação: a camada de plumbing entre certificados regionais e a identidade off-critical ficou completamente internalizada ao próprio modelo continuado. A próxima etapa deixou de ser “mostrar que os tipos genéricos batem” e passou a ser só produzir certificados concretos near-axis, bulk e edge dentro desses novos tipos pinados.
 
   73. bulk regional pinado diretamente no modelo continuado: para eliminar também o último `F_eq` do lado quantitativo, o Lean agora espelha em `Analytic/GenuineBulkConcrete.lean` a camada de `Analytic/GenuineBulk.lean`, mas com alvo definicionalmente igual a `c2OddTailContinuedBalancingSeedBulkModel`. Foram adicionados:
@@ -3178,14 +3180,14 @@ Já está formalizado e compilando:
     - os adaptadores `...ofRegionalVerticalBulkRouteData`, `...ofRegionalVerticalBulkBoundsData` e suas versões restritas `...On`;
     - os conversores `...toRegionalVerticalBulkRouteData`, `...toRegionalVerticalBulkBoundsData`, `...toRegionalBulkRouteData`, `...toPinnedBulkRouteData` e `...toPinnedBulkBoundsData`;
     - `c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_regionalBulkRouteData` e `..._of_regionalBulkBoundsData`;
-    - `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_regionalBulkCover` e `..._regionalBulkBoundsCover`.
+    - `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_regionalBulkCover` e `..._regionalBulkBoundsCover`.
     Interpretação: os certificados quantitativos regionais do bulk já têm agora um alvo canônico para a rota continuada. Quando houver uma decomposição regional concreta do bulk num subconjunto off-critical, ela poderá ser transportada diretamente para a colagem final pinada sem carregar igualdades globais artificiais do numerador.
 
   74. integração genérica de near-axis e edge para o alvo continuado pinado: para atacar o item 2 sem fingir um certificado analítico que ainda não existe, `Analytic/GenuineBulkConcrete.lean` agora fecha a camada de transporte entre os tipos genéricos do roadmap e os tipos pinados do modelo continuado. Foram adicionados:
     - `C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofNearAxisRouteData`;
     - `C2OddTailContinuedBalancingSeedBulkModelEdgeData.ofEdgeRouteData`;
     - `C2OddTailContinuedBalancingSeedBulkModelNearBulkEdgeData.ofNearBulkEdge` e `...NearBulkBoundsEdgeData.ofNearBulkBoundsEdge`;
-    - os corolários `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_regional_genericNearEdge` e `..._regionalBounds_genericNearEdge`, que combinam bulk regional já pinado com dados near/edge ainda fornecidos no formato genérico.
+    - os corolários `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_regional_genericNearEdge` e `..._regionalBounds_genericNearEdge`, que combinam bulk regional já pinado com dados near/edge ainda fornecidos no formato genérico.
     Interpretação: a parte difícil de transporte dependente ficou absorvida dentro do próprio Lean. Daqui em diante, um certificado near-axis ou edge para a rota continuada pode ser primeiro produzido como `NearAxisRouteData` / `EdgeRouteData` abstrato e depois convertido diretamente para a camada pinada do modelo continuado, sem repetir reescritas manuais por igualdade funcional.
 
   75. certificado regional concreto off-critical para o bulk continuado: a etapa 1 agora também ganhou uma instância operacional real dentro de `Analytic/GenuineBulkConcrete.lean`. Foram adicionados:
@@ -3290,7 +3292,7 @@ Já está formalizado e compilando:
   94. Analiticidade puncionada de `genuineFInfinite` derivada da continuação: o módulo `LeanC2/Analytic/GenuineContinuation.lean` agora contém `c0_analyticOnNhd_punctured`, o lema geral `FundamentalIdentityOnRightHalfPlane.analyticOnNhd_punctured` e a especialização `GenuineFInfiniteContinuationData.analyticOnNhd_punctured`; em paralelo, `LeanC2/Analytic/GenuineG11.lean` ganhou o builder `GenuineFInfiniteNearAxisData.ofLeibnizJet_c0_of_continuation`.
     Interpretação: a hipótese analítica isolada do passo 93 deixou de ser um requisito externo independente. A partir de agora, qualquer continuação no formato já padronizado por `GenuineFInfiniteContinuationData` fornece automaticamente `AnalyticOnNhd ℂ genuineFInfinite puncturedOpenRightHalfPlane`, e portanto também a especialização near-axis de Thm 8 no formato Leibniz-jet. O gargalo desse ramo foi reduzido da analiticidade puncionada para a própria construção/instanciação de `GenuineFInfiniteContinuationData`.
 
-  95. A rota bulk agora consome `continuation` sem repetir a analiticidade do genuine: o módulo `LeanC2/Analytic/GenuineBulkConcrete.lean` ganhou os wrappers `c2OddTailBalancingSeedBulkModelComparisonFromOneLtAtOneData_of_continuation`, `...ComparisonFromOneLtData_of_continuation`, `...ContinuationData_of_continuation`, `c2OddTailBalancingSeedBulkModel_fundamentalIdentity_of_continuation`, `c2OddTailBalancingSeedBulkModelGenuineRouteData_of_continuation_cover` e `riemannHypothesisC2_of_c2OddTailBalancingSeedBulkModel_continuation_cover`.
+  95. A rota bulk agora consome `continuation` sem repetir a analiticidade do genuine: o módulo `LeanC2/Analytic/GenuineBulkConcrete.lean` ganhou os wrappers `c2OddTailBalancingSeedBulkModelComparisonFromOneLtAtOneData_of_continuation`, `...ComparisonFromOneLtData_of_continuation`, `...ContinuationData_of_continuation`, `c2OddTailBalancingSeedBulkModel_fundamentalIdentity_of_continuation`, `c2OddTailBalancingSeedBulkModelGenuineRouteData_of_continuation_cover` e `mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModel_continuation_cover`.
     Interpretação: a nova ponte do passo 94 já foi propagada para a camada bulk concreta. Assim que houver uma instância de `GenuineFInfiniteContinuationData`, o pipeline bulk não precisa mais receber também uma hipótese separada `AnalyticOnNhd ℂ genuineFInfinite puncturedOpenRightHalfPlane`; essa dependência agora é resolvida internamente pela continuação. O próximo trabalho nessa frente passa a ser puramente construtivo: produzir a continuação genuine e depois alimentar os modelos bulk concretos com `hBulk` e a igualdade em `s = 1`.
 
   96. Prefixo sharp do quarteto vertical formalizado: o módulo `LeanC2/Operators/VerticalResolvent.lean` agora contém `verticalQuartetPrefix`, a fatoração `verticalQuartetPrefix_factor`, o bound sharp `verticalQuartetPrefix_norm_lower_bound_on_circle` e a realização do pior caso `verticalQuartetPrefix_eq_lower_bound_at_pi` / `verticalQuartetPrefix_norm_eq_lower_bound_at_pi`.
@@ -3353,14 +3355,14 @@ Já está formalizado e compilando:
     - `C2OddTailContinuedBalancingSeedBulkModelQuartetBulkBoundsData`;
     - conversões `...toBulkRegionData`;
     - teoremas de não-anulação para `BulkRegionData`, `QuartetBulkRouteData` e `QuartetBulkBoundsData`;
-    - `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_bulkRegionCover`;
-    - `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetBulkCover`;
-    - `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetBoundsCover`.
+    - `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_bulkRegionCover`;
+    - `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetBulkCover`;
+    - `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetBoundsCover`.
 
     O pacote concreto do passo 99 também foi encaixado nessa camada com:
     - `c2OddTailContinuedBalancingSeedBulkQuartetConcreteBoundsData`;
     - `c2OddTailContinuedBalancingSeedBulkQuartetConcreteBulkRegionData`;
-    - `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteCover`.
+    - `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteCover`.
 
     Interpretação: o bulk quartet continuado deixou de ser apenas um certificado ponto-a-ponto e virou uma peça aceitada pelo cover global near/bulk/edge do modelo continuado. A versão concreta usa diretamente a região de estimativas
     `c2OddTailContinuedBalancingSeedBulkQuartetConcreteRegion`, sem converter artificialmente o quarteto de volta ao resolvente vertical puro.
@@ -3609,15 +3611,15 @@ Já está formalizado e compilando:
 
   111. Cobertura near/scalar-bulk/edge para a região escalar expandida: `LeanC2/Analytic/GenuineBulkConcrete.lean` agora contém:
     - `c2ExpandedScalarBulkRegionData`;
-    - `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_expandedScalarCover`;
+    - `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_expandedScalarCover`;
     - `C2ExpandedScalarCoverData`;
     - `C2ExpandedScalarCoverData.toBulkRegionData`;
     - `C2ExpandedScalarCoverData.toOffCriticalCoverData`;
     - `offCriticalStripNonvanishing_of_c2ExpandedScalarCoverData`;
-    - `riemannHypothesisC2_of_c2ExpandedScalarCoverData`.
+    - `mathlibRiemannHypothesis_of_expandedScalarCoverData`.
 
     Interpretação: a região `c2ExpandedExactZetaScalarRegion` agora está empacotada como uma região bulk legítima para o mecanismo near/bulk/edge já existente. Uma cobertura do `offCriticalStrip` por:
-    near-axis, scalar bulk e edge já implica não anulamento do modelo bulk continuado no off-critical strip e, via identidade fundamental já formalizada, implica `RiemannHypothesisC2`.
+    near-axis, scalar bulk e edge já implica não anulamento do modelo bulk continuado no off-critical strip e, via identidade fundamental já formalizada, implica `RiemannHypothesis`.
 
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs. A busca por `sorry`, `admit`, `axiom` e `constant` continua vazia.
@@ -3641,9 +3643,9 @@ Já está formalizado e compilando:
     - `C2ExpandedScalarCoverChoice.scalarBulk_of_localData`;
     - `C2ExpandedScalarCoverData.ofLocalChoice`;
     - `offCriticalStripNonvanishing_of_c2ExpandedScalarLocalChoice`;
-    - `riemannHypothesisC2_of_c2ExpandedScalarLocalChoice`.
+    - `mathlibRiemannHypothesis_of_expandedScalarLocalChoice`.
 
-    Interpretação: a cobertura global não precisa mais ser entregue diretamente como uma disjunção crua. Agora basta fornecer, para cada ponto off-critical, uma escolha local entre três ramos: near-axis, scalar bulk ou edge. O ramo scalar bulk já aceita diretamente os pacotes locais do salto 112 (`scale`, `horizontal` e `main inequalities`), produzindo a região escalar e fechando a ponte até `RiemannHypothesisC2` pelo cover data existente.
+    Interpretação: a cobertura global não precisa mais ser entregue diretamente como uma disjunção crua. Agora basta fornecer, para cada ponto off-critical, uma escolha local entre três ramos: near-axis, scalar bulk ou edge. O ramo scalar bulk já aceita diretamente os pacotes locais do salto 112 (`scale`, `horizontal` e `main inequalities`), produzindo a região escalar e fechando a ponte até `RiemannHypothesis` pelo cover data existente.
 
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs. A busca por `sorry`, `admit`, `axiom` e `constant` continua vazia.
@@ -3663,18 +3665,18 @@ Já está formalizado e compilando:
     `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs. A busca por `sorry`, `admit`, `axiom` e `constant` continua vazia.
 
   115. Covers globais diretos para as regiões quartet intermediárias: `LeanC2/Analytic/GenuineBulkConcrete.lean` agora contém:
-    - o helper genérico `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover`;
-    - os corolários `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetExactCover`;
-    - `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetTriangleCover`;
-    - `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_quartetClosedCover`;
-    - `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_zetaDepthCoreCover`;
-    - `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_explicitFiniteCoreCover`;
-    - `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_explicitScalarCover`;
-    - `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_explicitScalarExactZetaCover`;
-    - `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_expandedExactZetaCover`;
-    - `riemannHypothesisC2_of_c2OddTailContinuedBalancingSeedBulkModel_expandedDominanceCover`.
+    - o helper genérico `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover`;
+    - os corolários `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetExactCover`;
+    - `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetTriangleCover`;
+    - `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetClosedCover`;
+    - `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_zetaDepthCoreCover`;
+    - `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_explicitFiniteCoreCover`;
+    - `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_explicitScalarCover`;
+    - `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_explicitScalarExactZetaCover`;
+    - `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_expandedExactZetaCover`;
+    - `mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_expandedDominanceCover`.
 
-    Interpretação: a cadeia de regiões locais do bulk quartet deixou de exigir rebaixamento manual para `c2OddTailContinuedBalancingSeedBulkQuartetConcreteRegion` toda vez que se quer fechar o cover global. Agora qualquer cobertura near/intermediate-bulk/edge em uma das camadas intermediárias já sobe diretamente para `RiemannHypothesisC2` via inclusão na região quartet concreta. O ganho aqui é de usabilidade final do pipeline: os certificados locais podem ser consumidos no nível natural em que foram provados.
+    Interpretação: a cadeia de regiões locais do bulk quartet deixou de exigir rebaixamento manual para `c2OddTailContinuedBalancingSeedBulkQuartetConcreteRegion` toda vez que se quer fechar o cover global. Agora qualquer cobertura near/intermediate-bulk/edge em uma das camadas intermediárias já sobe diretamente para `RiemannHypothesis` via inclusão na região quartet concreta. O ganho aqui é de usabilidade final do pipeline: os certificados locais podem ser consumidos no nível natural em que foram provados.
 
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs. A busca por `sorry`, `admit`, `axiom` e `constant` continua vazia.
@@ -3686,9 +3688,9 @@ Já está formalizado e compilando:
     - `C2ExpandedScalarChoiceRegions.toCover`;
     - `C2ExpandedScalarCoverData.ofChoiceRegions`;
     - `offCriticalStripNonvanishing_of_c2ExpandedScalarChoiceRegions`;
-    - `riemannHypothesisC2_of_c2ExpandedScalarChoiceRegions`.
+    - `mathlibRiemannHypothesis_of_expandedScalarChoiceRegions`.
 
-    Interpretação: a função global `choose : ∀ s, offCriticalStrip s → C2ExpandedScalarCoverChoice ... s` deixou de ser o único formato aceito para fechar a cobertura escalar expandida. Agora o Lean também aceita uma decomposição regional abstrata em três peças: uma sub-região que entra no ramo near-axis, uma sub-região que produz `C2ExpandedScalarLocalBulkData`, e uma sub-região que entra no edge. A união dessas três regiões gera automaticamente `C2ExpandedScalarCoverChoice`, depois `C2ExpandedScalarCoverData`, depois não anulamento off-critical e finalmente `RiemannHypothesisC2`.
+    Interpretação: a função global `choose : ∀ s, offCriticalStrip s → C2ExpandedScalarCoverChoice ... s` deixou de ser o único formato aceito para fechar a cobertura escalar expandida. Agora o Lean também aceita uma decomposição regional abstrata em três peças: uma sub-região que entra no ramo near-axis, uma sub-região que produz `C2ExpandedScalarLocalBulkData`, e uma sub-região que entra no edge. A união dessas três regiões gera automaticamente `C2ExpandedScalarCoverChoice`, depois `C2ExpandedScalarCoverData`, depois não anulamento off-critical e finalmente `RiemannHypothesis`.
 
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs. A busca por `sorry`, `admit`, `axiom` e `constant` continua vazia.
@@ -3704,7 +3706,7 @@ Já está formalizado e compilando:
     - `C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_edge`;
     - `C2ExpandedScalarCoverData.ofCanonicalRegions`;
     - `offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalRegions`;
-    - `riemannHypothesisC2_of_c2ExpandedScalarCanonicalRegions`.
+    - `mathlibRiemannHypothesis_of_expandedScalarCanonicalRegions`.
 
     Interpretação: a instância regional abstrata do passo 116 já ganhou sua primeira forma concreta e nativa da rota. O ramo bulk local passou a ser a região dos pontos que já carregam um pacote `C2ExpandedScalarLocalBulkData`; essa região alimenta automaticamente a região escalar `c2ExpandedExactZetaScalarRegion` e o não anulamento correspondente. Com isso, a cobertura global pode ser formulada diretamente na união canônica: near-axis, local bulk data, edge. Não é mais necessário reconstruir manualmente `C2ExpandedScalarChoiceRegions` nem a escolha local ponto a ponto.
 
@@ -3715,15 +3717,15 @@ Já está formalizado e compilando:
     - `C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_mem_localBulkRegion`;
     - `C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_cover`;
     - `offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalCover`;
-    - `riemannHypothesisC2_of_c2ExpandedScalarCanonicalCover`;
+    - `mathlibRiemannHypothesis_of_expandedScalarCanonicalCover`;
     - `C2ExpandedScalarCanonicalCoverData`;
     - `C2ExpandedScalarCanonicalCoverData.toCoverData`;
     - `offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalCoverData`;
-    - `riemannHypothesisC2_of_c2ExpandedScalarCanonicalCoverData`.
+    - `mathlibRiemannHypothesis_of_expandedScalarCanonicalCoverData`.
 
     Interpretação: a etapa 117 ainda pedia um `cover` como pertinência à união set-teórica `combinedRegion`. Agora isso também foi colapsado para a forma final natural da prova: basta fornecer a cobertura direta
     `near-axis ∨ c2ExpandedScalarLocalBulkRegion ∨ edge`.
-    O Lean converte automaticamente essa disjunção para a união canônica, depois para `C2ExpandedScalarCoverData`, e conclui não anulamento off-critical ou `RiemannHypothesisC2`. Com isso, a parte de plumbing da rota expanded-scalar ficou essencialmente estabilizada: o que sobra é produzir os certificados analíticos concretos de cada ramo.
+    O Lean converte automaticamente essa disjunção para a união canônica, depois para `C2ExpandedScalarCoverData`, e conclui não anulamento off-critical ou `RiemannHypothesis`. Com isso, a parte de plumbing da rota expanded-scalar ficou essencialmente estabilizada: o que sobra é produzir os certificados analíticos concretos de cada ramo.
 
     Verificação local:
     `lake env lean LeanC2/Analytic/GenuineBulkConcrete.lean` concluiu com sucesso. `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs. A busca por `sorry`, `admit`, `axiom` e `constant` continua vazia.
@@ -3735,7 +3737,7 @@ Já está formalizado e compilando:
     - `c2ExpandedScalarLocalBulkRegion_eq_scalarRegion`;
     - `C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_scalarRegion`;
     - `offCriticalStripNonvanishing_of_c2ExpandedScalarCanonicalScalarCover`;
-    - `riemannHypothesisC2_of_c2ExpandedScalarCanonicalScalarCover`.
+    - `mathlibRiemannHypothesis_of_expandedScalarCanonicalScalarCover`.
 
     Interpretação: a distinção entre “ponto que satisfaz `C2ExpandedExactZetaScalarEstimates`” e “ponto que já carrega `C2ExpandedScalarLocalBulkData`” foi eliminada. O Lean agora reconstrói `C2ExpandedScalarLocalBulkData` diretamente a partir da região escalar e prova que
     `c2ExpandedScalarLocalBulkRegion = c2ExpandedExactZetaScalarRegion`.
@@ -3747,11 +3749,11 @@ Já está formalizado e compilando:
   120. Redução da cobertura canônica ao “middle region”: `LeanC2/Analytic/GenuineBulkConcrete.lean` agora contém:
     - `c2ExpandedScalarMiddleRegion`;
     - `offCriticalStripNonvanishing_of_c2ExpandedScalarMiddleRegion`;
-    - `riemannHypothesisC2_of_c2ExpandedScalarMiddleRegion`.
+    - `mathlibRiemannHypothesis_of_expandedScalarMiddleRegion`.
 
     Interpretação: a cobertura near/scalar/edge foi comprimida à forma mais enxuta possível. Para concluir a rota expanded-scalar, já não é necessário provar diretamente a disjunção completa nem manipular a união canônica de regiões. Basta provar uma única inclusão analítica:
     o complemento off-critical de near-axis e edge, isto é, `c2ExpandedScalarMiddleRegion`, entra em `c2ExpandedExactZetaScalarRegion`.
-    A partir disso, o Lean reconstitui automaticamente o cover near/scalar/edge e conclui não anulamento off-critical ou `RiemannHypothesisC2`.
+    A partir disso, o Lean reconstitui automaticamente o cover near/scalar/edge e conclui não anulamento off-critical ou `RiemannHypothesis`.
 
     Verificação local:
     `lake env lean LeanC2/Analytic/GenuineBulkConcrete.lean` concluiu com sucesso. `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs. A busca por `sorry`, `admit`, `axiom` e `constant` continua vazia.
@@ -3762,9 +3764,9 @@ Já está formalizado e compilando:
     - `C2ExpandedScalarMiddleRegionData.mem_localBulkRegion`;
     - `C2ExpandedScalarMiddleRegionData.toCanonicalCoverData`;
     - `offCriticalStripNonvanishing_of_c2ExpandedScalarMiddleRegionData`;
-    - `riemannHypothesisC2_of_c2ExpandedScalarMiddleRegionData`.
+    - `mathlibRiemannHypothesis_of_expandedScalarMiddleRegionData`.
 
-    Interpretação: a obrigação restante no middle region agora pode ser satisfeita numa forma ainda mais natural para a etapa analítica concreta. Em vez de provar diretamente que todo ponto do middle strip pertence à região escalar expandida, basta fornecer, para cada ponto do `c2ExpandedScalarMiddleRegion`, o pacote local `C2ExpandedScalarLocalBulkData`. O Lean converte esse pacote em pertencimento à região local-bulk e recompõe automaticamente o cover canônico near/local-bulk/edge, preservando o fecho até `RiemannHypothesisC2`.
+    Interpretação: a obrigação restante no middle region agora pode ser satisfeita numa forma ainda mais natural para a etapa analítica concreta. Em vez de provar diretamente que todo ponto do middle strip pertence à região escalar expandida, basta fornecer, para cada ponto do `c2ExpandedScalarMiddleRegion`, o pacote local `C2ExpandedScalarLocalBulkData`. O Lean converte esse pacote em pertencimento à região local-bulk e recompõe automaticamente o cover canônico near/local-bulk/edge, preservando o fecho até `RiemannHypothesis`.
 
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs.
@@ -3775,35 +3777,35 @@ Já está formalizado e compilando:
     - `c2ExpandedExactZetaScalarRegion_mem_of_mem_expandedDominanceRegion`;
     - `c2ExpandedExactZetaScalarRegion_mem_of_mem_expandedExactZetaRegion`;
     - `offCriticalStripNonvanishing_of_c2ExpandedExactZetaMiddleRegion`;
-    - `riemannHypothesisC2_of_c2ExpandedExactZetaMiddleRegion`;
+    - `mathlibRiemannHypothesis_of_expandedExactZetaMiddleRegion`;
     - `offCriticalStripNonvanishing_of_c2ExpandedDominanceMiddleRegion`;
-    - `riemannHypothesisC2_of_c2ExpandedDominanceMiddleRegion`.
+    - `mathlibRiemannHypothesis_of_expandedDominanceMiddleRegion`.
 
     Interpretação: a etapa analítica central foi enfraquecida mais uma vez. Já não é necessário atacar diretamente `c2ExpandedExactZetaScalarRegion` no complemento off-critical de near-axis e edge. Basta provar, no middle region, qualquer uma das duas formas intermediárias mais naturais já presentes no arquivo:
     pertencimento a `c2OddTailContinuedBalancingSeedBulkQuartetExpandedExactZetaRegion` ou pertencimento a `c2ExpandedExactZetaDominanceRegion`.
-    O Lean transporta automaticamente essas hipóteses até `C2ExpandedScalarLocalBulkData`, depois para a região escalar expandida, e fecha a rota até não anulamento off-critical ou `RiemannHypothesisC2` sem plumbing novo.
+    O Lean transporta automaticamente essas hipóteses até `C2ExpandedScalarLocalBulkData`, depois para a região escalar expandida, e fecha a rota até não anulamento off-critical ou `RiemannHypothesis` sem plumbing novo.
 
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs.
 
   123. Generalização do split do middle region para rotas concretas pré-existentes: `LeanC2/Analytic/GenuineBulkConcrete.lean` agora contém:
     - `c2ExpandedScalarMiddleRegion_cover`;
-    - `riemannHypothesisC2_of_c2ZetaDepthCoreMiddleRegion`;
-    - `riemannHypothesisC2_of_c2ExplicitFiniteCoreMiddleRegion`;
-    - `riemannHypothesisC2_of_c2ExplicitScalarMiddleRegion`.
+    - `mathlibRiemannHypothesis_of_zetaDepthCoreMiddleRegion`;
+    - `mathlibRiemannHypothesis_of_explicitFiniteCoreMiddleRegion`;
+    - `mathlibRiemannHypothesis_of_explicitScalarMiddleRegion`.
 
-    Interpretação: o complemento off-critical de near-axis e edge agora recompõe automaticamente o cover não só na rota expanded-scalar final, mas também em camadas concretas anteriores da cadeia analítica. Isso desloca a obrigação restante para formatos mais próximos das estimativas já isoladas no arquivo: já é suficiente provar o middle region dentro de `c2OddTailContinuedBalancingSeedBulkQuartetZetaDepthCoreRegion`, `c2OddTailContinuedBalancingSeedBulkQuartetExplicitFiniteCoreRegion` ou `c2OddTailContinuedBalancingSeedBulkQuartetExplicitScalarRegion`, e o Lean fecha diretamente `RiemannHypothesisC2` sem reconstrução manual do split near/bulk/edge.
+    Interpretação: o complemento off-critical de near-axis e edge agora recompõe automaticamente o cover não só na rota expanded-scalar final, mas também em camadas concretas anteriores da cadeia analítica. Isso desloca a obrigação restante para formatos mais próximos das estimativas já isoladas no arquivo: já é suficiente provar o middle region dentro de `c2OddTailContinuedBalancingSeedBulkQuartetZetaDepthCoreRegion`, `c2OddTailContinuedBalancingSeedBulkQuartetExplicitFiniteCoreRegion` ou `c2OddTailContinuedBalancingSeedBulkQuartetExplicitScalarRegion`, e o Lean fecha diretamente `RiemannHypothesis` sem reconstrução manual do split near/bulk/edge.
 
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs.
 
   124. Fecho do middle region nas camadas quartet exact / triangle / closed e identificação `explicitScalarExactZeta = expandedExactZeta`: `LeanC2/Analytic/GenuineBulkConcrete.lean` agora contém:
     - `c2ExplicitScalarExactZetaRegion_eq_expandedExactZetaRegion`;
-    - `riemannHypothesisC2_of_c2QuartetExactMiddleRegion`;
-    - `riemannHypothesisC2_of_c2QuartetTriangleMiddleRegion`;
-    - `riemannHypothesisC2_of_c2QuartetClosedMiddleRegion`.
+    - `mathlibRiemannHypothesis_of_quartetExactMiddleRegion`;
+    - `mathlibRiemannHypothesis_of_quartetTriangleMiddleRegion`;
+    - `mathlibRiemannHypothesis_of_quartetClosedMiddleRegion`.
 
-    Interpretação: a interface do middle region ficou praticamente completa ao longo de toda a escada concreta já formalizada no arquivo. Além de aceitar as rotas `zetaDepthCore`, `explicitFiniteCore`, `explicitScalar`, `expandedExactZeta` e `expandedDominance`, o complemento off-critical de near-axis e edge agora também fecha `RiemannHypothesisC2` diretamente nas camadas `quartetExact`, `triangle` e `closed`. Em paralelo, a equivalência entre `c2OddTailContinuedBalancingSeedBulkQuartetExplicitScalarExactZetaRegion` e `c2OddTailContinuedBalancingSeedBulkQuartetExpandedExactZetaRegion` deixa explícito que essas duas apresentações são apenas reformulações da mesma obrigação analítica.
+    Interpretação: a interface do middle region ficou praticamente completa ao longo de toda a escada concreta já formalizada no arquivo. Além de aceitar as rotas `zetaDepthCore`, `explicitFiniteCore`, `explicitScalar`, `expandedExactZeta` e `expandedDominance`, o complemento off-critical de near-axis e edge agora também fecha `RiemannHypothesis` diretamente nas camadas `quartetExact`, `triangle` e `closed`. Em paralelo, a equivalência entre `c2OddTailContinuedBalancingSeedBulkQuartetExplicitScalarExactZetaRegion` e `c2OddTailContinuedBalancingSeedBulkQuartetExpandedExactZetaRegion` deixa explícito que essas duas apresentações são apenas reformulações da mesma obrigação analítica.
 
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs.
@@ -3814,7 +3816,7 @@ Já está formalizado e compilando:
     - `c2OddTailContinuedBalancingSeedBulkQuartetClosed_mem_of_canonicalClosedRegion`;
     - `c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_canonicalClosedRegion`;
     - `offCriticalStripNonvanishing_of_c2CanonicalClosedMiddleRegion`;
-    - `riemannHypothesisC2_of_c2CanonicalClosedMiddleRegion`.
+    - `mathlibRiemannHypothesis_of_canonicalClosedMiddleRegion`.
 
     Interpretação: a rota concreta mais natural do middle region ficou ainda mais enxuta. Na nova camada `canonicalClosed`, dois subcertificados deixam de ser metas analíticas independentes: o bound de `rectangularGenuine` passa a ser fornecido automaticamente pela decomposição `direct + bracket`, e o bound do canal central continuado passa a usar diretamente a norma exata `‖continuedCentralOddChannel s‖`. Com isso, para fechar o middle region por essa rota, resta essencialmente provar apenas as desigualdades escaladas de seed/cutoff e a dominância do quarteto com esses envelopes canônicos.
 
@@ -3828,7 +3830,7 @@ Já está formalizado e compilando:
     - `c2OddTailContinuedBalancingSeedBulkQuartetCanonicalClosedScaledRegion`;
     - `c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_scaledCanonicalClosedRegion`;
     - `offCriticalStripNonvanishing_of_c2CanonicalClosedScaledMiddleRegion`;
-    - `riemannHypothesisC2_of_c2CanonicalClosedScaledMiddleRegion`.
+    - `mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleRegion`.
 
     Interpretação: a rota concreta preferida do middle region ficou ainda mais curta. Na camada `canonicalClosedScaled`, as escalas de tilt e cutoff são fixadas canonicamente em `1`, enquanto as constantes correspondentes são escolhidas para tornar tautológicos os certificados escalados de seed e cutoff. Assim, ao transportar o `c2ExpandedScalarMiddleRegion` para essa nova região, restam como conteúdo analítico efetivo apenas o orçamento geométrico horizontal e a dominância do quarteto.
 
@@ -3841,7 +3843,7 @@ Já está formalizado e compilando:
     - `C2ExpandedScalarLocalBulkData.mem_canonicalClosedScaledRegion`;
     - `C2ExpandedScalarMiddleRegionData.mem_canonicalClosedScaledRegion`;
     - `offCriticalStripNonvanishing_of_c2CanonicalClosedScaledMiddleRegionData`;
-    - `riemannHypothesisC2_of_c2CanonicalClosedScaledMiddleRegionData`.
+    - `mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleRegionData`.
 
     Interpretação: a nova rota preferida `canonicalClosedScaled` deixou de ser apenas um corolário final isolado. Quando as constantes canônicas e as escalas unitárias são fixadas, toda a infraestrutura já existente do arquivo para `expandedScalar`, `localBulk` e `middleRegionData` passa a desembocar automaticamente nessa nova camada. Em termos práticos, isso elimina mais uma etapa de plumbing no fechamento final: qualquer pacote regional já montado nessas constantes agora entra diretamente na região concreta preferida, sem precisar refazer pontes manuais entre as escadas antigas.
 
@@ -3852,9 +3854,9 @@ Já está formalizado e compilando:
     - `C2CanonicalClosedScaledMiddleCoverData`;
     - `C2CanonicalClosedScaledMiddleCoverData.ofExpandedScalarMiddleRegionData`;
     - `offCriticalStripNonvanishing_of_c2CanonicalClosedScaledMiddleCoverData`;
-    - `riemannHypothesisC2_of_c2CanonicalClosedScaledMiddleCoverData`.
+    - `mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleCoverData`.
 
-    Interpretação: o alvo final do middle strip agora virou um único objeto dedicado. Em vez de fechar `RiemannHypothesisC2` passando explicitamente por `expandedScalarMiddleRegionData` especializado, basta fornecer um pacote `C2CanonicalClosedScaledMiddleCoverData`, isto é, near-axis, edge e a entrada da faixa média diretamente na região concreta preferida `canonicalClosedScaled`. A conversão a partir do pacote expanded-scalar especializado também ficou automática, de modo que a interface antiga continua disponível apenas como etapa intermediária opcional.
+    Interpretação: o alvo final do middle strip agora virou um único objeto dedicado. Em vez de fechar `RiemannHypothesis` passando explicitamente por `expandedScalarMiddleRegionData` especializado, basta fornecer um pacote `C2CanonicalClosedScaledMiddleCoverData`, isto é, near-axis, edge e a entrada da faixa média diretamente na região concreta preferida `canonicalClosedScaled`. A conversão a partir do pacote expanded-scalar especializado também ficou automática, de modo que a interface antiga continua disponível apenas como etapa intermediária opcional.
 
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs.
@@ -3864,7 +3866,7 @@ Já está formalizado e compilando:
     - `C2CanonicalClosedScaledCoverData`;
     - `C2CanonicalClosedScaledCoverData.toOffCriticalCoverData`;
     - `offCriticalStripNonvanishing_of_c2CanonicalClosedScaledCoverData`;
-    - `riemannHypothesisC2_of_c2CanonicalClosedScaledCoverData`;
+    - `mathlibRiemannHypothesis_of_canonicalClosedScaledCoverData`;
     - `C2CanonicalClosedScaledMiddleCoverData.toCoverData`.
 
     Interpretação: a camada concreta preferida deixou de depender de um fechamento especial. Ela agora fala a mesma linguagem estrutural das rotas anteriores: bulk-region data, cover data e conversão para `OffCriticalCoverData`. Com isso, o pacote final `C2CanonicalClosedScaledMiddleCoverData` virou apenas uma forma enxuta de produzir um `C2CanonicalClosedScaledCoverData`, e o fechamento off-critical/RH passa a reutilizar a infraestrutura genérica do roadmap em vez de um corolário isolado.
@@ -3879,7 +3881,7 @@ Já está formalizado e compilando:
     - `C2CanonicalClosedScaledMiddleRegionData.toMiddleCoverData`;
     - `C2CanonicalClosedScaledMiddleRegionData.toCoverData`;
     - `offCriticalStripNonvanishing_of_c2CanonicalClosedScaledDirectMiddleRegionData`;
-    - `riemannHypothesisC2_of_c2CanonicalClosedScaledDirectMiddleRegionData`.
+    - `mathlibRiemannHypothesis_of_canonicalClosedScaledDirectMiddleRegionData`.
 
     Interpretação: o alvo final ficou ainda mais próximo do conteúdo analítico real. Em vez de provar apenas que cada ponto da faixa média pertence ao conjunto `canonicalClosedScaled`, agora existe um pacote regional próprio que pede diretamente as estimativas ponto a ponto daquela rota. Esse formato é mais econômico para a etapa final porque coincide exatamente com as obrigações remanescentes da camada preferida: hipóteses geométricas horizontais e dominância do quarteto, com seed/cutoff já absorvidos pelos envelopes canônicos.
 
@@ -3895,9 +3897,9 @@ Já está formalizado e compilando:
     - `C2CanonicalClosedScaledMiddleLocalData.toMiddleCoverData`;
     - `C2CanonicalClosedScaledMiddleLocalData.toCoverData`;
     - `offCriticalStripNonvanishing_of_c2CanonicalClosedScaledMiddleLocalData`;
-    - `riemannHypothesisC2_of_c2CanonicalClosedScaledMiddleLocalData`.
+    - `mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleLocalData`.
 
-    Interpretação: o alvo final foi reduzido à forma mais econômica disponível no arquivo. A nova interface `C2CanonicalClosedScaledLocalData` remove a hipótese redundante de off-criticalidade do certificado local, porque ela já vem automaticamente da própria `c2ExpandedScalarMiddleRegion`. Assim, a etapa analítica remanescente na faixa média passa a consistir apenas em provar, ponto a ponto, as condições geométricas horizontais e a dominância do quarteto; todo o restante da passagem para a região concreta, para o cover data e para `RiemannHypothesisC2` fica automático.
+    Interpretação: o alvo final foi reduzido à forma mais econômica disponível no arquivo. A nova interface `C2CanonicalClosedScaledLocalData` remove a hipótese redundante de off-criticalidade do certificado local, porque ela já vem automaticamente da própria `c2ExpandedScalarMiddleRegion`. Assim, a etapa analítica remanescente na faixa média passa a consistir apenas em provar, ponto a ponto, as condições geométricas horizontais e a dominância do quarteto; todo o restante da passagem para a região concreta, para o cover data e para `RiemannHypothesis` fica automático.
 
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs.
@@ -3922,18 +3924,18 @@ Já está formalizado e compilando:
     `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs.
 
   134. Pacote terminal explícito para “RH aceita pelo Lean”: `LeanC2/Analytic/GenuineBulkConcrete.lean` agora contém:
-    - `C2RiemannHypothesisTerminalData`;
-    - `C2RiemannHypothesisTerminalData.toMiddleLocalData`;
-    - `C2RiemannHypothesisTerminalData.toCoverData`;
-    - `offCriticalStripNonvanishing_of_c2RiemannHypothesisTerminalData`;
-    - `riemannHypothesisC2_of_c2RiemannHypothesisTerminalData`.
+    - `RiemannHypothesisTerminalData`;
+    - `RiemannHypothesisTerminalData.toMiddleLocalData`;
+    - `RiemannHypothesisTerminalData.toCoverData`;
+    - `offCriticalStripNonvanishing_of_terminalData`;
+    - `mathlibRiemannHypothesis_of_terminalData`.
 
-    Interpretação: o formato final já está explicitamente codificado e compilando. A formalização agora tem um único objeto terminal cuja existência basta para produzir `RiemannHypothesisC2`. Portanto, o momento em que “o Lean aceitou RH” ficou bem definido: assim que conseguirmos construir um habitante de `C2RiemannHypothesisTerminalData`, o teorema `riemannHypothesisC2_of_c2RiemannHypothesisTerminalData` fecha RH sem qualquer hipótese residual adicional.
+    Interpretação: o formato final já está explicitamente codificado e compilando. A formalização agora tem um único objeto terminal cuja existência basta para produzir `RiemannHypothesis`, isto é, a RH oficial do mathlib. Portanto, o momento em que “o Lean aceitou RH” ficou bem definido: assim que conseguirmos construir um habitante de `RiemannHypothesisTerminalData`, o teorema `mathlibRiemannHypothesis_of_terminalData` fecha RH sem qualquer hipótese residual adicional.
 
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs.
 
-  135. O pacote terminal virou endpoint canônico das interfaces já existentes da rota preferida: `LeanC2/Analytic/GenuineBulkConcrete.lean` agora contém conversões diretas para `C2RiemannHypothesisTerminalData` a partir de:
+  135. O pacote terminal virou endpoint canônico das interfaces já existentes da rota preferida: `LeanC2/Analytic/GenuineBulkConcrete.lean` agora contém conversões diretas para `RiemannHypothesisTerminalData` a partir de:
     - `C2CanonicalClosedScaledMiddleLocalData`;
     - `C2CanonicalClosedScaledMiddleRegionData`;
     - `C2CanonicalClosedScaledMiddleCoverData`;
@@ -3941,7 +3943,7 @@ Já está formalizado e compilando:
     - a especialização canônica de `C2ExpandedScalarMiddleRegionData`;
     - a especialização canônica de `C2ExpandedScalarCanonicalCoverData`.
 
-    Interpretação: a parte estrutural realmente fechou. Não existe mais bifurcação prática entre “certificados antigos ainda úteis” e “formato terminal final”. Qualquer certificado atual da rota `canonicalClosedScaled` já desce automaticamente ao único objeto terminal que produz `RiemannHypothesisC2`. O restante do trabalho passou a ser puramente analítico: construir algum desses certificados concretos, de preferência já no menor nível `middle_local`, sabendo que todos os níveis acima colapsam automaticamente para o mesmo endpoint.
+    Interpretação: a parte estrutural realmente fechou. Não existe mais bifurcação prática entre “certificados antigos ainda úteis” e “formato terminal final”. Qualquer certificado atual da rota `canonicalClosedScaled` já desce automaticamente ao único objeto terminal que produz `RiemannHypothesis`, isto é, a RH oficial do mathlib. O restante do trabalho passou a ser puramente analítico: construir algum desses certificados concretos, de preferência já no menor nível `middle_local`, sabendo que todos os níveis acima colapsam automaticamente para o mesmo endpoint.
 
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs.
@@ -3951,9 +3953,9 @@ Já está formalizado e compilando:
     - `c2OddTailContinuedBalancingSeedBulkQuartetExplicitFiniteCoreRegion`;
     - `c2OddTailContinuedBalancingSeedBulkQuartetExplicitScalarExactZetaRegion`.
 
-    Além disso, o próprio endpoint final `C2RiemannHypothesisTerminalData` agora pode ser construído diretamente a partir dessas três hipóteses de middle-region forte.
+    Além disso, o próprio endpoint final `RiemannHypothesisTerminalData` agora pode ser construído diretamente a partir dessas três hipóteses de middle-region forte.
 
-    Interpretação: a última obrigação analítica não precisa mais ser formulada apenas no alvo mínimo `middle_local`. Ela já pode ser atacada em três camadas concretas, progressivamente mais próximas dos bounds naturais do arquivo, sabendo que qualquer uma delas desce automaticamente até o mesmo pacote terminal que produz `RiemannHypothesisC2`. Isso fecha a compressão estrutural também do lado das hipóteses fortes: falta apenas provar uma dessas formas concretas.
+    Interpretação: a última obrigação analítica não precisa mais ser formulada apenas no alvo mínimo `middle_local`. Ela já pode ser atacada em três camadas concretas, progressivamente mais próximas dos bounds naturais do arquivo, sabendo que qualquer uma delas desce automaticamente até o mesmo pacote terminal que produz `RiemannHypothesis`, isto é, a RH oficial do mathlib. Isso fecha a compressão estrutural também do lado das hipóteses fortes: falta apenas provar uma dessas formas concretas.
 
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs.
@@ -3961,9 +3963,9 @@ Já está formalizado e compilando:
   137. A rota `explicitScalarExactZeta` ganhou um pacote regional próprio: `LeanC2/Analytic/GenuineBulkConcrete.lean` agora contém `C2ExplicitScalarExactZetaMiddleRegionData` com conversões automáticas para:
     - `C2ExpandedScalarMiddleRegionData`;
     - `C2CanonicalClosedScaledMiddleLocalData` na especialização canônica;
-    - `C2RiemannHypothesisTerminalData` na especialização canônica.
+    - `RiemannHypothesisTerminalData` na especialização canônica.
 
-    Interpretação: o próximo alvo analítico deixou de ser apenas um triplo `(near, edge, hmiddle)` solto. A rota `explicitScalarExactZeta`, que parece a mais concreta e natural neste ponto, agora está empacotada como um objeto próprio e reutilizável. Isso elimina mais um nível de plumbing: se conseguirmos construir `C2ExplicitScalarExactZetaMiddleRegionData` na especialização canônica, o arquivo já sabe descer automaticamente até o pacote terminal e, portanto, até `RiemannHypothesisC2`.
+    Interpretação: o próximo alvo analítico deixou de ser apenas um triplo `(near, edge, hmiddle)` solto. A rota `explicitScalarExactZeta`, que parece a mais concreta e natural neste ponto, agora está empacotada como um objeto próprio e reutilizável. Isso elimina mais um nível de plumbing: se conseguirmos construir `C2ExplicitScalarExactZetaMiddleRegionData` na especialização canônica, o arquivo já sabe descer automaticamente até o pacote terminal e, portanto, até `RiemannHypothesis`, a RH oficial do mathlib.
 
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs.
@@ -3971,29 +3973,29 @@ Já está formalizado e compilando:
   138. A camada `expandedExactZeta` também virou pacote regional próprio: `LeanC2/Analytic/GenuineBulkConcrete.lean` agora contém `C2ExpandedExactZetaMiddleRegionData`, com:
     - conversão automática para `C2ExpandedScalarMiddleRegionData`;
     - equivalência estrutural bidirecional com `C2ExplicitScalarExactZetaMiddleRegionData`;
-    - descida automática para `C2CanonicalClosedScaledMiddleLocalData` e para `C2RiemannHypothesisTerminalData` na especialização canônica;
-    - builder direto `C2RiemannHypothesisTerminalData.ofExpandedExactZetaMiddleRegion`.
+    - descida automática para `C2CanonicalClosedScaledMiddleLocalData` e para `RiemannHypothesisTerminalData` na especialização canônica;
+    - builder direto `RiemannHypothesisTerminalData.ofExpandedExactZetaMiddleRegion`.
 
     Interpretação: as duas formas fortes mais concretas do arquivo para a faixa média, `expandedExactZeta` e `explicitScalarExactZeta`, agora estão empacotadas como objetos regionais equivalentes, não apenas como predicados ponto a ponto ou hipóteses funcionais `hmiddle`. Isso deixa o gargalo analítico ainda mais explícito: basta construir qualquer um desses dois pacotes fortes na especialização canônica, e o caminho até o pacote terminal final já está totalmente automatizado.
 
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs.
 
-  139. O endpoint terminal ficou mais próximo do fechamento real: `LeanC2/Analytic/GenuineContinuation.lean` agora prova que `genuineFInfinite = continuedCentralOddChannel` em `puncturedOpenRightHalfPlane`, e `LeanC2/Analytic/GenuineBulkConcrete.lean` usa isso para transportar automaticamente qualquer `GenuineFInfiniteNearAxisData` para `C2OddTailContinuedBalancingSeedBulkModelNearAxisData`. No mesmo passo, o arquivo ganhou o edge trivial `C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty` e o construtor terminal direto `C2RiemannHypothesisTerminalData.ofGenuineFInfiniteNearAxisAndExplicitScalarExactZetaMiddleRegion`, junto com o corolário final `riemannHypothesisC2_of_genuineFInfiniteNearAxisAndExplicitScalarExactZetaMiddleRegion`.
+  139. O endpoint terminal ficou mais próximo do fechamento real: `LeanC2/Analytic/GenuineContinuation.lean` agora prova que `genuineFInfinite = continuedCentralOddChannel` em `puncturedOpenRightHalfPlane`, e `LeanC2/Analytic/GenuineBulkConcrete.lean` usa isso para transportar automaticamente qualquer `GenuineFInfiniteNearAxisData` para `C2OddTailContinuedBalancingSeedBulkModelNearAxisData`. No mesmo passo, o arquivo ganhou o edge trivial `C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty` e o construtor terminal direto `RiemannHypothesisTerminalData.ofGenuineFInfiniteNearAxisAndExplicitScalarExactZetaMiddleRegion`, junto com o corolário final `mathlibRiemannHypothesis_of_genuineFInfiniteNearAxisAndExplicitScalarExactZetaMiddleRegion`.
 
     Interpretação: o bloco `edge` deixou de ser um obstáculo real no endpoint final, e o bloco `near` também deixou de depender de um certificado específico do modelo continuado. O próximo passo natural ficou reduzido a produzir um certificado near-axis para `genuineFInfinite` e então fechar apenas a obrigação uniforme da faixa média forte `explicitScalarExactZeta` fora da região near-axis. O gargalo final ficou honestamente comprimido em dois ingredientes: near-axis do operador genuíno e middle-region forte do modelo continuado.
 
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso sem warnings. `lake build LeanC2` concluiu com sucesso com 8289 jobs.
 
-  140. O bloco `near` foi efetivamente fechado sem teorema G11 adicional: `LeanC2/Route/NearAxisTaylor.lean` agora contém o builder genérico `NearAxisCertificate.of_eventually_ne_zero`, e `LeanC2/Analytic/GenuineG11.lean` usa apenas a continuação de `genuineFInfinite` e o princípio de zeros isolados em domínio preconexo para construir `GenuineFInfiniteNearAxisData.of_continuation`. Em seguida, `LeanC2/Analytic/GenuineBulkConcrete.lean` comprime ainda mais o endpoint com `C2RiemannHypothesisTerminalData.ofContinuationAndExplicitScalarExactZetaMiddleRegion` e o corolário `riemannHypothesisC2_of_continuationAndExplicitScalarExactZetaMiddleRegion`.
+  140. O bloco `near` foi efetivamente fechado sem teorema G11 adicional: `LeanC2/Route/NearAxisTaylor.lean` agora contém o builder genérico `NearAxisCertificate.of_eventually_ne_zero`, e `LeanC2/Analytic/GenuineG11.lean` usa apenas a continuação de `genuineFInfinite` e o princípio de zeros isolados em domínio preconexo para construir `GenuineFInfiniteNearAxisData.of_continuation`. Em seguida, `LeanC2/Analytic/GenuineBulkConcrete.lean` comprime ainda mais o endpoint com `RiemannHypothesisTerminalData.ofContinuationAndExplicitScalarExactZetaMiddleRegion` e o corolário `mathlibRiemannHypothesis_of_continuationAndExplicitScalarExactZetaMiddleRegion`.
 
     Interpretação: a witness near-axis não é mais um gargalo independente. A continuação já basta para provar que `genuineFInfinite` zera nos zeros críticos de `ζ`, não é identicamente nula em vizinhança deles, e portanto possui janelas transversais livres de zeros por isolamento analítico. Depois desse passo, o fechamento real ficou reduzido a uma única peça matemática restante: a prova uniforme da faixa média forte `explicitScalarExactZeta` para o modelo continuado. O endpoint terminal final agora pode ser alimentado por `continuation + hmiddle`, sem carregar `near` ou `edge` como dados extras.
 
     Verificação local:
     `lake build LeanC2.Analytic.GenuineG11 LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso; `lake build LeanC2` concluiu com sucesso com 8289 jobs.
 
-  141. O endpoint final também foi comprimido até a obrigação mínima local: `LeanC2/Analytic/GenuineBulkConcrete.lean` agora contém `C2RiemannHypothesisTerminalData.ofContinuationAndMiddleLocal` e o corolário `riemannHypothesisC2_of_continuationAndMiddleLocal`. Esses resultados usam automaticamente:
+  141. O endpoint final também foi comprimido até a obrigação mínima local: `LeanC2/Analytic/GenuineBulkConcrete.lean` agora contém `RiemannHypothesisTerminalData.ofContinuationAndMiddleLocal` e o corolário `mathlibRiemannHypothesis_of_continuationAndMiddleLocal`. Esses resultados usam automaticamente:
     - a continuação de `genuineFInfinite`;
     - a witness near-axis concreta `GenuineFInfiniteNearAxisData.of_continuation`;
     - o edge trivial `C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty`.
@@ -4003,21 +4005,21 @@ Já está formalizado e compilando:
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete LeanC2` concluiu com sucesso com 8289 jobs.
 
-  142. A rota forte por continuação deixou de ficar artificialmente presa às constantes canônicas do endpoint terminal. `LeanC2/Analytic/GenuineBulkConcrete.lean` agora também contém os corolários diretos `riemannHypothesisC2_of_continuationAndExplicitScalarExactZetaMiddleRegionWithBounds` e `riemannHypothesisC2_of_continuationAndExpandedExactZetaMiddleRegionWithBounds`. Diferentemente de `riemannHypothesisC2_of_continuationAndExplicitScalarExactZetaMiddleRegion`, esses novos resultados mantêm `tiltConstant`, `tiltScale`, `cutoffConstant` e `cutoffScale` como funções arbitrárias.
+  142. A rota forte por continuação deixou de ficar artificialmente presa às constantes canônicas do endpoint terminal. `LeanC2/Analytic/GenuineBulkConcrete.lean` agora também contém os corolários diretos `mathlibRiemannHypothesis_of_continuationAndExplicitScalarExactZetaMiddleRegionWithBounds` e `mathlibRiemannHypothesis_of_continuationAndExpandedExactZetaMiddleRegionWithBounds`. Diferentemente de `mathlibRiemannHypothesis_of_continuationAndExplicitScalarExactZetaMiddleRegion`, esses novos resultados mantêm `tiltConstant`, `tiltScale`, `cutoffConstant` e `cutoffScale` como funções arbitrárias.
 
     Interpretação: a opção forte ficou formalmente exposta sem precisar provar antes que as majorantes canônicas dominam a pilha `explicitFiniteCore` ou `explicitScalarExactZeta`. A pendência real passa a ser exatamente a prova do `hmiddle` forte na faixa média, com os bounds que a análise realmente fornecer, e não mais uma comparação extra entre famílias de constantes.
 
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete LeanC2` concluiu com sucesso com 8289 jobs.
 
-  143. A fronteira entre “majorante” e “witness” também ficou formalizada. `LeanC2/Analytic/GenuineBulkConcrete.lean` agora contém `C2ExpandedScalarMiddleRegionData.ofContinuation`, o corolário `riemannHypothesisC2_of_continuationAndExpandedScalarMiddleRegionWithBounds`, e ainda o wrapper mais cru `riemannHypothesisC2_of_continuationAndExpandedScalarMiddlePointwiseBounds`. O primeiro aceita diretamente o witness local `C2ExpandedScalarLocalBulkData` em cada ponto da faixa média; o segundo aceita apenas os ingredientes locais separados `C2ExpandedScalarScaleData`, `C2ExpandedHorizontalLayerBudget` e `C2ExpandedScalarMainInequalities`, montando o witness automaticamente.
+  143. A fronteira entre “majorante” e “witness” também ficou formalizada. `LeanC2/Analytic/GenuineBulkConcrete.lean` agora contém `C2ExpandedScalarMiddleRegionData.ofContinuation`, o corolário `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegionWithBounds`, e ainda o wrapper mais cru `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddlePointwiseBounds`. O primeiro aceita diretamente o witness local `C2ExpandedScalarLocalBulkData` em cada ponto da faixa média; o segundo aceita apenas os ingredientes locais separados `C2ExpandedScalarScaleData`, `C2ExpandedHorizontalLayerBudget` e `C2ExpandedScalarMainInequalities`, montando o witness automaticamente.
 
     Interpretação: a montagem terminal deixou de exigir que a análise entregue logo um elemento de região como `explicitScalarExactZeta`. Agora há um degrau explícito “majorantes locais ⇒ witness local ⇒ RH”, todo especializado à continuação de `genuineFInfinite`. Com isso, a única pendência honesta restante é provar os majorantes ponto a ponto na `c2ExpandedScalarMiddleRegion`.
 
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete LeanC2` concluiu com sucesso com 8289 jobs.
 
-  144. O subbloco restante `hmain` também foi aberto até as três desigualdades efetivas. `LeanC2/Analytic/GenuineBulkConcrete.lean` agora contém o builder `C2ExpandedScalarMainInequalities.ofComponents` e o corolário `riemannHypothesisC2_of_continuationAndExpandedScalarMiddleSeparatedMainBounds`. Com isso, a rota por continuação pode ser alimentada diretamente por três hipóteses separadas sobre a faixa média: `C2ExpandedSeedScaledBound`, `C2ExpandedCutoffScaledBound` e `C2ExpandedQuartetDominance`, além dos pacotes já isolados `hscale` e `hhorizontal`.
+  144. O subbloco restante `hmain` também foi aberto até as três desigualdades efetivas. `LeanC2/Analytic/GenuineBulkConcrete.lean` agora contém o builder `C2ExpandedScalarMainInequalities.ofComponents` e o corolário `mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleSeparatedMainBounds`. Com isso, a rota por continuação pode ser alimentada diretamente por três hipóteses separadas sobre a faixa média: `C2ExpandedSeedScaledBound`, `C2ExpandedCutoffScaledBound` e `C2ExpandedQuartetDominance`, além dos pacotes já isolados `hscale` e `hhorizontal`.
 
     Interpretação: o bloco médio forte ficou quebrado exatamente na granularidade natural da análise. Não é mais necessário montar manualmente nem `C2ExpandedScalarMainInequalities` nem `C2ExpandedScalarLocalBulkData` para usar o funil final. A obrigação remanescente agora aparece explicitamente como: controlar o seed, controlar o cutoff, e fechar a dominância do quarteto em cada ponto da região média.
 
@@ -4026,4 +4028,4 @@ Já está formalizado e compilando:
 
   O próximo salto técnico natural fica agora concentrado numa única obrigação analítica central:
   1. construir a obrigação uniforme de faixa média em qualquer uma das formas fortes já disponíveis, preferencialmente `explicitScalarExactZeta`, ou diretamente no alvo mínimo `C2CanonicalClosedScaledLocalData`.
-  2. aplicar diretamente `C2RiemannHypothesisTerminalData.ofContinuationAndMiddleLocal`, `C2RiemannHypothesisTerminalData.ofContinuationAndExplicitScalarExactZetaMiddleRegion`, ou os corolários correspondentes, sem plumbing extra.
+  2. aplicar diretamente `RiemannHypothesisTerminalData.ofContinuationAndMiddleLocal`, `RiemannHypothesisTerminalData.ofContinuationAndExplicitScalarExactZetaMiddleRegion`, ou os corolários correspondentes, sem plumbing extra.
