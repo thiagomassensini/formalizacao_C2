@@ -6,6 +6,14 @@ import LeanC2.Route.BulkQuartet
 
 namespace C2
 
+/-
+Route tags used on theorem/lemma declarations below:
+- ACTIVE_MAIN_ROUTE: current continued/terminal path to mathlib RH.
+- ACTIVE_OPTIONAL_REFINEMENT: live stronger or alternative quantitative package.
+- FORMAL_BARRIER: formalized obstruction, empty region, or no-go reduction.
+- DEPRECATED_HISTORICAL: retained earlier route or proxy from previous development.
+-/
+
 /-!
 Adapters from the concrete C2 bulk packages to the `genuineFInfinite`-pinned bulk
 interface.
@@ -54,6 +62,7 @@ noncomputable def c2ConcreteAntiMiracleTail
         (c2ConcreteOddHorizontalDefect coreCutoff)) s +
       c2BulkEdelta (c2ConcreteCutoffError K M) s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleTail_eq_expanded
     (tiltSeed : ℂ → ℂ) (coreCutoff : ℕ → ℕ) (K M : ℕ) (s : ℂ) :
     c2ConcreteAntiMiracleTail tiltSeed coreCutoff K M s =
@@ -64,6 +73,7 @@ theorem c2ConcreteAntiMiracleTail_eq_expanded
   unfold c2ConcreteAntiMiracleTail c2QuartetBulkGdelta c2BulkGdelta c2BulkEdelta
   ring
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleFiniteModel_eq_quartet_add_tail_of_re_pos
     (tiltSeed : ℂ → ℂ) (coreCutoff : ℕ → ℕ) (K M : ℕ) {s : ℂ}
     (hs : 0 < s.re) :
@@ -174,6 +184,7 @@ noncomputable def c2ConcreteAntiMiracleAdjustedDefect
       ‖c2ConcreteAntiMiracleAdjustedError2 coreCutoff s‖ +
       ‖c2ConcreteAntiMiracleAdjustedError3 coreCutoff s‖
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleAdjustedLayer_eq_amplitude_ratio_add_error
     (tiltSeed : ℂ → ℂ) (coreCutoff : ℕ → ℕ) (j : ℕ) (s : ℂ) :
     c2ConcreteAntiMiracleAdjustedLayer tiltSeed coreCutoff j s =
@@ -184,6 +195,7 @@ theorem c2ConcreteAntiMiracleAdjustedLayer_eq_amplitude_ratio_add_error
     c2ConcreteAntiMiracleAdjustedRatio c2SeededTiltLayerResidual c2QuartetBulkK2
   ring
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleAdjustedQuartet_eq_errorSplit
     (tiltSeed : ℂ → ℂ) (coreCutoff : ℕ → ℕ) (s : ℂ) :
     c2ConcreteAntiMiracleAdjustedQuartet tiltSeed coreCutoff s =
@@ -206,6 +218,7 @@ theorem c2ConcreteAntiMiracleAdjustedQuartet_eq_errorSplit
   simp [Finset.sum_range_succ]
   ring
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleAdjustedQuartet_eq_quartet_add_tiltPrefix_add_horizontalQuartet
     (tiltSeed : ℂ → ℂ) (coreCutoff : ℕ → ℕ) (s : ℂ) :
     c2ConcreteAntiMiracleAdjustedQuartet tiltSeed coreCutoff s =
@@ -219,6 +232,7 @@ theorem c2ConcreteAntiMiracleAdjustedQuartet_eq_quartet_add_tiltPrefix_add_horiz
   simp [Finset.sum_range_succ]
   ring
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteOddHorizontalDefect_eq_quartet_add_tail
     (coreCutoff : ℕ → ℕ) {s : ℂ}
     (hsum : Summable fun j : ℕ => c2ConcreteOddHorizontalLayerDefect coreCutoff s j) :
@@ -229,6 +243,7 @@ theorem c2ConcreteOddHorizontalDefect_eq_quartet_add_tail
     c2ConcreteAntiMiracleHorizontalQuartet c2ConcreteAntiMiracleHorizontalTail
   simpa using (hsum.sum_add_tsum_nat_add 4).symm
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem summable_c2SeededTiltLayerResidual_of_re_pos
     (tiltSeed : ℂ → ℂ) {s : ℂ} (hs : 0 < s.re) :
     Summable fun j : ℕ => c2SeededTiltLayerResidual tiltSeed s j := by
@@ -247,6 +262,7 @@ theorem summable_c2SeededTiltLayerResidual_of_re_pos
     (s := s)
     hseed
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleFiniteModel_eq_adjustedQuartet_add_tail
     (tiltSeed : ℂ → ℂ) (coreCutoff : ℕ → ℕ) (K M : ℕ) (s : ℂ) :
     c2ConcreteAntiMiracleFiniteModel tiltSeed coreCutoff K M s =
@@ -255,6 +271,7 @@ theorem c2ConcreteAntiMiracleFiniteModel_eq_adjustedQuartet_add_tail
   unfold c2ConcreteAntiMiracleAdjustedTail
   ring
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleAdjustedTail_eq_expanded_of_re_pos
     (tiltSeed : ℂ → ℂ) (coreCutoff : ℕ → ℕ) (K M : ℕ) {s : ℂ}
     (hs : 0 < s.re)
@@ -307,6 +324,7 @@ theorem c2ConcreteAntiMiracleAdjustedTail_eq_expanded_of_re_pos
       ring
 
 /-- The concrete bulk model expanded into the four route-level analytic pieces. -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ScaledSeededExplicitOddTailBulkModel_eq_expanded
     (tiltSeed : ℂ → ℂ) (coreCutoff : ℕ → ℕ) (K M : ℕ) (s : ℂ) :
     c2ScaledSeededExplicitOddTailBulkModel tiltSeed coreCutoff K M s =
@@ -319,6 +337,7 @@ theorem c2ScaledSeededExplicitOddTailBulkModel_eq_expanded
   ring
 
 /-- The residual expanded before rewriting the cutoff target. -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ScaledSeededExplicitOddTailBulkModelResidual_eq_expanded
     (tiltSeed : ℂ → ℂ) (coreCutoff : ℕ → ℕ) (K M : ℕ) (s : ℂ) :
     c2ScaledSeededExplicitOddTailBulkModelResidual tiltSeed coreCutoff K M s =
@@ -358,6 +377,7 @@ noncomputable def c2ScaledSeededExplicitOddTailRegularizedResidual
     c2TiltRegularizedResidual (c2SeededTiltLayerResidual tiltSeed) s +
       c2ConcreteOddHorizontalDefect coreCutoff s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ScaledSeededExplicitOddTailRectangularCentralResidual_eq_split
     (tiltSeed : ℂ → ℂ) (coreCutoff : ℕ → ℕ) (K M : ℕ) (s : ℂ) :
     c2ScaledSeededExplicitOddTailRectangularCentralResidual tiltSeed coreCutoff K M s =
@@ -368,6 +388,7 @@ theorem c2ScaledSeededExplicitOddTailRectangularCentralResidual_eq_split
     c2ScaledSeededExplicitOddTailRegularizedResidual
   ring
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ScaledSeededExplicitOddTailBulkModelResidual_eq_rectangularCentralResidual_of_one_lt_re
     (tiltSeed : ℂ → ℂ) (coreCutoff : ℕ → ℕ) (K M : ℕ) {s : ℂ}
     (hs : 1 < s.re) :
@@ -403,6 +424,7 @@ def C2ScaledSeededExplicitOddTailC0ZetaCutoffGenuineIdentity
 /--
 The same regional identity, expressed as vanishing of the concrete model residual.
 -/
+-- ROUTE_TAG: FORMAL_BARRIER
 theorem c2ScaledSeededExplicitOddTailC0ZetaCutoffGenuineIdentity_iff_residual_zero
     (tiltSeed : ℂ → ℂ)
     (coreCutoff : ℕ → ℕ) (K M : ℕ)
@@ -477,6 +499,7 @@ def C2ScaledSeededExplicitOddTailResidualBalance
     c2ScaledSeededExplicitOddTailRegularizedResidual tiltSeed coreCutoff s =
       -c2ScaledSeededExplicitOddTailVerticalRectangularResidual K M s
 
+-- ROUTE_TAG: FORMAL_BARRIER
 theorem c2ScaledSeededExplicitOddTailRectangularCentralResidualZero_of_residualBalance
     {tiltSeed : ℂ → ℂ}
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -498,6 +521,7 @@ theorem c2ScaledSeededExplicitOddTailRectangularCentralResidualZero_of_residualB
   rw [hbalance s hs]
   ring
 
+-- ROUTE_TAG: FORMAL_BARRIER
 theorem c2ScaledSeededExplicitOddTailResidualBalance_of_rectangularCentralResidualZero
     {tiltSeed : ℂ → ℂ}
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -528,6 +552,7 @@ theorem c2ScaledSeededExplicitOddTailResidualBalance_of_rectangularCentralResidu
     _ = -c2ScaledSeededExplicitOddTailVerticalRectangularResidual K M s := by
       ring
 
+-- ROUTE_TAG: FORMAL_BARRIER
 theorem c2ScaledSeededExplicitOddTailRectangularCentralResidualZero_iff_residualBalance
     (tiltSeed : ℂ → ℂ)
     (coreCutoff : ℕ → ℕ) (K M : ℕ)
@@ -561,6 +586,7 @@ noncomputable def c2OddTailBalancingSeed
       c2ConcreteOddHorizontalDefect coreCutoff s) *
       (1 - q s)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailBalancingSeed_norm_le
     (coreCutoff : ℕ → ℕ) (K M : ℕ) (s : ℂ) :
     ‖c2OddTailBalancingSeed coreCutoff K M s‖ ≤
@@ -598,6 +624,7 @@ def C2OddTailBalancingSeedScaledBound
       ‖1 - q s‖) *
     tiltScale s ≤ tiltConstant s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailBalancingSeed_scaled_bound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale : ℂ → ℝ} {s : ℂ}
@@ -612,6 +639,7 @@ theorem c2OddTailBalancingSeed_scaled_bound
       hscale_nonneg)
     hbound
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailRegularizedResidual_balancingSeed
     (coreCutoff : ℕ → ℕ) (K M : ℕ) {s : ℂ} (hs : 0 < s.re) :
     c2ScaledSeededExplicitOddTailRegularizedResidual
@@ -625,6 +653,7 @@ theorem c2OddTailRegularizedResidual_balancingSeed
   rw [mul_assoc, mul_inv_cancel₀ hden]
   ring
 
+-- ROUTE_TAG: FORMAL_BARRIER
 theorem c2OddTailResidualBalance_balancingSeed
     (coreCutoff : ℕ → ℕ) (K M : ℕ)
     (tiltConstant tiltScale
@@ -639,6 +668,7 @@ theorem c2OddTailResidualBalance_balancingSeed
   exact c2OddTailRegularizedResidual_balancingSeed coreCutoff K M
     (lt_trans zero_lt_one hs.one_lt_re)
 
+-- ROUTE_TAG: FORMAL_BARRIER
 theorem c2ScaledSeededExplicitOddTailC0ZetaCutoffGenuineIdentity_of_rectangularCentralResidualZero
     {tiltSeed : ℂ → ℂ}
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -661,6 +691,7 @@ theorem c2ScaledSeededExplicitOddTailC0ZetaCutoffGenuineIdentity_of_rectangularC
     tiltSeed coreCutoff K M hs.one_lt_re]
   exact hzero s hs
 
+-- ROUTE_TAG: FORMAL_BARRIER
 theorem c2ScaledSeededExplicitOddTailRectangularCentralResidualZero_of_C0ZetaCutoffGenuineIdentity
     {tiltSeed : ℂ → ℂ}
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -687,6 +718,7 @@ theorem c2ScaledSeededExplicitOddTailRectangularCentralResidualZero_of_C0ZetaCut
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale).mp hmodel s hs
 
+-- ROUTE_TAG: FORMAL_BARRIER
 theorem c2ScaledSeededExplicitOddTailC0ZetaCutoffGenuineIdentity_iff_rectangularCentralResidualZero
     (tiltSeed : ℂ → ℂ)
     (coreCutoff : ℕ → ℕ) (K M : ℕ)
@@ -709,6 +741,7 @@ theorem c2ScaledSeededExplicitOddTailC0ZetaCutoffGenuineIdentity_iff_rectangular
   · exact
       c2ScaledSeededExplicitOddTailC0ZetaCutoffGenuineIdentity_of_rectangularCentralResidualZero
 
+-- ROUTE_TAG: FORMAL_BARRIER
 theorem c2ScaledSeededExplicitOddTailC0ZetaCutoffGenuineIdentity_iff_residualBalance
     (tiltSeed : ℂ → ℂ)
     (coreCutoff : ℕ → ℕ) (K M : ℕ)
@@ -728,6 +761,7 @@ theorem c2ScaledSeededExplicitOddTailC0ZetaCutoffGenuineIdentity_iff_residualBal
   rw [c2ScaledSeededExplicitOddTailC0ZetaCutoffGenuineIdentity_iff_rectangularCentralResidualZero,
     c2ScaledSeededExplicitOddTailRectangularCentralResidualZero_iff_residualBalance]
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailGenuineIdentity_balancingSeed
     (coreCutoff : ℕ → ℕ) (K M : ℕ)
     (tiltConstant tiltScale
@@ -744,6 +778,7 @@ theorem c2OddTailGenuineIdentity_balancingSeed
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailGenuineIdentity_balancingSeed_at_of_one_lt_re
     (coreCutoff : ℕ → ℕ) (K M : ℕ) {s : ℂ} (hs : 1 < s.re) :
     genuineFInfinite s =
@@ -783,6 +818,7 @@ theorem c2OddTailGenuineIdentity_balancingSeed_at_of_one_lt_re
           (c2OddTailBalancingSeed coreCutoff K M) coreCutoff K M s := by
             ring
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeedBulkModel_eq_central_of_re_pos
     (coreCutoff : ℕ → ℕ) (K M : ℕ) {s : ℂ} (hs : 0 < s.re) :
     c2ScaledSeededExplicitOddTailBulkModel
@@ -820,6 +856,7 @@ noncomputable def c2OddTailBalancingSeedBulkModel
   c2ScaledSeededExplicitOddTailBulkModel
     (c2OddTailBalancingSeed coreCutoff K M) coreCutoff K M
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailBalancingSeed_bulkModel_identity_on_oneLtHalfPlane
     (coreCutoff : ℕ → ℕ) (K M : ℕ) :
     C2IdentityOn oneLtHalfPlane
@@ -834,6 +871,7 @@ theorem c2OddTailBalancingSeed_bulkModel_identity_on_oneLtHalfPlane
     _ = c0 s * riemannZeta s := by
       exact genuineFInfinite_eq_c0_mul_riemannZeta_of_one_lt_re s hs
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeedBulkModel_eq_genuineFInfinite_on_oneLtHalfPlane
     (coreCutoff : ℕ → ℕ) (K M : ℕ) :
     ∀ s : ℂ, s ∈ oneLtHalfPlane →
@@ -843,6 +881,7 @@ theorem c2OddTailBalancingSeedBulkModel_eq_genuineFInfinite_on_oneLtHalfPlane
   simpa [oneLtHalfPlane, c2OddTailBalancingSeedBulkModel] using
     (c2OddTailGenuineIdentity_balancingSeed_at_of_one_lt_re coreCutoff K M hs)
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeedBulkModel_eq_continuedCentralOddChannel_on_oneLtHalfPlane
     (coreCutoff : ℕ → ℕ) (K M : ℕ) :
     ∀ s : ℂ, s ∈ oneLtHalfPlane →
@@ -870,6 +909,7 @@ noncomputable def c2ScaledSeededExplicitOddTailContinuedBulkModel
     (c2BulkEdelta
       (c2ConcreteCutoffErrorFromTarget continuedCentralOddChannel K M))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ScaledSeededExplicitOddTailContinuedBulkModel_eq_expanded
     (tiltSeed : ℂ → ℂ) (coreCutoff : ℕ → ℕ) (K M : ℕ) (s : ℂ) :
     c2ScaledSeededExplicitOddTailContinuedBulkModel tiltSeed coreCutoff K M s =
@@ -910,6 +950,7 @@ central target.
 noncomputable def c2ConcreteAntiMiracleCentralRebasingError : ℂ → ℂ :=
   fun s => (2 : ℂ) * (genuineCentralDoubleSeries s - continuedCentralOddChannel s)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailBalancingSeed_eq_continued_add_rebasingError
     (coreCutoff : ℕ → ℕ) (K M : ℕ) (s : ℂ) :
     c2OddTailBalancingSeed coreCutoff K M s =
@@ -921,6 +962,7 @@ theorem c2OddTailBalancingSeed_eq_continued_add_rebasingError
     c2ConcreteAntiMiracleCentralRebasingError
   ring
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailBalancingSeed_norm_le_continued_add_centralDefect
     (coreCutoff : ℕ → ℕ) (K M : ℕ) (s : ℂ) :
     ‖c2OddTailBalancingSeed coreCutoff K M s‖ ≤
@@ -948,6 +990,7 @@ theorem c2OddTailBalancingSeed_norm_le_continued_add_centralDefect
           ‖1 - q s‖ := by
           rw [hrebaseNorm]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailBalancingSeed_scaled_bound_of_continued_and_centralDefect
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -995,6 +1038,7 @@ theorem c2OddTailBalancingSeed_scaled_bound_of_continued_and_centralDefect
       (add_le_add hcontinued hprod)
   exact le_trans (mul_le_mul_of_nonneg_right hseed hscale_nonneg) hscaled
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailRegularizedResidual_eq_continued_add_rebasingError_of_re_pos
     (coreCutoff : ℕ → ℕ) (K M : ℕ) {s : ℂ} (hs : 0 < s.re) :
     c2ScaledSeededExplicitOddTailRegularizedResidual
@@ -1011,6 +1055,7 @@ theorem c2OddTailRegularizedResidual_eq_continued_add_rebasingError_of_re_pos
   field_simp [hden]
   ring
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailContinuedRegularizedResidual_balancingSeed
     (coreCutoff : ℕ → ℕ) (K M : ℕ) {s : ℂ} (hs : 0 < s.re) :
     c2ScaledSeededExplicitOddTailRegularizedResidual
@@ -1024,6 +1069,7 @@ theorem c2OddTailContinuedRegularizedResidual_balancingSeed
   rw [mul_assoc, mul_inv_cancel₀ hden]
   ring
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 lemma offCriticalStrip_mem_puncturedOpenRightHalfPlane {s : ℂ}
     (hs : offCriticalStrip s) :
     s ∈ puncturedOpenRightHalfPlane := by
@@ -1032,6 +1078,7 @@ lemma offCriticalStrip_mem_puncturedOpenRightHalfPlane {s : ℂ}
   have hre : s.re = 1 := by simp [h1]
   linarith [hs.2.1, hre]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleResidual_eq_centralDefect_of_continuation_offCritical
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -1055,6 +1102,7 @@ theorem c2ConcreteAntiMiracleResidual_eq_centralDefect_of_continuation_offCritic
     _ = genuineCentralDoubleSeries s - continuedCentralOddChannel s := by
       rw [continuation.eq_continuedCentralOddChannel_on_punctured s hsPunct]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleResidual_norm_eq_centralDefect_of_continuation_offCritical
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -1065,6 +1113,7 @@ theorem c2ConcreteAntiMiracleResidual_norm_eq_centralDefect_of_continuation_offC
   rw [c2ConcreteAntiMiracleResidual_eq_centralDefect_of_continuation_offCritical
     continuation hs]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleResidual_eq_rebased_continuedSeed_of_re_pos
     (coreCutoff : ℕ → ℕ) (K M : ℕ) {s : ℂ} (hs : 0 < s.re) :
     c2ConcreteAntiMiracleResidual
@@ -1106,6 +1155,7 @@ theorem c2ConcreteAntiMiracleResidual_eq_rebased_continuedSeed_of_re_pos
           unfold c2ScaledSeededExplicitOddTailRegularizedResidual
           ring
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleResidual_norm_le_rebased_continuedSeed_of_re_pos
     (coreCutoff : ℕ → ℕ) (K M : ℕ) {s : ℂ} (hs : 0 < s.re) :
     ‖c2ConcreteAntiMiracleResidual
@@ -1134,6 +1184,7 @@ theorem c2ConcreteAntiMiracleResidual_norm_le_rebased_continuedSeed_of_re_pos
           2 * ‖genuineCentralDoubleSeries s - continuedCentralOddChannel s‖ := by
             rw [hrebaseNorm]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleResidual_eq_neg_centralDefect_of_continuation_offCritical
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -1158,6 +1209,7 @@ theorem c2ConcreteAntiMiracleResidual_eq_neg_centralDefect_of_continuation_offCr
           unfold c2ConcreteAntiMiracleCentralRebasingError
           ring
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleResidual_norm_eq_centralDefect_of_continuedSeed_offCritical
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -1173,6 +1225,7 @@ theorem c2ConcreteAntiMiracleResidual_norm_eq_centralDefect_of_continuedSeed_off
     ring
   rw [hsymm, norm_neg]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteCutoffError_eq_continued_add_centralDefect
     (K M : ℕ) (s : ℂ) :
     c2ConcreteCutoffError K M s =
@@ -1182,6 +1235,7 @@ theorem c2ConcreteCutoffError_eq_continued_add_centralDefect
     c2AnalyticCentralTarget
   ring
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteCutoffError_norm_le_continued_add_centralDefect
     (K M : ℕ) (s : ℂ) :
     ‖c2ConcreteCutoffError K M s‖ ≤
@@ -1202,6 +1256,7 @@ theorem c2ConcreteCutoffError_norm_le_continued_add_centralDefect
         ‖genuineCentralDoubleSeries s - continuedCentralOddChannel s‖ := by
           rw [hsymm, norm_neg]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteCutoffError_scaled_bound_of_continued_and_centralDefect
     {K M : ℕ}
     {cutoffConstant cutoffScale
@@ -1226,6 +1281,7 @@ theorem c2ConcreteCutoffError_scaled_bound_of_continued_and_centralDefect
       (add_le_add hcontinued hcentralDefect)
   exact le_trans (mul_le_mul_of_nonneg_right hcutoff hscale_nonneg) hscaled
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExponentialCutoffErrorFromTarget_continued_eq_exponential_add_centralDefect
     (K M : ℕ) (X : ℝ) (s : ℂ) :
     c2ExponentialCutoffErrorFromTarget continuedCentralOddChannel K M X s =
@@ -1234,6 +1290,7 @@ theorem c2ExponentialCutoffErrorFromTarget_continued_eq_exponential_add_centralD
   simp [c2ExponentialCutoffError, c2ExponentialCutoffErrorFromTarget,
     c2AnalyticCentralTarget]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExponentialCutoffErrorFromTarget_continued_norm_le_exponential_add_centralDefect
     (K M : ℕ) (X : ℝ) (s : ℂ) :
     ‖c2ExponentialCutoffErrorFromTarget continuedCentralOddChannel K M X s‖ ≤
@@ -1243,6 +1300,7 @@ theorem c2ExponentialCutoffErrorFromTarget_continued_norm_le_exponential_add_cen
     K M X s]
   exact norm_add_le _ _
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2ExponentialCutoffErrorFromTarget_continued_norm_le_pointwiseOscillatoryUpper_add_centralDefect
     (K M J : ℕ) (X : ℝ) (s : ℂ) (hJ : 1 ≤ J) :
@@ -1256,6 +1314,7 @@ theorem
       (c2ExponentialCutoffError_norm_le_pointwiseOscillatoryUpper K M J X s hJ)
       le_rfl)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2ConcreteCutoffErrorFromTarget_continued_norm_le_exponentialFromTarget_add_residualWitness
     (K M J : ℕ) (X : ℝ) (s : ℂ) (hJ : 1 ≤ J) :
@@ -1266,6 +1325,7 @@ theorem
     c2ConcreteCutoffErrorFromTarget_norm_le_exponentialFromTarget_add_pointwiseOscillatoryExpUpper
       continuedCentralOddChannel K M J X s hJ
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2ConcreteCutoffErrorFromTarget_continued_norm_le_twoResidualWitness_add_concreteCutoff_add_centralDefect
     (K M J : ℕ) (X : ℝ) (s : ℂ) (hJ : 1 ≤ J) :
@@ -1298,6 +1358,7 @@ theorem
 The continued-target bulk model closes algebraically on the honest continued
 central channel throughout the open right half-plane.
 -/
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem c2OddTailContinuedBalancingSeedBulkModel_eq_continuedCentral_of_re_pos
     (coreCutoff : ℕ → ℕ) (K M : ℕ) {s : ℂ} (hs : 0 < s.re) :
     c2ScaledSeededExplicitOddTailContinuedBulkModel
@@ -1331,6 +1392,7 @@ noncomputable def c2OddTailContinuedBalancingSeedBulkModel
   c2ScaledSeededExplicitOddTailContinuedBulkModel
     (c2OddTailContinuedBalancingSeed coreCutoff K M) coreCutoff K M
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem c2OddTailContinuedBalancingSeedBulkModel_fundamentalIdentity
     (coreCutoff : ℕ → ℕ) (K M : ℕ) :
     FundamentalIdentityOnRightHalfPlane
@@ -1345,6 +1407,7 @@ theorem c2OddTailContinuedBalancingSeedBulkModel_fundamentalIdentity
     _ = c0 s * riemannZeta s :=
       continuedCentralOddChannel_fundamentalIdentity s hs
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem c2OddTailContinuedBalancingSeedBulkModel_fundamentalIdentity_offCritical
     (coreCutoff : ℕ → ℕ) (K M : ℕ) :
     FundamentalIdentityOnOffCriticalStrip
@@ -1352,6 +1415,7 @@ theorem c2OddTailContinuedBalancingSeedBulkModel_fundamentalIdentity_offCritical
   FundamentalIdentityOnRightHalfPlane.toOffCriticalStrip
     (c2OddTailContinuedBalancingSeedBulkModel_fundamentalIdentity coreCutoff K M)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_cover_offCritical
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (cover : OffCriticalCoverData)
@@ -1389,6 +1453,7 @@ noncomputable def c2OddTailContinuedBalancingSeedBulkModelCoverData_of_nearBulkB
     OffCriticalCoverData :=
   OffCriticalCoverData.ofNearBulkBoundsEdge near bulk edge hBulkF hEdgeF hcover
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_nearBulkEdge
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (near : NearAxisRouteData)
@@ -1408,6 +1473,7 @@ theorem mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_nearB
         c2OddTailContinuedBalancingSeedBulkModel_fundamentalIdentity_offCritical
           coreCutoff K M)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
   mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_nearBulkBoundsEdge
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -1458,6 +1524,7 @@ noncomputable def C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofNearAxi
         simpa [hF] using near.near_axis.nonvanishing hrho hs
     }
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem c2OddTailContinuedBalancingSeedBulkModel_eq_genuineFInfinite_on_punctured
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData) :
@@ -1703,6 +1770,7 @@ noncomputable def
     rfl
     data.cover
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem offCriticalStripNonvanishing_of_oddTailContinuedBalancingSeedBulkModelNearBulkEdgeData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (data : C2OddTailContinuedBalancingSeedBulkModelNearBulkEdgeData coreCutoff K M) :
@@ -1712,6 +1780,7 @@ theorem offCriticalStripNonvanishing_of_oddTailContinuedBalancingSeedBulkModelNe
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.toNearAxisRouteData] using
     offCriticalStripNonvanishing_of_coverData data.toOffCriticalCoverData
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     offCriticalStripNonvanishing_of_oddTailContinuedBalancingSeedBulkModelNearBulkBoundsEdgeData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -1723,6 +1792,7 @@ theorem
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.toNearAxisRouteData] using
     offCriticalStripNonvanishing_of_coverData data.toOffCriticalCoverData
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_pinnedNearBulkEdge
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -1731,6 +1801,7 @@ theorem
   exact mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_cover_offCritical
     data.toOffCriticalCoverData rfl
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_pinnedNearBulkBoundsEdge
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -1935,6 +2006,7 @@ noncomputable def
   bounds := data.toRegionalVerticalBulkBoundsData
   F_eq := rfl
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_regionalBulkRouteData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (data : C2OddTailContinuedBalancingSeedBulkModelRegionalBulkRouteData coreCutoff K M)
@@ -1942,6 +2014,7 @@ theorem c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_regionalBulkRou
     c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M s ≠ 0 := by
   exact regionalVerticalBulk_nonvanishing data.toRegionalVerticalBulkRouteData hs
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_regionalBulkBoundsData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (data : C2OddTailContinuedBalancingSeedBulkModelRegionalBulkBoundsData coreCutoff K M)
@@ -1950,6 +2023,7 @@ theorem c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_regionalBulkBou
   exact regionalVerticalBulk_nonvanishing_of_bounds
     data.toRegionalVerticalBulkBoundsData hs
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_bulkRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (data : C2OddTailContinuedBalancingSeedBulkModelBulkRegionData coreCutoff K M)
@@ -1957,6 +2031,7 @@ theorem c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_bulkRegionData
     c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M s ≠ 0 := by
   simpa [data.F_eq] using data.bulk.bulk_nonvanishing hs
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_quartetRouteData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (data :
@@ -1965,6 +2040,7 @@ theorem c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_quartetRouteDat
     c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M s ≠ 0 := by
   simpa [data.F_eq] using regionalVerticalQuartetBulk_nonvanishing data.route hs
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_quartetBoundsData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (data :
@@ -1973,6 +2049,7 @@ theorem c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_quartetBoundsDa
     c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M s ≠ 0 := by
   simpa [data.F_eq] using regionalVerticalQuartetBulk_nonvanishing_of_bounds data.bounds hs
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_bulkRegionCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -1995,6 +2072,7 @@ theorem
       cover)
     rfl
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetBulkCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -2017,6 +2095,7 @@ theorem
             s ∈ bulk.route.bulkRegion ∨ s ∈ edge.edgeRegion
         exact cover)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetBoundsCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -2039,6 +2118,7 @@ theorem
             s ∈ bulk.bounds.bulkRegion ∨ s ∈ edge.edgeRegion
         exact cover)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_regionalBulkCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -2064,6 +2144,7 @@ theorem
       cover := hcover
     }
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_regionalBulkBoundsCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -2091,6 +2172,7 @@ theorem
         cover := hcover
       }
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
   mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_regional_genericNearEdge
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -2109,6 +2191,7 @@ theorem
     (C2OddTailContinuedBalancingSeedBulkModelEdgeData.ofEdgeRouteData edge hEdgeF)
     cover
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
   mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_regionalBounds_genericNearEdge
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -2177,6 +2260,7 @@ def c2OddTailContinuedBalancingSeedBulkConcreteRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailContinuedBalancingSeedBulkConcrete_mem_regularizedHorizontalRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -2259,6 +2343,7 @@ noncomputable def c2OddTailContinuedBalancingSeedBulkConcreteBoundsData
       intro s _hs
       rfl)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_concreteRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -2278,6 +2363,7 @@ theorem c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_concreteReg
       cutoffConstant cutoffScale)
     hs
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailContinuedBalancingSeedBulkConcreteRegion_nonempty_iff
     (coreCutoff : ℕ → ℕ) (K M : ℕ)
     (tiltConstant tiltScale
@@ -2297,6 +2383,7 @@ theorem c2OddTailContinuedBalancingSeedBulkConcreteRegion_nonempty_iff
           cutoffConstant cutoffScale s := by
   rfl
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkModel_exists_nonvanishing_point_of_nonempty_concreteRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -2320,6 +2407,7 @@ theorem
   exact ⟨s, hs,
     c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_concreteRegion hs⟩
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_concreteCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -2348,6 +2436,7 @@ theorem
       edge
       cover
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2LiftBulkCover_of_subset
     {nearRegion bulkRegion targetRegion edgeRegion : Set ℂ}
     (hsubset : ∀ ⦃s : ℂ⦄, s ∈ bulkRegion → s ∈ targetRegion)
@@ -2361,6 +2450,7 @@ theorem c2LiftBulkCover_of_subset
   · exact Or.inr <| Or.inl <| hsubset hbulk
   · exact Or.inr <| Or.inr hedge
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_concreteSubsetCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -2436,6 +2526,7 @@ def c2OddTailContinuedBalancingSeedBulkQuartetConcreteRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_quartetRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -2514,6 +2605,7 @@ noncomputable def c2OddTailContinuedBalancingSeedBulkQuartetConcreteGenericBound
     (c2HorizontalRegularizedUpper horizontalConstant horizontalScale horizontalRatio)
     (c2CutoffUpperFromScale cutoffConstant cutoffScale)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_quartetConcreteRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -2548,6 +2640,7 @@ theorem c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_quartetConc
   simpa [c2OddTailContinuedBalancingSeedBulkModel,
     c2ScaledSeededExplicitOddTailContinuedBulkModel] using hnonzero
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailContinuedBalancingSeedBulkQuartetConcreteRegion_nonempty_iff
     (coreCutoff : ℕ → ℕ) (K M : ℕ)
     (tiltConstant tiltScale
@@ -2567,6 +2660,7 @@ theorem c2OddTailContinuedBalancingSeedBulkQuartetConcreteRegion_nonempty_iff
           cutoffConstant cutoffScale s := by
   rfl
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkModel_exists_nonzero_of_nonempty_quartetConcreteRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -2628,6 +2722,7 @@ noncomputable def c2OddTailContinuedBalancingSeedBulkQuartetConcreteBulkRegionDa
     }
   F_eq := rfl
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -2706,6 +2801,7 @@ def c2OddTailBalancingSeedBulkModelComparisonToContinuedCentralData_of_analyticO
   ComparisonFromOneLtPuncturedData.of_analyticOnNhd_punctured
     hBulk continuedCentralOddChannel_analyticOnNhd_punctured
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeedBulkModel_eq_continuedCentral_on_punctured_of_central
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (hCentral : ∀ s : ℂ, s ∈ puncturedOpenRightHalfPlane →
@@ -2729,6 +2825,7 @@ def c2OddTailBalancingSeedBulkModelComparisonToContinuedCentral_of_central
     (c2OddTailBalancingSeedBulkModel_eq_continuedCentral_on_punctured_of_central
       (coreCutoff := coreCutoff) (K := K) (M := M) hCentral)
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeedBulkModel_fundamentalIdentity_offCritical_of_analyticOnNhd
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (hBulk : AnalyticOnNhd ℂ
@@ -2743,6 +2840,7 @@ theorem c2OddTailBalancingSeedBulkModel_fundamentalIdentity_offCritical_of_analy
     (c2OddTailBalancingSeedBulkModel_eq_continuedCentralOddChannel_on_oneLtHalfPlane
       coreCutoff K M)
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeedBulkModel_fundamentalIdentity_offCritical_of_central
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (hCentral : ∀ s : ℂ, s ∈ puncturedOpenRightHalfPlane →
@@ -2756,6 +2854,7 @@ theorem c2OddTailBalancingSeedBulkModel_fundamentalIdentity_offCritical_of_centr
     (c2OddTailBalancingSeedBulkModel_eq_continuedCentralOddChannel_on_oneLtHalfPlane
       coreCutoff K M)
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeedBulkModel_eq_genuineFInfinite_on_openRightHalfPlane
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (comparison :
@@ -2772,6 +2871,7 @@ noncomputable def c2OddTailBalancingSeedBulkModelComparisonFromOneLtData_of_atOn
     C2OddTailBalancingSeedBulkModelComparisonFromOneLtData coreCutoff K M :=
   comparison.toComparisonFromOneLtData
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeedBulkModel_eq_genuineFInfinite_on_openRightHalfPlane_of_atOne
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (comparison :
@@ -2879,6 +2979,7 @@ noncomputable def c2OddTailBalancingSeedBulkModelContinuationData_of_continuatio
     (c2OddTailBalancingSeedBulkModelComparisonFromOneLtAtOneData_of_continuation
       continuation hBulk hEqAtOne)
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeedBulkModel_fundamentalIdentity_of_eqOnOpenRightHalfPlane
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (data : GenuineFInfiniteContinuationData)
@@ -2890,6 +2991,7 @@ theorem c2OddTailBalancingSeedBulkModel_fundamentalIdentity_of_eqOnOpenRightHalf
     data hEq).to_fundamentalRightHalfPlane
       (c2OddTailBalancingSeed_bulkModel_identity_on_oneLtHalfPlane coreCutoff K M)
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeedBulkModel_fundamentalIdentity_of_comparisonFromOneLt
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -2901,6 +3003,7 @@ theorem c2OddTailBalancingSeedBulkModel_fundamentalIdentity_of_comparisonFromOne
     continuation comparison).to_fundamentalRightHalfPlane
       (c2OddTailBalancingSeed_bulkModel_identity_on_oneLtHalfPlane coreCutoff K M)
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeedBulkModel_fundamentalIdentity_of_comparisonFromOneLtAtOne
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -2912,6 +3015,7 @@ theorem c2OddTailBalancingSeedBulkModel_fundamentalIdentity_of_comparisonFromOne
     continuation comparison).to_fundamentalRightHalfPlane
       (c2OddTailBalancingSeed_bulkModel_identity_on_oneLtHalfPlane coreCutoff K M)
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeedBulkModel_fundamentalIdentity_of_analyticOnNhd
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -2927,6 +3031,7 @@ theorem c2OddTailBalancingSeedBulkModel_fundamentalIdentity_of_analyticOnNhd
     continuation hBulk hGenuine hEqAtOne).to_fundamentalRightHalfPlane
       (c2OddTailBalancingSeed_bulkModel_identity_on_oneLtHalfPlane coreCutoff K M)
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeedBulkModel_fundamentalIdentity_of_continuation
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -2941,6 +3046,7 @@ theorem c2OddTailBalancingSeedBulkModel_fundamentalIdentity_of_continuation
     continuation hBulk hEqAtOne).to_fundamentalRightHalfPlane
       (c2OddTailBalancingSeed_bulkModel_identity_on_oneLtHalfPlane coreCutoff K M)
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem C2OddTailBalancingSeedBulkModelContinuationData.fundamentalIdentity
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (data : C2OddTailBalancingSeedBulkModelContinuationData coreCutoff K M) :
@@ -2970,6 +3076,7 @@ noncomputable def C2OddTailBalancingSeedBulkModelContinuationData.toGenuineRoute
     (c2OddTailBalancingSeed_bulkModel_identity_on_oneLtHalfPlane coreCutoff K M)
     cover hCoverF
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModelContinuation
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (data : C2OddTailBalancingSeedBulkModelContinuationData coreCutoff K M)
@@ -2980,6 +3087,7 @@ theorem mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModelContinuation
   exact mathlibRiemannHypothesis_of_genuineRouteData
     (data.toGenuineRouteData hNonvanishing)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModelContinuation_cover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (data : C2OddTailBalancingSeedBulkModelContinuationData coreCutoff K M)
@@ -3018,6 +3126,7 @@ noncomputable def c2OddTailBalancingSeedBulkModelGenuineRouteData_of_continuatio
   (c2OddTailBalancingSeedBulkModelContinuationData_of_continuation
     continuation hBulk hEqAtOne).toGenuineRouteDataOfCover cover hCoverF
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModel_analyticOnNhd_cover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -3034,6 +3143,7 @@ theorem mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModel_analyticOnNhd_
     (c2OddTailBalancingSeedBulkModelGenuineRouteData_of_analyticOnNhd_cover
       continuation hBulk hGenuine hEqAtOne cover hCoverF)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModel_continuation_cover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (continuation : GenuineFInfiniteContinuationData)
@@ -3049,6 +3159,7 @@ theorem mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModel_continuation_c
     (c2OddTailBalancingSeedBulkModelGenuineRouteData_of_continuation_cover
       continuation hBulk hEqAtOne cover hCoverF)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModel_analyticOnNhd_cover_offCritical
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (hBulk : AnalyticOnNhd ℂ
@@ -3063,6 +3174,7 @@ theorem mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModel_analyticOnNhd_
         c2OddTailBalancingSeedBulkModel_fundamentalIdentity_offCritical_of_analyticOnNhd
           (coreCutoff := coreCutoff) (K := K) (M := M) hBulk)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_oddTailBalancingSeedBulkModel_central_bridge_cover_offCritical
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (hCentral : ∀ s : ℂ, s ∈ puncturedOpenRightHalfPlane →
@@ -3136,6 +3248,7 @@ noncomputable def c2GenuineBulkScaledSeededExplicitOddTailC0ZetaCutoffBoundsData
       intro s hs
       exact hmodel s hs)
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2GenuineBulkScaledSeededExplicitOddTailC0ZetaCutoff_nonvanishing_of_mem
     {tiltSeed : ℂ → ℂ}
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -3179,6 +3292,7 @@ noncomputable def c2OddTailGenuineBulkBoundsData_balancingSeed
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale)
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailGenuine_nonvanishing_balancingSeed_of_mem
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -3248,6 +3362,7 @@ noncomputable def c2ResolventNoteScaleMatchedConstant
     cutoffScale s * continuedVerticalUpper s +
       horizontalConstant s * (1 - horizontalRatio s)⁻¹
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ResolventNoteUpper_eq_scaleMatched_of_pos
     {continuedVerticalUpper horizontalConstant
       cutoffScale horizontalRatio : ℂ → ℝ} {s : ℂ}
@@ -3263,6 +3378,7 @@ theorem c2ResolventNoteUpper_eq_scaleMatched_of_pos
     c2HorizontalRegularizedUpper
   field_simp [ne_of_gt hcutoffScale_pos]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2BalancingSeedFactorScaledBound.of_noteUpper
     {verticalRectangularUpper horizontalDefectUpper resolventGapUpper
       resolventConstant cutoffScale tiltConstant tiltScale : ℂ → ℝ}
@@ -3298,6 +3414,7 @@ Reduction lemma: from the three scalar bounds plus a combined scaled bound, we
 recover the operational obligation `C2OddTailBalancingSeedScaledBound` used by
 the balancing seed admissibility certificate.
 -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailBalancingSeed_scaledBound_of_componentBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -3357,6 +3474,7 @@ for the resolvent gap.
 -/
 
 /-- Closed-form bound for the resolvent gap: `‖1 - q s‖ ≤ 1 + ‖q s‖`. -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ResolventGapBound_one_add_norm_q (s : ℂ) :
     C2ResolventGapBound (fun s => 1 + ‖q s‖) s := by
   unfold C2ResolventGapBound
@@ -3369,6 +3487,7 @@ Triangle-inequality bound for the vertical/rectangular residual:
 is bounded by `‖verticalDepthTailFromTwo‖ + ‖rectangularGenuine‖
 + 2 · ‖genuineCentralDoubleSeries‖`.
 -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2VerticalRectangularResidualBound_triangle (K M : ℕ) (s : ℂ) :
     C2VerticalRectangularResidualBound K M
       (fun s =>
@@ -3414,6 +3533,7 @@ noncomputable def c2VerticalC0ZetaAnchorResidual : ℂ → ℂ :=
 Exact split of the vertical/rectangular residual into a fixed vertical anchor and
 the rectangular cutoff error against the central infinite target.
 -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ScaledSeededExplicitOddTailVerticalRectangularResidual_eq_anchor_add_cutoff
     (K M : ℕ) (s : ℂ) :
     c2ScaledSeededExplicitOddTailVerticalRectangularResidual K M s =
@@ -3426,6 +3546,7 @@ theorem c2ScaledSeededExplicitOddTailVerticalRectangularResidual_eq_anchor_add_c
 /--
 On `Re(s) > 1`, the same split can be written against the `c0 * ζ` cutoff error.
 -/
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem
   c2ScaledSeededExplicitOddTailVerticalRectangularResidual_eq_c0ZetaAnchor_add_cutoff_of_one_lt_re
     (K M : ℕ) {s : ℂ} (hs : 1 < s.re) :
@@ -3441,6 +3562,7 @@ theorem
 The `c0 * ζ` vertical anchor factors through the odd Dirichlet channel.
 This isolates the non-decaying vertical contribution from the genuine central term.
 -/
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2VerticalC0ZetaAnchorResidual_eq_factorized_of_one_lt_re
     (s : ℂ) (hs : 1 < s.re) :
     c2VerticalC0ZetaAnchorResidual s =
@@ -3455,6 +3577,7 @@ theorem c2VerticalC0ZetaAnchorResidual_eq_factorized_of_one_lt_re
 noncomputable def c2VerticalC0ZetaAnchorExplicitUpper (s : ℂ) : ℝ :=
   verticalDepthTailUpper s * (1 + 2 * oddDirichletChannelExplicitUpper s)
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2VerticalC0ZetaAnchorResidual_bound_explicit_of_one_lt_re
     (s : ℂ) (hs : 1 < s.re) :
     ‖c2VerticalC0ZetaAnchorResidual s‖ ≤ c2VerticalC0ZetaAnchorExplicitUpper s := by
@@ -3494,6 +3617,7 @@ Refined vertical/rectangular bound: a bound on the fixed `c0 * ζ` anchor togeth
 with a scaled rectangular cutoff bound implies a bound for the full
 vertical/rectangular residual.
 -/
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2VerticalRectangularResidualBound_of_c0ZetaAnchor_and_cutoffScaled
     {K M : ℕ}
     {verticalAnchorUpper cutoffConstant cutoffScale : ℂ → ℝ} {s : ℂ}
@@ -3521,6 +3645,7 @@ Geometric layer bound for the regularized odd horizontal defect: from a per-laye
 estimate `‖layer j‖ ≤ (C/X) * r^j` with `0 ≤ r < 1` we obtain
 `C2OddHorizontalDefectBound` against `c2HorizontalRegularizedUpper C X r`.
 -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddHorizontalDefectBound_of_layer_geometric
     {coreCutoff : ℕ → ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ} {s : ℂ}
@@ -3553,6 +3678,7 @@ def C2ContinuedVerticalResidualBound
   ‖c2ScaledSeededExplicitOddTailContinuedVerticalResidual K M s‖ ≤
     continuedVerticalUpper s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailContinuedBalancingSeed_norm_le
     (coreCutoff : ℕ → ℕ) (K M : ℕ) (s : ℂ) :
     ‖c2OddTailContinuedBalancingSeed coreCutoff K M s‖ ≤
@@ -3590,6 +3716,7 @@ def C2OddTailContinuedBalancingSeedScaledBound
       ‖1 - q s‖) *
     tiltScale s ≤ tiltConstant s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailContinuedBalancingSeed_scaled_bound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale : ℂ → ℝ} {s : ℂ}
@@ -3604,6 +3731,7 @@ theorem c2OddTailContinuedBalancingSeed_scaled_bound
       hscale_nonneg)
     hbound
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailContinuedBalancingSeed_scaledBound_of_componentBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -3697,6 +3825,7 @@ def c2OddTailContinuedBalancingSeedBulkQuartetComponentRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_componentRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -3751,6 +3880,7 @@ theorem
     quartet_dominance := hs.quartet_dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_quartetComponentRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -3771,6 +3901,7 @@ theorem
 noncomputable def c2ContinuedVerticalResidualExactUpper (K M : ℕ) : ℂ → ℝ :=
   fun s => ‖c2ScaledSeededExplicitOddTailContinuedVerticalResidual K M s‖
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ContinuedVerticalResidualBound_exact (K M : ℕ) (s : ℂ) :
     C2ContinuedVerticalResidualBound K M
       (c2ContinuedVerticalResidualExactUpper K M) s := by
@@ -3826,6 +3957,7 @@ def c2OddTailContinuedBalancingSeedBulkQuartetExactRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetComponent_mem_of_exactRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -3859,6 +3991,7 @@ theorem
     quartet_dominance := hs.quartet_dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_exactRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -3878,6 +4011,7 @@ theorem
   c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_componentRegion
     (c2OddTailContinuedBalancingSeedBulkQuartetComponent_mem_of_exactRegion hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_quartetExactRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -3908,6 +4042,7 @@ noncomputable def c2ContinuedVerticalResidualTriangleUpper (K M : ℕ) : ℂ →
     verticalDepthTailUpper s + ‖rectangularGenuine s K M‖ +
       2 * ‖continuedCentralOddChannel s‖
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ContinuedVerticalResidualBound_triangle (K M : ℕ) (s : ℂ) :
     C2ContinuedVerticalResidualBound K M
       (fun s =>
@@ -3941,6 +4076,7 @@ theorem c2ContinuedVerticalResidualBound_triangle (K M : ℕ) (s : ℂ) :
     _ = ‖verticalDepthTailFromTwo s‖ + ‖rectangularGenuine s K M‖ +
           2 * ‖continuedCentralOddChannel s‖ := by rw [h₃]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ContinuedVerticalResidualBound_triangleUpper_of_offCritical
     (K M : ℕ) {s : ℂ} (hs : offCriticalStrip s) :
     C2ContinuedVerticalResidualBound K M
@@ -3950,6 +4086,7 @@ theorem c2ContinuedVerticalResidualBound_triangleUpper_of_offCritical
   unfold C2ContinuedVerticalResidualBound c2ContinuedVerticalResidualTriangleUpper at *
   linarith
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ContinuedVerticalResidualTriangleUpper_nonneg_of_offCritical
     (K M : ℕ) {s : ℂ} (hs : offCriticalStrip s) :
     0 ≤ c2ContinuedVerticalResidualTriangleUpper K M s := by
@@ -3962,6 +4099,7 @@ theorem c2ContinuedVerticalResidualTriangleUpper_nonneg_of_offCritical
 noncomputable def c2ContinuedCutoffTriangleUpper (K M : ℕ) : ℂ → ℝ :=
   fun s => ‖rectangularGenuine s K M‖ + ‖continuedCentralOddChannel s‖
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ContinuedCutoff_norm_le_triangle (K M : ℕ) (s : ℂ) :
     ‖c2ConcreteCutoffErrorFromTarget continuedCentralOddChannel K M s‖ ≤
       c2ContinuedCutoffTriangleUpper K M s := by
@@ -3970,6 +4108,7 @@ theorem c2ContinuedCutoff_norm_le_triangle (K M : ℕ) (s : ℂ) :
   simpa [sub_eq_add_neg, norm_neg] using
     norm_add_le (rectangularGenuine s K M) (-continuedCentralOddChannel s)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ContinuedCutoff_scaled_bound_of_triangle
     {K M : ℕ} {cutoffConstant cutoffScale : ℂ → ℝ} {s : ℂ}
     (hscale_nonneg : 0 ≤ cutoffScale s)
@@ -4027,6 +4166,7 @@ def c2OddTailContinuedBalancingSeedBulkQuartetTriangleRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetComponent_mem_of_triangleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -4062,6 +4202,7 @@ theorem
     quartet_dominance := hs.quartet_dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_triangleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -4081,6 +4222,7 @@ theorem
   c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_componentRegion
     (c2OddTailContinuedBalancingSeedBulkQuartetComponent_mem_of_triangleRegion hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_quartetTriangleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -4118,6 +4260,7 @@ def C2ContinuedCentralBound (centralUpper : ℂ → ℝ) (s : ℂ) : Prop :=
 noncomputable def c2GenuineCentralExactUpper : ℂ → ℝ :=
   fun s => ‖genuineCentralDoubleSeries s‖
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2GenuineCentralBound_exact (s : ℂ) :
     C2GenuineCentralBound c2GenuineCentralExactUpper s := by
   unfold C2GenuineCentralBound c2GenuineCentralExactUpper
@@ -4127,6 +4270,7 @@ noncomputable def c2CentralDefectTriangleUpper
     (genuineCentralUpper continuedCentralUpper : ℂ → ℝ) : ℂ → ℝ :=
   fun s => genuineCentralUpper s + continuedCentralUpper s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2CentralDefectBound_triangle_of_bounds
     {genuineCentralUpper continuedCentralUpper : ℂ → ℝ} {s : ℂ}
     (hgenuine : C2GenuineCentralBound genuineCentralUpper s)
@@ -4150,6 +4294,7 @@ noncomputable def c2ContinuedCutoffClosedUpper
     (_K _M : ℕ) (rectangularUpper centralUpper : ℂ → ℝ) : ℂ → ℝ :=
   fun s => rectangularUpper s + centralUpper s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ContinuedVerticalResidualBound_closedUpper_of_bounds
     {K M : ℕ} {rectangularUpper centralUpper : ℂ → ℝ} {s : ℂ}
     (hs : offCriticalStrip s)
@@ -4165,6 +4310,7 @@ theorem c2ContinuedVerticalResidualBound_closedUpper_of_bounds
     C2ContinuedCentralBound at *
   linarith
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ContinuedVerticalResidualClosedUpper_nonneg_of_bounds
     {K M : ℕ} {rectangularUpper centralUpper : ℂ → ℝ} {s : ℂ}
     (hs : offCriticalStrip s)
@@ -4180,6 +4326,7 @@ theorem c2ContinuedVerticalResidualClosedUpper_nonneg_of_bounds
   unfold c2ContinuedVerticalResidualClosedUpper
   positivity
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ContinuedCutoff_norm_le_closedUpper_of_bounds
     {K M : ℕ} {rectangularUpper centralUpper : ℂ → ℝ} {s : ℂ}
     (hrect : C2RectangularGenuineBound K M rectangularUpper s)
@@ -4191,6 +4338,7 @@ theorem c2ContinuedCutoff_norm_le_closedUpper_of_bounds
     C2RectangularGenuineBound C2ContinuedCentralBound at *
   linarith
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ContinuedCutoff_scaled_bound_of_closedUpper
     {K M : ℕ} {rectangularUpper centralUpper cutoffConstant cutoffScale : ℂ → ℝ}
     {s : ℂ}
@@ -4258,6 +4406,7 @@ def c2OddTailContinuedBalancingSeedBulkQuartetClosedRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetComponent_mem_of_closedRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -4297,6 +4446,7 @@ theorem
     quartet_dominance := hs.quartet_dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_closedRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -4317,6 +4467,7 @@ theorem
   c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_componentRegion
     (c2OddTailContinuedBalancingSeedBulkQuartetComponent_mem_of_closedRegion hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_quartetClosedRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -4344,12 +4495,14 @@ noncomputable def c2RectangularDirectFiniteUpper (K M : ℕ) : ℂ → ℝ :=
       ∑ m ∈ oddCoresUpTo M,
         ‖directPairTerm (complexDirichletCoeff s) k m‖
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2RectangularDirectFiniteUpper_nonneg (K M : ℕ) (s : ℂ) :
     0 ≤ c2RectangularDirectFiniteUpper K M s := by
   unfold c2RectangularDirectFiniteUpper
   exact Finset.sum_nonneg fun _ _ =>
     Finset.sum_nonneg fun _ _ => norm_nonneg _
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem rectangularDirect_norm_le_finiteUpper (s : ℂ) (K M : ℕ) :
     ‖rectangularDirect s K M‖ ≤ c2RectangularDirectFiniteUpper K M s := by
   unfold rectangularDirect c2RectangularDirectFiniteUpper
@@ -4375,12 +4528,14 @@ noncomputable def c2RectangularBracketFiniteUpper (K M : ℕ) : ℂ → ℝ :=
       ∑ m ∈ oddCoresUpTo M,
         ‖bracketTerm (complexDirichletCoeff s) k m‖
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2RectangularBracketFiniteUpper_nonneg (K M : ℕ) (s : ℂ) :
     0 ≤ c2RectangularBracketFiniteUpper K M s := by
   unfold c2RectangularBracketFiniteUpper
   exact Finset.sum_nonneg fun _ _ =>
     Finset.sum_nonneg fun _ _ => norm_nonneg _
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem rectangularBracket_norm_le_finiteUpper (s : ℂ) (K M : ℕ) :
     ‖rectangularBracket s K M‖ ≤ c2RectangularBracketFiniteUpper K M s := by
   unfold rectangularBracket c2RectangularBracketFiniteUpper
@@ -4399,6 +4554,7 @@ theorem rectangularBracket_norm_le_finiteUpper (s : ℂ) (K M : ℕ) :
           intro k _hk
           exact norm_sum_le _ _
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2RectangularGenuineBound_directBracket (K M : ℕ) (s : ℂ) :
     C2RectangularGenuineBound K M
       (c2RectangularGenuineDirectBracketUpper K M) s := by
@@ -4411,6 +4567,7 @@ theorem c2RectangularGenuineBound_directBracket (K M : ℕ) (s : ℂ) :
 noncomputable def c2ContinuedCentralExactUpper : ℂ → ℝ :=
   fun s => ‖continuedCentralOddChannel s‖
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ContinuedCentralBound_exact (s : ℂ) :
     C2ContinuedCentralBound c2ContinuedCentralExactUpper s := by
   unfold C2ContinuedCentralBound c2ContinuedCentralExactUpper
@@ -4423,6 +4580,7 @@ def C2ContinuedOddChannelBound (oddUpper : ℂ → ℝ) (s : ℂ) : Prop :=
 noncomputable def c2ContinuedCentralFromOddUpper (oddUpper : ℂ → ℝ) : ℂ → ℝ :=
   fun s => 2 * verticalDepthTailUpper s * oddUpper s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ContinuedCentralBound_of_oddChannelBound
     {oddUpper : ℂ → ℝ} {s : ℂ}
     (hs : offCriticalStrip s)
@@ -4501,6 +4659,7 @@ def c2OddTailContinuedBalancingSeedBulkQuartetCanonicalClosedRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetClosed_mem_of_canonicalClosedRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -4536,6 +4695,7 @@ theorem
     quartet_dominance := hs.quartet_dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_canonicalClosedRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -4555,6 +4715,7 @@ theorem
   c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_closedRegion
     (c2OddTailContinuedBalancingSeedBulkQuartetClosed_mem_of_canonicalClosedRegion hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_canonicalClosedRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -4585,6 +4746,7 @@ noncomputable def c2RectangularGenuineDepthCoreUpper
     (_K _M : ℕ) (depthUpper coreUpper : ℂ → ℝ) : ℂ → ℝ :=
   fun s => 2 * depthUpper s * coreUpper s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2RectangularGenuineBound_depthCore_of_bounds
     {K M : ℕ} {depthUpper coreUpper : ℂ → ℝ} {s : ℂ}
     (hdepth : C2RectangularDepthFactorBound K depthUpper s)
@@ -4610,6 +4772,7 @@ theorem c2RectangularGenuineBound_depthCore_of_bounds
 noncomputable def c2RectangularDepthFactorExactUpper (K : ℕ) : ℂ → ℝ :=
   fun s => ‖rectangularDepthFactor s K‖
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2RectangularDepthFactorBound_exact (K : ℕ) (s : ℂ) :
     C2RectangularDepthFactorBound K (c2RectangularDepthFactorExactUpper K) s := by
   unfold C2RectangularDepthFactorBound c2RectangularDepthFactorExactUpper
@@ -4619,6 +4782,7 @@ theorem c2RectangularDepthFactorBound_exact (K : ℕ) (s : ℂ) :
 noncomputable def c2RectangularOddCoreExactUpper (M : ℕ) : ℂ → ℝ :=
   fun s => ‖rectangularOddCoreSum s M‖
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2RectangularOddCoreBound_exact (M : ℕ) (s : ℂ) :
     C2RectangularOddCoreBound M (c2RectangularOddCoreExactUpper M) s := by
   unfold C2RectangularOddCoreBound c2RectangularOddCoreExactUpper
@@ -4634,6 +4798,7 @@ def C2RiemannZetaBound (zetaUpper : ℂ → ℝ) (s : ℂ) : Prop :=
 noncomputable def c2RiemannZetaExactUpper : ℂ → ℝ :=
   fun s => ‖riemannZeta s‖
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2RiemannZetaBound_exact (s : ℂ) :
     C2RiemannZetaBound c2RiemannZetaExactUpper s := by
   unfold C2RiemannZetaBound c2RiemannZetaExactUpper
@@ -4643,6 +4808,7 @@ theorem c2RiemannZetaBound_exact (s : ℂ) :
 noncomputable def c2RiemannZetaOneLtDirichletUpper : ℂ → ℝ :=
   fun s => ∑' n : ℕ, ‖complexDirichletCoeff s (n + 1)‖
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma summable_positiveDirichletCoeff_norm_of_one_lt_re
     (s : ℂ) (hs : 1 < s.re) :
     Summable fun n : ℕ => ‖complexDirichletCoeff s (n + 1)‖ := by
@@ -4656,6 +4822,7 @@ lemma summable_positiveDirichletCoeff_norm_of_one_lt_re
     rw [complexDirichletCoeff_eq_cpow_neg s (by omega : n + 1 ≠ 0)]
     simp [riemannZetaSummandHom, Nat.cast_add, Nat.cast_one]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2RiemannZetaBound_oneLtDirichletUpper
     {s : ℂ} (hs : 1 < s.re) :
     C2RiemannZetaBound c2RiemannZetaOneLtDirichletUpper s := by
@@ -4670,6 +4837,7 @@ noncomputable def c2ContinuedOddFromZetaUpper
     (eulerUpper zetaUpper : ℂ → ℝ) : ℂ → ℝ :=
   fun s => eulerUpper s * zetaUpper s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ContinuedOddChannelBound_of_zetaBound
     {eulerUpper zetaUpper : ℂ → ℝ} {s : ℂ}
     (heuler : C2OddEulerFactorBound eulerUpper s)
@@ -4691,6 +4859,7 @@ theorem c2ContinuedOddChannelBound_of_zetaBound
 noncomputable def c2OddEulerFactorTriangleUpper : ℂ → ℝ :=
   fun s => 1 + ‖complexDirichletCoeff s 2‖
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddEulerFactorBound_triangle (s : ℂ) :
     C2OddEulerFactorBound c2OddEulerFactorTriangleUpper s := by
   unfold C2OddEulerFactorBound c2OddEulerFactorTriangleUpper
@@ -4755,6 +4924,7 @@ def c2OddTailContinuedBalancingSeedBulkQuartetZetaDepthCoreRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetClosed_mem_of_zetaDepthCoreRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -4796,6 +4966,7 @@ theorem
     quartet_dominance := hs.quartet_dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_zetaDepthCoreRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -4816,6 +4987,7 @@ theorem
   c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_closedRegion
     (c2OddTailContinuedBalancingSeedBulkQuartetClosed_mem_of_zetaDepthCoreRegion hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_zetaDepthCoreRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -4893,6 +5065,7 @@ def c2OddTailBalancingSeedConcreteRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeed_mem_c0ZetaCutoffRegion_of_mem_concreteRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -4973,6 +5146,7 @@ theorem c2OddTailBalancingSeed_mem_c0ZetaCutoffRegion_of_mem_concreteRegion
     dominance := hs.dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailBalancingSeed_nonvanishing_of_mem_concreteRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -5049,6 +5223,7 @@ def c2OddTailBalancingSeedRefinedConcreteRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeed_mem_c0ZetaCutoffRegion_of_mem_refinedConcreteRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {verticalAnchorUpper tiltConstant tiltScale
@@ -5140,6 +5315,7 @@ theorem c2OddTailBalancingSeed_mem_c0ZetaCutoffRegion_of_mem_refinedConcreteRegi
     dominance := hs.dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailBalancingSeed_nonvanishing_of_mem_refinedConcreteRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {verticalAnchorUpper tiltConstant tiltScale
@@ -5205,6 +5381,7 @@ def c2OddTailBalancingSeedExplicitAnchorRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: FORMAL_BARRIER
 theorem c2OddTailBalancingSeedExplicitAnchorRegion_eq_empty
     (coreCutoff : ℕ → ℕ) (K M : ℕ)
     (tiltConstant tiltScale
@@ -5222,6 +5399,7 @@ theorem c2OddTailBalancingSeedExplicitAnchorRegion_eq_empty
   · intro hs
     simp at hs
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailBalancingSeed_mem_refinedConcreteRegion_of_mem_explicitAnchorRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -5255,6 +5433,7 @@ theorem c2OddTailBalancingSeed_mem_refinedConcreteRegion_of_mem_explicitAnchorRe
     dominance := hs.dominance
   }
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeed_mem_c0ZetaCutoffRegion_of_mem_explicitAnchorRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -5273,6 +5452,7 @@ theorem c2OddTailBalancingSeed_mem_c0ZetaCutoffRegion_of_mem_explicitAnchorRegio
   exact c2OddTailBalancingSeed_mem_c0ZetaCutoffRegion_of_mem_refinedConcreteRegion
     (c2OddTailBalancingSeed_mem_refinedConcreteRegion_of_mem_explicitAnchorRegion hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailBalancingSeed_nonvanishing_of_mem_explicitAnchorRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -5297,6 +5477,7 @@ single point satisfies the explicit quantitative estimates, the operational bulk
 zone is nonempty and contains a point where `genuineFInfinite` is nonzero.
 -/
 
+-- ROUTE_TAG: FORMAL_BARRIER
 theorem c2OddTailBalancingSeedExplicitAnchorRegion_nonempty_iff
     (coreCutoff : ℕ → ℕ) (K M : ℕ)
     (tiltConstant tiltScale
@@ -5316,6 +5497,7 @@ theorem c2OddTailBalancingSeedExplicitAnchorRegion_nonempty_iff
           cutoffConstant cutoffScale s := by
   rfl
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem
   c2BulkScaledSeededExplicitOddTailC0ZetaCutoffRegion_nonempty_of_nonempty_explicitAnchorRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -5338,6 +5520,7 @@ theorem
   exact ⟨s,
     c2OddTailBalancingSeed_mem_c0ZetaCutoffRegion_of_mem_explicitAnchorRegion hs⟩
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailBalancingSeed_exists_nonvanishing_point_of_nonempty_explicitAnchorRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -5384,6 +5567,7 @@ noncomputable def c2ConcreteCutoffErrorC0ZetaExplicitUpper
       oddDirichletTailExplicitUpper s ((M + 1) / 2) +
     2 * rectangularDepthCutoffUpper s K * oddDirichletChannelExplicitUpper s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma rectangularDepthCutoffUpper_nonneg_of_re_pos
     (s : ℂ) (K : ℕ) (hs : 0 < s.re) :
     0 ≤ rectangularDepthCutoffUpper s K := by
@@ -5393,6 +5577,7 @@ lemma rectangularDepthCutoffUpper_nonneg_of_re_pos
     linarith [norm_nonneg (q s)]
   exact div_nonneg (by positivity) hden
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma rectangularDepthFactorExplicitUpper_nonneg_of_re_pos
     (s : ℂ) (K : ℕ) (hs : 0 < s.re) :
     0 ≤ rectangularDepthFactorExplicitUpper s K := by
@@ -5401,6 +5586,7 @@ lemma rectangularDepthFactorExplicitUpper_nonneg_of_re_pos
     (verticalDepthTailUpper_nonneg_of_re_pos s hs)
     (rectangularDepthCutoffUpper_nonneg_of_re_pos s K hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem verticalResolvent_norm_le_upper_of_re_pos
     (s : ℂ) (hs : 0 < s.re) :
     ‖verticalResolvent s‖ ≤ (1 - ‖q s‖)⁻¹ := by
@@ -5423,6 +5609,7 @@ theorem verticalResolvent_norm_le_upper_of_re_pos
     _ = (1 - ‖q s‖)⁻¹ := by
       rw [tsum_geometric_of_lt_one hq_nonneg hq_lt_one]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem rectangularDepthFactor_eq_closed_of_re_pos
     (s : ℂ) (K : ℕ) (hs : 0 < s.re) (hK : 2 ≤ K) :
     rectangularDepthFactor s K =
@@ -5434,6 +5621,7 @@ theorem rectangularDepthFactor_eq_closed_of_re_pos
   unfold FormalDirichletKernel.closedDepthFactor
   simp [complexDirichletKernel, verticalRatio]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem rectangularDepthFactor_sub_verticalDepthTailFromTwo_eq_neg_cutoff_of_re_pos
     (s : ℂ) (K : ℕ) (hs : 0 < s.re) (hK : 2 ≤ K) :
     rectangularDepthFactor s K - verticalDepthTailFromTwo s =
@@ -5448,6 +5636,7 @@ theorem rectangularDepthFactor_sub_verticalDepthTailFromTwo_eq_neg_cutoff_of_re_
   field_simp [hden₁, hden₂]
   ring
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem rectangularDepthFactor_sub_verticalDepthTailFromTwo_norm_le_explicit_of_re_pos
     (s : ℂ) (K : ℕ) (hs : 0 < s.re) (hK : 2 ≤ K) :
     ‖rectangularDepthFactor s K - verticalDepthTailFromTwo s‖ ≤
@@ -5465,6 +5654,7 @@ theorem rectangularDepthFactor_sub_verticalDepthTailFromTwo_norm_le_explicit_of_
           rw [div_eq_mul_inv]
           simp [q, norm_pow]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem rectangularDepthFactor_norm_le_explicit_of_re_pos
     (s : ℂ) (K : ℕ) (hs : 0 < s.re) (hK : 2 ≤ K) :
     ‖rectangularDepthFactor s K‖ ≤ rectangularDepthFactorExplicitUpper s K := by
@@ -5484,6 +5674,7 @@ theorem rectangularDepthFactor_norm_le_explicit_of_re_pos
 noncomputable def c2RectangularDepthFactorExplicitUpper (K : ℕ) : ℂ → ℝ :=
   fun s => rectangularDepthFactorExplicitUpper s K
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2RectangularDepthFactorBound_explicit_of_re_pos
     (K : ℕ) {s : ℂ} (hs : 0 < s.re) (hK : 2 ≤ K) :
     C2RectangularDepthFactorBound K
@@ -5491,6 +5682,7 @@ theorem c2RectangularDepthFactorBound_explicit_of_re_pos
   unfold C2RectangularDepthFactorBound c2RectangularDepthFactorExplicitUpper
   exact rectangularDepthFactor_norm_le_explicit_of_re_pos s K hs hK
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2RectangularDepthFactorBound_explicit_of_offCriticalStrip
     (K : ℕ) {s : ℂ} (hs : offCriticalStrip s) (hK : 2 ≤ K) :
     C2RectangularDepthFactorBound K
@@ -5501,17 +5693,20 @@ theorem c2RectangularDepthFactorBound_explicit_of_offCriticalStrip
 noncomputable def c2RectangularOddCoreFiniteUpper (M : ℕ) : ℂ → ℝ :=
   fun s => ∑ m ∈ oddCoresUpTo M, ‖complexDirichletCoeff s m‖
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2RectangularOddCoreFiniteUpper_nonneg (M : ℕ) (s : ℂ) :
     0 ≤ c2RectangularOddCoreFiniteUpper M s := by
   unfold c2RectangularOddCoreFiniteUpper
   exact Finset.sum_nonneg fun _ _ => norm_nonneg _
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem rectangularOddCoreSum_norm_le_finiteUpper (s : ℂ) (M : ℕ) :
     ‖rectangularOddCoreSum s M‖ ≤ c2RectangularOddCoreFiniteUpper M s := by
   unfold rectangularOddCoreSum c2RectangularOddCoreFiniteUpper
   simpa using
     (norm_sum_le (oddCoresUpTo M) (fun m => complexDirichletCoeff s m))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2RectangularOddCoreBound_finite (M : ℕ) (s : ℂ) :
     C2RectangularOddCoreBound M
       (c2RectangularOddCoreFiniteUpper M) s := by
@@ -5580,6 +5775,7 @@ def c2OddTailContinuedBalancingSeedBulkQuartetExplicitFiniteCoreRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetZetaDepthCore_mem_of_explicitFiniteCoreRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -5621,6 +5817,7 @@ theorem
     quartet_dominance := hs.quartet_dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_explicitFiniteCoreRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -5641,6 +5838,7 @@ theorem
   c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_zetaDepthCoreRegion
     (c2OddTailContinuedBalancingSeedBulkQuartetZetaDepthCore_mem_of_explicitFiniteCoreRegion hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_explicitFiniteCoreRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -5737,6 +5935,7 @@ def c2OddTailContinuedBalancingSeedBulkQuartetExplicitScalarRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetExplicitFiniteCore_mem_of_explicitScalarRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -5782,6 +5981,7 @@ theorem
     quartet_dominance := hs.quartet_dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_explicitScalarRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -5802,6 +6002,7 @@ theorem
   c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_explicitFiniteCoreRegion
     (c2OddTailContinuedBalancingSeedBulkQuartetExplicitFiniteCore_mem_of_explicitScalarRegion hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_explicitScalarRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -5864,6 +6065,7 @@ def c2OddTailContinuedBalancingSeedBulkQuartetExplicitScalarExactZetaRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetExplicitScalar_mem_of_explicitScalarExactZetaRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -5897,6 +6099,7 @@ theorem
     quartet_dominance := hs.quartet_dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_explicitScalarExactZetaRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -5917,6 +6120,7 @@ theorem
     (c2OddTailContinuedBalancingSeedBulkQuartetExplicitScalar_mem_of_explicitScalarExactZetaRegion
       hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_explicitScalarExactZetaRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -5940,12 +6144,14 @@ noncomputable def c2ExplicitFiniteCoreRectangularScalarUpper
     2 * c2RectangularDepthFactorExplicitUpper K s *
       c2RectangularOddCoreFiniteUpper M s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExplicitFiniteCoreRectangularUpper_eq_scalar
     (K M : ℕ) (s : ℂ) :
     c2ExplicitFiniteCoreRectangularUpper K M s =
       c2ExplicitFiniteCoreRectangularScalarUpper K M s := by
   rfl
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2ExplicitFiniteCoreRectangularScalarUpper_nonneg_of_re_pos
     (K M : ℕ) {s : ℂ} (hs : 0 < s.re) :
     0 ≤ c2ExplicitFiniteCoreRectangularScalarUpper K M s := by
@@ -5962,11 +6168,13 @@ lemma c2ExplicitFiniteCoreRectangularScalarUpper_nonneg_of_re_pos
 noncomputable def c2ExplicitFiniteCoreOddExactZetaScalarUpper : ℂ → ℝ :=
   fun s => (1 + ‖complexDirichletCoeff s 2‖) * ‖riemannZeta s‖
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExplicitFiniteCoreOddUpper_exactZeta_eq_scalar (s : ℂ) :
     c2ExplicitFiniteCoreOddUpper c2RiemannZetaExactUpper s =
       c2ExplicitFiniteCoreOddExactZetaScalarUpper s := by
   rfl
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2ExplicitFiniteCoreOddExactZetaScalarUpper_nonneg (s : ℂ) :
     0 ≤ c2ExplicitFiniteCoreOddExactZetaScalarUpper s := by
   unfold c2ExplicitFiniteCoreOddExactZetaScalarUpper
@@ -5979,11 +6187,13 @@ noncomputable def c2ExplicitFiniteCoreCentralExactZetaScalarUpper :
     2 * verticalDepthTailUpper s *
       c2ExplicitFiniteCoreOddExactZetaScalarUpper s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExplicitFiniteCoreCentralUpper_exactZeta_eq_scalar (s : ℂ) :
     c2ExplicitFiniteCoreCentralUpper c2RiemannZetaExactUpper s =
       c2ExplicitFiniteCoreCentralExactZetaScalarUpper s := by
   rfl
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2ExplicitFiniteCoreCentralExactZetaScalarUpper_nonneg_of_re_pos
     {s : ℂ} (hs : 0 < s.re) :
     0 ≤ c2ExplicitFiniteCoreCentralExactZetaScalarUpper s := by
@@ -6003,6 +6213,7 @@ noncomputable def c2CanonicalClosedVerticalFiniteExactZetaUpper
       c2RectangularBracketFiniteUpper K M s +
       2 * c2ExplicitFiniteCoreCentralExactZetaScalarUpper s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2ContinuedCentralExactUpper_le_exactZetaScalar_of_offCriticalStrip
     {s : ℂ} (hs : offCriticalStrip s) :
     c2ContinuedCentralExactUpper s ≤ c2ExplicitFiniteCoreCentralExactZetaScalarUpper s := by
@@ -6024,6 +6235,7 @@ lemma c2ContinuedCentralExactUpper_le_exactZetaScalar_of_offCriticalStrip
     c2ExplicitFiniteCoreCentralExactZetaScalarUpper,
     c2ExplicitFiniteCoreOddExactZetaScalarUpper] using hcentral
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2GenuineCentralDoubleSeries_norm_le_exactZetaScalar_of_one_lt_re
     {s : ℂ} (hs : 1 < s.re) :
     ‖genuineCentralDoubleSeries s‖ ≤ c2ExplicitFiniteCoreCentralExactZetaScalarUpper s := by
@@ -6079,6 +6291,7 @@ lemma c2GenuineCentralDoubleSeries_norm_le_exactZetaScalar_of_one_lt_re
           unfold c2ExplicitFiniteCoreCentralExactZetaScalarUpper
           ring
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2GenuineCentralBound_exactZetaScalar_of_one_lt_re
     {s : ℂ} (hs : 1 < s.re) :
     C2GenuineCentralBound c2ExplicitFiniteCoreCentralExactZetaScalarUpper s := by
@@ -6094,18 +6307,21 @@ noncomputable def c2GenuineCentralSplitAtOneUpper
   fun s => if 1 < s.re then c2ExplicitFiniteCoreCentralExactZetaScalarUpper s
     else genuineCentralUpper s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2GenuineCentralSplitAtOneUpper_eq_exactZeta_of_one_lt_re
     {genuineCentralUpper : ℂ → ℝ} {s : ℂ} (hs : 1 < s.re) :
     c2GenuineCentralSplitAtOneUpper genuineCentralUpper s =
       c2ExplicitFiniteCoreCentralExactZetaScalarUpper s := by
   simp [c2GenuineCentralSplitAtOneUpper, hs]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2GenuineCentralSplitAtOneUpper_eq_original_of_re_le_one
     {genuineCentralUpper : ℂ → ℝ} {s : ℂ} (hs : s.re ≤ 1) :
     c2GenuineCentralSplitAtOneUpper genuineCentralUpper s =
       genuineCentralUpper s := by
   simp [c2GenuineCentralSplitAtOneUpper, not_lt.mpr hs]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2GenuineCentralBound_splitAtOne
     {genuineCentralUpper : ℂ → ℝ} {s : ℂ}
     (hcenter : s.re ≤ 1 → C2GenuineCentralBound genuineCentralUpper s) :
@@ -6117,6 +6333,7 @@ theorem c2GenuineCentralBound_splitAtOne
     simpa [C2GenuineCentralBound, c2GenuineCentralSplitAtOneUpper, hs] using
       (hcenter hle)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2CentralDefectTriangleUpper_splitAtOne_le_two_mul_splitAtOneUpper
     {centralDefectUpper genuineCentralUpper : ℂ → ℝ} {s : ℂ}
     (hcentralDefect :
@@ -6160,6 +6377,7 @@ theorem c2CentralDefectTriangleUpper_splitAtOne_le_two_mul_splitAtOneUpper
       symm
       rw [two_mul]))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2CentralDefectTriangleUpper_splitAtOne_le_two_mul_splitAtOneUpper_of_exactZetaLeOne
     {genuineCentralUpper : ℂ → ℝ} {s : ℂ}
     (hexact_le :
@@ -6188,6 +6406,7 @@ theorem c2CentralDefectTriangleUpper_splitAtOne_le_two_mul_splitAtOneUpper_of_ex
       symm
       rw [two_mul]))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2CentralDefect_norm_le_splitAtOneUpper_of_exactZetaCentralDefect
     {centralDefectUpper genuineCentralUpper : ℂ → ℝ} {s : ℂ}
     (hs : offCriticalStrip s)
@@ -6221,6 +6440,7 @@ theorem c2CentralDefect_norm_le_splitAtOneUpper_of_exactZetaCentralDefect
       nlinarith
     exact le_trans hcentralDefect hdef_le
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2CanonicalClosedVerticalUpper_le_finiteExactZetaUpper_of_offCriticalStrip
     (K M : ℕ) {s : ℂ} (hs : offCriticalStrip s) :
     c2ContinuedVerticalResidualClosedUpper K M
@@ -6263,6 +6483,7 @@ noncomputable def
       c2ExplicitFiniteCoreRectangularScalarUpper K M s +
       2 * c2ExplicitFiniteCoreCentralExactZetaScalarUpper s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExplicitFiniteCoreContinuedVerticalUpper_exactZeta_eq_scalar
     (K M : ℕ) (s : ℂ) :
     c2ExplicitFiniteCoreContinuedVerticalUpper
@@ -6270,6 +6491,7 @@ theorem c2ExplicitFiniteCoreContinuedVerticalUpper_exactZeta_eq_scalar
       c2ExplicitFiniteCoreContinuedVerticalExactZetaScalarUpper K M s := by
   rfl
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma
     c2ExplicitFiniteCoreContinuedVerticalExactZetaScalarUpper_nonneg_of_re_pos
     (K M : ℕ) {s : ℂ} (hs : 0 < s.re) :
@@ -6293,6 +6515,7 @@ noncomputable def
     c2ExplicitFiniteCoreRectangularScalarUpper K M s +
       c2ExplicitFiniteCoreCentralExactZetaScalarUpper s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExplicitFiniteCoreContinuedCutoffUpper_exactZeta_eq_scalar
     (K M : ℕ) (s : ℂ) :
     c2ExplicitFiniteCoreContinuedCutoffUpper
@@ -6300,6 +6523,7 @@ theorem c2ExplicitFiniteCoreContinuedCutoffUpper_exactZeta_eq_scalar
       c2ExplicitFiniteCoreContinuedCutoffExactZetaScalarUpper K M s := by
   rfl
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma
     c2ExplicitFiniteCoreContinuedCutoffExactZetaScalarUpper_nonneg_of_re_pos
     (K M : ℕ) {s : ℂ} (hs : 0 < s.re) :
@@ -6312,6 +6536,7 @@ lemma
   unfold c2ExplicitFiniteCoreContinuedCutoffExactZetaScalarUpper
   exact add_nonneg hrect hcentral
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ContinuedCutoff_norm_le_exactZetaScalar_of_offCriticalStrip
     (K M : ℕ) {s : ℂ} (hK : 2 ≤ K) (hs : offCriticalStrip s) :
     ‖c2ConcreteCutoffErrorFromTarget continuedCentralOddChannel K M s‖ ≤
@@ -6383,6 +6608,7 @@ def c2OddTailContinuedBalancingSeedBulkQuartetExpandedExactZetaRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2ExpandedExactZeta_mem_explicitScalarExactZetaRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -6421,6 +6647,7 @@ theorem
     quartet_dominance := hs.quartet_dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2ExplicitScalarExactZeta_mem_expandedExactZetaRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -6457,6 +6684,7 @@ theorem
     quartet_dominance := hs.quartet_dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExplicitScalarExactZetaRegion_eq_expandedExactZetaRegion
     (coreCutoff : ℕ → ℕ) (K M : ℕ)
     (tiltConstant tiltScale
@@ -6477,6 +6705,7 @@ theorem c2ExplicitScalarExactZetaRegion_eq_expandedExactZetaRegion
   · exact c2ExplicitScalarExactZeta_mem_expandedExactZetaRegion
   · exact c2ExpandedExactZeta_mem_explicitScalarExactZetaRegion
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_expandedExactZetaRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -6496,6 +6725,7 @@ theorem
   c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_explicitScalarExactZetaRegion
     (c2ExpandedExactZeta_mem_explicitScalarExactZetaRegion hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_expandedExactZetaRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -6561,6 +6791,7 @@ noncomputable def c2ExpandedQuartetResidualUpper
         horizontalConstant horizontalScale horizontalRatio s +
       c2CutoffUpperFromScale cutoffConstant cutoffScale s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExpandedQuartetFourTermUpper_eq_tail_add_residualUpper
     (tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -6577,6 +6808,7 @@ theorem c2ExpandedQuartetFourTermUpper_eq_tail_add_residualUpper
           cutoffConstant cutoffScale s := by
   simp [c2ExpandedQuartetFourTermUpper, c2ExpandedQuartetResidualUpper, add_assoc]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExpandedQuartetLeftUpper_eq_fourTermUpper
     (tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -6611,6 +6843,7 @@ residual margin.
 noncomputable def c2ExpandedQuartetResidualReserve : ℂ → ℝ :=
   fun s => 2 * ‖q s‖ ^ 6 / (1 - ‖q s‖ ^ 2)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2ExpandedQuartetK2Margin_nonneg_of_offCriticalStrip
     {s : ℂ} (hs : offCriticalStrip s) :
     0 ≤ c2ExpandedQuartetK2Margin s := by
@@ -6625,6 +6858,7 @@ lemma c2ExpandedQuartetK2Margin_nonneg_of_offCriticalStrip
   unfold c2ExpandedQuartetK2Margin
   exact mul_nonneg hk2 (mul_nonneg hgap hquad)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExpandedQuartetResidualMargin_eq_analyticBulkAllowance_sub_reserve_of_offCriticalStrip
     {s : ℂ} (hs : offCriticalStrip s) :
     c2ExpandedQuartetResidualMargin s =
@@ -6657,6 +6891,7 @@ def C2ExpandedQuartetDominance
       cutoffConstant cutoffScale s <
     c2ExpandedQuartetK2Margin s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExpandedQuartetDominance_of_fourTermBound
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -6674,6 +6909,7 @@ theorem c2ExpandedQuartetDominance_of_fourTermBound
   rw [C2ExpandedQuartetDominance, c2ExpandedQuartetLeftUpper_eq_fourTermUpper]
   exact hdom
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExpandedQuartetDominance_of_budgetBounds
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -6718,6 +6954,7 @@ theorem c2ExpandedQuartetDominance_of_budgetBounds
 Finite Anti-Miracle criterion from `notas/teorema_anti_milagre.md`, expressed in
 the quartet/tail/tilt/horizontal/cutoff budget interface used by the Lean bulk route.
 -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2AntiMiracleFiniteCriterion_of_budgetBounds
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -6738,6 +6975,7 @@ theorem c2AntiMiracleFiniteCriterion_of_budgetBounds
   c2ExpandedQuartetDominance_of_budgetBounds
     hquartetTail htilt hhorizontal hcutoff hdom
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExpandedQuartetDominance_of_residualBound
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -6757,6 +6995,7 @@ theorem c2ExpandedQuartetDominance_of_residualBound
   rw [c2ExpandedQuartetFourTermUpper_eq_tail_add_residualUpper]
   linarith
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExpandedQuartetDominance_of_residualBudgetBounds
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -6793,6 +7032,7 @@ theorem c2ExpandedQuartetDominance_of_residualBudgetBounds
 Adjusted Anti-Miracle criterion from `notas/teorema_anti_milagre.md`, after peeling off
 the exact quartet tail and keeping only the residual tilt/horizontal/cutoff budgets.
 -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2AntiMiracleAdjustedCriterion_of_residualBudgetBounds
     {tiltConstant tiltScale
       horizontalConstant horizontalScale horizontalRatio
@@ -6817,6 +7057,7 @@ Abstract finite Anti-Miracle criterion from `notas/teorema_anti_milagre.md`:
 if a quartet lower bound beats tail plus cutoff proxy, then the limiting object is
 nonzero.
 -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2AntiMiracleFiniteCriterion_of_splitBounds
     {FInfinity FX quartet tail : ℂ → ℂ}
     {quartetLower tailBudget cutoffProxy : ℂ → ℝ}
@@ -6847,6 +7088,7 @@ Abstract adjusted Anti-Miracle criterion from `notas/teorema_anti_milagre.md`:
 the quantity `quartetMain - adjustmentDefect` is the lower bound coming from the
 adjusted quartet `|A(s) P₄(β(s))| - Σ |Eⱼ(s)|`.
 -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2AntiMiracleAdjustedCriterion_of_adjustedQuartetBounds
     {FInfinity FX quartet tail : ℂ → ℂ}
     {quartetMain adjustmentDefect tailBudget cutoffProxy : ℂ → ℝ}
@@ -6865,6 +7107,7 @@ theorem c2AntiMiracleAdjustedCriterion_of_adjustedQuartetBounds
 Pointwise lower bound from the adjusted quartet representation in
 `notas/teorema_anti_milagre.md`.
 -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2AntiMiracleAdjustedQuartetLowerBound_of_errorSplit
     {quartet A beta E0 E1 E2 E3 : ℂ}
     (hrep : quartet =
@@ -6902,6 +7145,7 @@ theorem c2AntiMiracleAdjustedQuartetLowerBound_of_errorSplit
 Adjusted Anti-Miracle criterion directly from the pointwise representation
 `F_{2+j,X}(s) = A(s) β(s)^j + Eⱼ(s)`.
 -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2AntiMiracleAdjustedCriterion_of_errorSplit
     {FInfinity FX quartet tail A beta E0 E1 E2 E3 : ℂ → ℂ}
     {tailBudget cutoffProxy : ℂ → ℝ}
@@ -6924,6 +7168,7 @@ theorem c2AntiMiracleAdjustedCriterion_of_errorSplit
     (c2AntiMiracleAdjustedQuartetLowerBound_of_errorSplit hrep)
     htail hproxy hdom
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleAdjustedQuartetLowerBound
     (tiltSeed : ℂ → ℂ) (coreCutoff : ℕ → ℕ) (s : ℂ) :
     c2ConcreteAntiMiracleAdjustedMain tiltSeed s -
@@ -6940,6 +7185,7 @@ theorem c2ConcreteAntiMiracleAdjustedQuartetLowerBound
       (E3 := c2ConcreteAntiMiracleAdjustedError3 coreCutoff s)
       (c2ConcreteAntiMiracleAdjustedQuartet_eq_errorSplit tiltSeed coreCutoff s))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleHorizontalTail_norm_le_upper_of_geometric
     {coreCutoff : ℕ → ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -6994,6 +7240,7 @@ noncomputable def c2ConcreteAntiMiracleAdjustedTailUpper
         horizontalConstant horizontalScale horizontalRatio s +
       cutoffBudget s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleAdjustedTail_norm_le_upper_of_bounds
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -7106,6 +7353,7 @@ theorem c2ConcreteAntiMiracleAdjustedTail_norm_le_upper_of_bounds
           cutoffBudget s := by
           simp [c2ConcreteAntiMiracleAdjustedTailUpper, add_assoc, add_left_comm, add_comm]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2AntiMiracleAdjustedCriterion_of_concreteSeededQuartetUpperBounds
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -7166,6 +7414,7 @@ noncomputable def c2ConcreteAntiMiracleAdjustedTailScaledUpper
     horizontalConstant horizontalScale horizontalRatio
     (c2CutoffUpperFromScale cutoffConstant cutoffScale)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleAdjustedTail_norm_le_scaledUpper_of_bounds
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -7205,6 +7454,7 @@ theorem c2ConcreteAntiMiracleAdjustedTail_norm_le_scaledUpper_of_bounds
       hhorizontalLayer
       (c2Cutoff_bound_from_scaled hcutoffScale hcutoffScaled))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2AntiMiracleAdjustedCriterion_of_concreteSeededQuartetScaledUpperBounds
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -7250,6 +7500,7 @@ theorem c2AntiMiracleAdjustedCriterion_of_concreteSeededQuartetScaledUpperBounds
       (c2Cutoff_bound_from_scaled hcutoffScale hcutoffScaled)
       hproxy hdom)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2AntiMiracleAdjustedCriterion_of_concreteSeededQuartetUpperBounds_of_residualBound
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -7301,6 +7552,7 @@ theorem c2AntiMiracleAdjustedCriterion_of_concreteSeededQuartetUpperBounds_of_re
     hhorizontalRatio_nonneg hhorizontalRatio_lt_one
     hhorizontalLayer hcutoff hproxy hdom
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2AntiMiracleAdjustedCriterion_of_concreteSeededQuartetScaledUpperBounds_of_residualBound
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -7372,6 +7624,7 @@ noncomputable def c2ConcreteAntiMiracleAdjustedAnalyticMargin
         cutoffConstant cutoffScale s -
       residualUpper s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2AntiMiracleAdjustedCriterion_of_concreteSeededQuartetScaledUpperBounds_of_analyticResidualBound
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -7416,6 +7669,7 @@ theorem
     (by
       simpa [c2ConcreteAntiMiracleAdjustedAnalyticMargin] using hmargin)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2AntiMiracleAdjustedCriterion_of_oddTailBalancingSeedScaledUpperBounds_of_centralDefectBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -7462,6 +7716,7 @@ theorem
       hhorizontalRatio_nonneg hhorizontalRatio_lt_one
       hhorizontalLayer hcutoffScale hcutoffScaled hresidual hmargin
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2AntiMiracleAdjustedCriterion_of_oddTailBalancingSeedScaledUpperBounds_of_separatedCentralBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -7507,6 +7762,7 @@ theorem
       (c2CentralDefectBound_triangle_of_bounds hgenuine hcontinued)
       hmargin
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2AntiMiracleAdjustedCriterion_of_oddTailBalancingSeedScaledUpperBounds_of_genuineCentralBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -7554,6 +7810,7 @@ theorem
       hhorizontalLayer hcutoffScale hcutoffScaled
       hgenuine hcontinued hmargin
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2AntiMiracleAdjustedCriterion_of_oddTailBalancingSeedScaledUpperBounds_of_exactGenuineCentralBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -7723,6 +7980,7 @@ noncomputable def c2ExponentialPointwiseOscillatoryRemainderUpper
     rectangularExponentialTaylorRemainderExpUpper s K M J X +
       ‖c2ConcreteCutoffError K M s‖
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExponentialCutoffError_eq_pointwiseOscillatoryMain_add_remainderTerm
     (K M J : ℕ) (X : ℝ) (s : ℂ) :
     c2ExponentialCutoffError K M X s =
@@ -7735,6 +7993,7 @@ theorem c2ExponentialCutoffError_eq_pointwiseOscillatoryMain_add_remainderTerm
     c2ExponentialPointwiseOscillatoryRemainderTerm
   ring
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExponentialPointwiseOscillatoryRemainderTerm_norm_le_upper
     (K M J : ℕ) (X : ℝ) {s : ℂ} (hJ : 1 ≤ J) :
     ‖c2ExponentialPointwiseOscillatoryRemainderTerm K M J X s‖ ≤
@@ -7755,6 +8014,7 @@ theorem c2ExponentialPointwiseOscillatoryRemainderTerm_norm_le_upper
               (rectangularExponentialTaylorRemainder_norm_le_expUpper
                 s K M J X hJ) le_rfl
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExponentialPointwiseOscillatoryRemainderTerm_norm_le_upper_three
     (K M : ℕ) (X : ℝ) (s : ℂ) :
     ‖c2ExponentialPointwiseOscillatoryRemainderTerm K M 3 X s‖ ≤
@@ -7762,6 +8022,7 @@ theorem c2ExponentialPointwiseOscillatoryRemainderTerm_norm_le_upper_three
   exact c2ExponentialPointwiseOscillatoryRemainderTerm_norm_le_upper
     K M 3 X (s := s) (by decide)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExponentialCutoffErrorPointwiseOscillatoryUpper_eq_main_add_remainderUpper
     (K M J : ℕ) (X : ℝ) (s : ℂ) :
     c2ExponentialCutoffErrorPointwiseOscillatoryUpper K M J X s =
@@ -7774,6 +8035,7 @@ theorem c2ExponentialCutoffErrorPointwiseOscillatoryUpper_eq_main_add_remainderU
     rectangularExponentialPointwiseOscillatoryExpUpper,
     add_assoc]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleResidual_norm_le_exponentialPointwiseOscillatoryUpper_of_eq_add_remainder
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M J : ℕ}
     {X : ℝ} {remainderTerm : ℂ → ℂ} {s : ℂ}
@@ -7802,6 +8064,7 @@ theorem c2ConcreteAntiMiracleResidual_norm_le_exponentialPointwiseOscillatoryUpp
     K M J X s]
   exact le_trans hmain hupper
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2ConcreteAntiMiracleResidual_norm_le_exponentialPointwiseOscillatoryUpper_of_eq_canonicalRemainder
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M J : ℕ}
@@ -7820,6 +8083,7 @@ theorem
       (c2ExponentialPointwiseOscillatoryRemainderTerm_norm_le_upper
         K M J X (s := s) hJ)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2ConcreteAntiMiracleResidual_norm_le_exponentialPointwiseOscillatoryUpper_of_eq_canonicalRemainder_three
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -7835,6 +8099,7 @@ theorem
       (K := K) (M := M) (J := 3) (X := X) (s := s)
       (by decide) hexpansion
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleHorizontalDefect_add_tail_le_regularizedUpper
     {coreCutoff : ℕ → ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -7884,6 +8149,7 @@ theorem c2ConcreteAntiMiracleHorizontalDefect_add_tail_le_regularizedUpper
         hhorizontalRatio_nonneg hhorizontalRatio_lt_one)
   linarith
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2ConcreteAntiMiracleAdjustedBaseMargin_ge_expandedQuartetResidualMargin_sub_residualUpper
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ}
@@ -8034,6 +8300,7 @@ theorem
     simp [c2ExpandedQuartetResidualMargin, c2ExpandedQuartetResidualUpper]
   ring
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2ConcreteAntiMiracleAdjustedExponentialPointwiseOscillatoryMargin_pos_of_combinedResidualDominance
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
@@ -8080,6 +8347,7 @@ theorem
     c2ConcreteAntiMiracleAdjustedAnalyticMargin at *
   linarith
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleAdjustedAnalyticMargin_pos_of_combinedResidualDominance
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ}
     {tiltConstant tiltScale
@@ -8123,6 +8391,7 @@ theorem c2ConcreteAntiMiracleAdjustedAnalyticMargin_pos_of_combinedResidualDomin
   unfold c2ConcreteAntiMiracleAdjustedAnalyticMargin at *
   linarith
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleAdjustedExponentialPointwiseOscillatoryMargin_pos_of_dominance
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
     {tiltConstant tiltScale
@@ -8147,6 +8416,7 @@ theorem c2ConcreteAntiMiracleAdjustedExponentialPointwiseOscillatoryMargin_pos_o
     c2ConcreteAntiMiracleAdjustedAnalyticMargin at *
   linarith
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2ConcreteAntiMiracleResidual_norm_le_pointwiseOscillatoryResidualUpper_of_eq_add_remainder
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -8180,6 +8450,7 @@ theorem
   exact le_trans hmain (by
     simpa [c2ConcreteAntiMiraclePointwiseOscillatoryResidualUpper] using hupper)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2AntiMiracleAdjustedCriterion_of_concreteSeededQuartetScaledUpperBounds_of_exponentialResidualBound
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -8231,6 +8502,7 @@ theorem
       (by
         simpa [c2ConcreteAntiMiracleAdjustedExponentialMargin] using hmargin)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2AntiMiracleAdjustedCriterion_of_concreteSeededQuartetScaledUpperBounds_of_pointwiseOscillatoryResidualBound
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -8282,6 +8554,7 @@ theorem
       (by
         simpa [c2ConcreteAntiMiracleAdjustedPointwiseOscillatoryMargin] using hmargin)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2AntiMiracleAdjustedCriterion_of_concreteSeededQuartetScaledUpperBounds_of_exponentialPointwiseOscillatoryResidualBound
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M J : ℕ}
@@ -8332,6 +8605,7 @@ theorem
         simpa [c2ConcreteAntiMiracleAdjustedExponentialPointwiseOscillatoryMargin] using
           hmargin)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2AntiMiracleAdjustedCriterion_of_concreteSeededQuartetScaledUpperBounds_of_exponentialPointwiseOscillatoryDominance
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M J : ℕ}
@@ -8382,6 +8656,7 @@ theorem
         (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
         hdominance)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2AntiMiracleAdjustedCriterion_of_concreteSeededQuartetScaledUpperBounds_of_exponentialPointwiseOscillatoryCombinedResidualDominance
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M J : ℕ}
@@ -8434,6 +8709,7 @@ theorem
         hhorizontalRatio_nonneg hhorizontalRatio_lt_one
         hhorizontalLayer hdominance)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2AntiMiracleAdjustedCriterion_of_concreteSeededQuartetScaledUpperBounds_of_pointwiseOscillatoryExpansion
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -8492,6 +8768,7 @@ theorem
       hhorizontalRatio_nonneg hhorizontalRatio_lt_one
       hhorizontalLayer hcutoffScale hcutoffScaled hresidual hmargin
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2AntiMiracleAdjustedCriterion_of_concreteSeededQuartetScaledUpperBounds_of_exponentialPointwiseOscillatoryExpansion
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M J : ℕ}
@@ -8543,6 +8820,7 @@ theorem
       hhorizontalRatio_nonneg hhorizontalRatio_lt_one
       hhorizontalLayer hcutoffScale hcutoffScaled hresidual hmargin
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ConcreteAntiMiracleResidual_eq_zero_of_oddTailBalancingSeed_of_comparison
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (comparison : C2OddTailBalancingSeedBulkModelComparisonFromOneLtData coreCutoff K M)
@@ -8555,6 +8833,7 @@ theorem c2ConcreteAntiMiracleResidual_eq_zero_of_oddTailBalancingSeed_of_compari
     c2ScaledSeededExplicitOddTailBulkModelResidual, c2OddTailBalancingSeedBulkModel] using
     sub_eq_zero.mpr hmodel
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2AntiMiracleAdjustedCriterion_of_oddTailBalancingSeedScaledUpperBounds_of_comparison
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (comparison : C2OddTailBalancingSeedBulkModelComparisonFromOneLtData coreCutoff K M)
@@ -8608,6 +8887,7 @@ theorem c2AntiMiracleAdjustedCriterion_of_oddTailBalancingSeedScaledUpperBounds_
     hhorizontalLayer hcutoffScale hcutoffScaled hresidual
     (by simpa using hdom)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2AntiMiracleAdjustedCriterion_of_oddTailBalancingSeedScaledUpperBounds_of_atOne
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (comparison : C2OddTailBalancingSeedBulkModelComparisonFromOneLtAtOneData coreCutoff K M)
@@ -8648,6 +8928,7 @@ Concrete adjusted Anti-Miracle criterion specialized to the current seeded tilt 
 horizontal-layer package. The remaining obligations are exactly the tail budget,
 the proxy against `genuineFInfinite`, and the final positivity inequality.
 -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2AntiMiracleAdjustedCriterion_of_concreteSeededQuartetBounds
     {tiltSeed : ℂ → ℂ} {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tailBudget cutoffProxy : ℂ → ℝ}
@@ -8719,6 +9000,7 @@ def c2ExpandedExactZetaDominanceRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExpandedDominance_mem_expandedExactZetaRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -8753,6 +9035,7 @@ theorem c2ExpandedDominance_mem_expandedExactZetaRegion
         c2ExpandedQuartetK2Margin] using hs.dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_expandedDominanceRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -8771,6 +9054,7 @@ theorem c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_expandedDomina
   c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_expandedExactZetaRegion
     (c2ExpandedDominance_mem_expandedExactZetaRegion hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_expandedDominanceRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -8787,6 +9071,7 @@ theorem
     (c2ExpandedDominance_mem_expandedExactZetaRegion hs)
 
 /-- Nonnegativity of the regularized horizontal scalar envelope. -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2HorizontalRegularizedUpper_nonneg_of_pos
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ} {s : ℂ}
     (hscale : 0 < horizontalScale s)
@@ -8820,6 +9105,7 @@ noncomputable def c2CanonicalClosedCutoffConstant
     (c2RectangularGenuineDirectBracketUpper K M)
     c2ContinuedCentralExactUpper
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2CanonicalClosedCutoffConstant_le_finiteExactZetaUpper_of_offCriticalStrip
     (K M : ℕ) {s : ℂ} (hs : offCriticalStrip s) :
     c2CanonicalClosedCutoffConstant K M s ≤
@@ -8918,6 +9204,7 @@ noncomputable def c2CanonicalClosedScaledResidualFiniteExactZetaUpper
       (2 * (1 - ‖q s‖)⁻¹) +
     c2CanonicalClosedCutoffFiniteExactZetaUpper K M s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2CanonicalClosedVerticalUpper_eq_directBracketExact
     (K M : ℕ) (s : ℂ) :
     c2ContinuedVerticalResidualClosedUpper K M
@@ -8930,6 +9217,7 @@ theorem c2CanonicalClosedVerticalUpper_eq_directBracketExact
     c2RectangularGenuineDirectBracketUpper c2ContinuedCentralExactUpper
   ring
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2CanonicalClosedScaledResidualUpper_eq_expanded
     (K M : ℕ)
     (horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ)
@@ -8945,6 +9233,7 @@ theorem c2CanonicalClosedScaledResidualUpper_eq_expanded
     c2TiltRegularizedUpper, c2TiltAnalyticRatio, c2CutoffUpperFromScale,
     mul_assoc, add_assoc]
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2CanonicalClosedScaledResidualExpanded_eq_linear_of_offCriticalStrip
     {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -9011,6 +9300,7 @@ theorem c2CanonicalClosedScaledResidualExpanded_eq_linear_of_offCriticalStrip
     rw [hhorizontal]
   simpa [add_assoc, add_mul] using hmain
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2CanonicalClosedScaledResidualUpper_eq_linear_of_offCriticalStrip
     {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -9022,6 +9312,7 @@ theorem c2CanonicalClosedScaledResidualUpper_eq_linear_of_offCriticalStrip
   rw [c2CanonicalClosedScaledResidualUpper_eq_expanded]
   exact c2CanonicalClosedScaledResidualExpanded_eq_linear_of_offCriticalStrip hs
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2CanonicalClosedScaledResidualUpper_le_majorant_of_offCriticalStrip
     {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -9063,6 +9354,7 @@ theorem c2CanonicalClosedScaledResidualUpper_le_majorant_of_offCriticalStrip
     mul_le_mul_of_nonneg_left hcoeff_le hvert_nonneg
   exact add_le_add (add_le_add hvertical le_rfl) le_rfl
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2CanonicalClosedScaledResidualMajorant_le_verticalBudget_of_offCriticalStrip
     {K M : ℕ}
     {verticalUpper horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -9089,6 +9381,7 @@ theorem c2CanonicalClosedScaledResidualMajorant_le_verticalBudget_of_offCritical
       le_rfl)
     le_rfl
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2CanonicalClosedScaledResidualMajorant_le_finiteExactZetaVerticalBudget_of_offCriticalStrip
     {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -9101,6 +9394,7 @@ theorem c2CanonicalClosedScaledResidualMajorant_le_finiteExactZetaVerticalBudget
   apply c2CanonicalClosedScaledResidualMajorant_le_verticalBudget_of_offCriticalStrip hs
   exact c2CanonicalClosedVerticalUpper_le_finiteExactZetaUpper_of_offCriticalStrip K M hs
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2CanonicalClosedScaledResidualVerticalBudgetUpper_le_finiteExactZeta_of_offCriticalStrip
     {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -9118,6 +9412,7 @@ theorem c2CanonicalClosedScaledResidualVerticalBudgetUpper_le_finiteExactZeta_of
     c2CanonicalClosedScaledResidualFiniteExactZetaUpper
   exact add_le_add (add_le_add le_rfl le_rfl) hcutoff
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2CanonicalClosedScaledResidualMajorant_le_finiteExactZeta_of_offCriticalStrip
     {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -9132,6 +9427,7 @@ theorem c2CanonicalClosedScaledResidualMajorant_le_finiteExactZeta_of_offCritica
     (c2CanonicalClosedScaledResidualVerticalBudgetUpper_le_finiteExactZeta_of_offCriticalStrip
       hs)
 
+-- ROUTE_TAG: FORMAL_BARRIER
 theorem c2ExpandedQuartetResidualMargin_lt_scaledVerticalDepthTail_of_offCriticalStrip
     {s : ℂ} (hs : offCriticalStrip s) :
     c2ExpandedQuartetResidualMargin s <
@@ -9188,6 +9484,7 @@ theorem c2ExpandedQuartetResidualMargin_lt_scaledVerticalDepthTail_of_offCritica
     simpa [hmain] using hprod_pos
   linarith
 
+-- ROUTE_TAG: FORMAL_BARRIER
 theorem c2AnalyticBulkAllowance_sub_reserve_lt_scaledVerticalDepthTail_of_offCriticalStrip
     {s : ℂ} (hs : offCriticalStrip s) :
     c2AnalyticBulkAllowance s - c2ExpandedQuartetResidualReserve s <
@@ -9195,6 +9492,7 @@ theorem c2AnalyticBulkAllowance_sub_reserve_lt_scaledVerticalDepthTail_of_offCri
   rw [← c2ExpandedQuartetResidualMargin_eq_analyticBulkAllowance_sub_reserve_of_offCriticalStrip hs]
   exact c2ExpandedQuartetResidualMargin_lt_scaledVerticalDepthTail_of_offCriticalStrip hs
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2CanonicalClosedCutoffFiniteExactZetaUpper_nonneg_of_offCriticalStrip
     (K M : ℕ) {s : ℂ} (hs : offCriticalStrip s) :
     0 ≤ c2CanonicalClosedCutoffFiniteExactZetaUpper K M s := by
@@ -9207,6 +9505,7 @@ lemma c2CanonicalClosedCutoffFiniteExactZetaUpper_nonneg_of_offCriticalStrip
   unfold c2CanonicalClosedCutoffFiniteExactZetaUpper
   linarith
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2CanonicalClosedVerticalFiniteExactZetaUpper_nonneg_of_offCriticalStrip
     (K M : ℕ) {s : ℂ} (hs : offCriticalStrip s) :
     0 ≤ c2CanonicalClosedVerticalFiniteExactZetaUpper K M s := by
@@ -9222,6 +9521,7 @@ lemma c2CanonicalClosedVerticalFiniteExactZetaUpper_nonneg_of_offCriticalStrip
   linarith
 
 
+-- ROUTE_TAG: FORMAL_BARRIER
 theorem scaledVerticalDepthTail_le_c2CanonicalClosedScaledResidualFiniteExactZetaUpper_of_offCriticalStrip
     {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -9269,6 +9569,7 @@ theorem scaledVerticalDepthTail_le_c2CanonicalClosedScaledResidualFiniteExactZet
   linarith
 
 
+-- ROUTE_TAG: FORMAL_BARRIER
 theorem not_c2CanonicalClosedScaledResidualFiniteExactZetaUpper_lt_analyticResidual_of_offCriticalStrip
     {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -9292,6 +9593,7 @@ theorem not_c2CanonicalClosedScaledResidualFiniteExactZetaUpper_lt_analyticResid
     c2AnalyticBulkAllowance_sub_reserve_lt_scaledVerticalDepthTail_of_offCriticalStrip hs
   linarith
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2CanonicalClosedVerticalUpper_nonneg_of_offCritical
     (K M : ℕ) {s : ℂ} (hs : offCriticalStrip s) :
     0 ≤ c2ContinuedVerticalResidualClosedUpper K M
@@ -9302,6 +9604,7 @@ lemma c2CanonicalClosedVerticalUpper_nonneg_of_offCritical
     (c2RectangularGenuineBound_directBracket K M s)
     (c2ContinuedCentralBound_exact s)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2CanonicalClosedTiltConstant_nonneg_of_offCritical
     (K M : ℕ)
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -9362,6 +9665,7 @@ def c2OddTailContinuedBalancingSeedBulkQuartetCanonicalClosedScaledRegion
   {s | C2OddTailContinuedBalancingSeedBulkQuartetCanonicalClosedScaledEstimates
     coreCutoff K M horizontalConstant horizontalScale horizontalRatio s}
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetCanonicalClosed_mem_of_scaledRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -9397,6 +9701,7 @@ theorem
     quartet_dominance := hs.quartet_dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_scaledCanonicalClosedRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -9414,6 +9719,7 @@ theorem
   c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_canonicalClosedRegion
     (c2OddTailContinuedBalancingSeedBulkQuartetCanonicalClosed_mem_of_scaledRegion hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_scaledCanonicalClosedRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -9435,6 +9741,7 @@ noncomputable def c2ExpandedSeedScaledLeft
           horizontalConstant horizontalScale horizontalRatio s) *
       (1 + ‖q s‖)) * tiltScale s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2ExpandedSeedScaledLeft_nonneg_of_re_pos
     (K M : ℕ)
     {horizontalConstant horizontalScale horizontalRatio tiltScale : ℂ → ℝ}
@@ -9475,6 +9782,7 @@ noncomputable def c2ExpandedCutoffScaledLeft
     c2ExplicitFiniteCoreContinuedCutoffExactZetaScalarUpper K M s *
       cutoffScale s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2ExpandedCutoffScaledLeft_nonneg_of_re_pos
     (K M : ℕ) {cutoffScale : ℂ → ℝ} {s : ℂ}
     (hs : 0 < s.re) (hscale_nonneg : 0 ≤ cutoffScale s) :
@@ -9531,6 +9839,7 @@ def c2ExpandedExactZetaScalarRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem c2ExpandedScalar_mem_expandedDominanceRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -9566,6 +9875,7 @@ theorem c2ExpandedScalar_mem_expandedDominanceRegion
     dominance := hs.dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_expandedScalarRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -9584,6 +9894,7 @@ theorem c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_expandedScalar
   c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_expandedDominanceRegion
     (c2ExpandedScalar_mem_expandedDominanceRegion hs)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetCanonicalClosedScaled_mem_of_expandedDominanceRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -9611,6 +9922,7 @@ theorem
         c2ExpandedQuartetK2Margin] using hs.dominance
   }
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     c2OddTailContinuedBalancingSeedBulkQuartetCanonicalClosedScaled_mem_of_expandedScalarRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -9628,6 +9940,7 @@ theorem
   c2OddTailContinuedBalancingSeedBulkQuartetCanonicalClosedScaled_mem_of_expandedDominanceRegion
     (c2ExpandedScalar_mem_expandedDominanceRegion hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_expandedScalarRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -9666,6 +9979,7 @@ noncomputable def c2ExpandedScalarBulkRegionData
     }
   F_eq := rfl
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_expandedScalarCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -9757,6 +10071,7 @@ noncomputable def C2ExpandedScalarCoverData.toOffCriticalCoverData
           s ∈ data.edge.edgeRegion
       exact data.cover)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_expandedScalarCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -9773,6 +10088,7 @@ theorem offCriticalStripNonvanishing_of_expandedScalarCoverData
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.toNearAxisRouteData] using
     offCriticalStripNonvanishing_of_coverData data.toOffCriticalCoverData
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_expandedScalarCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -9787,6 +10103,7 @@ theorem mathlibRiemannHypothesis_of_expandedScalarCoverData
   mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_expandedScalarCover
     data.near data.edge data.cover
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteSubsetCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -9811,6 +10128,7 @@ theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteCover
       near edge (c2LiftBulkCover_of_subset hsubset cover)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetExactCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -9844,6 +10162,7 @@ theorem
   intro s hs
   exact c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_exactRegion hs
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetTriangleCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -9877,6 +10196,7 @@ theorem
   intro s hs
   exact c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_triangleRegion hs
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetClosedCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -9911,6 +10231,7 @@ theorem
   intro s hs
   exact c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_closedRegion hs
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_zetaDepthCoreCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -9945,6 +10266,7 @@ theorem
   intro s hs
   exact c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_zetaDepthCoreRegion hs
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_explicitFiniteCoreCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -9979,6 +10301,7 @@ theorem
   intro s hs
   exact c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_explicitFiniteCoreRegion hs
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_explicitScalarCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -10013,6 +10336,7 @@ theorem
   intro s hs
   exact c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_explicitScalarRegion hs
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_explicitScalarExactZetaCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -10046,6 +10370,7 @@ theorem
   intro s hs
   exact c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_explicitScalarExactZetaRegion hs
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_expandedExactZetaCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -10079,6 +10404,7 @@ theorem
   intro s hs
   exact c2OddTailContinuedBalancingSeedBulkQuartetConcrete_mem_of_expandedExactZetaRegion hs
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_expandedDominanceCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -10151,6 +10477,7 @@ structure C2ExpandedOddTruncationBudget
     2 * ‖q s‖ ^ (j + 2) * oddTruncationUpper s j ≤
       (horizontalConstant s / horizontalScale s) * horizontalRatio s ^ j
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2ExpandedOddTruncationBudget.toHorizontalLayerBudget
     {coreCutoff : ℕ → ℕ}
     {oddTruncationUpper : ℂ → ℕ → ℝ}
@@ -10167,6 +10494,7 @@ theorem C2ExpandedOddTruncationBudget.toHorizontalLayerBudget
         data.truncation_bound data.horizontal_budget
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2ExpandedHorizontalLayerBudget.of_truncationBounds
     {coreCutoff : ℕ → ℕ}
     {oddTruncationUpper : ℂ → ℕ → ℝ}
@@ -10184,6 +10512,7 @@ theorem C2ExpandedHorizontalLayerBudget.of_truncationBounds
     horizontal_budget := hhorizontal
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2OddTailContinuedBalancingSeedBulkQuartetComponentEstimates.of_truncationBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
@@ -10261,6 +10590,7 @@ structure C2ExpandedScalarMainInequalities
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale s
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarMainInequalities.ofComponents
     {K M : ℕ}
     {tiltConstant tiltScale
@@ -10286,6 +10616,7 @@ theorem C2ExpandedScalarMainInequalities.ofComponents
     dominance := hdominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExpandedExactZetaScalarEstimates_of_localData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10325,6 +10656,7 @@ theorem c2ExpandedExactZetaScalarEstimates_of_localData
     dominance := hmain.dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExpandedExactZetaScalarRegion_mem_of_localData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10351,6 +10683,7 @@ theorem c2ExpandedExactZetaScalarRegion_mem_of_localData
   c2ExpandedExactZetaScalarEstimates_of_localData
     hK hoff hscale hhorizontal hmain
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem c2ExpandedScalarBulkModel_nonvanishing_of_localData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10409,6 +10742,7 @@ inductive C2ExpandedScalarCoverChoice
         horizontalConstant horizontalScale horizontalRatio
         cutoffConstant cutoffScale near edge s
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarCoverChoice.toCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10434,6 +10768,7 @@ theorem C2ExpandedScalarCoverChoice.toCover
   · exact Or.inr (Or.inl hbulk)
   · exact Or.inr (Or.inr hedge)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarCoverChoice.scalarBulk_of_localData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10485,6 +10820,7 @@ structure C2ExpandedScalarLocalBulkData
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarLocalBulkData.toScalarEstimates
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10504,6 +10840,7 @@ theorem C2ExpandedScalarLocalBulkData.toScalarEstimates
   c2ExpandedExactZetaScalarEstimates_of_localData
     data.two_le_K data.offCritical data.scale data.horizontal data.main
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarLocalBulkData.mem_scalarRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10522,6 +10859,7 @@ theorem C2ExpandedScalarLocalBulkData.mem_scalarRegion
       cutoffConstant cutoffScale :=
   data.toScalarEstimates
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarLocalBulkData.nonvanishing
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10537,6 +10875,7 @@ theorem C2ExpandedScalarLocalBulkData.nonvanishing
   c2ExpandedScalarBulkModel_nonvanishing_of_localData
     data.two_le_K data.offCritical data.scale data.horizontal data.main
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarLocalBulkData.concreteCutoff_scaled_bound_of_exactZetaCentralDefect
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10568,6 +10907,7 @@ theorem C2ExpandedScalarLocalBulkData.concreteCutoff_scaled_bound_of_exactZetaCe
     (hcentralDefect := hcentralDefect)
     (hscaled := hscaled)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarLocalBulkData.concreteCutoff_scaled_bound_of_splitAtOneUpper
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10608,6 +10948,7 @@ theorem C2ExpandedScalarLocalBulkData.concreteCutoff_scaled_bound_of_splitAtOneU
     (hcentralDefect := hdefect)
     (hscaled := hscaled)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarLocalBulkData.concreteCutoff_scaled_bound_of_splitAtOneDefectUpper
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10638,6 +10979,7 @@ theorem C2ExpandedScalarLocalBulkData.concreteCutoff_scaled_bound_of_splitAtOneD
     (hcentralDefect := hdefect)
     (hscaled := hscaled)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarLocalBulkData.ofScalarEstimates
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10676,6 +11018,7 @@ theorem C2ExpandedScalarLocalBulkData.ofScalarEstimates
     }
   }
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarLocalBulkData.of_mem_scalarRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10694,6 +11037,7 @@ theorem C2ExpandedScalarLocalBulkData.of_mem_scalarRegion
       cutoffConstant cutoffScale s :=
   C2ExpandedScalarLocalBulkData.ofScalarEstimates hs
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarLocalBulkData.of_expandedDominanceEstimates
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10736,6 +11080,7 @@ theorem C2ExpandedScalarLocalBulkData.of_expandedDominanceEstimates
     }
   }
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarLocalBulkData.of_mem_expandedDominanceRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10754,6 +11099,7 @@ theorem C2ExpandedScalarLocalBulkData.of_mem_expandedDominanceRegion
       cutoffConstant cutoffScale s :=
   C2ExpandedScalarLocalBulkData.of_expandedDominanceEstimates hs
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExpandedDominance_mem_of_mem_expandedExactZetaRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10789,6 +11135,7 @@ theorem c2ExpandedDominance_mem_of_mem_expandedExactZetaRegion
         c2ExpandedQuartetK2Margin] using hs.quartet_dominance
   }
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarLocalBulkData.of_mem_expandedExactZetaRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10808,6 +11155,7 @@ theorem C2ExpandedScalarLocalBulkData.of_mem_expandedExactZetaRegion
   C2ExpandedScalarLocalBulkData.of_mem_expandedDominanceRegion
     (c2ExpandedDominance_mem_of_mem_expandedExactZetaRegion hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExpandedExactZetaScalarRegion_mem_of_mem_expandedDominanceRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10826,6 +11174,7 @@ theorem c2ExpandedExactZetaScalarRegion_mem_of_mem_expandedDominanceRegion
       cutoffConstant cutoffScale :=
   (C2ExpandedScalarLocalBulkData.of_mem_expandedDominanceRegion hs).mem_scalarRegion
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExpandedExactZetaScalarRegion_mem_of_mem_expandedExactZetaRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10845,6 +11194,7 @@ theorem c2ExpandedExactZetaScalarRegion_mem_of_mem_expandedExactZetaRegion
   c2ExpandedExactZetaScalarRegion_mem_of_mem_expandedDominanceRegion
     (c2ExpandedDominance_mem_of_mem_expandedExactZetaRegion hs)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarLocalBulkData.of_mem_explicitScalarExactZetaRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10864,6 +11214,7 @@ theorem C2ExpandedScalarLocalBulkData.of_mem_explicitScalarExactZetaRegion
   C2ExpandedScalarLocalBulkData.of_mem_expandedExactZetaRegion
     (c2ExplicitScalarExactZeta_mem_expandedExactZetaRegion hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExpandedExactZetaScalarRegion_mem_of_mem_explicitScalarExactZetaRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10882,6 +11233,7 @@ theorem c2ExpandedExactZetaScalarRegion_mem_of_mem_explicitScalarExactZetaRegion
       cutoffConstant cutoffScale :=
   (C2ExpandedScalarLocalBulkData.of_mem_explicitScalarExactZetaRegion hs).mem_scalarRegion
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarLocalBulkData.mem_canonicalClosedScaledRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -10899,6 +11251,7 @@ theorem C2ExpandedScalarLocalBulkData.mem_canonicalClosedScaledRegion
   c2OddTailContinuedBalancingSeedBulkQuartetCanonicalClosedScaled_mem_of_expandedScalarRegion
     data.mem_scalarRegion
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarCoverChoice.nearAxis_of_mem
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10915,6 +11268,7 @@ theorem C2ExpandedScalarCoverChoice.nearAxis_of_mem
       cutoffConstant cutoffScale near edge s :=
   C2ExpandedScalarCoverChoice.nearAxis hnear
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarCoverChoice.scalarBulk_of_localBulkData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10935,6 +11289,7 @@ theorem C2ExpandedScalarCoverChoice.scalarBulk_of_localBulkData
       cutoffConstant cutoffScale near edge s :=
   C2ExpandedScalarCoverChoice.scalarBulk data.mem_scalarRegion
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarCoverChoice.edgeRegion_of_mem
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10975,6 +11330,7 @@ noncomputable def C2ExpandedScalarCoverData.ofLocalChoice
     intro s hs
     exact C2ExpandedScalarCoverChoice.toCover (choose s hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_expandedScalarLocalChoice
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -10993,6 +11349,7 @@ theorem offCriticalStripNonvanishing_of_expandedScalarLocalChoice
   offCriticalStripNonvanishing_of_expandedScalarCoverData
     (C2ExpandedScalarCoverData.ofLocalChoice near edge choose)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_expandedScalarLocalChoice
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11050,6 +11407,7 @@ def C2ExpandedScalarChoiceRegions.combinedRegion
       cutoffConstant cutoffScale near edge) : Set ℂ :=
   data.nearRegion ∪ data.localBulkRegion ∪ data.edgeRegion
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarChoiceRegions.toChoice
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11076,6 +11434,7 @@ theorem C2ExpandedScalarChoiceRegions.toChoice
         (data.localBulk_data hbulk)
   · exact C2ExpandedScalarCoverChoice.edgeRegion_of_mem (data.edge_subset hedge)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarChoiceRegions.toCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11120,6 +11479,7 @@ noncomputable def C2ExpandedScalarCoverData.ofChoiceRegions
   C2ExpandedScalarCoverData.ofLocalChoice near edge
     (fun s hs => regions.toChoice (cover s hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_expandedScalarChoiceRegions
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11138,6 +11498,7 @@ theorem offCriticalStripNonvanishing_of_expandedScalarChoiceRegions
   offCriticalStripNonvanishing_of_expandedScalarCoverData
     (C2ExpandedScalarCoverData.ofChoiceRegions near edge regions cover)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_expandedScalarChoiceRegions
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11167,6 +11528,7 @@ def c2ExpandedScalarLocalBulkRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarLocalBulkData.mem_localBulkRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11185,6 +11547,7 @@ theorem C2ExpandedScalarLocalBulkData.mem_localBulkRegion
       cutoffConstant cutoffScale := by
   simpa [c2ExpandedScalarLocalBulkRegion] using data
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ExpandedExactZetaScalarRegion_mem_of_mem_localBulkRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11208,6 +11571,7 @@ theorem c2ExpandedExactZetaScalarRegion_mem_of_mem_localBulkRegion
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale s from hs).mem_scalarRegion
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_localBulkRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11227,6 +11591,7 @@ theorem c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_localBulkRe
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale s from hs).nonvanishing
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem c2ExpandedScalarLocalBulkRegion_mem_of_mem_scalarRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11245,6 +11610,7 @@ theorem c2ExpandedScalarLocalBulkRegion_mem_of_mem_scalarRegion
       cutoffConstant cutoffScale :=
   (C2ExpandedScalarLocalBulkData.of_mem_scalarRegion hs).mem_localBulkRegion
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem c2ExpandedScalarLocalBulkRegion_eq_scalarRegion
     (coreCutoff : ℕ → ℕ) (K M : ℕ)
     (tiltConstant tiltScale
@@ -11296,6 +11662,7 @@ def C2ExpandedScalarChoiceRegions.canonical
     intro s hs
     exact hs
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_nearAxis
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11313,6 +11680,7 @@ theorem C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_nearAxis
       near edge).combinedRegion := by
   exact Or.inl <| Or.inl hs
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_localBulkData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11334,6 +11702,7 @@ theorem C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_localBulkDa
       near edge).combinedRegion := by
   exact Or.inl <| Or.inr data.mem_localBulkRegion
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_mem_localBulkRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11355,6 +11724,7 @@ theorem C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_mem_localBu
       near edge).combinedRegion := by
   exact Or.inl <| Or.inr hs
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_scalarRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11378,6 +11748,7 @@ theorem C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_scalarRegio
     C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_mem_localBulkRegion
       (c2ExpandedScalarLocalBulkRegion_mem_of_mem_scalarRegion hs)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_edge
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11395,6 +11766,7 @@ theorem C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_edge
       near edge).combinedRegion := by
   exact Or.inr hs
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_cover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11451,6 +11823,7 @@ noncomputable def C2ExpandedScalarCoverData.ofCanonicalRegions
       near edge)
     cover
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_expandedScalarCanonicalRegions
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11470,6 +11843,7 @@ theorem offCriticalStripNonvanishing_of_expandedScalarCanonicalRegions
   offCriticalStripNonvanishing_of_expandedScalarCoverData
     (C2ExpandedScalarCoverData.ofCanonicalRegions near edge cover)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_expandedScalarCanonicalRegions
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11488,6 +11862,7 @@ theorem mathlibRiemannHypothesis_of_expandedScalarCanonicalRegions
   mathlibRiemannHypothesis_of_expandedScalarCoverData
     (C2ExpandedScalarCoverData.ofCanonicalRegions near edge cover)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_expandedScalarCanonicalCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11508,6 +11883,7 @@ theorem offCriticalStripNonvanishing_of_expandedScalarCanonicalCover
   offCriticalStripNonvanishing_of_expandedScalarCanonicalRegions near edge
     (fun s hs => C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_cover (cover s hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_expandedScalarCanonicalCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11527,6 +11903,7 @@ theorem mathlibRiemannHypothesis_of_expandedScalarCanonicalCover
   mathlibRiemannHypothesis_of_expandedScalarCanonicalRegions near edge
     (fun s hs => C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_cover (cover s hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_expandedScalarCanonicalScalarCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11557,6 +11934,7 @@ theorem offCriticalStripNonvanishing_of_expandedScalarCanonicalScalarCover
         · exact C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_scalarRegion hbulk
         · exact C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_edge hedge)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_expandedScalarCanonicalScalarCover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11595,6 +11973,7 @@ def c2ExpandedScalarMiddleRegion
     s ∉ nearAxisRegion riemannZeta near.near_axis.radius ∧
     s ∉ edge.edgeRegion}
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem c2ExpandedScalarMiddleRegion_cover
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
@@ -11613,6 +11992,7 @@ theorem c2ExpandedScalarMiddleRegion_cover
     · exact Or.inr <| Or.inr hedge
     · exact Or.inr <| Or.inl <| hmiddle ⟨hs, hnear, hedge⟩
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem offCriticalStripNonvanishing_of_expandedScalarMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11638,6 +12018,7 @@ theorem offCriticalStripNonvanishing_of_expandedScalarMiddleRegion
         · exact Or.inr <| Or.inr hedge
         · exact Or.inr <| Or.inl <| hmiddle ⟨hs, hnear, hedge⟩)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_expandedScalarMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11698,6 +12079,7 @@ noncomputable def C2ExpandedScalarCanonicalCoverData.toCoverData
         C2ExpandedScalarChoiceRegions.mem_canonicalCombinedRegion_of_cover
           (data.cover s hs))
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem offCriticalStripNonvanishing_of_expandedScalarCanonicalCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11712,6 +12094,7 @@ theorem offCriticalStripNonvanishing_of_expandedScalarCanonicalCoverData
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
   offCriticalStripNonvanishing_of_expandedScalarCoverData data.toCoverData
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_expandedScalarCanonicalCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11744,6 +12127,7 @@ structure C2ExpandedScalarMiddleRegionData
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale s
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarMiddleRegionData.mem_scalarRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11763,6 +12147,7 @@ theorem C2ExpandedScalarMiddleRegionData.mem_scalarRegion
       cutoffConstant cutoffScale :=
   (data.middle_local hs).mem_scalarRegion
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarMiddleRegionData.mem_localBulkRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11807,6 +12192,7 @@ noncomputable def C2ExpandedScalarMiddleRegionData.toCanonicalCoverData
       · exact Or.inr <| Or.inr hedge
       · exact Or.inr <| Or.inl <| data.mem_localBulkRegion ⟨hs, hnear, hedge⟩
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem offCriticalStripNonvanishing_of_expandedScalarMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11822,6 +12208,7 @@ theorem offCriticalStripNonvanishing_of_expandedScalarMiddleRegionData
   offCriticalStripNonvanishing_of_expandedScalarCanonicalCoverData
     data.toCanonicalCoverData
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_expandedScalarMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11835,6 +12222,7 @@ theorem mathlibRiemannHypothesis_of_expandedScalarMiddleRegionData
     RiemannHypothesis :=
   mathlibRiemannHypothesis_of_expandedScalarCanonicalCoverData data.toCanonicalCoverData
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarMiddleRegionData.mem_canonicalClosedScaledRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -11852,6 +12240,7 @@ theorem C2ExpandedScalarMiddleRegionData.mem_canonicalClosedScaledRegion
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio :=
   (data.middle_local hs).mem_canonicalClosedScaledRegion
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -11867,6 +12256,7 @@ theorem offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleRegionData
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
   offCriticalStripNonvanishing_of_expandedScalarMiddleRegionData data
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -11881,6 +12271,7 @@ theorem mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleRegionData
     RiemannHypothesis :=
   mathlibRiemannHypothesis_of_expandedScalarMiddleRegionData data
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_expandedExactZetaMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11901,6 +12292,7 @@ theorem offCriticalStripNonvanishing_of_expandedExactZetaMiddleRegion
     (fun _ hs =>
       c2ExpandedExactZetaScalarRegion_mem_of_mem_expandedExactZetaRegion (hmiddle hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_expandedExactZetaMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11920,6 +12312,7 @@ theorem mathlibRiemannHypothesis_of_expandedExactZetaMiddleRegion
     (fun _ hs =>
       c2ExpandedExactZetaScalarRegion_mem_of_mem_expandedExactZetaRegion (hmiddle hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_expandedDominanceMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11940,6 +12333,7 @@ theorem offCriticalStripNonvanishing_of_expandedDominanceMiddleRegion
     (fun _ hs =>
       c2ExpandedExactZetaScalarRegion_mem_of_mem_expandedDominanceRegion (hmiddle hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_expandedDominanceMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11960,6 +12354,7 @@ theorem mathlibRiemannHypothesis_of_expandedDominanceMiddleRegion
       c2ExpandedExactZetaScalarRegion_mem_of_mem_expandedDominanceRegion
         (hmiddle hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_quartetExactMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11978,6 +12373,7 @@ theorem mathlibRiemannHypothesis_of_quartetExactMiddleRegion
   mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetExactCover
     near edge (c2ExpandedScalarMiddleRegion_cover near edge hmiddle)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_quartetTriangleMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -11996,6 +12392,7 @@ theorem mathlibRiemannHypothesis_of_quartetTriangleMiddleRegion
   mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetTriangleCover
     near edge (c2ExpandedScalarMiddleRegion_cover near edge hmiddle)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_quartetClosedMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {rectangularUpper centralUpper : ℂ → ℝ}
@@ -12015,6 +12412,7 @@ theorem mathlibRiemannHypothesis_of_quartetClosedMiddleRegion
   mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetClosedCover
     near edge (c2ExpandedScalarMiddleRegion_cover near edge hmiddle)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_quartetComponentMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
@@ -12040,6 +12438,7 @@ theorem offCriticalStripNonvanishing_of_quartetComponentMiddleRegion
       hbulk
   · exact edge.edge_nonvanishing hedge
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_quartetComponentMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
@@ -12112,6 +12511,7 @@ structure C2QuartetComponentTruncationLocalData
       c2BulkEUpper (c2CutoffUpperFromScale cutoffConstant cutoffScale) s <
         c2QuartetBulkK2Lower s * ((1 - ‖q s‖) * (1 + ‖q s‖ ^ 2))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2QuartetComponentTruncationLocalData.mem_componentRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
@@ -12167,6 +12567,7 @@ structure C2QuartetComponentTruncationMiddleRegionData
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_quartetComponentTruncationMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
@@ -12190,6 +12591,7 @@ theorem offCriticalStripNonvanishing_of_quartetComponentTruncationMiddleRegionDa
     (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
     data.near data.edge (fun _ hs => (data.middle_local hs).mem_componentRegion)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_quartetComponentTruncationMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
@@ -12213,6 +12615,7 @@ theorem mathlibRiemannHypothesis_of_quartetComponentTruncationMiddleRegionData
     data.near data.edge (fun _ hs => (data.middle_local hs).mem_componentRegion)
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_continuationAndQuartetComponentTruncationLocalData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
@@ -12251,6 +12654,7 @@ theorem offCriticalStripNonvanishing_of_continuationAndQuartetComponentTruncatio
   }
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_continuationAndQuartetComponentTruncationLocalData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
@@ -12336,6 +12740,7 @@ structure C2QuartetComponentResolventNoteLocalData
       c2BulkEUpper (c2CutoffUpperFromScale cutoffConstant cutoffScale) s <
         c2QuartetBulkK2Lower s * ((1 - ‖q s‖) * (1 + ‖q s‖ ^ 2))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2QuartetComponentResolventNoteLocalData.of_noteBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
@@ -12399,6 +12804,7 @@ theorem C2QuartetComponentResolventNoteLocalData.of_noteBounds
     quartet_dominance := hdominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2QuartetComponentResolventNoteLocalData.toTruncationLocalData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
@@ -12446,6 +12852,7 @@ theorem C2QuartetComponentResolventNoteLocalData.toTruncationLocalData
     quartet_dominance := data.quartet_dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2QuartetComponentResolventNoteLocalData.mem_componentRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
@@ -12512,6 +12919,7 @@ def C2QuartetComponentResolventNoteMiddleRegionData.toTruncationMiddleRegionData
   middle_local := fun {_} hs =>
     (data.middle_local hs).toTruncationLocalData
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_quartetComponentResolventNoteMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
@@ -12530,6 +12938,7 @@ theorem offCriticalStripNonvanishing_of_quartetComponentResolventNoteMiddleRegio
   offCriticalStripNonvanishing_of_quartetComponentTruncationMiddleRegionData
     data.toTruncationMiddleRegionData
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_quartetComponentResolventNoteMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
@@ -12548,6 +12957,7 @@ theorem mathlibRiemannHypothesis_of_quartetComponentResolventNoteMiddleRegionDat
     data.toTruncationMiddleRegionData
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_continuationAndQuartetComponentResolventNoteLocalData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
@@ -12588,6 +12998,7 @@ theorem offCriticalStripNonvanishing_of_continuationAndQuartetComponentResolvent
     }
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_continuationAndQuartetComponentResolventNoteLocalData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
@@ -12626,6 +13037,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndQuartetComponentResolventNote
   }
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_continuationAndQuartetComponentResolventNoteBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
@@ -12798,6 +13210,7 @@ theorem offCriticalStripNonvanishing_of_continuationAndQuartetComponentResolvent
           (hdominance hs))
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_continuationAndQuartetComponentResolventNoteBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
@@ -12979,6 +13392,7 @@ noncomputable def c2QuartetComponentExactScaleMatchedResolventConstant
     (c2ContinuedVerticalResidualExactUpper K M)
     horizontalConstant cutoffScale horizontalRatio
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2ResolventNoteUpper_eq_quartetComponentExactScaleMatched_of_pos
     {K M : ℕ}
     {horizontalConstant cutoffScale horizontalRatio : ℂ → ℝ} {s : ℂ}
@@ -13000,6 +13414,7 @@ theorem c2ResolventNoteUpper_eq_quartetComponentExactScaleMatched_of_pos
       hcutoffScale_pos)
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   offCriticalStripNonvanishing_of_continuationAndQuartetComponentExactScaleMatchedResolventBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -13157,6 +13572,7 @@ theorem
       hdominance
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_continuationAndQuartetComponentExactScaleMatchedResolventBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {oddTruncationUpper : ℂ → ℕ → ℝ}
@@ -13311,6 +13727,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndQuartetComponentExactScaleMat
       hcutoff
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_canonicalClosedMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -13356,6 +13773,7 @@ theorem offCriticalStripNonvanishing_of_canonicalClosedMiddleRegion
         rfl
         hcover)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_canonicalClosedMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -13379,6 +13797,7 @@ theorem mathlibRiemannHypothesis_of_canonicalClosedMiddleRegion
       c2OddTailContinuedBalancingSeedBulkQuartetClosed_mem_of_canonicalClosedRegion
         (hmiddle hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13404,6 +13823,7 @@ theorem offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleRegion
       c2OddTailContinuedBalancingSeedBulkQuartetCanonicalClosed_mem_of_scaledRegion
         (hmiddle hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13516,6 +13936,7 @@ noncomputable def C2CanonicalClosedScaledCoverData.toOffCriticalCoverData
             hmiddle
       · exact Or.inr <| Or.inr hedge)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_canonicalClosedScaledCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13527,6 +13948,7 @@ theorem offCriticalStripNonvanishing_of_canonicalClosedScaledCoverData
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.toNearAxisRouteData] using
     offCriticalStripNonvanishing_of_coverData data.toOffCriticalCoverData
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_canonicalClosedScaledCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13554,6 +13976,7 @@ noncomputable def C2CanonicalClosedScaledMiddleCoverData.toCoverData
   edge := data.edge
   cover := c2ExpandedScalarMiddleRegion_cover data.near data.edge data.middle_scaled
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13563,6 +13986,7 @@ theorem offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleCoverData
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
   offCriticalStripNonvanishing_of_canonicalClosedScaledCoverData data.toCoverData
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13586,6 +14010,7 @@ structure C2CanonicalClosedScaledMiddleRegionData
     C2OddTailContinuedBalancingSeedBulkQuartetCanonicalClosedScaledEstimates
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio s
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2CanonicalClosedScaledMiddleRegionData.mem_scaledRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13634,6 +14059,7 @@ noncomputable def C2CanonicalClosedScaledMiddleRegionData.toCoverData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio :=
   data.toMiddleCoverData.toCoverData
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_canonicalClosedScaledDirectMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13644,6 +14070,7 @@ theorem offCriticalStripNonvanishing_of_canonicalClosedScaledDirectMiddleRegionD
   offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleCoverData
     data.toMiddleCoverData
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_canonicalClosedScaledDirectMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13683,6 +14110,7 @@ structure C2CanonicalClosedScaledLocalData
           (fun _ => (1 : ℝ))) s <
         c2QuartetBulkK2Lower s * ((1 - ‖q s‖) * (1 + ‖q s‖ ^ 2))
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2CanonicalClosedScaledLocalData.of_residualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13713,6 +14141,7 @@ theorem C2CanonicalClosedScaledLocalData.of_residualDominance
     c2ExpandedQuartetK2Margin] using
     (c2ExpandedQuartetDominance_of_residualBound hdominance)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2CanonicalClosedScaledLocalData.of_analyticResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13736,6 +14165,7 @@ theorem C2CanonicalClosedScaledLocalData.of_analyticResidualDominance
     hoff] using
     hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2CanonicalClosedScaledLocalData.of_majorantAnalyticResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13760,6 +14190,7 @@ theorem C2CanonicalClosedScaledLocalData.of_majorantAnalyticResidualDominance
       hoff)
     hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2CanonicalClosedScaledLocalData.of_verticalBudgetAnalyticResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {verticalUpper horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13789,6 +14220,7 @@ theorem C2CanonicalClosedScaledLocalData.of_verticalBudgetAnalyticResidualDomina
       hoff hvertical)
     hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2CanonicalClosedScaledLocalData.of_verticalBudgetAnalyticResidualTruncationBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {verticalUpper : ℂ → ℝ}
@@ -13818,6 +14250,7 @@ theorem C2CanonicalClosedScaledLocalData.of_verticalBudgetAnalyticResidualTrunca
     hoff hscale_pos hconstant_nonneg hratio_nonneg hratio_lt_one
     htruncation.toHorizontalLayerBudget hvertical hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2CanonicalClosedScaledLocalData.of_finiteExactZetaVerticalAnalyticResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13841,6 +14274,7 @@ theorem C2CanonicalClosedScaledLocalData.of_finiteExactZetaVerticalAnalyticResid
     (c2CanonicalClosedVerticalUpper_le_finiteExactZetaUpper_of_offCriticalStrip K M hoff)
     hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2CanonicalClosedScaledLocalData.of_finiteExactZetaAnalyticResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13865,6 +14299,7 @@ theorem C2CanonicalClosedScaledLocalData.of_finiteExactZetaAnalyticResidualDomin
       hoff)
     hdominance
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2CanonicalClosedScaledLocalData.toEstimates
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13883,6 +14318,7 @@ theorem C2CanonicalClosedScaledLocalData.toEstimates
     quartet_dominance := data.quartet_dominance
   }
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2CanonicalClosedScaledLocalData.ofEstimates
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13900,6 +14336,7 @@ theorem C2CanonicalClosedScaledLocalData.ofEstimates
     quartet_dominance := hs.quartet_dominance
   }
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2CanonicalClosedScaledLocalData.of_mem_scaledRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13910,6 +14347,7 @@ theorem C2CanonicalClosedScaledLocalData.of_mem_scaledRegion
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio s :=
   C2CanonicalClosedScaledLocalData.ofEstimates hs
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarLocalBulkData.toCanonicalClosedScaledLocalData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13955,6 +14393,7 @@ structure C2CanonicalClosedScaledVerticalBudgetLocalData
         K M verticalUpper horizontalConstant horizontalScale horizontalRatio s <
       c2AnalyticBulkAllowance s - c2ExpandedQuartetResidualReserve s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2CanonicalClosedScaledVerticalBudgetLocalData.toCanonicalClosedScaledLocalData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {verticalUpper horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -14014,6 +14453,7 @@ def C2CanonicalClosedScaledVerticalBudgetMiddleRegionData.toCanonicalClosedScale
         localData
     exact C2CanonicalClosedScaledLocalData.toEstimates localData.offCritical hcanonical
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_canonicalClosedScaledVerticalBudgetMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {verticalUpper horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -14025,6 +14465,7 @@ theorem offCriticalStripNonvanishing_of_canonicalClosedScaledVerticalBudgetMiddl
   offCriticalStripNonvanishing_of_canonicalClosedScaledDirectMiddleRegionData
     data.toCanonicalClosedScaledMiddleRegionData
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_canonicalClosedScaledVerticalBudgetMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {verticalUpper horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -14065,6 +14506,7 @@ structure C2CanonicalClosedScaledVerticalTruncationLocalData
         K M verticalUpper horizontalConstant horizontalScale horizontalRatio s <
       c2AnalyticBulkAllowance s - c2ExpandedQuartetResidualReserve s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2CanonicalClosedScaledVerticalTruncationLocalData.toCanonicalClosedScaledLocalData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {verticalUpper : ℂ → ℝ}
@@ -14132,6 +14574,7 @@ def
         localData
     exact C2CanonicalClosedScaledLocalData.toEstimates localData.offCritical hcanonical
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_canonicalClosedScaledVerticalTruncationMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -14146,6 +14589,7 @@ theorem
   offCriticalStripNonvanishing_of_canonicalClosedScaledDirectMiddleRegionData
     data.toCanonicalClosedScaledMiddleRegionData
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_canonicalClosedScaledVerticalTruncationMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {verticalUpper : ℂ → ℝ}
@@ -14191,6 +14635,7 @@ structure C2CanonicalClosedScaledResidualBudgetLocalData
     tiltBudget s + horizontalBudget s + cutoffBudget s <
       c2ExpandedQuartetResidualMargin s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2CanonicalClosedScaledResidualBudgetLocalData.toCanonicalClosedScaledLocalData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio
@@ -14263,6 +14708,7 @@ def C2CanonicalClosedScaledResidualBudgetMiddleRegionData.toCanonicalClosedScale
     exact C2CanonicalClosedScaledLocalData.toEstimates localData.offCritical hcanonical
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_canonicalClosedScaledResidualBudgetMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio
@@ -14277,6 +14723,7 @@ theorem offCriticalStripNonvanishing_of_canonicalClosedScaledResidualBudgetMiddl
     data.toCanonicalClosedScaledMiddleRegionData
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_canonicalClosedScaledResidualBudgetMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio
@@ -14289,6 +14736,7 @@ theorem mathlibRiemannHypothesis_of_canonicalClosedScaledResidualBudgetMiddleReg
   mathlibRiemannHypothesis_of_canonicalClosedScaledDirectMiddleRegionData
     data.toCanonicalClosedScaledMiddleRegionData
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2CanonicalClosedScaledLocalData.of_mem_zetaDepthCoreRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {depthUpper coreUpper oddFactorUpper zetaUpper : ℂ → ℝ}
@@ -14315,6 +14763,7 @@ theorem C2CanonicalClosedScaledLocalData.of_mem_zetaDepthCoreRegion
       simpa using hs.quartet_dominance
   }
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2CanonicalClosedScaledLocalData.of_mem_explicitFiniteCoreRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {zetaUpper : ℂ → ℝ}
@@ -14340,6 +14789,7 @@ theorem C2CanonicalClosedScaledLocalData.of_mem_explicitFiniteCoreRegion
       simpa using hs.quartet_dominance
   }
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2CanonicalClosedScaledLocalData.of_mem_explicitScalarExactZetaRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -14364,6 +14814,7 @@ theorem C2CanonicalClosedScaledLocalData.of_mem_explicitScalarExactZetaRegion
       simpa using hs.quartet_dominance
   }
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2CanonicalClosedScaledLocalData.mem_scaledRegion_of_middle
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -14519,6 +14970,7 @@ noncomputable def C2CanonicalClosedScaledMiddleLocalData.toCoverData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio :=
   data.toMiddleRegionData.toCoverData
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleLocalData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -14529,6 +14981,7 @@ theorem offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleLocalData
   offCriticalStripNonvanishing_of_canonicalClosedScaledDirectMiddleRegionData
     data.toMiddleRegionData
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleLocalData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -14567,6 +15020,7 @@ noncomputable def RiemannHypothesisTerminalData.toCoverData
       data.horizontalConstant data.horizontalScale data.horizontalRatio :=
   data.middle.toCoverData
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem offCriticalStripNonvanishing_of_terminalData
     (data : RiemannHypothesisTerminalData) :
     offCriticalStripNonvanishing
@@ -14575,6 +15029,7 @@ theorem offCriticalStripNonvanishing_of_terminalData
   offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleLocalData
     data.middle
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_terminalData
     (data : RiemannHypothesisTerminalData) :
     RiemannHypothesis :=
@@ -14602,6 +15057,7 @@ Unlike the canonical terminal package above, this version keeps the bulk-bound
 functions `tiltConstant`, `tiltScale`, `cutoffConstant`, and `cutoffScale`
 fully parametric.
 -/
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_continuationAndExplicitScalarExactZetaMiddleRegionWithBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -14635,6 +15091,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndExplicitScalarExactZetaMiddle
       c2ExpandedExactZetaScalarRegion_mem_of_mem_explicitScalarExactZetaRegion
         (hmiddle hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_continuationAndExpandedExactZetaMiddleRegionWithBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -14672,6 +15129,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndExpandedExactZetaMiddleRegion
     (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
     nearC2 edgeC2 (fun _ hs => hmiddle hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_continuationAndBulkConcreteMiddleRegionWithBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -14708,6 +15166,7 @@ theorem offCriticalStripNonvanishing_of_continuationAndBulkConcreteMiddleRegionW
   · exact c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_concreteRegion hbulk
   · exact edgeC2.edge_nonvanishing hedge
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   offCriticalStripNonvanishing_of_genuineFInfinite_of_continuationAndBulkConcreteMiddle
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -14751,6 +15210,7 @@ theorem
       continuation s hsPunctured
   simpa [hEq] using hcontinued
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_continuationAndBulkConcreteMiddleRegionWithBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -14790,6 +15250,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndBulkConcreteMiddleRegionWithB
       nearC2 edgeC2
       (c2ExpandedScalarMiddleRegion_cover nearC2 edgeC2 (fun _ hs => hmiddle hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   mathlibRiemannHypothesis_of_genuineFInfiniteContinuationAndBulkConcreteMiddle
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -14821,6 +15282,7 @@ theorem
       (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
       continuation hmiddle)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_continuationAndBulkConcreteMiddlePointwiseBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -14851,6 +15313,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndBulkConcreteMiddlePointwiseBo
     (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
     continuation (fun _ hs => hmiddle hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   offCriticalStripNonvanishing_of_genuineFInfinite_of_continuationAndBulkConcretePointwiseBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -14882,6 +15345,7 @@ theorem
       (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
       continuation (fun _ hs => hmiddle hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   mathlibRiemannHypothesis_of_genuineFInfiniteContinuationAndBulkConcretePointwiseBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -15071,6 +15535,7 @@ structure C2ExplicitScalarExactZetaMiddleRegionData
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2ExplicitScalarExactZetaMiddleRegionData.mem_explicitScalarExactZetaRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -15111,6 +15576,7 @@ def C2ExplicitScalarExactZetaMiddleRegionData.toExpandedScalarMiddleRegionData
     C2ExpandedScalarLocalBulkData.of_mem_explicitScalarExactZetaRegion
       (data.mem_explicitScalarExactZetaRegion hs)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem offCriticalStripNonvanishing_of_explicitScalarExactZetaMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -15126,6 +15592,7 @@ theorem offCriticalStripNonvanishing_of_explicitScalarExactZetaMiddleRegionData
   offCriticalStripNonvanishing_of_expandedScalarMiddleRegionData
     data.toExpandedScalarMiddleRegionData
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_explicitScalarExactZetaMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -15190,6 +15657,7 @@ structure C2ExpandedExactZetaMiddleRegionData
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2ExpandedExactZetaMiddleRegionData.mem_expandedExactZetaRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -15230,6 +15698,7 @@ def C2ExpandedExactZetaMiddleRegionData.toExpandedScalarMiddleRegionData
     C2ExpandedScalarLocalBulkData.of_mem_expandedExactZetaRegion
       (data.mem_expandedExactZetaRegion hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_expandedExactZetaMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -15245,6 +15714,7 @@ theorem offCriticalStripNonvanishing_of_expandedExactZetaMiddleRegionData
   offCriticalStripNonvanishing_of_expandedScalarMiddleRegionData
     data.toExpandedScalarMiddleRegionData
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_expandedExactZetaMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -15443,6 +15913,7 @@ noncomputable def
   exact RiemannHypothesisTerminalData.ofExplicitScalarExactZetaMiddleRegion
     nearC2 edgeC2 (fun _ hs => hmiddle hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_genuineFInfiniteNearAxisAndExplicitScalarExactZetaMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -15502,6 +15973,7 @@ noncomputable def RiemannHypothesisTerminalData.ofContinuationAndMiddleLocal
     middle_local := fun _ hs => hmiddle hs
   })
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_continuationAndMiddleLocal
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -15526,6 +15998,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndMiddleLocal
       continuation hmiddle
   exact mathlibRiemannHypothesis_of_terminalData terminalData
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddlePointwiseBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -15618,6 +16091,7 @@ theorem offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMidd
     }
   }
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddlePointwiseBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -15709,6 +16183,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddlePo
     }
   }
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
   offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddleSeparatedDominanceBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -15829,6 +16304,7 @@ theorem
         (hcutoff hs)
         (hbudgetDominance hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddleResidualDominanceBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -15939,6 +16415,7 @@ theorem
         (hcutoff hs)
         (hbudgetDominance hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddleResidualPointwiseBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -16019,6 +16496,7 @@ theorem
         (hhorizontal hs)
         (hdominance hs)).quartet_dominance)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddleResidualAnalyticBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -16099,6 +16577,7 @@ theorem
         (hhorizontal hs)
         (hdominance hs)).quartet_dominance)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
   mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleSeparatedDominanceBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -16218,6 +16697,7 @@ theorem
         (hcutoff hs)
         (hbudgetDominance hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualDominanceBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -16327,6 +16807,7 @@ theorem
         (hcutoff hs)
         (hbudgetDominance hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualPointwiseBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -16405,6 +16886,7 @@ theorem
         (hhorizontal hs)
         (hdominance hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualAnalyticBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -16484,6 +16966,7 @@ theorem
         (hhorizontal hs)
         (hdominance hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddleResidualMajorantBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -16564,6 +17047,7 @@ theorem
         (hhorizontal hs)
         (hdominance hs)).quartet_dominance)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualMajorantBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -16644,6 +17128,7 @@ theorem
         (hdominance hs))
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddleResidualVerticalBudgetBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -16738,6 +17223,7 @@ theorem
         (hdominance hs)).quartet_dominance)
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualVerticalBudgetBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -16831,6 +17317,7 @@ theorem
         (hdominance hs))
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddleResidualVerticalBudgetTruncationBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -16922,6 +17409,7 @@ theorem
       hvertical hdominance
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualVerticalBudgetTruncationBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -17012,6 +17500,7 @@ theorem
       hvertical hdominance
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddleResidualFiniteExactZetaVerticalBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -17094,6 +17583,7 @@ theorem
         (hdominance hs)).quartet_dominance)
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualFiniteExactZetaVerticalBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -17175,6 +17665,7 @@ theorem
         (hdominance hs))
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   offCriticalStripNonvanishing_of_continuationAndCanonicalClosedScaledMiddleResidualFiniteExactZetaBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -17256,6 +17747,7 @@ theorem
         (hdominance hs)).quartet_dominance)
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleResidualFiniteExactZetaBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -17373,6 +17865,7 @@ noncomputable def C2ExpandedScalarMiddleRegionData.ofContinuation
     middle_local := fun _ hs => hmiddle hs
   }
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegionWithBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -17404,6 +17897,7 @@ theorem offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegio
       (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
       continuation hmiddle)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegionWithBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -17434,6 +17928,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegionWit
       (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
       continuation hmiddle)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddlePointwiseBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -17493,6 +17988,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddlePointwise
       main := hmain hs
     })
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleSeparatedMainBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -17574,6 +18070,7 @@ Continuation-driven middle-strip closure for the natural odd-tail balancing
 seed using a real residual upper `|F_∞ - F_X| ≤ residualUpper` in the
 Anti-Miracle criterion.
 -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -17705,6 +18202,7 @@ theorem
 Continuation-driven middle-strip closure for the natural odd-tail balancing
 seed using the zero-proxy Anti-Miracle criterion.
 -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -17790,6 +18288,7 @@ theorem
         simpa [c2ConcreteAntiMiracleAdjustedAnalyticMargin] using hdominance hs)
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -17878,6 +18377,7 @@ Continuation-driven middle-strip closure for the natural odd-tail balancing
 seed, with the Anti-Miracle residual bounded through the central defect
 `‖genuineCentralDoubleSeries - continuedCentralOddChannel‖`.
 -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_centralDefectBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -17962,6 +18462,7 @@ theorem
       (fun {s} hs => by
         simpa [c2ConcreteAntiMiracleAdjustedAnalyticMargin] using hdominance hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_centralDefectBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -18045,6 +18546,7 @@ theorem
       (fun {s} hs => by
         simpa [c2ConcreteAntiMiracleAdjustedAnalyticMargin] using hdominance hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_separatedCentralBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -18138,6 +18640,7 @@ theorem
           (hgenuineCombined hs) (hcontinued hs))
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_separatedCentralBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -18230,6 +18733,7 @@ theorem
           (hgenuineCombined hs) (hcontinued hs))
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -18314,6 +18818,7 @@ theorem
           c2ContinuedCentralExactUpper_le_exactZetaScalar_of_offCriticalStrip hs.1)
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -18397,6 +18902,7 @@ theorem
           c2ContinuedCentralExactUpper_le_exactZetaScalar_of_offCriticalStrip hs.1)
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exactGenuineCentralBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -18474,6 +18980,7 @@ theorem
       (fun _ _ => c2GenuineCentralBound_exact _)
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exactGenuineCentralBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -18550,6 +19057,7 @@ theorem
       (fun _ _ => c2GenuineCentralBound_exact _)
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -18653,6 +19161,7 @@ theorem
           (hscale hs).horizontalRatio_lt_one
           (hhorizontal hs).layer_bound (hdominance hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_genuineCentralCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -18785,6 +19294,7 @@ structure C2AntiMiracleGenuineCentralLocalData
         (c2CentralDefectTriangleUpper
           genuineCentralUpper c2ExplicitFiniteCoreCentralExactZetaScalarUpper) s > 0
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarLocalBulkData.toAntiMiracleGenuineCentralLocalData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -18824,6 +19334,7 @@ theorem C2ExpandedScalarLocalBulkData.toAntiMiracleGenuineCentralLocalData
     dominance := hdominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2AntiMiracleGenuineCentralLocalData.of_majorantCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -18901,6 +19412,7 @@ theorem C2AntiMiracleGenuineCentralLocalData.of_majorantCombinedResidualDominanc
       hscale.horizontalRatio_nonneg hscale.horizontalRatio_lt_one
       hhorizontal.layer_bound hcombined
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndAntiMiracleGenuineCentralMiddleRegionWithBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -18940,6 +19452,7 @@ theorem
       (fun _ hs => (hmiddle hs).genuine)
       (fun _ hs => (hmiddle hs).dominance)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -19019,6 +19532,7 @@ theorem
           (hmiddle hs) (hseed hs) (hcutoff hs)
             (hgenuineCombined hs) (hdominance hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndAntiMiracleGenuineCentralMiddleRegionWithBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -19057,6 +19571,7 @@ theorem
       (fun _ hs => (hmiddle hs).genuine)
       (fun _ hs => (hmiddle hs).dominance)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -19135,6 +19650,7 @@ theorem
           (hmiddle hs) (hseed hs) (hcutoff hs)
             (hgenuineCombined hs) (hdominance hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 private theorem c2ContinuedVerticalResidualBound_exactZetaScalar_of_offCriticalStrip
     (K M : ℕ) {s : ℂ} (hK : 2 ≤ K) (hs : offCriticalStrip s) :
     C2ContinuedVerticalResidualBound K M
@@ -19160,6 +19676,7 @@ private theorem c2ContinuedVerticalResidualBound_exactZetaScalar_of_offCriticalS
   simpa [c2ExplicitFiniteCoreContinuedVerticalUpper_exactZeta_eq_scalar] using
     (c2ContinuedVerticalResidualBound_closedUpper_of_bounds hs hrect hcentral)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 private theorem
     c2OddTailContinuedBalancingSeed_norm_le_exactZetaScalar_of_localData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -19225,6 +19742,7 @@ private theorem
     (c2OddTailContinuedBalancingSeed_norm_le coreCutoff K M s)
     hprod
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 private theorem
     c2ExpandedScalarLocalBulkData_balancingSeed_bound_of_exactZetaCentralDefect
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -19277,6 +19795,7 @@ private theorem
       (hscaled := hscaled)
   exact c2TiltSeed_bound_from_scaled data.scale.tiltScale_pos hseed_scaled
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 private theorem
     c2ExpandedScalarLocalBulkData_balancingSeed_bound_of_splitAtOneUpper
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -19337,6 +19856,7 @@ private theorem
       (hscaled := hscaled)
   exact c2TiltSeed_bound_from_scaled data.scale.tiltScale_pos hseed_scaled
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 private theorem
     c2ExpandedScalarLocalBulkData_balancingSeed_bound_of_splitAtOneDefectUpper
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -19387,6 +19907,7 @@ private theorem
       (hscaled := hscaled)
   exact c2TiltSeed_bound_from_scaled data.scale.tiltScale_pos hseed_scaled
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 private theorem
     c2ExpandedScalarLocalBulkData_genuineCentral_bound_of_exactZetaCentralDefect_le_one
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -19435,6 +19956,7 @@ private theorem
             exact add_le_add hcentralDefect hcontinued
     _ ≤ genuineCentralUpper s := hupper hle
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound_splitAtOne
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -19578,6 +20100,7 @@ theorem
           (hgenuine hs))
       hdominance
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound_splitAtOne
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -19720,6 +20243,7 @@ theorem
           (hgenuine hs))
       hdominance
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound_splitAtOneScaledBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -19869,6 +20393,7 @@ structure C2AntiMiracleGenuineCentralMiddleRegionData
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale genuineCentralUpper s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_antiMiracleGenuineCentralMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -19893,6 +20418,7 @@ theorem offCriticalStripNonvanishing_of_antiMiracleGenuineCentralMiddleRegionDat
       data.continuation
       (fun _ hs => data.middle_local hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_antiMiracleGenuineCentralMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -20071,6 +20597,7 @@ def C2AntiMiracleGenuineCentralMiddleRegionData.ofContinuationAndExpandedScalarM
         hs.1 (hmiddle hs).scale (hmiddle hs).horizontal
         hseed hcutoff hgenuine hmajorant (hdominance hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound_splitAtOneScaledBoundsCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -20175,6 +20702,7 @@ theorem
         continuation hmiddle hdefectSplitAtOne hseedSplitAtOne hcutoffSplitAtOne
         hgenuineLeOne hexactLeOne hdominance)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound_splitAtOneScaledBoundsCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -20278,6 +20806,7 @@ theorem
         continuation hmiddle hdefectSplitAtOne hseedSplitAtOne hcutoffSplitAtOne
         hgenuineLeOne hexactLeOne hdominance)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralBound_splitAtOneScaledBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -20402,6 +20931,7 @@ theorem
           (hgenuineLeOne hs))
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -20481,6 +21011,7 @@ theorem
       (fun _ hs => (hmiddle hs).horizontal)
       hseed hcutoff hgenuine hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -20559,6 +21090,7 @@ theorem
       (fun _ hs => (hmiddle hs).horizontal)
       hseed hcutoff hgenuine hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralCombinedResidualDominance_splitAtOne
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -20702,6 +21234,7 @@ theorem
           (hgenuine hs))
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralCombinedResidualDominance_splitAtOne
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -20844,6 +21377,7 @@ theorem
           (hgenuine hs))
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -20934,6 +21468,7 @@ theorem
           hs.1 (hmiddle hs).scale (hmiddle hs).horizontal
           (hseed hs) (hcutoff hs) (hgenuine hs) (hmajorant hs) (hdominance hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -21023,6 +21558,7 @@ theorem
           hs.1 (hmiddle hs).scale (hmiddle hs).horizontal
           (hseed hs) (hcutoff hs) (hgenuine hs) (hmajorant hs) (hdominance hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance_splitAtOne
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -21178,6 +21714,7 @@ theorem
           (hgenuine hs))
       hmajorant hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralMajorantCombinedResidualDominance_splitAtOne
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -21332,6 +21869,7 @@ theorem
           (hgenuine hs))
       hmajorant hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralSplitAtOneDoubleUpperCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -21435,6 +21973,7 @@ theorem
           (hupper := hgenuineCombined hs))
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralSplitAtOneDoubleUpperCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -21537,6 +22076,7 @@ theorem
           (hupper := hgenuineCombined hs))
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralSplitAtOneUpperBoundsCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -21685,6 +22225,7 @@ theorem
           (hupper := hgenuineCombined hs))
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralSplitAtOneUpperBoundsCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -21832,6 +22373,7 @@ theorem
           (hupper := hgenuineCombined hs))
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralSplitAtOneScaledBoundsCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -21981,6 +22523,7 @@ theorem
           (hupper := hgenuineCombined hs))
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_genuineCentralSplitAtOneScaledBoundsCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -22157,6 +22700,7 @@ structure C2AntiMiracleExactGenuineCentralLocalData
         (c2CentralDefectTriangleUpper
           c2GenuineCentralExactUpper c2ExplicitFiniteCoreCentralExactZetaScalarUpper) s > 0
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2AntiMiracleExactGenuineCentralLocalData.ofCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -22210,6 +22754,7 @@ theorem C2AntiMiracleExactGenuineCentralLocalData.ofCombinedResidualDominance
         hhorizontal.layer_bound hdominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2AntiMiracleExactGenuineCentralLocalData.of_majorantCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -22256,6 +22801,7 @@ theorem C2AntiMiracleExactGenuineCentralLocalData.of_majorantCombinedResidualDom
             cutoffConstant cutoffScale s))
     hdominance
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem C2ExpandedScalarLocalBulkData.toAntiMiracleExactGenuineCentralLocalData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -22293,6 +22839,7 @@ theorem C2ExpandedScalarLocalBulkData.toAntiMiracleExactGenuineCentralLocalData
     dominance := hdominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2AntiMiracleExactGenuineCentralLocalData.toGenuineCentralLocalData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -22317,6 +22864,7 @@ theorem C2AntiMiracleExactGenuineCentralLocalData.toGenuineCentralLocalData
     dominance := hs.dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem C2AntiMiracleExactGenuineCentralLocalData.nonvanishing
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -22344,6 +22892,7 @@ theorem C2AntiMiracleExactGenuineCentralLocalData.nonvanishing
       hs.horizontal.layer_bound hs.scale.cutoffScale_pos hs.cutoff
       hs.dominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndAntiMiracleExactGenuineCentralMiddleRegionWithBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -22378,6 +22927,7 @@ theorem
       continuation
       (fun _ hs => (hmiddle hs).toGenuineCentralLocalData)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndAntiMiracleExactGenuineCentralMiddleRegionWithBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -22435,6 +22985,7 @@ structure C2AntiMiracleExactGenuineCentralMiddleRegionData
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale s
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem offCriticalStripNonvanishing_of_antiMiracleExactGenuineCentralMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -22458,6 +23009,7 @@ theorem offCriticalStripNonvanishing_of_antiMiracleExactGenuineCentralMiddleRegi
       data.continuation
       (fun _ hs => data.middle_local hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_antiMiracleExactGenuineCentralMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -22544,6 +23096,7 @@ def C2AntiMiracleExactGenuineCentralMiddleRegionData.ofContinuationAndExpandedSc
     (hmiddle hs).toAntiMiracleExactGenuineCentralLocalData
       (hseed hs) (hcutoff hs) (hdominance hs)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_exactGenuineCentralBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -22612,6 +23165,7 @@ theorem
         (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
         continuation hmiddle hseed hcutoff hdominance)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exactGenuineCentralBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -22840,6 +23394,7 @@ def C2AntiMiracleExactGenuineCentralMiddleRegionData.ofContinuationAndExpandedSc
       hs.1 (hmiddle hs).scale (hmiddle hs).horizontal
       (hseed hs) (hcutoff hs) (hmajorant hs) (hdominance hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_exactGenuineCentralCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -22908,6 +23463,7 @@ theorem
         (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
         continuation hmiddle hseed hcutoff hdominance)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exactGenuineCentralCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -22975,6 +23531,7 @@ theorem
         (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
         continuation hmiddle hseed hcutoff hdominance)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_exactGenuineCentralMajorantCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -23054,6 +23611,7 @@ theorem
         (centralDefectMajorant := centralDefectMajorant)
         continuation hmiddle hseed hcutoff hmajorant hdominance)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exactGenuineCentralMajorantCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -23137,6 +23695,7 @@ Continuation-driven middle-strip closure for the natural odd-tail balancing
 seed using a pointwise oscillatory cutoff witness
 `‖Σ_{1 ≤ j < J} (-1)^j D_j(s)/(j! X^j)‖ + remainderUpper(s)`.
 -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryResidualBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -23223,6 +23782,7 @@ theorem
         simpa [c2ConcreteAntiMiracleAdjustedPointwiseOscillatoryMargin,
           c2ConcreteAntiMiracleAdjustedAnalyticMargin] using hdominance hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryResidualBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -23308,6 +23868,7 @@ theorem
         simpa [c2ConcreteAntiMiracleAdjustedPointwiseOscillatoryMargin,
           c2ConcreteAntiMiracleAdjustedAnalyticMargin] using hdominance hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_pointwiseOscillatoryResidualBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -23390,6 +23951,7 @@ theorem
       (fun _ hs => (hmiddle hs).horizontal)
       hseed hcutoff hresidual hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_pointwiseOscillatoryResidualBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -23471,6 +24033,7 @@ theorem
       (fun _ hs => (hmiddle hs).horizontal)
       hseed hcutoff hresidual hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryResidualBound
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
@@ -23554,6 +24117,7 @@ theorem
         simpa [c2ConcreteAntiMiracleAdjustedExponentialPointwiseOscillatoryMargin,
           c2ConcreteAntiMiracleAdjustedAnalyticMargin] using hdominance hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryDominance
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
@@ -23645,6 +24209,7 @@ theorem
           (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
           (hdominance hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryResidualBound
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
@@ -23727,6 +24292,7 @@ theorem
         simpa [c2ConcreteAntiMiracleAdjustedExponentialPointwiseOscillatoryMargin,
           c2ConcreteAntiMiracleAdjustedAnalyticMargin] using hdominance hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryDominance
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
@@ -23817,6 +24383,7 @@ theorem
           (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
           (hdominance hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
@@ -23918,6 +24485,7 @@ theorem
             hsHorizontal.layer_bound
             (hdominance hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
@@ -24018,6 +24586,7 @@ theorem
             hsHorizontal.layer_bound
             (hdominance hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryExpansion
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
@@ -24114,6 +24683,7 @@ theorem
           (hexpansion hs) (hremainder hs))
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialPointwiseOscillatoryExpansion
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
@@ -24209,6 +24779,7 @@ theorem
           (hexpansion hs) (hremainder hs))
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryExpansion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -24306,6 +24877,7 @@ theorem
           (hexpansion hs) (hremainder hs))
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryExpansion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -24402,6 +24974,7 @@ theorem
           (hexpansion hs) (hremainder hs))
       hdominance
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_pointwiseOscillatoryExpansion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -24496,6 +25069,7 @@ theorem
       (fun _ hs => (hmiddle hs).horizontal)
       hseed hcutoff hexpansion hremainder hdominance
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_pointwiseOscillatoryExpansion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -24589,6 +25163,7 @@ theorem
       (fun _ hs => (hmiddle hs).horizontal)
       hseed hcutoff hexpansion hremainder hdominance
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryExpansion
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
@@ -24674,6 +25249,7 @@ theorem
       (fun _ hs => (hmiddle hs).horizontal)
       hseed hcutoff hexpansion hremainder hdominance
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryExpansion
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
@@ -24758,6 +25334,7 @@ theorem
       (fun _ hs => (hmiddle hs).horizontal)
       hseed hcutoff hexpansion hremainder hdominance
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansion
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
@@ -24837,6 +25414,7 @@ theorem
           K M J X (s := s) hJ)
       hdominance
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansion
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
@@ -24915,6 +25493,7 @@ theorem
           K M J X (s := s) hJ)
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansionCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
@@ -24994,6 +25573,7 @@ theorem
           (K := K) (M := M) (J := J) (X := X) (s := s) hJ (hexpansion hs))
       hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansionCombinedResidualDominance
     {coreCutoff : ℕ → ℕ} {K M J : ℕ} {X : ℝ}
@@ -25072,6 +25652,7 @@ theorem
           (K := K) (M := M) (J := J) (X := X) (s := s) hJ (hexpansion hs))
       hdominance
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansion_three
     {coreCutoff : ℕ → ℕ} {K M : ℕ} {X : ℝ}
@@ -25143,6 +25724,7 @@ theorem
       (coreCutoff := coreCutoff) (K := K) (M := M) (J := 3) (X := X)
       continuation (hJ := by decide) hmiddle hseed hcutoff hexpansion hdominance
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansion_three
     {coreCutoff : ℕ → ℕ} {K M : ℕ} {X : ℝ}
@@ -25213,6 +25795,7 @@ theorem
       (coreCutoff := coreCutoff) (K := K) (M := M) (J := 3) (X := X)
       continuation (hJ := by decide) hmiddle hseed hcutoff hexpansion hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansionCombinedResidualDominance_three
     {coreCutoff : ℕ → ℕ} {K M : ℕ} {X : ℝ}
@@ -25284,6 +25867,7 @@ theorem
       (coreCutoff := coreCutoff) (K := K) (M := M) (J := 3) (X := X)
       continuation (hJ := by decide) hmiddle hseed hcutoff hexpansion hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegion_of_exponentialPointwiseOscillatoryCanonicalExpansionCombinedResidualDominance_three
     {coreCutoff : ℕ → ℕ} {K M : ℕ} {X : ℝ}
@@ -25359,6 +25943,7 @@ Continuation-driven middle-strip closure for the natural odd-tail balancing
 seed using the note-style exponential cutoff residual upper
 `C_Γ(s) * X^(1-σ) + C₁(s)/X + C₂(s)/X²`.
 -/
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialResidualBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -25445,6 +26030,7 @@ theorem
         simpa [c2ConcreteAntiMiracleAdjustedExponentialMargin,
           c2ConcreteAntiMiracleAdjustedAnalyticMargin] using hdominance hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialResidualBound
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -25530,6 +26116,7 @@ theorem
         simpa [c2ConcreteAntiMiracleAdjustedExponentialMargin,
           c2ConcreteAntiMiracleAdjustedAnalyticMargin] using hdominance hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -25612,6 +26199,7 @@ theorem
       (fun {s} hs => by
         simpa [c2ConcreteAntiMiracleAdjustedAnalyticMargin] using hdominance hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_atOne
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -25685,6 +26273,7 @@ theorem
       (c2OddTailBalancingSeedBulkModelComparisonFromOneLtData_of_atOne comparison)
       hscale hhorizontal hseed hcutoff hdominance
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_atOne
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -25757,6 +26346,7 @@ theorem
       (c2OddTailBalancingSeedBulkModelComparisonFromOneLtData_of_atOne comparison)
       hscale hhorizontal hseed hcutoff hdominance
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleSeparatedBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -25908,6 +26498,7 @@ noncomputable def
     (GenuineFInfiniteNearAxisData.of_continuation continuation)
     hmiddle
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_continuationAndExplicitScalarExactZetaMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -25938,6 +26529,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndExplicitScalarExactZetaMiddle
       continuation hmiddle
   exact mathlibRiemannHypothesis_of_terminalData terminalData
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_continuationAndExpandedDominanceMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -25974,6 +26566,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndExpandedDominanceMiddleRegion
     (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
     nearC2 edgeC2 (fun _ hs => hmiddle hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_continuationAndQuartetExactMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -26010,6 +26603,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndQuartetExactMiddleRegion
     (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
     nearC2 edgeC2 (fun _ hs => hmiddle hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_continuationAndQuartetTriangleMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -26046,6 +26640,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndQuartetTriangleMiddleRegion
     (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
     nearC2 edgeC2 (fun _ hs => hmiddle hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_continuationAndQuartetClosedMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {rectangularUpper centralUpper : ℂ → ℝ}
@@ -26084,6 +26679,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndQuartetClosedMiddleRegion
     (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
     nearC2 edgeC2 (fun _ hs => hmiddle hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_continuationAndQuartetComponentMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
@@ -26123,6 +26719,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndQuartetComponentMiddleRegion
     nearC2 edgeC2 (fun _ hs => hmiddle hs)
 
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_continuationAndQuartetComponentTruncationBounds
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {continuedVerticalUpper : ℂ → ℝ}
@@ -26279,6 +26876,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndQuartetComponentTruncationBou
         (hcutoff hs)
         (hdominance hs))
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -26308,6 +26906,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndCanonicalClosedScaledMiddleRe
     (horizontalRatio := horizontalRatio)
     nearC2 edgeC2 (fun _ hs => hmiddle hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_continuationAndExplicitFiniteCoreMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {zetaUpper : ℂ → ℝ}
@@ -26346,6 +26945,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndExplicitFiniteCoreMiddleRegio
     (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
     nearC2 edgeC2 (c2ExpandedScalarMiddleRegion_cover nearC2 edgeC2 hmiddle)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_continuationAndExplicitScalarMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {zetaUpper : ℂ → ℝ}
@@ -26384,6 +26984,7 @@ theorem mathlibRiemannHypothesis_of_continuationAndExplicitScalarMiddleRegion
     (cutoffConstant := cutoffConstant) (cutoffScale := cutoffScale)
     nearC2 edgeC2 (c2ExpandedScalarMiddleRegion_cover nearC2 edgeC2 hmiddle)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_zetaDepthCoreMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {depthUpper coreUpper oddFactorUpper zetaUpper : ℂ → ℝ}
@@ -26404,6 +27005,7 @@ theorem mathlibRiemannHypothesis_of_zetaDepthCoreMiddleRegion
   mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_zetaDepthCoreCover
     near edge (c2ExpandedScalarMiddleRegion_cover near edge hmiddle)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_explicitFiniteCoreMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {zetaUpper : ℂ → ℝ}
@@ -26423,6 +27025,7 @@ theorem mathlibRiemannHypothesis_of_explicitFiniteCoreMiddleRegion
   mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_explicitFiniteCoreCover
     near edge (c2ExpandedScalarMiddleRegion_cover near edge hmiddle)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem mathlibRiemannHypothesis_of_explicitScalarMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {zetaUpper : ℂ → ℝ}
@@ -26442,6 +27045,7 @@ theorem mathlibRiemannHypothesis_of_explicitScalarMiddleRegion
   mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_explicitScalarCover
     near edge (c2ExpandedScalarMiddleRegion_cover near edge hmiddle)
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem offCriticalStripNonvanishing_of_explicitScalarExactZetaMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -26463,6 +27067,7 @@ theorem offCriticalStripNonvanishing_of_explicitScalarExactZetaMiddleRegion
       c2ExpandedExactZetaScalarRegion_mem_of_mem_explicitScalarExactZetaRegion
         (hmiddle hs))
 
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_explicitScalarExactZetaMiddleRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -26483,6 +27088,7 @@ theorem mathlibRiemannHypothesis_of_explicitScalarExactZetaMiddleRegion
       c2ExpandedExactZetaScalarRegion_mem_of_mem_explicitScalarExactZetaRegion
         (hmiddle hs))
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem rectangularOddCoreSum_sub_oddDirichletChannel_norm_le_explicit_of_one_lt_re
     (s : ℂ) (hs : 1 < s.re) (M : ℕ) :
     ‖rectangularOddCoreSum s M - oddDirichletChannel s‖ ≤
@@ -26497,6 +27103,7 @@ theorem rectangularOddCoreSum_sub_oddDirichletChannel_norm_le_explicit_of_one_lt
         exact le_rfl)
   simpa [c2ConcreteOddTruncationError, c2OddTruncationError] using hbound 0
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2ConcreteCutoffErrorC0Zeta_eq_split_of_one_lt_re
     (K M : ℕ) {s : ℂ} (hs : 1 < s.re) :
     c2ConcreteCutoffErrorC0Zeta K M s =
@@ -26517,6 +27124,7 @@ theorem c2ConcreteCutoffErrorC0Zeta_eq_split_of_one_lt_re
   unfold centralFromOddChannel
   ring
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2ConcreteCutoffErrorC0Zeta_norm_le_explicit_of_one_lt_re
     (K M : ℕ) {s : ℂ} (hK : 2 ≤ K) (hs : 1 < s.re) :
     ‖c2ConcreteCutoffErrorC0Zeta K M s‖ ≤
@@ -26572,6 +27180,7 @@ theorem c2ConcreteCutoffErrorC0Zeta_norm_le_explicit_of_one_lt_re
   rw [c2ConcreteCutoffErrorC0Zeta_eq_split_of_one_lt_re K M hs]
   exact le_trans (norm_add_le _ _) (add_le_add hterm1 hterm2)
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2ConcreteCutoffErrorC0Zeta_scaled_bound_of_explicit
     {K M : ℕ} {cutoffConstant cutoffScale : ℂ → ℝ} {s : ℂ}
     (hK : 2 ≤ K) (hs : 1 < s.re)
@@ -26631,6 +27240,7 @@ def c2OddTailBalancingSeedExplicitCutoffRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: FORMAL_BARRIER
 theorem c2OddTailBalancingSeedExplicitCutoffRegion_eq_empty
     (coreCutoff : ℕ → ℕ) (K M : ℕ)
     (tiltConstant tiltScale
@@ -26648,6 +27258,7 @@ theorem c2OddTailBalancingSeedExplicitCutoffRegion_eq_empty
   · intro hs
     simp at hs
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailBalancingSeed_mem_explicitAnchorRegion_of_mem_explicitCutoffRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -26682,6 +27293,7 @@ theorem c2OddTailBalancingSeed_mem_explicitAnchorRegion_of_mem_explicitCutoffReg
     dominance := hs.dominance
   }
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeed_mem_c0ZetaCutoffRegion_of_mem_explicitCutoffRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -26700,6 +27312,7 @@ theorem c2OddTailBalancingSeed_mem_c0ZetaCutoffRegion_of_mem_explicitCutoffRegio
   exact c2OddTailBalancingSeed_mem_c0ZetaCutoffRegion_of_mem_explicitAnchorRegion
     (c2OddTailBalancingSeed_mem_explicitAnchorRegion_of_mem_explicitCutoffRegion hs)
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailBalancingSeed_nonvanishing_of_mem_explicitCutoffRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -26714,6 +27327,7 @@ theorem c2OddTailBalancingSeed_nonvanishing_of_mem_explicitCutoffRegion
   exact c2OddTailBalancingSeed_nonvanishing_of_mem_explicitAnchorRegion
     (c2OddTailBalancingSeed_mem_explicitAnchorRegion_of_mem_explicitCutoffRegion hs)
 
+-- ROUTE_TAG: FORMAL_BARRIER
 theorem c2OddTailBalancingSeedExplicitCutoffRegion_nonempty_iff
     (coreCutoff : ℕ → ℕ) (K M : ℕ)
     (tiltConstant tiltScale
@@ -26733,6 +27347,7 @@ theorem c2OddTailBalancingSeedExplicitCutoffRegion_nonempty_iff
           cutoffConstant cutoffScale s := by
   rfl
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem
     c2BulkScaledSeededExplicitOddTailC0ZetaCutoffRegion_nonempty_of_nonempty_explicitCutoffRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -26755,6 +27370,7 @@ theorem
   exact ⟨s,
     c2OddTailBalancingSeed_mem_c0ZetaCutoffRegion_of_mem_explicitCutoffRegion hs⟩
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailBalancingSeed_exists_nonvanishing_point_of_nonempty_explicitCutoffRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -26830,6 +27446,7 @@ def c2OddTailBalancingSeedExplicitCutoffOneLtRegion
     horizontalConstant horizontalScale horizontalRatio
     cutoffConstant cutoffScale s}
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem
     c2OddTailBalancingSeed_mem_c0ZetaCutoffOneLtRegion_of_mem_explicitCutoffOneLtRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -26929,6 +27546,7 @@ theorem
     dominance := hs.dominance
   }
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailBalancingSeed_nonvanishing_of_mem_explicitCutoffOneLtRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -26945,6 +27563,7 @@ theorem c2OddTailBalancingSeed_nonvanishing_of_mem_explicitCutoffOneLtRegion
   exact c2BulkScaledSeededExplicitOddTailC0ZetaCutoffOneLt_nonvanishing_of_mem
     (c2OddTailBalancingSeed_mem_c0ZetaCutoffOneLtRegion_of_mem_explicitCutoffOneLtRegion hs)
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeedBulkModel_nonvanishing_of_mem_explicitCutoffOneLtRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -26962,6 +27581,7 @@ theorem c2OddTailBalancingSeedBulkModel_nonvanishing_of_mem_explicitCutoffOneLtR
         coreCutoff K M s hs.one_lt_re)]
   exact c2OddTailBalancingSeed_nonvanishing_of_mem_explicitCutoffOneLtRegion hs
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailContinuedBalancingSeedBulkModel_eq_oldBulkModel_on_oneLtHalfPlane
     (coreCutoff : ℕ → ℕ) (K M : ℕ) :
     ∀ s : ℂ, s ∈ oneLtHalfPlane →
@@ -26984,6 +27604,7 @@ theorem c2OddTailContinuedBalancingSeedBulkModel_eq_oldBulkModel_on_oneLtHalfPla
             c2OddTailBalancingSeedBulkModel_eq_continuedCentralOddChannel_on_oneLtHalfPlane
               coreCutoff K M s hs
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeedBulkModel_norm_le_exactZetaScalar_of_one_lt_re
     (coreCutoff : ℕ → ℕ) (K M : ℕ) {s : ℂ} (hs : 1 < s.re) :
     ‖c2OddTailBalancingSeedBulkModel coreCutoff K M s‖ ≤
@@ -27001,6 +27622,7 @@ theorem c2OddTailBalancingSeedBulkModel_norm_le_exactZetaScalar_of_one_lt_re
     _ ≤ c2ExplicitFiniteCoreCentralExactZetaScalarUpper s :=
           c2GenuineCentralDoubleSeries_norm_le_exactZetaScalar_of_one_lt_re hs
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailContinuedBalancingSeedBulkModel_norm_le_exactZetaScalar_of_one_lt_re
     (coreCutoff : ℕ → ℕ) (K M : ℕ) {s : ℂ} (hs : 1 < s.re) :
     ‖c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M s‖ ≤
@@ -27012,6 +27634,7 @@ theorem c2OddTailContinuedBalancingSeedBulkModel_norm_le_exactZetaScalar_of_one_
   exact c2OddTailBalancingSeedBulkModel_norm_le_exactZetaScalar_of_one_lt_re
     coreCutoff K M hs
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeedBulkModel_norm_le_exactZetaScalar_of_mem_explicitCutoffOneLtRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -27027,6 +27650,7 @@ theorem c2OddTailBalancingSeedBulkModel_norm_le_exactZetaScalar_of_mem_explicitC
   c2OddTailBalancingSeedBulkModel_norm_le_exactZetaScalar_of_one_lt_re
     coreCutoff K M hs.one_lt_re
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailContinuedBalancingSeedBulkModel_norm_le_exactZetaScalar_of_mem_explicitCutoffOneLtRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -27042,6 +27666,7 @@ theorem c2OddTailContinuedBalancingSeedBulkModel_norm_le_exactZetaScalar_of_mem_
   c2OddTailContinuedBalancingSeedBulkModel_norm_le_exactZetaScalar_of_one_lt_re
     coreCutoff K M hs.one_lt_re
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_explicitCutoffOneLtRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {tiltConstant tiltScale
@@ -27060,6 +27685,7 @@ theorem c2OddTailContinuedBalancingSeedBulkModel_nonvanishing_of_mem_explicitCut
         coreCutoff K M s hs.one_lt_re)]
   exact c2OddTailBalancingSeedBulkModel_nonvanishing_of_mem_explicitCutoffOneLtRegion hs
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem c2OddTailBalancingSeedExplicitCutoffOneLtRegion_nonempty_iff
     (coreCutoff : ℕ → ℕ) (K M : ℕ)
     (tiltConstant tiltScale
@@ -27079,6 +27705,7 @@ theorem c2OddTailBalancingSeedExplicitCutoffOneLtRegion_nonempty_iff
           cutoffConstant cutoffScale s := by
   rfl
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
     c2OddTailBalancingSeed_exists_nonvanishing_point_of_nonempty_explicitCutoffOneLtRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -27102,6 +27729,7 @@ theorem
   exact ⟨s, hs,
     c2OddTailBalancingSeed_nonvanishing_of_mem_explicitCutoffOneLtRegion hs⟩
 
+-- ROUTE_TAG: DEPRECATED_HISTORICAL
 theorem
     c2OddTailBalancingSeedBulkModel_exists_nonvanishing_point_of_nonempty_explicitCutoffOneLtRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -27125,6 +27753,7 @@ theorem
   exact ⟨s, hs,
     c2OddTailBalancingSeedBulkModel_nonvanishing_of_mem_explicitCutoffOneLtRegion hs⟩
 
+-- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 theorem
   c2OddTailContinuedBalancingSeedBulkModel_exists_nonzero_of_nonempty_explicitCutoffOneLtRegion
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
