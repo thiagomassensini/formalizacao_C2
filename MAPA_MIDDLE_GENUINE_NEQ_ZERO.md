@@ -356,6 +356,10 @@ Nomes:
   em `LeanC2/AuditGenuineMiddle.lean:12015`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperClearedBudgetOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:12030`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:12048`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:12060`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedLocalData`
   em `LeanC2/AuditGenuineMiddle.lean:11492`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedLocalData.of_horizontalBudget`
@@ -466,14 +470,20 @@ Nomes:
   em `LeanC2/AuditGenuineMiddle.lean:14206`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedScalarBudgetOnMiddle_of_explicit`
   em `LeanC2/AuditGenuineMiddle.lean:14228`
+- `GenuineMiddleAudit.c2ExactGapAnchorExactTailGapBudget_eq_verticalDepthTailUpper_mul_exactFactorUpper`
+  em `LeanC2/AuditGenuineMiddle.lean:13295`
 - `GenuineMiddleAudit.C2ExactGapAnchorTailNormAnchorResidualFactorBudgetOnMiddle_exact_of_exactGapExpandedScalarBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16494`
+  em `LeanC2/AuditGenuineMiddle.lean:16581`
 - `GenuineMiddleAudit.C2ExactGapAnchorTailNormAnchorResidualFactorBudgetOnMiddle_exact_of_exactGapExpandedUpperBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16518`
+  em `LeanC2/AuditGenuineMiddle.lean:16605`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperBudget_iff_upperClearedBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:16212`
+  em `LeanC2/AuditGenuineMiddle.lean:16252`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperBudgetOnMiddle_iff_upperClearedBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16287`
+  em `LeanC2/AuditGenuineMiddle.lean:16327`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperClearedBudget_iff_collectedBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:16359`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperClearedBudgetOnMiddle_iff_collectedBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:16374`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortion`
   em `LeanC2/AuditGenuineMiddle.lean:11309`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortionExplicitUpper`
@@ -1682,9 +1692,29 @@ Pointwise, a desigualdade fica:
     c2ExpandedQuartetResidualMargin s * (1 - ‖q s‖)
 ```
 
+Coleta algebraica equivalente:
+
+```lean
+def C2ExactGapAnchorExactGapExpandedUpperCollectedBudget
+def C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle
+
+theorem C2ExactGapAnchorExactGapExpandedUpperClearedBudget_iff_collectedBudget
+theorem C2ExactGapAnchorExactGapExpandedUpperClearedBudgetOnMiddle_iff_collectedBudgetOnMiddle
+```
+
+Pointwise:
+
+```lean
+(1 + ‖q s‖) * c2ExactGapAnchorExactTailGapBudget s +
+    (1 + ‖q s‖) *
+      (genuineCentralUpper s + continuedCentralUpper s) +
+    2 * (horizontalBudget s + cutoffBudget s) <
+  c2ExpandedQuartetResidualMargin s * (1 - ‖q s‖)
+```
+
 Essa e a forma algebraica recomendada para o proximo ataque quantitativo:
-phase/exact-gap contribution, genuine, continued, cutoff e horizontal contra a
-margem do quarteto ja multiplicada por `1 - ‖q s‖`.
+tail phase/exact-gap contribution, genuine, continued, cutoff e horizontal
+contra a margem do quarteto ja multiplicada por `1 - ‖q s‖`.
 
 com
 
@@ -1692,6 +1722,23 @@ com
 c2ExactGapAnchorExactTailGapBudget s =
   verticalDepthTailUpper s * c2ContinuedOddExactGapUpper s
 ```
+
+No off-critical, o tail-gap canonico tambem foi normalizado contra o
+exact-factor operator-side:
+
+```lean
+theorem c2ExactGapAnchorExactTailGapBudget_eq_verticalDepthTailUpper_mul_exactFactorUpper
+```
+
+isto e, o termo coletado de fase e
+
+```lean
+verticalDepthTailUpper s *
+  c2ContinuedVerticalAnchorResidualExactFactorUpper s
+```
+
+O fator `verticalDepthTailUpper s` e parte da igualdade algebraica do budget
+expanded; remove-lo exigiria uma estimativa adicional, nao uma coleta pura.
 
 Nao e um endpoint global novo; e apenas a ponte local que transforma o boleto
 expanded/upper no budget exact-factor.

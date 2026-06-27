@@ -12041,6 +12041,36 @@ noncomputable def C2ExactGapAnchorExactGapExpandedUpperClearedBudgetOnMiddle
       horizontalBudget cutoffBudget s
 
 /--
+Collected version of the cleared exact-gap external-upper budget.  It keeps the
+exact tail-gap contribution separate from central and horizontal/cutoff
+contributions.
+-/
+noncomputable def C2ExactGapAnchorExactGapExpandedUpperCollectedBudget
+    (_K _M : ℕ)
+    (genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ)
+    (s : ℂ) : Prop :=
+  (1 + ‖q s‖) * c2ExactGapAnchorExactTailGapBudget s +
+      (1 + ‖q s‖) *
+        (genuineCentralUpper s + continuedCentralUpper s) +
+      2 * (horizontalBudget s + cutoffBudget s) <
+    c2ExpandedQuartetResidualMargin s * (1 - ‖q s‖)
+
+/-- Global middle version of the collected exact-gap external-upper budget. -/
+noncomputable def C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ)
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M) :
+    Prop :=
+  ∀ ⦃s : ℂ⦄,
+    s ∈ c2ExpandedScalarMiddleRegion near edge →
+    C2ExactGapAnchorExactGapExpandedUpperCollectedBudget
+      K M genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget s
+
+/--
 Self-contained pointwise exact-gap local data for the genuine middle ledger.
 The analytic content is the expanded exact-gap scalar budget; the remaining
 fields are the horizontal geometry needed by the quartet ledger.
@@ -13261,6 +13291,16 @@ theorem c2ContinuedVerticalAnchorResidualExactFactorUpper_eq_exactOddGap
   have htail_pos : 0 < ‖verticalDepthTailFromTwo s‖ :=
     verticalDepthTailFromTwo_norm_pos_of_offCriticalStrip hoff
   field_simp [ne_of_gt htail_pos]
+
+theorem c2ExactGapAnchorExactTailGapBudget_eq_verticalDepthTailUpper_mul_exactFactorUpper
+    {s : ℂ}
+    (hoff : offCriticalStrip s) :
+    c2ExactGapAnchorExactTailGapBudget s =
+      verticalDepthTailUpper s *
+        c2ContinuedVerticalAnchorResidualExactFactorUpper s := by
+  rw [c2ContinuedVerticalAnchorResidualExactFactorUpper_eq_exactOddGap hoff]
+  unfold c2ExactGapAnchorExactTailGapBudget c2ContinuedOddExactGapUpper
+  rfl
 
 theorem c2ContinuedVerticalAnchorResidualExactFactorUpper_eq_two_norm_half_sub
     {s : ℂ}
@@ -16315,6 +16355,53 @@ theorem C2ExactGapAnchorExactGapExpandedUpperBudgetOnMiddle_iff_upperClearedBudg
         (horizontalBudget := horizontalBudget)
         (cutoffBudget := cutoffBudget)
         (s := s) hs.1).2 (hbudget hs)
+
+theorem C2ExactGapAnchorExactGapExpandedUpperClearedBudget_iff_collectedBudget
+    {K M : ℕ}
+    {genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ}
+    {s : ℂ} :
+    C2ExactGapAnchorExactGapExpandedUpperClearedBudget
+        K M genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget s ↔
+      C2ExactGapAnchorExactGapExpandedUpperCollectedBudget
+        K M genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget s := by
+  unfold C2ExactGapAnchorExactGapExpandedUpperClearedBudget
+    C2ExactGapAnchorExactGapExpandedUpperCollectedBudget
+  ring_nf
+
+theorem C2ExactGapAnchorExactGapExpandedUpperClearedBudgetOnMiddle_iff_collectedBudgetOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M} :
+    C2ExactGapAnchorExactGapExpandedUpperClearedBudgetOnMiddle
+        genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget near edge ↔
+      C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle
+        genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget near edge := by
+  constructor
+  · intro hbudget s hs
+    exact
+      (C2ExactGapAnchorExactGapExpandedUpperClearedBudget_iff_collectedBudget
+        (K := K) (M := M)
+        (genuineCentralUpper := genuineCentralUpper)
+        (continuedCentralUpper := continuedCentralUpper)
+        (horizontalBudget := horizontalBudget)
+        (cutoffBudget := cutoffBudget)
+        (s := s)).1 (hbudget hs)
+  · intro hbudget s hs
+    exact
+      (C2ExactGapAnchorExactGapExpandedUpperClearedBudget_iff_collectedBudget
+        (K := K) (M := M)
+        (genuineCentralUpper := genuineCentralUpper)
+        (continuedCentralUpper := continuedCentralUpper)
+        (horizontalBudget := horizontalBudget)
+        (cutoffBudget := cutoffBudget)
+        (s := s)).2 (hbudget hs)
 
 theorem C2ExactGapAnchorExactGapExpandedScalarBudget_iff_explicit
     {K M : ℕ}
