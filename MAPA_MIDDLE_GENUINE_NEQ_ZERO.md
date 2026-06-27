@@ -251,13 +251,13 @@ Nomes:
 - `GenuineMiddleAudit.C2ExactGapAnchorPositiveAllowanceUpperBudgetOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:10987`
 - `GenuineMiddleAudit.C2ExactGapAnchorPhaseSaving`
-  em `LeanC2/AuditGenuineMiddle.lean:11001`
+  em `LeanC2/AuditGenuineMiddle.lean:11041`
 - `GenuineMiddleAudit.C2ExactGapAnchorPhaseSavingOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:11010`
+  em `LeanC2/AuditGenuineMiddle.lean:11050`
 - `GenuineMiddleAudit.C2ExactGapAnchorPhaseDisk`
-  em `LeanC2/AuditGenuineMiddle.lean:11025`
+  em `LeanC2/AuditGenuineMiddle.lean:11065`
 - `GenuineMiddleAudit.C2ExactGapAnchorPhaseDiskOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:11034`
+  em `LeanC2/AuditGenuineMiddle.lean:11074`
 - `GenuineMiddleAudit.C2ContinuedOddChannelBoundOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:10671`
 - `GenuineMiddleAudit.c2ContinuedOddChannelBoundOnMiddle_exact`
@@ -268,16 +268,24 @@ Nomes:
   em `LeanC2/AuditGenuineMiddle.lean:11090`
 - `GenuineMiddleAudit.c2HalfDiskUpperFromOddUpper`
   em `LeanC2/AuditGenuineMiddle.lean:11101`
-- `GenuineMiddleAudit.C2ExactGapAnchorPhaseDiskBudget`
+- `GenuineMiddleAudit.c2ContinuedOddGapUpperFromHalfDisk`
   em `LeanC2/AuditGenuineMiddle.lean:11106`
+- `GenuineMiddleAudit.C2ExactGapAnchorPhaseDiskBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:11111`
 - `GenuineMiddleAudit.C2ExactGapAnchorPhaseDiskBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:11116`
+  em `LeanC2/AuditGenuineMiddle.lean:11121`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactHalfDiskBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:11134`
+- `GenuineMiddleAudit.C2ContinuedOddGapBound_of_halfDiskBound`
+  em `LeanC2/AuditGenuineMiddle.lean:12592`
+- `GenuineMiddleAudit.C2ContinuedOddGapBoundOnMiddle_of_halfDiskBoundOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:12602`
 - `GenuineMiddleAudit.C2ContinuedOddHalfDiskBound_of_oddChannelBound`
-  em `LeanC2/AuditGenuineMiddle.lean:11783`
+  em `LeanC2/AuditGenuineMiddle.lean:12663`
 - `GenuineMiddleAudit.C2ContinuedOddHalfDiskBoundOnMiddle_of_oddChannelBoundOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:11798`
+  em `LeanC2/AuditGenuineMiddle.lean:12678`
 - `GenuineMiddleAudit.C2ContinuedOddHalfDiskBoundOnMiddle_exactMetric`
-  em `LeanC2/AuditGenuineMiddle.lean:11810`
+  em `LeanC2/AuditGenuineMiddle.lean:12690`
 - `GenuineMiddleAudit.c2VerticalDepthTailLower`
   em `LeanC2/AuditGenuineMiddle.lean:11084`
 - `GenuineMiddleAudit.C2ContinuedVerticalAnchorResidualBound`
@@ -493,15 +501,17 @@ Nomes:
 - `GenuineMiddleAudit.C2ExactGapAnchorTailNormAnchorResidualFactorBudgetOnMiddle_exact_iff_tailNormAnchorResidualBudgetOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:11706`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactFactorUpperBound_exact`
-  em `LeanC2/AuditGenuineMiddle.lean:11791`
+  em `LeanC2/AuditGenuineMiddle.lean:13804`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactFactorUpperBoundOnMiddle_exact`
-  em `LeanC2/AuditGenuineMiddle.lean:11798`
+  em `LeanC2/AuditGenuineMiddle.lean:13811`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactFactorUpperBound_of_gapBound`
-  em `LeanC2/AuditGenuineMiddle.lean:11855`
+  em `LeanC2/AuditGenuineMiddle.lean:13820`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactFactorUpperBoundOnMiddle_of_gapBoundOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:11864`
+  em `LeanC2/AuditGenuineMiddle.lean:13829`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactFactorUpperBoundOnMiddle_of_halfDiskBoundOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:13841`
 - `GenuineMiddleAudit.C2ExactGapAnchorFactorAllowanceLowerBound_exact`
-  em `LeanC2/AuditGenuineMiddle.lean:11807`
+  em `LeanC2/AuditGenuineMiddle.lean:13853`
 - `GenuineMiddleAudit.C2ExactGapAnchorFactorAllowanceLowerBoundOnMiddle_exact`
   em `LeanC2/AuditGenuineMiddle.lean:11818`
 - `GenuineMiddleAudit.C2ExactGapAnchorFactorAllowanceLowerBound_of_scalarBudget`
@@ -897,27 +907,31 @@ Nomes:
 - `GenuineMiddleAudit.C2GenuineExactGapAnchorFinalBudget_forces_factorAllowance_pos`
   em `LeanC2/AuditGenuineMiddle.lean:12238`
 - `GenuineMiddleAudit.c2ExactGapAnchorFactorAllowance_pos_iff_positiveAllowanceBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:12253`
+  em `LeanC2/AuditGenuineMiddle.lean:14730`
 - `GenuineMiddleAudit.c2ExactGapAnchorFactorAllowance_pos_of_positiveAllowanceBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:12276`
+  em `LeanC2/AuditGenuineMiddle.lean:14753`
 - `GenuineMiddleAudit.C2ExactGapAnchorPositiveAllowanceBudget_of_factorAllowance_pos`
-  em `LeanC2/AuditGenuineMiddle.lean:12294`
+  em `LeanC2/AuditGenuineMiddle.lean:14771`
 - `GenuineMiddleAudit.c2ExactGapAnchorFactorAllowance_pos_onMiddle_of_positiveAllowanceBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:12312`
+  em `LeanC2/AuditGenuineMiddle.lean:14789`
 - `GenuineMiddleAudit.c2ExactGapAnchorFactorAllowance_lt_one_of_offCritical`
-  em `LeanC2/AuditGenuineMiddle.lean:12416`
+  em `LeanC2/AuditGenuineMiddle.lean:15013`
+- `GenuineMiddleAudit.c2ContinuedOddGapUpperFromHalfDisk_lt_one_of_phaseDiskBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:15042`
+- `GenuineMiddleAudit.c2ContinuedOddGapUpperFromHalfDisk_lt_one_onMiddle_of_phaseDiskBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:15065`
 - `GenuineMiddleAudit.C2ExactGapAnchorPhaseSaving_forces_exactOddGap_lt_one`
-  em `LeanC2/AuditGenuineMiddle.lean:12445`
+  em `LeanC2/AuditGenuineMiddle.lean:15092`
 - `GenuineMiddleAudit.C2ExactGapAnchorTailNormAnchorResidualBudget_forces_exactOddGap_lt_one`
-  em `LeanC2/AuditGenuineMiddle.lean:12465`
+  em `LeanC2/AuditGenuineMiddle.lean:15112`
 - `GenuineMiddleAudit.not_C2ExactGapAnchorTailNormAnchorResidualBudget_of_one_le_exactOddGap`
-  em `LeanC2/AuditGenuineMiddle.lean:12484`
+  em `LeanC2/AuditGenuineMiddle.lean:15131`
 - `GenuineMiddleAudit.C2ExactGapAnchorPhaseDisk_forces_exactOddGap_lt_one`
-  em `LeanC2/AuditGenuineMiddle.lean:12504`
+  em `LeanC2/AuditGenuineMiddle.lean:15151`
 - `GenuineMiddleAudit.C2GenuineExactGapAnchorFinalBudget_forces_exactOddGap_lt_one`
-  em `LeanC2/AuditGenuineMiddle.lean:12559`
+  em `LeanC2/AuditGenuineMiddle.lean:15206`
 - `GenuineMiddleAudit.not_C2GenuineExactGapAnchorFinalBudget_of_one_le_exactOddGap`
-  em `LeanC2/AuditGenuineMiddle.lean:12592`
+  em `LeanC2/AuditGenuineMiddle.lean:15239`
 - `GenuineMiddleAudit.exactVerticalScalarBudget_iff_budget_lt_allowance`
   em `LeanC2/AuditGenuineMiddle.lean:12804`
 - `GenuineMiddleAudit.C2ExactGapAnchorPositiveAllowanceScalarBudget_iff_positiveAllowanceBudget`
@@ -2199,6 +2213,52 @@ Isto usa o bound formal ja existente
 `c2ExpandedQuartetResidualMargin_lt_scaledVerticalDepthTail_linearCoefficient_of_offCriticalStrip`
 e confirma que o alvo vivo nao e um `gapUpper` norm-only trivial: a
 desigualdade component-cleared so fecha com `gapUpper < 1`.
+
+Superficie phase-aware para construir esse `gapUpper`:
+
+```lean
+gapUpper := c2ContinuedOddGapUpperFromHalfDisk halfDiskUpper
+-- pointwise:
+gapUpper s = 2 * halfDiskUpper s
+```
+
+A ponte geométrica é:
+
+```lean
+C2ContinuedOddHalfDiskBoundOnMiddle halfDiskUpper near edge
+⇒
+C2ContinuedOddGapBoundOnMiddle
+  (c2ContinuedOddGapUpperFromHalfDisk halfDiskUpper) near edge
+⇒
+C2ExactGapAnchorExactFactorUpperBoundOnMiddle
+  (c2ContinuedOddGapUpperFromHalfDisk halfDiskUpper) near edge
+```
+
+formalizado por:
+
+```lean
+def c2ContinuedOddGapUpperFromHalfDisk
+theorem C2ContinuedOddGapBound_of_halfDiskBound
+theorem C2ContinuedOddGapBoundOnMiddle_of_halfDiskBoundOnMiddle
+theorem C2ExactGapAnchorExactFactorUpperBoundOnMiddle_of_halfDiskBoundOnMiddle
+```
+
+O mesmo half-disk budget que alimenta `PhaseDisk` tambem da o saving
+`gapUpper < 1`, pois `factorAllowance < 1` no regime geométrico padrao:
+
+```lean
+C2ExactGapAnchorPhaseDiskBudgetOnMiddle
+  horizontalConstant horizontalScale horizontalRatio halfDiskUpper near edge
+⇒
+c2ContinuedOddGapUpperFromHalfDisk halfDiskUpper s < 1
+```
+
+formalizado por:
+
+```lean
+theorem c2ContinuedOddGapUpperFromHalfDisk_lt_one_of_phaseDiskBudget
+theorem c2ContinuedOddGapUpperFromHalfDisk_lt_one_onMiddle_of_phaseDiskBudgetOnMiddle
+```
 
 A hipotese `0 ≤ externalComponentDebit` tambem foi fechada por componentes:
 

@@ -11102,6 +11102,11 @@ noncomputable def c2HalfDiskUpperFromOddUpper
     (oddUpper : ℂ → ℝ) : ℂ → ℝ :=
   fun s => (1 / 2 : ℝ) + oddUpper s
 
+/-- Gap upper induced by a phase-aware half-disk upper around `1 / 2`. -/
+noncomputable def c2ContinuedOddGapUpperFromHalfDisk
+    (halfDiskUpper : ℂ → ℝ) : ℂ → ℝ :=
+  fun s => 2 * halfDiskUpper s
+
 /-- Scalar budget that converts a half-disk upper into the exact phase disk. -/
 def C2ExactGapAnchorPhaseDiskBudget
     (K M : ℕ)
@@ -12584,6 +12589,28 @@ lemma norm_one_sub_two_mul_eq_two_norm_half_sub (z : ℂ) :
   rw [hrewrite, norm_mul]
   norm_num
 
+theorem C2ContinuedOddGapBound_of_halfDiskBound
+    {halfDiskUpper : ℂ → ℝ} {s : ℂ}
+    (hhalf : C2ContinuedOddHalfDiskBound halfDiskUpper s) :
+    C2ContinuedOddGapBound
+      (c2ContinuedOddGapUpperFromHalfDisk halfDiskUpper) s := by
+  unfold C2ContinuedOddHalfDiskBound at hhalf
+  unfold C2ContinuedOddGapBound c2ContinuedOddGapUpperFromHalfDisk
+  rw [norm_one_sub_two_mul_eq_two_norm_half_sub]
+  exact mul_le_mul_of_nonneg_left hhalf (by norm_num)
+
+theorem C2ContinuedOddGapBoundOnMiddle_of_halfDiskBoundOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {halfDiskUpper : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M}
+    (hhalf :
+      C2ContinuedOddHalfDiskBoundOnMiddle halfDiskUpper near edge) :
+    C2ContinuedOddGapBoundOnMiddle
+      (c2ContinuedOddGapUpperFromHalfDisk halfDiskUpper) near edge := by
+  intro s hs
+  exact C2ContinuedOddGapBound_of_halfDiskBound (hhalf hs)
+
 /-- Pointwise conversion from a half-disk upper plus its scalar budget. -/
 theorem C2ExactGapAnchorPhaseDisk_of_halfDiskBound
     {K M : ℕ}
@@ -13811,6 +13838,18 @@ theorem C2ExactGapAnchorExactFactorUpperBoundOnMiddle_of_gapBoundOnMiddle
   exact C2ExactGapAnchorExactFactorUpperBound_of_gapBound
     hs.1 (hgap hs)
 
+theorem C2ExactGapAnchorExactFactorUpperBoundOnMiddle_of_halfDiskBoundOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {halfDiskUpper : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M}
+    (hhalf :
+      C2ContinuedOddHalfDiskBoundOnMiddle halfDiskUpper near edge) :
+    C2ExactGapAnchorExactFactorUpperBoundOnMiddle
+      (c2ContinuedOddGapUpperFromHalfDisk halfDiskUpper) near edge :=
+  C2ExactGapAnchorExactFactorUpperBoundOnMiddle_of_gapBoundOnMiddle
+    (C2ContinuedOddGapBoundOnMiddle_of_halfDiskBoundOnMiddle hhalf)
+
 theorem C2ExactGapAnchorFactorAllowanceLowerBound_exact
     {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -14999,6 +15038,56 @@ theorem c2ExactGapAnchorFactorAllowance_lt_one_of_offCritical
   unfold c2ExactGapAnchorFactorAllowance
   rw [div_lt_iff₀ htail_pos]
   nlinarith
+
+theorem c2ContinuedOddGapUpperFromHalfDisk_lt_one_of_phaseDiskBudget
+    {K M : ℕ}
+    {horizontalConstant horizontalScale horizontalRatio
+      halfDiskUpper : ℂ → ℝ}
+    {s : ℂ}
+    (hoff : offCriticalStrip s)
+    (hhorizontalScale_pos : 0 < horizontalScale s)
+    (hhorizontalConstant_nonneg : 0 ≤ horizontalConstant s)
+    (hhorizontalRatio_lt_one : horizontalRatio s < 1)
+    (hbudget :
+      C2ExactGapAnchorPhaseDiskBudget
+        K M horizontalConstant horizontalScale horizontalRatio halfDiskUpper s) :
+    c2ContinuedOddGapUpperFromHalfDisk halfDiskUpper s < 1 := by
+  have hallow :
+      c2ExactGapAnchorFactorAllowance
+          K M horizontalConstant horizontalScale horizontalRatio s < 1 :=
+    c2ExactGapAnchorFactorAllowance_lt_one_of_offCritical
+      hoff hhorizontalScale_pos hhorizontalConstant_nonneg
+      hhorizontalRatio_lt_one
+  unfold C2ExactGapAnchorPhaseDiskBudget at hbudget
+  unfold c2ContinuedOddGapUpperFromHalfDisk
+  exact lt_trans hbudget hallow
+
+theorem c2ContinuedOddGapUpperFromHalfDisk_lt_one_onMiddle_of_phaseDiskBudgetOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {horizontalConstant horizontalScale horizontalRatio
+      halfDiskUpper : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M}
+    (hhorizontalScale_pos : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      0 < horizontalScale s)
+    (hhorizontalConstant_nonneg : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      0 ≤ horizontalConstant s)
+    (hhorizontalRatio_lt_one : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      horizontalRatio s < 1)
+    (hbudget :
+      C2ExactGapAnchorPhaseDiskBudgetOnMiddle
+        horizontalConstant horizontalScale horizontalRatio halfDiskUpper near edge) :
+    ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      c2ContinuedOddGapUpperFromHalfDisk halfDiskUpper s < 1 := by
+  intro s hs
+  exact
+    c2ContinuedOddGapUpperFromHalfDisk_lt_one_of_phaseDiskBudget
+      hs.1 (hhorizontalScale_pos hs) (hhorizontalConstant_nonneg hs)
+      (hhorizontalRatio_lt_one hs) (hbudget hs)
 
 theorem C2ExactGapAnchorPhaseSaving_forces_exactOddGap_lt_one
     {K M : ℕ}
