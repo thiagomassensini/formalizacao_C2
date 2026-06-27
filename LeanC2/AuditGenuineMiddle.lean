@@ -12142,6 +12142,24 @@ def C2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentBoundsOnMiddle
       genuineBudget continuedBudget
       horizontalBudgetUpper cutoffBudgetUpper s
 
+/-- Individual genuine-central component bound for the external debit ledger. -/
+def C2ExactGapAnchorExactGapExpandedUpperGenuineComponentBound
+    (genuineCentralUpper genuineBudget : ℂ → ℝ)
+    (s : ℂ) : Prop :=
+  genuineCentralUpper s ≤ genuineBudget s
+
+/-- Global middle version of the genuine-central component bound. -/
+def C2ExactGapAnchorExactGapExpandedUpperGenuineComponentBoundOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (genuineCentralUpper genuineBudget : ℂ → ℝ)
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M) :
+    Prop :=
+  ∀ ⦃s : ℂ⦄,
+    s ∈ c2ExpandedScalarMiddleRegion near edge →
+    C2ExactGapAnchorExactGapExpandedUpperGenuineComponentBound
+      genuineCentralUpper genuineBudget s
+
 /-- Individual continued-central component bound for the external debit ledger. -/
 def C2ExactGapAnchorExactGapExpandedUpperContinuedComponentBound
     (continuedCentralUpper continuedBudget : ℂ → ℝ)
@@ -16962,6 +16980,25 @@ theorem C2ExactGapAnchorExactGapExpandedUpperExternalDebitUpperBoundOnMiddle_of_
   exact
     C2ExactGapAnchorExactGapExpandedUpperExternalDebitUpperBound_of_componentBounds
       (hcomponents hs)
+
+theorem C2ExactGapAnchorExactGapExpandedUpperGenuineComponentBound_self
+    (genuineCentralUpper : ℂ → ℝ) (s : ℂ) :
+    C2ExactGapAnchorExactGapExpandedUpperGenuineComponentBound
+      genuineCentralUpper genuineCentralUpper s := by
+  unfold C2ExactGapAnchorExactGapExpandedUpperGenuineComponentBound
+  exact le_rfl
+
+theorem C2ExactGapAnchorExactGapExpandedUpperGenuineComponentBoundOnMiddle_self
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (genuineCentralUpper : ℂ → ℝ)
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M) :
+    C2ExactGapAnchorExactGapExpandedUpperGenuineComponentBoundOnMiddle
+      genuineCentralUpper genuineCentralUpper near edge := by
+  intro s _hs
+  exact
+    C2ExactGapAnchorExactGapExpandedUpperGenuineComponentBound_self
+      genuineCentralUpper s
 
 theorem C2ExactGapAnchorExactGapExpandedUpperContinuedComponentBound_self
     (continuedCentralUpper : ℂ → ℝ) (s : ℂ) :
