@@ -11171,6 +11171,11 @@ noncomputable def c2HalfDiskUpperFromAnchor
     (anchorUpper : ℂ → ℝ) : ℂ → ℝ :=
   fun s => anchorUpper s / (2 * c2VerticalDepthTailLower s)
 
+/-- Odd-gap upper inherited from an anchor residual upper. -/
+noncomputable def c2ContinuedOddGapUpperFromAnchor
+    (anchorUpper : ℂ → ℝ) : ℂ → ℝ :=
+  fun s => anchorUpper s / c2VerticalDepthTailLower s
+
 /-- Exact upper for the continued vertical anchor residual. -/
 noncomputable def c2ContinuedVerticalAnchorResidualExactUpper : ℂ → ℝ :=
   fun s => ‖c2ContinuedVerticalAnchorResidual s‖
@@ -11338,6 +11343,13 @@ noncomputable def c2ContinuedVerticalAnchorResidualExactLowerFactorUpper :
   fun s =>
     ‖c2ContinuedVerticalAnchorResidual s‖ /
       c2VerticalDepthTailLower s
+
+theorem c2ContinuedOddGapUpperFromAnchor_exact_eq_exactLowerFactorUpper
+    (s : ℂ) :
+    c2ContinuedOddGapUpperFromAnchor
+        c2ContinuedVerticalAnchorResidualExactUpper s =
+      c2ContinuedVerticalAnchorResidualExactLowerFactorUpper s := by
+  rfl
 
 /-- Tail-lower distorted exact-gap budget for the operator-side anchor route. -/
 def C2ExactGapAnchorTailLowerDistortedGapBudget
@@ -12974,6 +12986,64 @@ theorem C2ContinuedOddHalfDiskBoundOnMiddle_of_anchorResidualBoundOnMiddle
   exact C2ContinuedOddHalfDiskBound_of_anchorResidualBound
     hs.1 (hanchor hs)
 
+theorem c2ContinuedOddGapUpperFromHalfDisk_fromAnchor_eq
+    (anchorUpper : ℂ → ℝ) (s : ℂ) :
+    c2ContinuedOddGapUpperFromHalfDisk
+        (c2HalfDiskUpperFromAnchor anchorUpper) s =
+      c2ContinuedOddGapUpperFromAnchor anchorUpper s := by
+  have hlower_ne : c2VerticalDepthTailLower s ≠ 0 :=
+    ne_of_gt (c2VerticalDepthTailLower_pos s)
+  unfold c2ContinuedOddGapUpperFromHalfDisk
+    c2HalfDiskUpperFromAnchor c2ContinuedOddGapUpperFromAnchor
+  field_simp [hlower_ne]
+
+theorem C2ContinuedOddGapBound_of_anchorResidualBound
+    {anchorUpper : ℂ → ℝ} {s : ℂ}
+    (hoff : offCriticalStrip s)
+    (hanchor : C2ContinuedVerticalAnchorResidualBound anchorUpper s) :
+    C2ContinuedOddGapBound
+      (c2ContinuedOddGapUpperFromAnchor anchorUpper) s := by
+  have hhalf :
+      C2ContinuedOddHalfDiskBound
+        (c2HalfDiskUpperFromAnchor anchorUpper) s :=
+    C2ContinuedOddHalfDiskBound_of_anchorResidualBound hoff hanchor
+  have hgap :
+      C2ContinuedOddGapBound
+        (c2ContinuedOddGapUpperFromHalfDisk
+          (c2HalfDiskUpperFromAnchor anchorUpper)) s :=
+    C2ContinuedOddGapBound_of_halfDiskBound hhalf
+  simpa [C2ContinuedOddGapBound,
+    c2ContinuedOddGapUpperFromHalfDisk_fromAnchor_eq] using hgap
+
+theorem C2ContinuedOddGapBoundOnMiddle_of_anchorResidualBoundOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {anchorUpper : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M}
+    (hanchor :
+      C2ContinuedVerticalAnchorResidualBoundOnMiddle anchorUpper near edge) :
+    C2ContinuedOddGapBoundOnMiddle
+      (c2ContinuedOddGapUpperFromAnchor anchorUpper) near edge := by
+  intro s hs
+  exact C2ContinuedOddGapBound_of_anchorResidualBound
+    hs.1 (hanchor hs)
+
+theorem C2ContinuedOddGapBoundOnMiddle_exactLowerFactorUpper
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M} :
+    C2ContinuedOddGapBoundOnMiddle
+      c2ContinuedVerticalAnchorResidualExactLowerFactorUpper near edge := by
+  intro s hs
+  have hgap :
+      C2ContinuedOddGapBound
+        (c2ContinuedOddGapUpperFromAnchor
+          c2ContinuedVerticalAnchorResidualExactUpper) s :=
+    C2ContinuedOddGapBound_of_anchorResidualBound
+      hs.1 (C2ContinuedVerticalAnchorResidualBound_exact s)
+  simpa [c2ContinuedOddGapUpperFromAnchor_exact_eq_exactLowerFactorUpper]
+    using hgap
+
 theorem C2ExactGapAnchorExactAnchorResidualBudget_iff_norm_lt_lower_mul_allowance
     {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13849,6 +13919,27 @@ theorem C2ExactGapAnchorExactFactorUpperBoundOnMiddle_of_halfDiskBoundOnMiddle
       (c2ContinuedOddGapUpperFromHalfDisk halfDiskUpper) near edge :=
   C2ExactGapAnchorExactFactorUpperBoundOnMiddle_of_gapBoundOnMiddle
     (C2ContinuedOddGapBoundOnMiddle_of_halfDiskBoundOnMiddle hhalf)
+
+theorem C2ExactGapAnchorExactFactorUpperBoundOnMiddle_of_anchorResidualBoundOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {anchorUpper : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M}
+    (hanchor :
+      C2ContinuedVerticalAnchorResidualBoundOnMiddle anchorUpper near edge) :
+    C2ExactGapAnchorExactFactorUpperBoundOnMiddle
+      (c2ContinuedOddGapUpperFromAnchor anchorUpper) near edge :=
+  C2ExactGapAnchorExactFactorUpperBoundOnMiddle_of_gapBoundOnMiddle
+    (C2ContinuedOddGapBoundOnMiddle_of_anchorResidualBoundOnMiddle hanchor)
+
+theorem C2ExactGapAnchorExactFactorUpperBoundOnMiddle_exactLowerFactorUpper
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M} :
+    C2ExactGapAnchorExactFactorUpperBoundOnMiddle
+      c2ContinuedVerticalAnchorResidualExactLowerFactorUpper near edge :=
+  C2ExactGapAnchorExactFactorUpperBoundOnMiddle_of_gapBoundOnMiddle
+    C2ContinuedOddGapBoundOnMiddle_exactLowerFactorUpper
 
 theorem C2ExactGapAnchorFactorAllowanceLowerBound_exact
     {K M : ℕ}
