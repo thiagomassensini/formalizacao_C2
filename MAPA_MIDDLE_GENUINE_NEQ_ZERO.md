@@ -352,6 +352,10 @@ Nomes:
   em `LeanC2/AuditGenuineMiddle.lean:11464`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperBudgetOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:11475`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperClearedBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:12015`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperClearedBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:12030`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedLocalData`
   em `LeanC2/AuditGenuineMiddle.lean:11492`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedLocalData.of_horizontalBudget`
@@ -463,9 +467,13 @@ Nomes:
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedScalarBudgetOnMiddle_of_explicit`
   em `LeanC2/AuditGenuineMiddle.lean:14228`
 - `GenuineMiddleAudit.C2ExactGapAnchorTailNormAnchorResidualFactorBudgetOnMiddle_exact_of_exactGapExpandedScalarBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16355`
+  em `LeanC2/AuditGenuineMiddle.lean:16494`
 - `GenuineMiddleAudit.C2ExactGapAnchorTailNormAnchorResidualFactorBudgetOnMiddle_exact_of_exactGapExpandedUpperBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16379`
+  em `LeanC2/AuditGenuineMiddle.lean:16518`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperBudget_iff_upperClearedBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:16212`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperBudgetOnMiddle_iff_upperClearedBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:16287`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortion`
   em `LeanC2/AuditGenuineMiddle.lean:11309`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortionExplicitUpper`
@@ -1649,6 +1657,34 @@ versao upper, a forma operacional existente e:
 horizontalBudget s + cutoffBudget s <
   c2ExpandedQuartetResidualMargin s
 ```
+
+Forma cleared equivalente no middle, com denominador comum apenas
+`1 - ‖q s‖`:
+
+```lean
+def C2ExactGapAnchorExactGapExpandedUpperClearedBudget
+def C2ExactGapAnchorExactGapExpandedUpperClearedBudgetOnMiddle
+
+theorem C2ExactGapAnchorExactGapExpandedUpperBudget_iff_upperClearedBudget
+theorem C2ExactGapAnchorExactGapExpandedUpperBudgetOnMiddle_iff_upperClearedBudgetOnMiddle
+```
+
+Pointwise, a desigualdade fica:
+
+```lean
+(1 + ‖q s‖) *
+    (c2ExactGapAnchorExactTailGapBudget s +
+      genuineCentralUpper s +
+      continuedCentralUpper s +
+      cutoffBudget s +
+      horizontalBudget s) +
+  (horizontalBudget s + cutoffBudget s) * (1 - ‖q s‖) <
+    c2ExpandedQuartetResidualMargin s * (1 - ‖q s‖)
+```
+
+Essa e a forma algebraica recomendada para o proximo ataque quantitativo:
+phase/exact-gap contribution, genuine, continued, cutoff e horizontal contra a
+margem do quarteto ja multiplicada por `1 - ‖q s‖`.
 
 com
 

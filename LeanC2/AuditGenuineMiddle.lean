@@ -12009,6 +12009,38 @@ noncomputable def C2ExactGapAnchorExactGapExpandedUpperBudgetOnMiddle
     horizontalBudget cutoffBudget near edge
 
 /--
+Cleared-denominator form of the canonical exact-gap external-upper budget.
+The only denominator in the expanded budget is `1 - ‖q s‖`.
+-/
+noncomputable def C2ExactGapAnchorExactGapExpandedUpperClearedBudget
+    (_K _M : ℕ)
+    (genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ)
+    (s : ℂ) : Prop :=
+  (1 + ‖q s‖) *
+      (c2ExactGapAnchorExactTailGapBudget s +
+        genuineCentralUpper s +
+        continuedCentralUpper s +
+        cutoffBudget s +
+        horizontalBudget s) +
+    (horizontalBudget s + cutoffBudget s) * (1 - ‖q s‖) <
+      c2ExpandedQuartetResidualMargin s * (1 - ‖q s‖)
+
+/-- Global middle version of the cleared exact-gap external-upper budget. -/
+noncomputable def C2ExactGapAnchorExactGapExpandedUpperClearedBudgetOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ)
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M) :
+    Prop :=
+  ∀ ⦃s : ℂ⦄,
+    s ∈ c2ExpandedScalarMiddleRegion near edge →
+    C2ExactGapAnchorExactGapExpandedUpperClearedBudget
+      K M genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget s
+
+/--
 Self-contained pointwise exact-gap local data for the genuine middle ledger.
 The analytic content is the expanded exact-gap scalar budget; the remaining
 fields are the horizontal geometry needed by the quartet ledger.
@@ -16176,6 +16208,113 @@ theorem C2ExactGapAnchorExactGapExpandedScalarBudgetOnMiddle_of_upperBudgetOnMid
     C2ExactGapAnchorGapUpperExpandedScalarBudgetOnMiddle_of_upperBudgetOnMiddle
       c2ExactGapAnchorExactTailGapBudget_bound_onMiddle
       hgenuine hcontinued hhorizontal hcutoff hbudget
+
+theorem C2ExactGapAnchorExactGapExpandedUpperBudget_iff_upperClearedBudget
+    {K M : ℕ}
+    {genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ}
+    {s : ℂ}
+    (hoff : offCriticalStrip s) :
+    C2ExactGapAnchorExactGapExpandedUpperBudget
+        K M genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget s ↔
+      C2ExactGapAnchorExactGapExpandedUpperClearedBudget
+        K M genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget s := by
+  set r := ‖q s‖
+  set A :=
+    c2ExactGapAnchorExactTailGapBudget s +
+      genuineCentralUpper s +
+      continuedCentralUpper s +
+      cutoffBudget s +
+      horizontalBudget s
+  set B := horizontalBudget s + cutoffBudget s
+  set Q := c2ExpandedQuartetResidualMargin s
+  set g := 1 - r
+  have hr_lt : r < 1 := by
+    simpa [r] using q_norm_lt_one_of_offCriticalStrip s hoff
+  have hg_pos : 0 < g := by
+    dsimp [g]
+    linarith
+  have hg_ne : g ≠ 0 := ne_of_gt hg_pos
+  constructor
+  · intro hbudget
+    have horig :
+        (A * (1 + r)) * g⁻¹ + B < Q := by
+      simpa [
+        C2ExactGapAnchorExactGapExpandedUpperBudget,
+        C2ExactGapAnchorGapUpperExpandedUpperBudget,
+        A, B, Q, r, g, add_assoc, add_comm, add_left_comm, mul_assoc]
+        using hbudget
+    have hmul :
+        ((A * (1 + r)) * g⁻¹ + B) * g < Q * g :=
+      mul_lt_mul_of_pos_right horig hg_pos
+    have hrewrite :
+        ((A * (1 + r)) * g⁻¹ + B) * g =
+          (1 + r) * A + B * g := by
+      field_simp [hg_ne]
+    have hcleared :
+        (1 + r) * A + B * g < Q * g := by
+      simpa [hrewrite] using hmul
+    simpa [
+      C2ExactGapAnchorExactGapExpandedUpperClearedBudget,
+      A, B, Q, r, g, add_assoc, add_comm, add_left_comm, mul_assoc]
+      using hcleared
+  · intro hbudget
+    have hcleared :
+        (1 + r) * A + B * g < Q * g := by
+      simpa [
+        C2ExactGapAnchorExactGapExpandedUpperClearedBudget,
+        A, B, Q, r, g, add_assoc, add_comm, add_left_comm, mul_assoc]
+        using hbudget
+    have hdiv :
+        ((1 + r) * A + B * g) / g < Q := by
+      rw [div_lt_iff₀ hg_pos]
+      simpa [mul_assoc] using hcleared
+    have hrewrite :
+        ((1 + r) * A + B * g) / g =
+          (A * (1 + r)) * g⁻¹ + B := by
+      field_simp [hg_ne]
+    have horig :
+        (A * (1 + r)) * g⁻¹ + B < Q := by
+      simpa [hrewrite] using hdiv
+    simpa [
+      C2ExactGapAnchorExactGapExpandedUpperBudget,
+      C2ExactGapAnchorGapUpperExpandedUpperBudget,
+      A, B, Q, r, g, add_assoc, add_comm, add_left_comm, mul_assoc]
+      using horig
+
+theorem C2ExactGapAnchorExactGapExpandedUpperBudgetOnMiddle_iff_upperClearedBudgetOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M} :
+    C2ExactGapAnchorExactGapExpandedUpperBudgetOnMiddle
+        genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget near edge ↔
+      C2ExactGapAnchorExactGapExpandedUpperClearedBudgetOnMiddle
+        genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget near edge := by
+  constructor
+  · intro hbudget s hs
+    exact
+      (C2ExactGapAnchorExactGapExpandedUpperBudget_iff_upperClearedBudget
+        (K := K) (M := M)
+        (genuineCentralUpper := genuineCentralUpper)
+        (continuedCentralUpper := continuedCentralUpper)
+        (horizontalBudget := horizontalBudget)
+        (cutoffBudget := cutoffBudget)
+        (s := s) hs.1).1 (hbudget hs)
+  · intro hbudget s hs
+    exact
+      (C2ExactGapAnchorExactGapExpandedUpperBudget_iff_upperClearedBudget
+        (K := K) (M := M)
+        (genuineCentralUpper := genuineCentralUpper)
+        (continuedCentralUpper := continuedCentralUpper)
+        (horizontalBudget := horizontalBudget)
+        (cutoffBudget := cutoffBudget)
+        (s := s) hs.1).2 (hbudget hs)
 
 theorem C2ExactGapAnchorExactGapExpandedScalarBudget_iff_explicit
     {K M : ℕ}
