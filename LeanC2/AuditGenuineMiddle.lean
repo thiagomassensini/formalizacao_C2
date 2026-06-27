@@ -12142,6 +12142,24 @@ def C2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentBoundsOnMiddle
       genuineBudget continuedBudget
       horizontalBudgetUpper cutoffBudgetUpper s
 
+/-- Individual horizontal component bound for the external debit ledger. -/
+def C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBound
+    (horizontalBudget horizontalBudgetUpper : ℂ → ℝ)
+    (s : ℂ) : Prop :=
+  horizontalBudget s ≤ horizontalBudgetUpper s
+
+/-- Global middle version of the horizontal component bound. -/
+def C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBoundOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (horizontalBudget horizontalBudgetUpper : ℂ → ℝ)
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M) :
+    Prop :=
+  ∀ ⦃s : ℂ⦄,
+    s ∈ c2ExpandedScalarMiddleRegion near edge →
+    C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBound
+      horizontalBudget horizontalBudgetUpper s
+
 /-- Reserve left for the exact tail-gap contribution after external debits. -/
 noncomputable def c2ExactGapAnchorExactGapExpandedUpperTailGapReserve
     (genuineCentralUpper continuedCentralUpper
@@ -16908,6 +16926,25 @@ theorem C2ExactGapAnchorExactGapExpandedUpperExternalDebitUpperBoundOnMiddle_of_
   exact
     C2ExactGapAnchorExactGapExpandedUpperExternalDebitUpperBound_of_componentBounds
       (hcomponents hs)
+
+theorem C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBound_self
+    (horizontalBudget : ℂ → ℝ) (s : ℂ) :
+    C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBound
+      horizontalBudget horizontalBudget s := by
+  unfold C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBound
+  exact le_rfl
+
+theorem C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBoundOnMiddle_self
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (horizontalBudget : ℂ → ℝ)
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M) :
+    C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBoundOnMiddle
+      horizontalBudget horizontalBudget near edge := by
+  intro s _hs
+  exact
+    C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBound_self
+      horizontalBudget s
 
 theorem C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerBound_of_externalDebitUpperBound
     {K M : ℕ}
