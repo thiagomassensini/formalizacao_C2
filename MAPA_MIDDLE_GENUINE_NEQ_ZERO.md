@@ -368,6 +368,12 @@ Nomes:
   em `LeanC2/AuditGenuineMiddle.lean:12093`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:12104`
+- `GenuineMiddleAudit.c2ExactGapAnchorExactGapExpandedUpperFactorReserve`
+  em `LeanC2/AuditGenuineMiddle.lean:12121`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:12131`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:12142`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedLocalData`
   em `LeanC2/AuditGenuineMiddle.lean:11492`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedLocalData.of_horizontalBudget`
@@ -479,23 +485,27 @@ Nomes:
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedScalarBudgetOnMiddle_of_explicit`
   em `LeanC2/AuditGenuineMiddle.lean:14228`
 - `GenuineMiddleAudit.c2ExactGapAnchorExactTailGapBudget_eq_verticalDepthTailUpper_mul_exactFactorUpper`
-  em `LeanC2/AuditGenuineMiddle.lean:13295`
+  em `LeanC2/AuditGenuineMiddle.lean:13377`
 - `GenuineMiddleAudit.C2ExactGapAnchorTailNormAnchorResidualFactorBudgetOnMiddle_exact_of_exactGapExpandedScalarBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16674`
+  em `LeanC2/AuditGenuineMiddle.lean:16786`
 - `GenuineMiddleAudit.C2ExactGapAnchorTailNormAnchorResidualFactorBudgetOnMiddle_exact_of_exactGapExpandedUpperBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16698`
+  em `LeanC2/AuditGenuineMiddle.lean:16810`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperBudget_iff_upperClearedBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:16296`
+  em `LeanC2/AuditGenuineMiddle.lean:16334`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperBudgetOnMiddle_iff_upperClearedBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16371`
+  em `LeanC2/AuditGenuineMiddle.lean:16409`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperClearedBudget_iff_collectedBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:16403`
+  em `LeanC2/AuditGenuineMiddle.lean:16441`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperClearedBudgetOnMiddle_iff_collectedBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16418`
+  em `LeanC2/AuditGenuineMiddle.lean:16456`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudget_iff_tailGapReserveBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:16450`
+  em `LeanC2/AuditGenuineMiddle.lean:16488`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_iff_tailGapReserveBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16467`
+  em `LeanC2/AuditGenuineMiddle.lean:16505`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget_of_factorReserveBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:16537`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMiddle_of_factorReserveBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:16593`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortion`
   em `LeanC2/AuditGenuineMiddle.lean:11309`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortionExplicitUpper`
@@ -1771,6 +1781,48 @@ Pointwise:
     genuineCentralUpper continuedCentralUpper
     horizontalBudget cutoffBudget s
 ```
+
+A normalizacao por fator divide essa reserva pelo coeficiente positivo
+`(1 + ‖q s‖) * verticalDepthTailUpper s`:
+
+```lean
+def c2ExactGapAnchorExactGapExpandedUpperFactorReserve
+def C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget
+def C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudgetOnMiddle
+```
+
+isto e,
+
+```lean
+c2ExactGapAnchorExactGapExpandedUpperFactorReserve
+    genuineCentralUpper continuedCentralUpper
+    horizontalBudget cutoffBudget s =
+  c2ExactGapAnchorExactGapExpandedUpperTailGapReserve
+      genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget s /
+    ((1 + ‖q s‖) * verticalDepthTailUpper s)
+```
+
+O budget fatorado fica:
+
+```lean
+c2ContinuedVerticalAnchorResidualExactFactorUpper s <
+  c2ExactGapAnchorExactGapExpandedUpperFactorReserve
+    genuineCentralUpper continuedCentralUpper
+    horizontalBudget cutoffBudget s
+```
+
+e alimenta a reserva tail-gap por:
+
+```lean
+theorem C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget_of_factorReserveBudget
+theorem C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMiddle_of_factorReserveBudgetOnMiddle
+```
+
+Essa passagem usa apenas a igualdade
+`c2ExactGapAnchorExactTailGapBudget_eq_verticalDepthTailUpper_mul_exactFactorUpper`
+e a positividade de `verticalDepthTailUpper` no off-critical.  Ainda nao ha
+estimativa analitica nova e ainda nao se remove o fator vertical por algebra.
 
 Essa e a forma algebraica recomendada para o proximo ataque quantitativo:
 tail phase/exact-gap contribution, genuine, continued, cutoff e horizontal

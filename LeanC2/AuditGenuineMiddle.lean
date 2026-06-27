@@ -12115,6 +12115,44 @@ noncomputable def C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMid
       horizontalBudget cutoffBudget s
 
 /--
+Dimensionless reserve for the exact anchor-residual factor.  This divides the
+tail-gap reserve by the positive coefficient in front of the exact gap.
+-/
+noncomputable def c2ExactGapAnchorExactGapExpandedUpperFactorReserve
+    (genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ)
+    (s : ℂ) : ℝ :=
+  c2ExactGapAnchorExactGapExpandedUpperTailGapReserve
+      genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget s /
+    ((1 + ‖q s‖) * verticalDepthTailUpper s)
+
+/-- Factor-reserve form of the exact tail-gap reserve budget. -/
+noncomputable def C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget
+    (_K _M : ℕ)
+    (genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ)
+    (s : ℂ) : Prop :=
+  c2ContinuedVerticalAnchorResidualExactFactorUpper s <
+    c2ExactGapAnchorExactGapExpandedUpperFactorReserve
+      genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget s
+
+/-- Global middle version of the exact factor-reserve budget. -/
+noncomputable def C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudgetOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ)
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M) :
+    Prop :=
+  ∀ ⦃s : ℂ⦄,
+    s ∈ c2ExpandedScalarMiddleRegion near edge →
+    C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget
+      K M genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget s
+
+/--
 Self-contained pointwise exact-gap local data for the genuine middle ledger.
 The analytic content is the expanded exact-gap scalar budget; the remaining
 fields are the horizontal geometry needed by the quartet ledger.
@@ -16495,6 +16533,80 @@ theorem C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_iff_tailGap
         (horizontalBudget := horizontalBudget)
         (cutoffBudget := cutoffBudget)
         (s := s)).2 (hbudget hs)
+
+theorem C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget_of_factorReserveBudget
+    {K M : ℕ}
+    {genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ}
+    {s : ℂ}
+    (hoff : offCriticalStrip s)
+    (hbudget :
+      C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget
+        K M genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget s) :
+    C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget
+      K M genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget s := by
+  set C := 1 + ‖q s‖
+  set V := verticalDepthTailUpper s
+  set F := c2ContinuedVerticalAnchorResidualExactFactorUpper s
+  set R :=
+    c2ExactGapAnchorExactGapExpandedUpperTailGapReserve
+      genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget s
+  have hC_pos : 0 < C := by
+    dsimp [C]
+    linarith [norm_nonneg (q s)]
+  have hV_pos : 0 < V := by
+    simpa [V] using verticalDepthTailUpper_pos_of_offCriticalStrip hoff
+  have hden_pos : 0 < C * V := mul_pos hC_pos hV_pos
+  have hden_ne : C * V ≠ 0 := ne_of_gt hden_pos
+  have hfactor :
+      F < R / (C * V) := by
+    simpa [
+      C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget,
+      c2ExactGapAnchorExactGapExpandedUpperFactorReserve,
+      C, V, F, R] using hbudget
+  have hmul :
+      F * (C * V) < (R / (C * V)) * (C * V) :=
+    mul_lt_mul_of_pos_right hfactor hden_pos
+  have hright :
+      (R / (C * V)) * (C * V) = R := by
+    field_simp [hden_ne]
+  have htail_eq :
+      c2ExactGapAnchorExactTailGapBudget s = V * F := by
+    simpa [V, F] using
+      c2ExactGapAnchorExactTailGapBudget_eq_verticalDepthTailUpper_mul_exactFactorUpper
+        (s := s) hoff
+  have htail :
+      C * c2ExactGapAnchorExactTailGapBudget s < R := by
+    calc
+      C * c2ExactGapAnchorExactTailGapBudget s = F * (C * V) := by
+          rw [htail_eq]
+          ring
+      _ < (R / (C * V)) * (C * V) := hmul
+      _ = R := hright
+  simpa [
+    C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget,
+    C, R] using htail
+
+theorem C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMiddle_of_factorReserveBudgetOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M}
+    (hbudget :
+      C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudgetOnMiddle
+        genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget near edge) :
+    C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMiddle
+      genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget near edge := by
+  intro s hs
+  exact
+    C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget_of_factorReserveBudget
+      hs.1 (hbudget hs)
 
 theorem C2ExactGapAnchorExactGapExpandedScalarBudget_iff_explicit
     {K M : ℕ}
