@@ -17344,6 +17344,105 @@ theorem C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalBudge
     C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalBudget_of_clearedBudget
       hs.1 (hbudget hs)
 
+theorem C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudget_forces_gapUpper_lt_one
+    {K M : ℕ}
+    {gapUpper genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper : ℂ → ℝ}
+    {s : ℂ}
+    (hoff : offCriticalStrip s)
+    (hdebit_nonneg :
+      0 ≤
+        c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper
+          genuineBudget continuedBudget
+          horizontalBudgetUpper cutoffBudgetUpper s)
+    (hbudget :
+      C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudget
+        K M gapUpper genuineBudget continuedBudget
+        horizontalBudgetUpper cutoffBudgetUpper s) :
+    gapUpper s < 1 := by
+  set r := ‖q s‖
+  set a := 1 - r
+  set C := (1 + r) * r ^ 2
+  set G := gapUpper s
+  set D :=
+    c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper
+      genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper s
+  set Q := c2ExpandedQuartetResidualMargin s
+  have hr_pos : 0 < r := by
+    have hq_ne : q s ≠ 0 := by
+      unfold q verticalRatio
+      exact complexDirichletDepthRatio_ne_zero s
+    simpa [r] using norm_pos_iff.mpr hq_ne
+  have hr_lt : r < 1 := by
+    simpa [r] using q_norm_lt_one_of_offCriticalStrip s hoff
+  have ha_pos : 0 < a := by
+    dsimp [a]
+    linarith
+  have hC_pos : 0 < C := by
+    dsimp [C]
+    positivity
+  have hcleared :
+      C * G + D * a < Q * a ^ 2 := by
+    simpa [
+      C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudget,
+      C, r, a, G, D, Q, mul_assoc] using hbudget
+  have hphase_lt :
+      C * G < Q * a ^ 2 := by
+    have hdebit_a_nonneg : 0 ≤ D * a :=
+      mul_nonneg (by simpa [D] using hdebit_nonneg) (le_of_lt ha_pos)
+    linarith
+  have hmargin_lt :
+      Q < verticalDepthTailUpper s * ((1 + r) * a⁻¹) := by
+    simpa [Q, r, a] using
+      c2ExpandedQuartetResidualMargin_lt_scaledVerticalDepthTail_linearCoefficient_of_offCriticalStrip
+        hoff
+  have htail_eq : verticalDepthTailUpper s = r ^ 2 / a := by
+    unfold verticalDepthTailUpper
+    simp [r, a]
+  have hmargin_cleared :
+      Q * a ^ 2 < C := by
+    have hmul :
+        Q * a ^ 2 <
+          (verticalDepthTailUpper s * ((1 + r) * a⁻¹)) * a ^ 2 :=
+      mul_lt_mul_of_pos_right hmargin_lt (sq_pos_of_pos ha_pos)
+    have hright :
+        (verticalDepthTailUpper s * ((1 + r) * a⁻¹)) * a ^ 2 = C := by
+      rw [htail_eq]
+      field_simp [ne_of_gt ha_pos]
+      ring
+    simpa [hright] using hmul
+  have hgap_scaled : C * G < C := lt_trans hphase_lt hmargin_cleared
+  have hgap_scaled_one : C * G < C * 1 := by
+    simpa using hgap_scaled
+  have hgap_lt : G < 1 :=
+    lt_of_mul_lt_mul_left hgap_scaled_one (le_of_lt hC_pos)
+  simpa [G] using hgap_lt
+
+theorem C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudgetOnMiddle_forces_gapUpper_lt_one
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {gapUpper genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M}
+    (hdebit_nonneg : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      0 ≤
+        c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper
+          genuineBudget continuedBudget
+          horizontalBudgetUpper cutoffBudgetUpper s)
+    (hbudget :
+      C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudgetOnMiddle
+        gapUpper genuineBudget continuedBudget
+        horizontalBudgetUpper cutoffBudgetUpper near edge) :
+    ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      gapUpper s < 1 := by
+  intro s hs
+  exact
+    C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudget_forces_gapUpper_lt_one
+      hs.1 (hdebit_nonneg hs) (hbudget hs)
+
 theorem C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget_of_lowerBound_of_lowerGapBudget
     {K M : ℕ}
     {genuineCentralUpper continuedCentralUpper

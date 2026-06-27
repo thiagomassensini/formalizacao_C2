@@ -604,18 +604,22 @@ Nomes:
   em `LeanC2/AuditGenuineMiddle.lean:17276`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalBudgetOnMiddle_of_clearedBudgetOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:17329`
-- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget_of_lowerBound_of_lowerGapBudget`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudget_forces_gapUpper_lt_one`
   em `LeanC2/AuditGenuineMiddle.lean:17347`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudgetOnMiddle_forces_gapUpper_lt_one`
+  em `LeanC2/AuditGenuineMiddle.lean:17422`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget_of_lowerBound_of_lowerGapBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:17446`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudgetOnMiddle_of_lowerBoundOnMiddle_of_lowerGapBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17367`
+  em `LeanC2/AuditGenuineMiddle.lean:17466`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_externalDebitUpperBoundOnMiddle_of_externalFactorBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17388`
+  em `LeanC2/AuditGenuineMiddle.lean:17487`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_externalDebitUpperBoundOnMiddle_of_exactFactorUpperBoundOnMiddle_of_weightedPhaseExternalBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17420`
+  em `LeanC2/AuditGenuineMiddle.lean:17519`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_componentBoundsOnMiddle_of_exactFactorUpperBoundOnMiddle_of_componentWeightedPhaseExternalBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17445`
+  em `LeanC2/AuditGenuineMiddle.lean:17544`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_componentBoundsOnMiddle_of_exactFactorUpperBoundOnMiddle_of_componentWeightedPhaseExternalClearedBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17477`
+  em `LeanC2/AuditGenuineMiddle.lean:17576`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortion`
   em `LeanC2/AuditGenuineMiddle.lean:11309`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortionExplicitUpper`
@@ -2166,6 +2170,27 @@ Como `verticalDepthTailUpper s = r ^ 2 / (1 - r)` no off-critical e
 theorem C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalBudget_of_clearedBudget
 theorem C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalBudgetOnMiddle_of_clearedBudgetOnMiddle
 ```
+
+Primeiro ataque formal dessa desigualdade: se o debito externo por componentes
+e nao negativo, entao o budget component-cleared força saving real do gap:
+
+```lean
+componentWeightedPhaseExternalClearedBudget
+  + 0 ≤ externalComponentDebit
+  ⇒ gapUpper s < 1
+```
+
+formalizado por:
+
+```lean
+theorem C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudget_forces_gapUpper_lt_one
+theorem C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudgetOnMiddle_forces_gapUpper_lt_one
+```
+
+Isto usa o bound formal ja existente
+`c2ExpandedQuartetResidualMargin_lt_scaledVerticalDepthTail_linearCoefficient_of_offCriticalStrip`
+e confirma que o alvo vivo nao e um `gapUpper` norm-only trivial: a
+desigualdade component-cleared so fecha com `gapUpper < 1`.
 
 Smoke-test final da cadeia component-cleared ate o collected budget:
 
