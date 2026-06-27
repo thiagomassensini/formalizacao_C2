@@ -17443,6 +17443,129 @@ theorem C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClear
     C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudget_forces_gapUpper_lt_one
       hs.1 (hdebit_nonneg hs) (hbudget hs)
 
+theorem c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper_nonneg_of_component_nonneg
+    {genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper : ℂ → ℝ}
+    {s : ℂ}
+    (hgenuine_nonneg : 0 ≤ genuineBudget s)
+    (hcontinued_nonneg : 0 ≤ continuedBudget s)
+    (hhorizontal_nonneg : 0 ≤ horizontalBudgetUpper s)
+    (hcutoff_nonneg : 0 ≤ cutoffBudgetUpper s) :
+    0 ≤
+      c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper
+        genuineBudget continuedBudget
+        horizontalBudgetUpper cutoffBudgetUpper s := by
+  have hfactor_nonneg : 0 ≤ 1 + ‖q s‖ := by
+    linarith [norm_nonneg (q s)]
+  have hcentral_nonneg :
+      0 ≤ (1 + ‖q s‖) * (genuineBudget s + continuedBudget s) :=
+    mul_nonneg hfactor_nonneg
+      (add_nonneg hgenuine_nonneg hcontinued_nonneg)
+  have houter_nonneg :
+      0 ≤ (2 : ℝ) * (horizontalBudgetUpper s + cutoffBudgetUpper s) :=
+    mul_nonneg (by norm_num : (0 : ℝ) ≤ 2)
+      (add_nonneg hhorizontal_nonneg hcutoff_nonneg)
+  unfold c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper
+  exact add_nonneg hcentral_nonneg houter_nonneg
+
+theorem c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper_nonnegOnMiddle_of_component_nonnegOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M}
+    (hgenuine_nonneg : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      0 ≤ genuineBudget s)
+    (hcontinued_nonneg : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      0 ≤ continuedBudget s)
+    (hhorizontal_nonneg : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      0 ≤ horizontalBudgetUpper s)
+    (hcutoff_nonneg : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      0 ≤ cutoffBudgetUpper s) :
+    ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      0 ≤
+        c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper
+          genuineBudget continuedBudget
+          horizontalBudgetUpper cutoffBudgetUpper s := by
+  intro s hs
+  exact
+    c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper_nonneg_of_component_nonneg
+      (hgenuine_nonneg hs) (hcontinued_nonneg hs)
+      (hhorizontal_nonneg hs) (hcutoff_nonneg hs)
+
+theorem C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudgetOnMiddle_forces_gapUpper_lt_one_of_component_nonnegOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {gapUpper genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M}
+    (hgenuine_nonneg : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      0 ≤ genuineBudget s)
+    (hcontinued_nonneg : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      0 ≤ continuedBudget s)
+    (hhorizontal_nonneg : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      0 ≤ horizontalBudgetUpper s)
+    (hcutoff_nonneg : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      0 ≤ cutoffBudgetUpper s)
+    (hbudget :
+      C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudgetOnMiddle
+        gapUpper genuineBudget continuedBudget
+        horizontalBudgetUpper cutoffBudgetUpper near edge) :
+    ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      gapUpper s < 1 := by
+  exact
+    C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudgetOnMiddle_forces_gapUpper_lt_one
+      (c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper_nonnegOnMiddle_of_component_nonnegOnMiddle
+        hgenuine_nonneg hcontinued_nonneg hhorizontal_nonneg hcutoff_nonneg)
+      hbudget
+
+theorem c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper_exact_nonnegOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M}
+    (hhorizontalScale_pos : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      0 < horizontalScale s)
+    (hhorizontalConstant_nonneg : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      0 ≤ horizontalConstant s)
+    (hhorizontalRatio_lt_one : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      horizontalRatio s < 1) :
+    ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      0 ≤
+        c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper
+          c2GenuineCentralExactUpper c2ContinuedCentralExactUpper
+          (c2HorizontalRegularizedUpper
+            horizontalConstant horizontalScale horizontalRatio)
+          (c2RawCentralCutoffNormConstant K M) s := by
+  intro s hs
+  exact
+    c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper_nonneg_of_component_nonneg
+      (by
+        unfold c2GenuineCentralExactUpper
+        exact norm_nonneg _)
+      (by
+        unfold c2ContinuedCentralExactUpper
+        exact norm_nonneg _)
+      (c2HorizontalRegularizedUpper_nonneg_of_pos
+        (hhorizontalScale_pos hs)
+        (hhorizontalConstant_nonneg hs)
+        (hhorizontalRatio_lt_one hs))
+      (c2RawCentralCutoffNormConstant_nonneg K M s)
+
 theorem C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget_of_lowerBound_of_lowerGapBudget
     {K M : ℕ}
     {genuineCentralUpper continuedCentralUpper

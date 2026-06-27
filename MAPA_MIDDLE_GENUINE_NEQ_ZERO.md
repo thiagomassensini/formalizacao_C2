@@ -608,18 +608,26 @@ Nomes:
   em `LeanC2/AuditGenuineMiddle.lean:17347`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudgetOnMiddle_forces_gapUpper_lt_one`
   em `LeanC2/AuditGenuineMiddle.lean:17422`
-- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget_of_lowerBound_of_lowerGapBudget`
+- `GenuineMiddleAudit.c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper_nonneg_of_component_nonneg`
   em `LeanC2/AuditGenuineMiddle.lean:17446`
+- `GenuineMiddleAudit.c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper_nonnegOnMiddle_of_component_nonnegOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:17471`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudgetOnMiddle_forces_gapUpper_lt_one_of_component_nonnegOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:17501`
+- `GenuineMiddleAudit.c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper_exact_nonnegOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:17532`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget_of_lowerBound_of_lowerGapBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:17569`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudgetOnMiddle_of_lowerBoundOnMiddle_of_lowerGapBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17466`
+  em `LeanC2/AuditGenuineMiddle.lean:17589`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_externalDebitUpperBoundOnMiddle_of_externalFactorBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17487`
+  em `LeanC2/AuditGenuineMiddle.lean:17610`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_externalDebitUpperBoundOnMiddle_of_exactFactorUpperBoundOnMiddle_of_weightedPhaseExternalBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17519`
+  em `LeanC2/AuditGenuineMiddle.lean:17642`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_componentBoundsOnMiddle_of_exactFactorUpperBoundOnMiddle_of_componentWeightedPhaseExternalBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17544`
+  em `LeanC2/AuditGenuineMiddle.lean:17667`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_componentBoundsOnMiddle_of_exactFactorUpperBoundOnMiddle_of_componentWeightedPhaseExternalClearedBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17576`
+  em `LeanC2/AuditGenuineMiddle.lean:17699`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortion`
   em `LeanC2/AuditGenuineMiddle.lean:11309`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortionExplicitUpper`
@@ -2191,6 +2199,44 @@ Isto usa o bound formal ja existente
 `c2ExpandedQuartetResidualMargin_lt_scaledVerticalDepthTail_linearCoefficient_of_offCriticalStrip`
 e confirma que o alvo vivo nao e um `gapUpper` norm-only trivial: a
 desigualdade component-cleared so fecha com `gapUpper < 1`.
+
+A hipotese `0 ≤ externalComponentDebit` tambem foi fechada por componentes:
+
+```lean
+0 ≤ genuineBudget s
+0 ≤ continuedBudget s
+0 ≤ horizontalBudgetUpper s
+0 ≤ cutoffBudgetUpper s
+⇒
+0 ≤ c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper
+      genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper s
+```
+
+formalizado por:
+
+```lean
+theorem c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper_nonneg_of_component_nonneg
+theorem c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper_nonnegOnMiddle_of_component_nonnegOnMiddle
+theorem C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudgetOnMiddle_forces_gapUpper_lt_one_of_component_nonnegOnMiddle
+```
+
+Para os quatro componentes naturais da rota exact-gap, a versao regional exata
+fica:
+
+```lean
+genuineBudget := c2GenuineCentralExactUpper
+continuedBudget := c2ContinuedCentralExactUpper
+horizontalBudgetUpper :=
+  c2HorizontalRegularizedUpper horizontalConstant horizontalScale horizontalRatio
+cutoffBudgetUpper := c2RawCentralCutoffNormConstant K M
+```
+
+e esta registrada por:
+
+```lean
+theorem c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper_exact_nonnegOnMiddle
+```
 
 Smoke-test final da cadeia component-cleared ate o collected budget:
 
