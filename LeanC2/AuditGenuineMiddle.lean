@@ -12104,6 +12104,44 @@ noncomputable def C2ExactGapAnchorExactGapExpandedUpperExternalDebitUpperBoundOn
       K M genuineCentralUpper continuedCentralUpper
       horizontalBudget cutoffBudget externalDebitUpper s
 
+/-- Componentwise external debit upper envelope. -/
+noncomputable def c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper
+    (genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper : ℂ → ℝ)
+    (s : ℂ) : ℝ :=
+  (1 + ‖q s‖) * (genuineBudget s + continuedBudget s) +
+    2 * (horizontalBudgetUpper s + cutoffBudgetUpper s)
+
+/-- Four component bounds sufficient to dominate the exact-gap external debit. -/
+def C2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentBounds
+    (genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget
+      genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper : ℂ → ℝ)
+    (s : ℂ) : Prop :=
+  genuineCentralUpper s ≤ genuineBudget s ∧
+    continuedCentralUpper s ≤ continuedBudget s ∧
+      horizontalBudget s ≤ horizontalBudgetUpper s ∧
+        cutoffBudget s ≤ cutoffBudgetUpper s
+
+/-- Global middle version of the componentwise external debit upper bounds. -/
+def C2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentBoundsOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget
+      genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper : ℂ → ℝ)
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M) :
+    Prop :=
+  ∀ ⦃s : ℂ⦄,
+    s ∈ c2ExpandedScalarMiddleRegion near edge →
+    C2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentBounds
+      genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget
+      genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper s
+
 /-- Reserve left for the exact tail-gap contribution after external debits. -/
 noncomputable def c2ExactGapAnchorExactGapExpandedUpperTailGapReserve
     (genuineCentralUpper continuedCentralUpper
@@ -16747,6 +16785,71 @@ theorem C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMiddle_of_fac
   exact
     C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget_of_factorReserveBudget
       hs.1 (hbudget hs)
+
+theorem C2ExactGapAnchorExactGapExpandedUpperExternalDebitUpperBound_of_componentBounds
+    {K M : ℕ}
+    {genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget
+      genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper : ℂ → ℝ}
+    {s : ℂ}
+    (hcomponents :
+      C2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentBounds
+        genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget
+        genuineBudget continuedBudget
+        horizontalBudgetUpper cutoffBudgetUpper s) :
+    C2ExactGapAnchorExactGapExpandedUpperExternalDebitUpperBound
+      K M genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget
+      (c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper
+        genuineBudget continuedBudget
+        horizontalBudgetUpper cutoffBudgetUpper) s := by
+  rcases hcomponents with ⟨hgenuine, hcontinued, hhorizontal, hcutoff⟩
+  have hfactor_nonneg : 0 ≤ 1 + ‖q s‖ := by
+    linarith [norm_nonneg (q s)]
+  have hcentral :
+      (1 + ‖q s‖) *
+          (genuineCentralUpper s + continuedCentralUpper s) ≤
+        (1 + ‖q s‖) *
+          (genuineBudget s + continuedBudget s) :=
+    mul_le_mul_of_nonneg_left
+      (add_le_add hgenuine hcontinued) hfactor_nonneg
+  have houter :
+      (2 : ℝ) * (horizontalBudget s + cutoffBudget s) ≤
+        (2 : ℝ) *
+          (horizontalBudgetUpper s + cutoffBudgetUpper s) :=
+    mul_le_mul_of_nonneg_left
+      (add_le_add hhorizontal hcutoff) (by norm_num)
+  unfold C2ExactGapAnchorExactGapExpandedUpperExternalDebitUpperBound
+  unfold c2ExactGapAnchorExactGapExpandedUpperExternalDebit
+    c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper
+  exact add_le_add hcentral houter
+
+theorem C2ExactGapAnchorExactGapExpandedUpperExternalDebitUpperBoundOnMiddle_of_componentBoundsOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget
+      genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M}
+    (hcomponents :
+      C2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentBoundsOnMiddle
+        genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget
+        genuineBudget continuedBudget
+        horizontalBudgetUpper cutoffBudgetUpper near edge) :
+    C2ExactGapAnchorExactGapExpandedUpperExternalDebitUpperBoundOnMiddle
+      genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget
+      (c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper
+        genuineBudget continuedBudget
+        horizontalBudgetUpper cutoffBudgetUpper) near edge := by
+  intro s hs
+  exact
+    C2ExactGapAnchorExactGapExpandedUpperExternalDebitUpperBound_of_componentBounds
+      (hcomponents hs)
 
 theorem C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerBound_of_externalDebitUpperBound
     {K M : ℕ}
