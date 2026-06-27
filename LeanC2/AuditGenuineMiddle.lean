@@ -12160,6 +12160,24 @@ def C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBoundOnMiddle
     C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBound
       horizontalBudget horizontalBudgetUpper s
 
+/-- Individual cutoff component bound for the external debit ledger. -/
+def C2ExactGapAnchorExactGapExpandedUpperCutoffComponentBound
+    (cutoffBudget cutoffBudgetUpper : ℂ → ℝ)
+    (s : ℂ) : Prop :=
+  cutoffBudget s ≤ cutoffBudgetUpper s
+
+/-- Global middle version of the cutoff component bound. -/
+def C2ExactGapAnchorExactGapExpandedUpperCutoffComponentBoundOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (cutoffBudget cutoffBudgetUpper : ℂ → ℝ)
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M) :
+    Prop :=
+  ∀ ⦃s : ℂ⦄,
+    s ∈ c2ExpandedScalarMiddleRegion near edge →
+    C2ExactGapAnchorExactGapExpandedUpperCutoffComponentBound
+      cutoffBudget cutoffBudgetUpper s
+
 /-- Reserve left for the exact tail-gap contribution after external debits. -/
 noncomputable def c2ExactGapAnchorExactGapExpandedUpperTailGapReserve
     (genuineCentralUpper continuedCentralUpper
@@ -16945,6 +16963,25 @@ theorem C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBoundOnMiddle_se
   exact
     C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBound_self
       horizontalBudget s
+
+theorem C2ExactGapAnchorExactGapExpandedUpperCutoffComponentBound_self
+    (cutoffBudget : ℂ → ℝ) (s : ℂ) :
+    C2ExactGapAnchorExactGapExpandedUpperCutoffComponentBound
+      cutoffBudget cutoffBudget s := by
+  unfold C2ExactGapAnchorExactGapExpandedUpperCutoffComponentBound
+  exact le_rfl
+
+theorem C2ExactGapAnchorExactGapExpandedUpperCutoffComponentBoundOnMiddle_self
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (cutoffBudget : ℂ → ℝ)
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M) :
+    C2ExactGapAnchorExactGapExpandedUpperCutoffComponentBoundOnMiddle
+      cutoffBudget cutoffBudget near edge := by
+  intro s _hs
+  exact
+    C2ExactGapAnchorExactGapExpandedUpperCutoffComponentBound_self
+      cutoffBudget s
 
 theorem C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerBound_of_externalDebitUpperBound
     {K M : ℕ}
