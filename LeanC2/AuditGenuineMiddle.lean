@@ -12453,6 +12453,37 @@ noncomputable def C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExt
       horizontalBudgetUpper cutoffBudgetUpper s
 
 /--
+Operator-side form of the component-cleared budget after choosing the exact
+lower-tail anchor factor as `gapUpper`.  The phase contribution is now the
+anchor residual norm with the exact cleared coefficient.
+-/
+noncomputable def C2ExactGapAnchorExactGapExpandedUpperAnchorResidualComponentClearedBudget
+    (_K _M : ℕ)
+    (genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper : ℂ → ℝ)
+    (s : ℂ) : Prop :=
+  (1 + ‖q s‖) ^ 2 * ‖c2ContinuedVerticalAnchorResidual s‖ +
+      c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper
+        genuineBudget continuedBudget
+        horizontalBudgetUpper cutoffBudgetUpper s *
+        (1 - ‖q s‖) <
+    c2ExpandedQuartetResidualMargin s * (1 - ‖q s‖) ^ 2
+
+/-- Global middle version of the operator-side component-cleared budget. -/
+noncomputable def C2ExactGapAnchorExactGapExpandedUpperAnchorResidualComponentClearedBudgetOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper : ℂ → ℝ)
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M) :
+    Prop :=
+  ∀ ⦃s : ℂ⦄,
+    s ∈ c2ExpandedScalarMiddleRegion near edge →
+    C2ExactGapAnchorExactGapExpandedUpperAnchorResidualComponentClearedBudget
+      K M genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper s
+
+/--
 Final no-division form of the exact-gap external-upper budget using an external
 upper bound for all non-tail debits.
 -/
@@ -17523,6 +17554,82 @@ theorem C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalBudge
   exact
     C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalBudget_of_clearedBudget
       hs.1 (hbudget hs)
+
+theorem C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudget_exactLowerFactorUpper_iff_anchorResidualComponentClearedBudget
+    {K M : ℕ}
+    {genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper : ℂ → ℝ}
+    {s : ℂ} :
+    C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudget
+        K M c2ContinuedVerticalAnchorResidualExactLowerFactorUpper
+        genuineBudget continuedBudget
+        horizontalBudgetUpper cutoffBudgetUpper s ↔
+      C2ExactGapAnchorExactGapExpandedUpperAnchorResidualComponentClearedBudget
+        K M genuineBudget continuedBudget
+        horizontalBudgetUpper cutoffBudgetUpper s := by
+  set r := ‖q s‖
+  set R := ‖c2ContinuedVerticalAnchorResidual s‖
+  have hr_pos : 0 < r := by
+    have hq_ne : q s ≠ 0 := by
+      unfold q verticalRatio
+      exact complexDirichletDepthRatio_ne_zero s
+    simpa [r] using norm_pos_iff.mpr hq_ne
+  have hone_add_pos : 0 < 1 + r := by
+    linarith
+  have hr_ne : r ≠ 0 := ne_of_gt hr_pos
+  have hone_add_ne : 1 + r ≠ 0 := ne_of_gt hone_add_pos
+  have hphase :
+      (1 + r) * r ^ 2 *
+          c2ContinuedVerticalAnchorResidualExactLowerFactorUpper s =
+        (1 + r) ^ 2 * R := by
+    unfold c2ContinuedVerticalAnchorResidualExactLowerFactorUpper
+      c2VerticalDepthTailLower
+    field_simp [r, R, hr_ne, hone_add_ne]
+    ring
+  constructor
+  · intro hbudget
+    unfold C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudget
+      at hbudget
+    unfold C2ExactGapAnchorExactGapExpandedUpperAnchorResidualComponentClearedBudget
+    simpa [r, R, hphase] using hbudget
+  · intro hbudget
+    unfold C2ExactGapAnchorExactGapExpandedUpperAnchorResidualComponentClearedBudget
+      at hbudget
+    unfold C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudget
+    simpa [r, R, hphase] using hbudget
+
+theorem C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudgetOnMiddle_exactLowerFactorUpper_iff_anchorResidualComponentClearedBudgetOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M} :
+    C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudgetOnMiddle
+        c2ContinuedVerticalAnchorResidualExactLowerFactorUpper
+        genuineBudget continuedBudget
+        horizontalBudgetUpper cutoffBudgetUpper near edge ↔
+      C2ExactGapAnchorExactGapExpandedUpperAnchorResidualComponentClearedBudgetOnMiddle
+        genuineBudget continuedBudget
+        horizontalBudgetUpper cutoffBudgetUpper near edge := by
+  constructor
+  · intro hbudget s hs
+    exact
+      (C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudget_exactLowerFactorUpper_iff_anchorResidualComponentClearedBudget
+        (K := K) (M := M)
+        (genuineBudget := genuineBudget)
+        (continuedBudget := continuedBudget)
+        (horizontalBudgetUpper := horizontalBudgetUpper)
+        (cutoffBudgetUpper := cutoffBudgetUpper)
+        (s := s)).1 (hbudget hs)
+  · intro hbudget s hs
+    exact
+      (C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudget_exactLowerFactorUpper_iff_anchorResidualComponentClearedBudget
+        (K := K) (M := M)
+        (genuineBudget := genuineBudget)
+        (continuedBudget := continuedBudget)
+        (horizontalBudgetUpper := horizontalBudgetUpper)
+        (cutoffBudgetUpper := cutoffBudgetUpper)
+        (s := s)).2 (hbudget hs)
 
 theorem C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudget_forces_gapUpper_lt_one
     {K M : ℕ}
