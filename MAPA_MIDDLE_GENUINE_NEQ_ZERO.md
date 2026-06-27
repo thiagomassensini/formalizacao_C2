@@ -490,6 +490,8 @@ Nomes:
   em `LeanC2/AuditGenuineMiddle.lean:16786`
 - `GenuineMiddleAudit.C2ExactGapAnchorTailNormAnchorResidualFactorBudgetOnMiddle_exact_of_exactGapExpandedUpperBudgetOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:16810`
+- `GenuineMiddleAudit.C2ExactGapAnchorTailNormAnchorResidualFactorBudgetOnMiddle_exact_of_exactGapExpandedUpperFactorReserveBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:16841`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperBudget_iff_upperClearedBudget`
   em `LeanC2/AuditGenuineMiddle.lean:16334`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperBudgetOnMiddle_iff_upperClearedBudgetOnMiddle`
@@ -1817,6 +1819,23 @@ e alimenta a reserva tail-gap por:
 ```lean
 theorem C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget_of_factorReserveBudget
 theorem C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMiddle_of_factorReserveBudgetOnMiddle
+```
+
+Smoke-test local da cadeia completa ate o budget exact-factor:
+
+```lean
+theorem C2ExactGapAnchorTailNormAnchorResidualFactorBudgetOnMiddle_exact_of_exactGapExpandedUpperFactorReserveBudgetOnMiddle
+```
+
+Ele compoe:
+
+```lean
+FactorReserveBudgetOnMiddle
+  → TailGapReserveBudgetOnMiddle
+  → CollectedBudgetOnMiddle
+  → ClearedBudgetOnMiddle
+  → ExactGapExpandedUpperBudgetOnMiddle
+  → TailNormAnchorResidualFactorBudgetOnMiddle exact
 ```
 
 Essa passagem usa apenas a igualdade

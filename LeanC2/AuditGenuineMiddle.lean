@@ -16838,6 +16838,62 @@ theorem C2ExactGapAnchorTailNormAnchorResidualFactorBudgetOnMiddle_exact_of_exac
     (C2ExactGapAnchorExactGapExpandedScalarBudgetOnMiddle_of_upperBudgetOnMiddle
       hgenuine hcontinued hhorizontal hcutoff hbudget)
 
+theorem C2ExactGapAnchorTailNormAnchorResidualFactorBudgetOnMiddle_exact_of_exactGapExpandedUpperFactorReserveBudgetOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
+    {genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M}
+    (hgenuine : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      C2GenuineCentralBound genuineCentralUpper s)
+    (hcontinued : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      C2ContinuedCentralBound continuedCentralUpper s)
+    (hhorizontal : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      c2HorizontalRegularizedUpper
+        horizontalConstant horizontalScale horizontalRatio s ≤ horizontalBudget s)
+    (hcutoff : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion near edge →
+      c2RawCentralCutoffNormConstant K M s ≤ cutoffBudget s)
+    (hbudget :
+      C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudgetOnMiddle
+        genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget near edge) :
+    C2ExactGapAnchorTailNormAnchorResidualFactorBudgetOnMiddle
+      horizontalConstant horizontalScale horizontalRatio
+      c2ContinuedVerticalAnchorResidualExactFactorUpper near edge :=
+  C2ExactGapAnchorTailNormAnchorResidualFactorBudgetOnMiddle_exact_of_exactGapExpandedUpperBudgetOnMiddle
+    hgenuine hcontinued hhorizontal hcutoff
+    ((C2ExactGapAnchorExactGapExpandedUpperBudgetOnMiddle_iff_upperClearedBudgetOnMiddle
+      (K := K) (M := M)
+      (genuineCentralUpper := genuineCentralUpper)
+      (continuedCentralUpper := continuedCentralUpper)
+      (horizontalBudget := horizontalBudget)
+      (cutoffBudget := cutoffBudget)
+      (near := near)
+      (edge := edge)).2
+      ((C2ExactGapAnchorExactGapExpandedUpperClearedBudgetOnMiddle_iff_collectedBudgetOnMiddle
+        (K := K) (M := M)
+        (genuineCentralUpper := genuineCentralUpper)
+        (continuedCentralUpper := continuedCentralUpper)
+        (horizontalBudget := horizontalBudget)
+        (cutoffBudget := cutoffBudget)
+        (near := near)
+        (edge := edge)).2
+        ((C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_iff_tailGapReserveBudgetOnMiddle
+          (K := K) (M := M)
+          (genuineCentralUpper := genuineCentralUpper)
+          (continuedCentralUpper := continuedCentralUpper)
+          (horizontalBudget := horizontalBudget)
+          (cutoffBudget := cutoffBudget)
+          (near := near)
+          (edge := edge)).2
+          (C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMiddle_of_factorReserveBudgetOnMiddle
+            hbudget))))
+
 theorem C2ExactGapAnchorExactGapExpandedMiddleData.of_scalarBudget
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
