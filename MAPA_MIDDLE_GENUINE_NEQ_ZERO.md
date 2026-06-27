@@ -406,10 +406,14 @@ Nomes:
   em `LeanC2/AuditGenuineMiddle.lean:12312`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalBudgetOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:12323`
-- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperExternalFactorBudget`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudget`
   em `LeanC2/AuditGenuineMiddle.lean:12340`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:12353`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperExternalFactorBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:12370`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperExternalFactorBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:12350`
+  em `LeanC2/AuditGenuineMiddle.lean:12380`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedLocalData`
   em `LeanC2/AuditGenuineMiddle.lean:11492`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedLocalData.of_horizontalBudget`
@@ -561,19 +565,23 @@ Nomes:
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperExternalFactorBudgetOnMiddle_of_exactFactorUpperBoundOnMiddle_of_weightedPhaseExternalBudgetOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:17040`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperWeightedPhaseExternalBudget_of_componentWeightedPhaseExternalBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:17058`
+  em `LeanC2/AuditGenuineMiddle.lean:17088`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperWeightedPhaseExternalBudgetOnMiddle_of_componentWeightedPhaseExternalBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17078`
+  em `LeanC2/AuditGenuineMiddle.lean:17108`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalBudget_of_clearedBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:17128`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalBudgetOnMiddle_of_clearedBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:17181`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget_of_lowerBound_of_lowerGapBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:17098`
+  em `LeanC2/AuditGenuineMiddle.lean:17199`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudgetOnMiddle_of_lowerBoundOnMiddle_of_lowerGapBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17118`
+  em `LeanC2/AuditGenuineMiddle.lean:17219`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_externalDebitUpperBoundOnMiddle_of_externalFactorBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17139`
+  em `LeanC2/AuditGenuineMiddle.lean:17240`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_externalDebitUpperBoundOnMiddle_of_exactFactorUpperBoundOnMiddle_of_weightedPhaseExternalBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17171`
+  em `LeanC2/AuditGenuineMiddle.lean:17272`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_componentBoundsOnMiddle_of_exactFactorUpperBoundOnMiddle_of_componentWeightedPhaseExternalBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17196`
+  em `LeanC2/AuditGenuineMiddle.lean:17297`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortion`
   em `LeanC2/AuditGenuineMiddle.lean:11309`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortionExplicitUpper`
@@ -2064,6 +2072,32 @@ formalizada por:
 
 ```lean
 theorem C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_componentBoundsOnMiddle_of_exactFactorUpperBoundOnMiddle_of_componentWeightedPhaseExternalBudgetOnMiddle
+```
+
+Normalizacao `r`-cleared da superficie por componentes:
+
+```lean
+def C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudget
+def C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudgetOnMiddle
+```
+
+com `r := ‖q s‖`:
+
+```lean
+(1 + r) * r ^ 2 * gapUpper s
+  + c2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentUpper
+      genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper s * (1 - r)
+<
+  c2ExpandedQuartetResidualMargin s * (1 - r) ^ 2
+```
+
+Como `verticalDepthTailUpper s = r ^ 2 / (1 - r)` no off-critical e
+`0 < 1 - r`, essa forma implica a superficie component-weighted atual:
+
+```lean
+theorem C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalBudget_of_clearedBudget
+theorem C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalBudgetOnMiddle_of_clearedBudgetOnMiddle
 ```
 
 Interface por lower reserve:
