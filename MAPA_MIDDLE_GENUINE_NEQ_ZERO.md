@@ -360,6 +360,14 @@ Nomes:
   em `LeanC2/AuditGenuineMiddle.lean:12048`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:12060`
+- `GenuineMiddleAudit.c2ExactGapAnchorExactGapExpandedUpperExternalDebit`
+  em `LeanC2/AuditGenuineMiddle.lean:12074`
+- `GenuineMiddleAudit.c2ExactGapAnchorExactGapExpandedUpperTailGapReserve`
+  em `LeanC2/AuditGenuineMiddle.lean:12083`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:12093`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:12104`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedLocalData`
   em `LeanC2/AuditGenuineMiddle.lean:11492`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedLocalData.of_horizontalBudget`
@@ -473,17 +481,21 @@ Nomes:
 - `GenuineMiddleAudit.c2ExactGapAnchorExactTailGapBudget_eq_verticalDepthTailUpper_mul_exactFactorUpper`
   em `LeanC2/AuditGenuineMiddle.lean:13295`
 - `GenuineMiddleAudit.C2ExactGapAnchorTailNormAnchorResidualFactorBudgetOnMiddle_exact_of_exactGapExpandedScalarBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16581`
+  em `LeanC2/AuditGenuineMiddle.lean:16674`
 - `GenuineMiddleAudit.C2ExactGapAnchorTailNormAnchorResidualFactorBudgetOnMiddle_exact_of_exactGapExpandedUpperBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16605`
+  em `LeanC2/AuditGenuineMiddle.lean:16698`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperBudget_iff_upperClearedBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:16252`
+  em `LeanC2/AuditGenuineMiddle.lean:16296`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperBudgetOnMiddle_iff_upperClearedBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16327`
+  em `LeanC2/AuditGenuineMiddle.lean:16371`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperClearedBudget_iff_collectedBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:16359`
+  em `LeanC2/AuditGenuineMiddle.lean:16403`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperClearedBudgetOnMiddle_iff_collectedBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16374`
+  em `LeanC2/AuditGenuineMiddle.lean:16418`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudget_iff_tailGapReserveBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:16450`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_iff_tailGapReserveBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:16467`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortion`
   em `LeanC2/AuditGenuineMiddle.lean:11309`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortionExplicitUpper`
@@ -1710,6 +1722,54 @@ Pointwise:
       (genuineCentralUpper s + continuedCentralUpper s) +
     2 * (horizontalBudget s + cutoffBudget s) <
   c2ExpandedQuartetResidualMargin s * (1 - ‖q s‖)
+```
+
+O debito externo foi isolado como:
+
+```lean
+def c2ExactGapAnchorExactGapExpandedUpperExternalDebit
+```
+
+com valor
+
+```lean
+(1 + ‖q s‖) *
+    (genuineCentralUpper s + continuedCentralUpper s) +
+  2 * (horizontalBudget s + cutoffBudget s)
+```
+
+e a reserva tail/phase restante como:
+
+```lean
+def c2ExactGapAnchorExactGapExpandedUpperTailGapReserve
+```
+
+isto e,
+
+```lean
+c2ExpandedQuartetResidualMargin s * (1 - ‖q s‖) -
+  c2ExactGapAnchorExactGapExpandedUpperExternalDebit
+    genuineCentralUpper continuedCentralUpper
+    horizontalBudget cutoffBudget s
+```
+
+O budget operacional da reserva agora e:
+
+```lean
+def C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget
+def C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMiddle
+
+theorem C2ExactGapAnchorExactGapExpandedUpperCollectedBudget_iff_tailGapReserveBudget
+theorem C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_iff_tailGapReserveBudgetOnMiddle
+```
+
+Pointwise:
+
+```lean
+(1 + ‖q s‖) * c2ExactGapAnchorExactTailGapBudget s <
+  c2ExactGapAnchorExactGapExpandedUpperTailGapReserve
+    genuineCentralUpper continuedCentralUpper
+    horizontalBudget cutoffBudget s
 ```
 
 Essa e a forma algebraica recomendada para o proximo ataque quantitativo:

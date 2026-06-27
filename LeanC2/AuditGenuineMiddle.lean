@@ -12070,6 +12070,50 @@ noncomputable def C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle
       K M genuineCentralUpper continuedCentralUpper
       horizontalBudget cutoffBudget s
 
+/-- External non-tail debit in the collected exact-gap external-upper budget. -/
+noncomputable def c2ExactGapAnchorExactGapExpandedUpperExternalDebit
+    (genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ)
+    (s : ℂ) : ℝ :=
+  (1 + ‖q s‖) *
+      (genuineCentralUpper s + continuedCentralUpper s) +
+    2 * (horizontalBudget s + cutoffBudget s)
+
+/-- Reserve left for the exact tail-gap contribution after external debits. -/
+noncomputable def c2ExactGapAnchorExactGapExpandedUpperTailGapReserve
+    (genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ)
+    (s : ℂ) : ℝ :=
+  c2ExpandedQuartetResidualMargin s * (1 - ‖q s‖) -
+    c2ExactGapAnchorExactGapExpandedUpperExternalDebit
+      genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget s
+
+/-- Tail-gap reserve form of the collected exact-gap external-upper budget. -/
+noncomputable def C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget
+    (_K _M : ℕ)
+    (genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ)
+    (s : ℂ) : Prop :=
+  (1 + ‖q s‖) * c2ExactGapAnchorExactTailGapBudget s <
+    c2ExactGapAnchorExactGapExpandedUpperTailGapReserve
+      genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget s
+
+/-- Global middle version of the exact tail-gap reserve budget. -/
+noncomputable def C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ)
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M) :
+    Prop :=
+  ∀ ⦃s : ℂ⦄,
+    s ∈ c2ExpandedScalarMiddleRegion near edge →
+    C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget
+      K M genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget s
+
 /--
 Self-contained pointwise exact-gap local data for the genuine middle ledger.
 The analytic content is the expanded exact-gap scalar budget; the remaining
@@ -16396,6 +16440,55 @@ theorem C2ExactGapAnchorExactGapExpandedUpperClearedBudgetOnMiddle_iff_collected
   · intro hbudget s hs
     exact
       (C2ExactGapAnchorExactGapExpandedUpperClearedBudget_iff_collectedBudget
+        (K := K) (M := M)
+        (genuineCentralUpper := genuineCentralUpper)
+        (continuedCentralUpper := continuedCentralUpper)
+        (horizontalBudget := horizontalBudget)
+        (cutoffBudget := cutoffBudget)
+        (s := s)).2 (hbudget hs)
+
+theorem C2ExactGapAnchorExactGapExpandedUpperCollectedBudget_iff_tailGapReserveBudget
+    {K M : ℕ}
+    {genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ}
+    {s : ℂ} :
+    C2ExactGapAnchorExactGapExpandedUpperCollectedBudget
+        K M genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget s ↔
+      C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget
+        K M genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget s := by
+  unfold C2ExactGapAnchorExactGapExpandedUpperCollectedBudget
+    C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget
+    c2ExactGapAnchorExactGapExpandedUpperTailGapReserve
+    c2ExactGapAnchorExactGapExpandedUpperExternalDebit
+  constructor <;> intro h <;> linarith
+
+theorem C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_iff_tailGapReserveBudgetOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M} :
+    C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle
+        genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget near edge ↔
+      C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMiddle
+        genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget near edge := by
+  constructor
+  · intro hbudget s hs
+    exact
+      (C2ExactGapAnchorExactGapExpandedUpperCollectedBudget_iff_tailGapReserveBudget
+        (K := K) (M := M)
+        (genuineCentralUpper := genuineCentralUpper)
+        (continuedCentralUpper := continuedCentralUpper)
+        (horizontalBudget := horizontalBudget)
+        (cutoffBudget := cutoffBudget)
+        (s := s)).1 (hbudget hs)
+  · intro hbudget s hs
+    exact
+      (C2ExactGapAnchorExactGapExpandedUpperCollectedBudget_iff_tailGapReserveBudget
         (K := K) (M := M)
         (genuineCentralUpper := genuineCentralUpper)
         (continuedCentralUpper := continuedCentralUpper)
