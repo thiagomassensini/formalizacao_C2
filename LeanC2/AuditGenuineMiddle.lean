@@ -12152,6 +12152,51 @@ noncomputable def C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudgetOnMidd
       K M genuineCentralUpper continuedCentralUpper
       horizontalBudget cutoffBudget s
 
+/-- Lower envelope for the exact-gap factor reserve. -/
+noncomputable def C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerBound
+    (_K _M : ℕ)
+    (genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget factorReserveLower : ℂ → ℝ)
+    (s : ℂ) : Prop :=
+  factorReserveLower s ≤
+    c2ExactGapAnchorExactGapExpandedUpperFactorReserve
+      genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget s
+
+/-- Global middle version of the factor-reserve lower envelope. -/
+noncomputable def C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerBoundOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget factorReserveLower : ℂ → ℝ)
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M) :
+    Prop :=
+  ∀ ⦃s : ℂ⦄,
+    s ∈ c2ExpandedScalarMiddleRegion near edge →
+    C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerBound
+      K M genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget factorReserveLower s
+
+/-- Phase-gap budget against a chosen lower envelope of the factor reserve. -/
+noncomputable def C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudget
+    (_K _M : ℕ)
+    (factorReserveLower : ℂ → ℝ)
+    (s : ℂ) : Prop :=
+  c2ContinuedVerticalAnchorResidualExactFactorUpper s <
+    factorReserveLower s
+
+/-- Global middle version of the phase-gap lower-envelope budget. -/
+noncomputable def C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudgetOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (factorReserveLower : ℂ → ℝ)
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M) :
+    Prop :=
+  ∀ ⦃s : ℂ⦄,
+    s ∈ c2ExpandedScalarMiddleRegion near edge →
+    C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudget
+      K M factorReserveLower s
+
 /--
 Self-contained pointwise exact-gap local data for the genuine middle ledger.
 The analytic content is the expanded exact-gap scalar budget; the remaining
@@ -16607,6 +16652,47 @@ theorem C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMiddle_of_fac
   exact
     C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget_of_factorReserveBudget
       hs.1 (hbudget hs)
+
+theorem C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget_of_lowerBound_of_lowerGapBudget
+    {K M : ℕ}
+    {genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget factorReserveLower : ℂ → ℝ}
+    {s : ℂ}
+    (hlower :
+      C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerBound
+        K M genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget factorReserveLower s)
+    (hgap :
+      C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudget
+        K M factorReserveLower s) :
+    C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget
+      K M genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget s := by
+  unfold C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerBound at hlower
+  unfold C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudget at hgap
+  unfold C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget
+  exact lt_of_lt_of_le hgap hlower
+
+theorem C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudgetOnMiddle_of_lowerBoundOnMiddle_of_lowerGapBudgetOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget factorReserveLower : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M}
+    (hlower :
+      C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerBoundOnMiddle
+        genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget factorReserveLower near edge)
+    (hgap :
+      C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudgetOnMiddle
+        factorReserveLower near edge) :
+    C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudgetOnMiddle
+      genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget near edge := by
+  intro s hs
+  exact
+    C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget_of_lowerBound_of_lowerGapBudget
+      (hlower hs) (hgap hs)
 
 theorem C2ExactGapAnchorExactGapExpandedScalarBudget_iff_explicit
     {K M : ℕ}

@@ -374,6 +374,14 @@ Nomes:
   em `LeanC2/AuditGenuineMiddle.lean:12131`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudgetOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:12142`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerBound`
+  em `LeanC2/AuditGenuineMiddle.lean:12156`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerBoundOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:12167`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:12181`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:12189`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedLocalData`
   em `LeanC2/AuditGenuineMiddle.lean:11492`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedLocalData.of_horizontalBudget`
@@ -487,27 +495,31 @@ Nomes:
 - `GenuineMiddleAudit.c2ExactGapAnchorExactTailGapBudget_eq_verticalDepthTailUpper_mul_exactFactorUpper`
   em `LeanC2/AuditGenuineMiddle.lean:13377`
 - `GenuineMiddleAudit.C2ExactGapAnchorTailNormAnchorResidualFactorBudgetOnMiddle_exact_of_exactGapExpandedScalarBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16786`
+  em `LeanC2/AuditGenuineMiddle.lean:16872`
 - `GenuineMiddleAudit.C2ExactGapAnchorTailNormAnchorResidualFactorBudgetOnMiddle_exact_of_exactGapExpandedUpperBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16810`
+  em `LeanC2/AuditGenuineMiddle.lean:16896`
 - `GenuineMiddleAudit.C2ExactGapAnchorTailNormAnchorResidualFactorBudgetOnMiddle_exact_of_exactGapExpandedUpperFactorReserveBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16841`
+  em `LeanC2/AuditGenuineMiddle.lean:16927`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperBudget_iff_upperClearedBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:16334`
+  em `LeanC2/AuditGenuineMiddle.lean:16379`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperBudgetOnMiddle_iff_upperClearedBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16409`
+  em `LeanC2/AuditGenuineMiddle.lean:16454`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperClearedBudget_iff_collectedBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:16441`
+  em `LeanC2/AuditGenuineMiddle.lean:16486`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperClearedBudgetOnMiddle_iff_collectedBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16456`
+  em `LeanC2/AuditGenuineMiddle.lean:16501`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudget_iff_tailGapReserveBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:16488`
+  em `LeanC2/AuditGenuineMiddle.lean:16533`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_iff_tailGapReserveBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16505`
+  em `LeanC2/AuditGenuineMiddle.lean:16550`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget_of_factorReserveBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:16537`
+  em `LeanC2/AuditGenuineMiddle.lean:16582`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMiddle_of_factorReserveBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16593`
+  em `LeanC2/AuditGenuineMiddle.lean:16638`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget_of_lowerBound_of_lowerGapBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:16656`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudgetOnMiddle_of_lowerBoundOnMiddle_of_lowerGapBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:16676`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortion`
   em `LeanC2/AuditGenuineMiddle.lean:11309`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortionExplicitUpper`
@@ -1819,6 +1831,34 @@ e alimenta a reserva tail-gap por:
 ```lean
 theorem C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget_of_factorReserveBudget
 theorem C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMiddle_of_factorReserveBudgetOnMiddle
+```
+
+Interface por lower reserve:
+
+```lean
+def C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerBound
+def C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerBoundOnMiddle
+def C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudget
+def C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudgetOnMiddle
+```
+
+Ela separa o alvo em dois boletos:
+
+```lean
+factorReserveLower s ≤
+  c2ExactGapAnchorExactGapExpandedUpperFactorReserve
+    genuineCentralUpper continuedCentralUpper
+    horizontalBudget cutoffBudget s
+
+c2ContinuedVerticalAnchorResidualExactFactorUpper s <
+  factorReserveLower s
+```
+
+e recompõe o budget fatorado por:
+
+```lean
+theorem C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget_of_lowerBound_of_lowerGapBudget
+theorem C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudgetOnMiddle_of_lowerBoundOnMiddle_of_lowerGapBudgetOnMiddle
 ```
 
 Smoke-test local da cadeia completa ate o budget exact-factor:
