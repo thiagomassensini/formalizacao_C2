@@ -17326,6 +17326,37 @@ theorem C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_componen
       (C2ExactGapAnchorExactGapExpandedUpperWeightedPhaseExternalBudgetOnMiddle_of_componentWeightedPhaseExternalBudgetOnMiddle
         hbudget)
 
+theorem C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_componentBoundsOnMiddle_of_exactFactorUpperBoundOnMiddle_of_componentWeightedPhaseExternalClearedBudgetOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget gapUpper
+      genuineBudget continuedBudget
+      horizontalBudgetUpper cutoffBudgetUpper : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M}
+    (hcomponents :
+      C2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentBoundsOnMiddle
+        genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget
+        genuineBudget continuedBudget
+        horizontalBudgetUpper cutoffBudgetUpper near edge)
+    (hgap :
+      C2ExactGapAnchorExactFactorUpperBoundOnMiddle
+        gapUpper near edge)
+    (hbudget :
+      C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudgetOnMiddle
+        gapUpper genuineBudget continuedBudget
+        horizontalBudgetUpper cutoffBudgetUpper near edge) :
+    C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle
+      genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget near edge := by
+  exact
+    C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_componentBoundsOnMiddle_of_exactFactorUpperBoundOnMiddle_of_componentWeightedPhaseExternalBudgetOnMiddle
+      hcomponents
+      hgap
+      (C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalBudgetOnMiddle_of_clearedBudgetOnMiddle
+        hbudget)
+
 theorem C2ExactGapAnchorExactGapExpandedScalarBudget_iff_explicit
     {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}

@@ -582,6 +582,8 @@ Nomes:
   em `LeanC2/AuditGenuineMiddle.lean:17272`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_componentBoundsOnMiddle_of_exactFactorUpperBoundOnMiddle_of_componentWeightedPhaseExternalBudgetOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:17297`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_componentBoundsOnMiddle_of_exactFactorUpperBoundOnMiddle_of_componentWeightedPhaseExternalClearedBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:17329`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortion`
   em `LeanC2/AuditGenuineMiddle.lean:11309`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortionExplicitUpper`
@@ -2099,6 +2101,25 @@ Como `verticalDepthTailUpper s = r ^ 2 / (1 - r)` no off-critical e
 theorem C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalBudget_of_clearedBudget
 theorem C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalBudgetOnMiddle_of_clearedBudgetOnMiddle
 ```
+
+Smoke-test final da cadeia component-cleared ate o collected budget:
+
+```lean
+componentBoundsOnMiddle
+  + exactFactorUpperBoundOnMiddle gapUpper
+  + componentWeightedPhaseExternalClearedBudgetOnMiddle
+  ⇒ C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle
+```
+
+formalizado por:
+
+```lean
+theorem C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_componentBoundsOnMiddle_of_exactFactorUpperBoundOnMiddle_of_componentWeightedPhaseExternalClearedBudgetOnMiddle
+```
+
+Status operacional: parar plumbing nesta rota. O proximo trabalho quantitativo
+deve atacar os budgets externos por familias: horizontal, cutoff,
+continued/genuine. O `gapUpper` phase-aware fica por ultimo.
 
 Interface por lower reserve:
 
