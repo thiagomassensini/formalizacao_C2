@@ -12237,6 +12237,36 @@ noncomputable def C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudg
     C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudget
       K M factorReserveLower s
 
+/-- Weighted phase debit for a chosen upper envelope of the exact factor. -/
+noncomputable def c2ExactGapAnchorExactGapExpandedUpperWeightedPhaseDebit
+    (gapUpper : ℂ → ℝ)
+    (s : ℂ) : ℝ :=
+  ((1 + ‖q s‖) * verticalDepthTailUpper s) * gapUpper s
+
+/--
+Final split budget: a weighted phase debit envelope plus an external debit
+envelope fits under the cleared quartet margin.
+-/
+noncomputable def C2ExactGapAnchorExactGapExpandedUpperWeightedPhaseExternalBudget
+    (_K _M : ℕ)
+    (gapUpper externalDebitUpper : ℂ → ℝ)
+    (s : ℂ) : Prop :=
+  c2ExactGapAnchorExactGapExpandedUpperWeightedPhaseDebit gapUpper s +
+    externalDebitUpper s <
+      c2ExpandedQuartetResidualMargin s * (1 - ‖q s‖)
+
+/-- Global middle version of the weighted phase/external split budget. -/
+noncomputable def C2ExactGapAnchorExactGapExpandedUpperWeightedPhaseExternalBudgetOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (gapUpper externalDebitUpper : ℂ → ℝ)
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M) :
+    Prop :=
+  ∀ ⦃s : ℂ⦄,
+    s ∈ c2ExpandedScalarMiddleRegion near edge →
+    C2ExactGapAnchorExactGapExpandedUpperWeightedPhaseExternalBudget
+      K M gapUpper externalDebitUpper s
+
 /--
 Final no-division form of the exact-gap external-upper budget using an external
 upper bound for all non-tail debits.
@@ -16835,6 +16865,65 @@ theorem C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudgetOnMiddle
     C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudget_of_externalFactorBudget
       hs.1 (hbudget hs)
 
+theorem C2ExactGapAnchorExactGapExpandedUpperExternalFactorBudget_of_exactFactorUpperBound_of_weightedPhaseExternalBudget
+    {K M : ℕ}
+    {gapUpper externalDebitUpper : ℂ → ℝ}
+    {s : ℂ}
+    (hoff : offCriticalStrip s)
+    (hgap :
+      C2ExactGapAnchorExactFactorUpperBound gapUpper s)
+    (hbudget :
+      C2ExactGapAnchorExactGapExpandedUpperWeightedPhaseExternalBudget
+        K M gapUpper externalDebitUpper s) :
+    C2ExactGapAnchorExactGapExpandedUpperExternalFactorBudget
+      K M externalDebitUpper s := by
+  set C := (1 + ‖q s‖) * verticalDepthTailUpper s
+  set F := c2ContinuedVerticalAnchorResidualExactFactorUpper s
+  set G := gapUpper s
+  set Du := externalDebitUpper s
+  set Q := c2ExpandedQuartetResidualMargin s
+  have hC_nonneg : 0 ≤ C := by
+    have hq_nonneg : 0 ≤ ‖q s‖ := norm_nonneg (q s)
+    have hleft_nonneg : 0 ≤ 1 + ‖q s‖ := by linarith
+    have htail_nonneg : 0 ≤ verticalDepthTailUpper s :=
+      le_of_lt (verticalDepthTailUpper_pos_of_offCriticalStrip hoff)
+    exact mul_nonneg hleft_nonneg htail_nonneg
+  have hFG : F ≤ G := by
+    simpa [C2ExactGapAnchorExactFactorUpperBound, F, G] using hgap
+  have hweighted :
+      C * F + Du ≤ C * G + Du := by
+    simpa [add_comm, add_left_comm, add_assoc] using
+      add_le_add_left (mul_le_mul_of_nonneg_left hFG hC_nonneg) Du
+  have hbudget' :
+      C * G + Du < Q * (1 - ‖q s‖) := by
+    simpa [
+      C2ExactGapAnchorExactGapExpandedUpperWeightedPhaseExternalBudget,
+      c2ExactGapAnchorExactGapExpandedUpperWeightedPhaseDebit,
+      C, G, Du, Q] using hbudget
+  have hmain : C * F + Du < Q * (1 - ‖q s‖) :=
+    lt_of_le_of_lt hweighted hbudget'
+  simpa [
+    C2ExactGapAnchorExactGapExpandedUpperExternalFactorBudget,
+    C, F, Du, Q] using hmain
+
+theorem C2ExactGapAnchorExactGapExpandedUpperExternalFactorBudgetOnMiddle_of_exactFactorUpperBoundOnMiddle_of_weightedPhaseExternalBudgetOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {gapUpper externalDebitUpper : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M}
+    (hgap :
+      C2ExactGapAnchorExactFactorUpperBoundOnMiddle
+        gapUpper near edge)
+    (hbudget :
+      C2ExactGapAnchorExactGapExpandedUpperWeightedPhaseExternalBudgetOnMiddle
+        gapUpper externalDebitUpper near edge) :
+    C2ExactGapAnchorExactGapExpandedUpperExternalFactorBudgetOnMiddle
+      externalDebitUpper near edge := by
+  intro s hs
+  exact
+    C2ExactGapAnchorExactGapExpandedUpperExternalFactorBudget_of_exactFactorUpperBound_of_weightedPhaseExternalBudget
+      hs.1 (hgap hs) (hbudget hs)
+
 theorem C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget_of_lowerBound_of_lowerGapBudget
     {K M : ℕ}
     {genuineCentralUpper continuedCentralUpper
@@ -16907,6 +16996,31 @@ theorem C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_external
             hdebit)
           (C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudgetOnMiddle_of_externalFactorBudgetOnMiddle
             hbudget)))
+
+theorem C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_externalDebitUpperBoundOnMiddle_of_exactFactorUpperBoundOnMiddle_of_weightedPhaseExternalBudgetOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget gapUpper externalDebitUpper : ℂ → ℝ}
+    {near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M}
+    {edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M}
+    (hdebit :
+      C2ExactGapAnchorExactGapExpandedUpperExternalDebitUpperBoundOnMiddle
+        genuineCentralUpper continuedCentralUpper
+        horizontalBudget cutoffBudget externalDebitUpper near edge)
+    (hgap :
+      C2ExactGapAnchorExactFactorUpperBoundOnMiddle
+        gapUpper near edge)
+    (hbudget :
+      C2ExactGapAnchorExactGapExpandedUpperWeightedPhaseExternalBudgetOnMiddle
+        gapUpper externalDebitUpper near edge) :
+    C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle
+      genuineCentralUpper continuedCentralUpper
+      horizontalBudget cutoffBudget near edge := by
+  exact
+    C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_externalDebitUpperBoundOnMiddle_of_externalFactorBudgetOnMiddle
+      hdebit
+      (C2ExactGapAnchorExactGapExpandedUpperExternalFactorBudgetOnMiddle_of_exactFactorUpperBoundOnMiddle_of_weightedPhaseExternalBudgetOnMiddle
+        hgap hbudget)
 
 theorem C2ExactGapAnchorExactGapExpandedScalarBudget_iff_explicit
     {K M : ℕ}
