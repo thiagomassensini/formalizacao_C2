@@ -390,6 +390,10 @@ Nomes:
   em `LeanC2/AuditGenuineMiddle.lean:12221`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudgetOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:12229`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperExternalFactorBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:12244`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperExternalFactorBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:12254`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedLocalData`
   em `LeanC2/AuditGenuineMiddle.lean:11492`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedLocalData.of_horizontalBudget`
@@ -513,25 +517,31 @@ Nomes:
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperBudgetOnMiddle_iff_upperClearedBudgetOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:16494`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperClearedBudget_iff_collectedBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:16526`
+  em `LeanC2/AuditGenuineMiddle.lean:16551`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperClearedBudgetOnMiddle_iff_collectedBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16541`
+  em `LeanC2/AuditGenuineMiddle.lean:16566`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudget_iff_tailGapReserveBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:16573`
+  em `LeanC2/AuditGenuineMiddle.lean:16598`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_iff_tailGapReserveBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16590`
+  em `LeanC2/AuditGenuineMiddle.lean:16615`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget_of_factorReserveBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:16622`
+  em `LeanC2/AuditGenuineMiddle.lean:16647`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMiddle_of_factorReserveBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16678`
+  em `LeanC2/AuditGenuineMiddle.lean:16703`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerBound_of_externalDebitUpperBound`
-  em `LeanC2/AuditGenuineMiddle.lean:16696`
+  em `LeanC2/AuditGenuineMiddle.lean:16721`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerBoundOnMiddle_of_externalDebitUpperBoundOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16739`
+  em `LeanC2/AuditGenuineMiddle.lean:16764`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudget_of_externalFactorBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:16784`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudgetOnMiddle_of_externalFactorBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:16822`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget_of_lowerBound_of_lowerGapBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:16759`
+  em `LeanC2/AuditGenuineMiddle.lean:16838`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudgetOnMiddle_of_lowerBoundOnMiddle_of_lowerGapBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16779`
+  em `LeanC2/AuditGenuineMiddle.lean:16858`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_externalDebitUpperBoundOnMiddle_of_externalFactorBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:16879`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortion`
   em `LeanC2/AuditGenuineMiddle.lean:11309`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortionExplicitUpper`
@@ -1884,6 +1894,32 @@ c2ContinuedVerticalAnchorResidualExactFactorUpper s <
 ```
 
 Essa desigualdade de fase contra a lower concreta ainda nao foi provada.
+
+A mesma obrigacao agora esta exposta sem divisao, usando diretamente o majorante
+do debito externo:
+
+```lean
+def C2ExactGapAnchorExactGapExpandedUpperExternalFactorBudget
+def C2ExactGapAnchorExactGapExpandedUpperExternalFactorBudgetOnMiddle
+```
+
+Pointwise:
+
+```lean
+((1 + ‖q s‖) * verticalDepthTailUpper s) *
+    c2ContinuedVerticalAnchorResidualExactFactorUpper s +
+  externalDebitUpper s <
+    c2ExpandedQuartetResidualMargin s * (1 - ‖q s‖)
+```
+
+Essa forma alimenta a lower concreta e, junto do upper externo para o debito,
+recompoe o collected budget:
+
+```lean
+theorem C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudget_of_externalFactorBudget
+theorem C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudgetOnMiddle_of_externalFactorBudgetOnMiddle
+theorem C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_externalDebitUpperBoundOnMiddle_of_externalFactorBudgetOnMiddle
+```
 
 Interface por lower reserve:
 
