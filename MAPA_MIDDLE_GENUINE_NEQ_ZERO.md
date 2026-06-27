@@ -372,56 +372,60 @@ Nomes:
   em `LeanC2/AuditGenuineMiddle.lean:12116`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentBoundsOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:12128`
-- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBound`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperContinuedComponentBound`
   em `LeanC2/AuditGenuineMiddle.lean:12146`
-- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBoundOnMiddle`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperContinuedComponentBoundOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:12152`
-- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCutoffComponentBound`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBound`
   em `LeanC2/AuditGenuineMiddle.lean:12164`
-- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCutoffComponentBoundOnMiddle`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBoundOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:12170`
-- `GenuineMiddleAudit.c2ExactGapAnchorExactGapExpandedUpperTailGapReserve`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCutoffComponentBound`
   em `LeanC2/AuditGenuineMiddle.lean:12182`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCutoffComponentBoundOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:12188`
+- `GenuineMiddleAudit.c2ExactGapAnchorExactGapExpandedUpperTailGapReserve`
+  em `LeanC2/AuditGenuineMiddle.lean:12200`
 - `GenuineMiddleAudit.c2ExactGapAnchorExactGapExpandedUpperTailGapReserveLower`
-  em `LeanC2/AuditGenuineMiddle.lean:12192`
-- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:12199`
-- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:12210`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:12217`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:12228`
 - `GenuineMiddleAudit.c2ExactGapAnchorExactGapExpandedUpperFactorReserve`
-  em `LeanC2/AuditGenuineMiddle.lean:12227`
-- `GenuineMiddleAudit.c2ExactGapAnchorExactGapExpandedUpperFactorReserveLower`
-  em `LeanC2/AuditGenuineMiddle.lean:12237`
-- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget`
   em `LeanC2/AuditGenuineMiddle.lean:12245`
+- `GenuineMiddleAudit.c2ExactGapAnchorExactGapExpandedUpperFactorReserveLower`
+  em `LeanC2/AuditGenuineMiddle.lean:12255`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:12263`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:12256`
+  em `LeanC2/AuditGenuineMiddle.lean:12274`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerBound`
-  em `LeanC2/AuditGenuineMiddle.lean:12270`
+  em `LeanC2/AuditGenuineMiddle.lean:12288`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerBoundOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:12281`
+  em `LeanC2/AuditGenuineMiddle.lean:12299`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:12295`
+  em `LeanC2/AuditGenuineMiddle.lean:12313`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:12303`
+  em `LeanC2/AuditGenuineMiddle.lean:12321`
 - `GenuineMiddleAudit.c2ExactGapAnchorExactGapExpandedUpperWeightedPhaseDebit`
-  em `LeanC2/AuditGenuineMiddle.lean:12315`
-- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperWeightedPhaseExternalBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:12324`
-- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperWeightedPhaseExternalBudgetOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:12333`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperWeightedPhaseExternalBudget`
+  em `LeanC2/AuditGenuineMiddle.lean:12342`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperWeightedPhaseExternalBudgetOnMiddle`
+  em `LeanC2/AuditGenuineMiddle.lean:12351`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:12348`
+  em `LeanC2/AuditGenuineMiddle.lean:12366`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:12359`
+  em `LeanC2/AuditGenuineMiddle.lean:12377`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:12376`
+  em `LeanC2/AuditGenuineMiddle.lean:12394`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalClearedBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:12389`
+  em `LeanC2/AuditGenuineMiddle.lean:12407`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperExternalFactorBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:12406`
+  em `LeanC2/AuditGenuineMiddle.lean:12424`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperExternalFactorBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:12416`
+  em `LeanC2/AuditGenuineMiddle.lean:12434`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedLocalData`
   em `LeanC2/AuditGenuineMiddle.lean:11492`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedLocalData.of_horizontalBudget`
@@ -553,53 +557,57 @@ Nomes:
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_iff_tailGapReserveBudgetOnMiddle`
   em `LeanC2/AuditGenuineMiddle.lean:16615`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudget_of_factorReserveBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:16809`
+  em `LeanC2/AuditGenuineMiddle.lean:16827`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperTailGapReserveBudgetOnMiddle_of_factorReserveBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16865`
-- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperExternalDebitUpperBound_of_componentBounds`
   em `LeanC2/AuditGenuineMiddle.lean:16883`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperExternalDebitUpperBound_of_componentBounds`
+  em `LeanC2/AuditGenuineMiddle.lean:16901`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperExternalDebitUpperBoundOnMiddle_of_componentBoundsOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:16923`
+  em `LeanC2/AuditGenuineMiddle.lean:16941`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperContinuedComponentBound_self`
+  em `LeanC2/AuditGenuineMiddle.lean:16966`
+- `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperContinuedComponentBoundOnMiddle_self`
+  em `LeanC2/AuditGenuineMiddle.lean:16973`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBound_self`
-  em `LeanC2/AuditGenuineMiddle.lean:16948`
+  em `LeanC2/AuditGenuineMiddle.lean:16985`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBoundOnMiddle_self`
-  em `LeanC2/AuditGenuineMiddle.lean:16955`
+  em `LeanC2/AuditGenuineMiddle.lean:16992`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCutoffComponentBound_self`
-  em `LeanC2/AuditGenuineMiddle.lean:16967`
+  em `LeanC2/AuditGenuineMiddle.lean:17004`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCutoffComponentBoundOnMiddle_self`
-  em `LeanC2/AuditGenuineMiddle.lean:16974`
+  em `LeanC2/AuditGenuineMiddle.lean:17011`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerBound_of_externalDebitUpperBound`
-  em `LeanC2/AuditGenuineMiddle.lean:16986`
+  em `LeanC2/AuditGenuineMiddle.lean:17023`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerBoundOnMiddle_of_externalDebitUpperBoundOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17029`
+  em `LeanC2/AuditGenuineMiddle.lean:17066`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudget_of_externalFactorBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:17049`
+  em `LeanC2/AuditGenuineMiddle.lean:17086`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveLowerGapBudgetOnMiddle_of_externalFactorBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17087`
+  em `LeanC2/AuditGenuineMiddle.lean:17124`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperExternalFactorBudget_of_exactFactorUpperBound_of_weightedPhaseExternalBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:17103`
+  em `LeanC2/AuditGenuineMiddle.lean:17140`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperExternalFactorBudgetOnMiddle_of_exactFactorUpperBoundOnMiddle_of_weightedPhaseExternalBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17144`
+  em `LeanC2/AuditGenuineMiddle.lean:17181`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperWeightedPhaseExternalBudget_of_componentWeightedPhaseExternalBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:17162`
+  em `LeanC2/AuditGenuineMiddle.lean:17199`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperWeightedPhaseExternalBudgetOnMiddle_of_componentWeightedPhaseExternalBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17182`
+  em `LeanC2/AuditGenuineMiddle.lean:17219`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalBudget_of_clearedBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:17202`
+  em `LeanC2/AuditGenuineMiddle.lean:17239`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperComponentWeightedPhaseExternalBudgetOnMiddle_of_clearedBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17255`
+  em `LeanC2/AuditGenuineMiddle.lean:17292`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudget_of_lowerBound_of_lowerGapBudget`
-  em `LeanC2/AuditGenuineMiddle.lean:17273`
+  em `LeanC2/AuditGenuineMiddle.lean:17310`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperFactorReserveBudgetOnMiddle_of_lowerBoundOnMiddle_of_lowerGapBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17293`
+  em `LeanC2/AuditGenuineMiddle.lean:17330`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_externalDebitUpperBoundOnMiddle_of_externalFactorBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17314`
+  em `LeanC2/AuditGenuineMiddle.lean:17351`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_externalDebitUpperBoundOnMiddle_of_exactFactorUpperBoundOnMiddle_of_weightedPhaseExternalBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17346`
+  em `LeanC2/AuditGenuineMiddle.lean:17383`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_componentBoundsOnMiddle_of_exactFactorUpperBoundOnMiddle_of_componentWeightedPhaseExternalBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17371`
+  em `LeanC2/AuditGenuineMiddle.lean:17408`
 - `GenuineMiddleAudit.C2ExactGapAnchorExactGapExpandedUpperCollectedBudgetOnMiddle_of_componentBoundsOnMiddle_of_exactFactorUpperBoundOnMiddle_of_componentWeightedPhaseExternalClearedBudgetOnMiddle`
-  em `LeanC2/AuditGenuineMiddle.lean:17403`
+  em `LeanC2/AuditGenuineMiddle.lean:17440`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortion`
   em `LeanC2/AuditGenuineMiddle.lean:11309`
 - `GenuineMiddleAudit.c2VerticalTailLowerDistortionExplicitUpper`
@@ -1947,6 +1955,7 @@ cutoffBudget s ≤ cutoffBudgetUpper s
 Budgets externos ja fechados sem perda por `self`:
 
 ```lean
+continuedBudget := continuedCentralUpper
 horizontalBudgetUpper := horizontalBudget
 cutoffBudgetUpper := cutoffBudget
 ```
@@ -1954,6 +1963,11 @@ cutoffBudgetUpper := cutoffBudget
 formalizado por:
 
 ```lean
+def C2ExactGapAnchorExactGapExpandedUpperContinuedComponentBound
+def C2ExactGapAnchorExactGapExpandedUpperContinuedComponentBoundOnMiddle
+theorem C2ExactGapAnchorExactGapExpandedUpperContinuedComponentBound_self
+theorem C2ExactGapAnchorExactGapExpandedUpperContinuedComponentBoundOnMiddle_self
+
 def C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBound
 def C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBoundOnMiddle
 theorem C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBound_self

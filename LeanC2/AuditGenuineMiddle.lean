@@ -12142,6 +12142,24 @@ def C2ExactGapAnchorExactGapExpandedUpperExternalDebitComponentBoundsOnMiddle
       genuineBudget continuedBudget
       horizontalBudgetUpper cutoffBudgetUpper s
 
+/-- Individual continued-central component bound for the external debit ledger. -/
+def C2ExactGapAnchorExactGapExpandedUpperContinuedComponentBound
+    (continuedCentralUpper continuedBudget : ℂ → ℝ)
+    (s : ℂ) : Prop :=
+  continuedCentralUpper s ≤ continuedBudget s
+
+/-- Global middle version of the continued-central component bound. -/
+def C2ExactGapAnchorExactGapExpandedUpperContinuedComponentBoundOnMiddle
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (continuedCentralUpper continuedBudget : ℂ → ℝ)
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M) :
+    Prop :=
+  ∀ ⦃s : ℂ⦄,
+    s ∈ c2ExpandedScalarMiddleRegion near edge →
+    C2ExactGapAnchorExactGapExpandedUpperContinuedComponentBound
+      continuedCentralUpper continuedBudget s
+
 /-- Individual horizontal component bound for the external debit ledger. -/
 def C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBound
     (horizontalBudget horizontalBudgetUpper : ℂ → ℝ)
@@ -16944,6 +16962,25 @@ theorem C2ExactGapAnchorExactGapExpandedUpperExternalDebitUpperBoundOnMiddle_of_
   exact
     C2ExactGapAnchorExactGapExpandedUpperExternalDebitUpperBound_of_componentBounds
       (hcomponents hs)
+
+theorem C2ExactGapAnchorExactGapExpandedUpperContinuedComponentBound_self
+    (continuedCentralUpper : ℂ → ℝ) (s : ℂ) :
+    C2ExactGapAnchorExactGapExpandedUpperContinuedComponentBound
+      continuedCentralUpper continuedCentralUpper s := by
+  unfold C2ExactGapAnchorExactGapExpandedUpperContinuedComponentBound
+  exact le_rfl
+
+theorem C2ExactGapAnchorExactGapExpandedUpperContinuedComponentBoundOnMiddle_self
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    (continuedCentralUpper : ℂ → ℝ)
+    (near : C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+    (edge : C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M) :
+    C2ExactGapAnchorExactGapExpandedUpperContinuedComponentBoundOnMiddle
+      continuedCentralUpper continuedCentralUpper near edge := by
+  intro s _hs
+  exact
+    C2ExactGapAnchorExactGapExpandedUpperContinuedComponentBound_self
+      continuedCentralUpper s
 
 theorem C2ExactGapAnchorExactGapExpandedUpperHorizontalComponentBound_self
     (horizontalBudget : ℂ → ℝ) (s : ℂ) :
