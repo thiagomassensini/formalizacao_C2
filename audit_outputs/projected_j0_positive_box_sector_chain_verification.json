@@ -1,0 +1,200 @@
+{
+  "boxes_count": 27,
+  "bridge_example_found": true,
+  "checks_failed": [],
+  "checks_passed": [
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/c2_projected_j0_sector_box_certifier_sector_positive_box_fast_sub32.csv",
+      "name": "exists:source_csv"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/c2_projected_j0_sector_box_certifier_sector_positive_box_fast_sub32.json",
+      "name": "exists:source_json"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/LeanC2/AuditAdjustedQuartetProjectedJ0PositiveBoxSectorRationalizedData.lean",
+      "name": "exists:lean_data"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/LeanC2/AuditAdjustedQuartetProjectedJ0PositiveBoxSectorRationalizedBridge.lean",
+      "name": "exists:bridge"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_certificate_pack/config.json",
+      "name": "exists:sector_pack/config.json"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_certificate_pack/boxes.csv",
+      "name": "exists:sector_pack/boxes.csv"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_certificate_pack/boxes.json",
+      "name": "exists:sector_pack/boxes.json"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_certificate_pack/commands.sh",
+      "name": "exists:sector_pack/commands.sh"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_certificate_pack/summary.md",
+      "name": "exists:sector_pack/summary.md"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_certificate_pack/README.md",
+      "name": "exists:sector_pack/README.md"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_rationalized_pack/config.json",
+      "name": "exists:sector_rat_pack/config.json"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_rationalized_pack/boxes_sector_rationalized.csv",
+      "name": "exists:sector_rat_pack/boxes_sector_rationalized.csv"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_rationalized_pack/boxes_sector_rationalized.json",
+      "name": "exists:sector_rat_pack/boxes_sector_rationalized.json"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_rationalized_pack/source_config.json",
+      "name": "exists:sector_rat_pack/source_config.json"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_rationalized_pack/summary.md",
+      "name": "exists:sector_rat_pack/summary.md"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_rationalized_pack/README.md",
+      "name": "exists:sector_rat_pack/README.md"
+    },
+    {
+      "detail": "27",
+      "name": "source_count_27"
+    },
+    {
+      "detail": "27",
+      "name": "source_json_count_27"
+    },
+    {
+      "detail": "27",
+      "name": "pack_count_27"
+    },
+    {
+      "detail": "27",
+      "name": "pack_json_count_27"
+    },
+    {
+      "detail": "27",
+      "name": "rat_count_27"
+    },
+    {
+      "detail": "27",
+      "name": "rat_json_count_27"
+    },
+    {
+      "detail": "",
+      "name": "same_source_pack_ids"
+    },
+    {
+      "detail": "",
+      "name": "same_source_rat_ids"
+    },
+    {
+      "detail": "max_diff=0",
+      "name": "source_to_pack_fields_match"
+    },
+    {
+      "detail": "",
+      "name": "sector_pack_internal_consistency"
+    },
+    {
+      "detail": "",
+      "name": "sector_pack_flags_true"
+    },
+    {
+      "detail": "",
+      "name": "sector_pack_to_rationalized_safe"
+    },
+    {
+      "detail": "27",
+      "name": "lean_data_combined_count_27"
+    },
+    {
+      "detail": "27",
+      "name": "lean_data_separate_count_27"
+    },
+    {
+      "detail": "",
+      "name": "lean_data_length_theorems"
+    },
+    {
+      "detail": "exact regenerated Lean data match",
+      "name": "lean_data_regenerates_exactly"
+    },
+    {
+      "detail": "",
+      "name": "bridge_hypotheses_found"
+    },
+    {
+      "detail": "",
+      "name": "bridge_to_box_found"
+    },
+    {
+      "detail": "",
+      "name": "bridge_total_found"
+    },
+    {
+      "detail": "",
+      "name": "bridge_example_found"
+    }
+  ],
+  "combined_count": 27,
+  "lean_data_counts": {
+    "combined_count": 27,
+    "has_combined_length": true,
+    "has_separate_length": true,
+    "separate_count": 27
+  },
+  "lean_hashes": {
+    "bridge": "9527e2745fdcae0e12fdf806b24dfc06e6c829d5536e2e199cd445ef3af5d9b3",
+    "data": "7e3a06ad31064f5decee54e5636fbf634b1ae30773d4a5d7c1aef0cd229b7097"
+  },
+  "max_d0_neg_re_upper": "-0.00019368049701349772",
+  "max_d0_neg_re_upper_box": "s0.86_t0",
+  "max_pack_to_rationalized_budget_loss": "0.000000000001804634",
+  "max_pack_to_rationalized_budget_loss_box": "s0.84_t4",
+  "max_raw_to_pack_diff": "0",
+  "max_raw_to_pack_diff_box": "",
+  "max_raw_to_pack_diff_field": "",
+  "max_rounding_loss_combined": "0.000000000001804634",
+  "max_rounding_loss_combined_box": "s0.84_t4",
+  "max_rounding_loss_separate": "0.000000000001692154",
+  "max_rounding_loss_separate_box": "s0.85_t5",
+  "min_sector_budget_combined": "0.05408604580200366",
+  "min_sector_budget_combined_rat": "0.054086045801",
+  "min_sector_budget_separate": "0.05403134348437868",
+  "min_sector_budget_separate_rat": "0.054031343484",
+  "nondestructive_count": 27,
+  "pack_hashes": {
+    "boxes_csv": "1df1ffc3cd98acbb8cbb9d687664dd2896f9935e6d4ce25b9d9d73aed6ea8e27",
+    "boxes_json": "2d87be8c5139a1aedaefaaefb226ec235198324570e5020298d2501efccbfb2b",
+    "commands": "418bcdb4f9e26b76e3bef73dbb3b738a55868745c8012ef673db0d4bc245c293",
+    "config": "d9c699798461e4f06f3d2ba8fbe23b93e73b34d549ec53c8742056157bf51e49"
+  },
+  "rationalized_combined_count": 27,
+  "rationalized_hashes": {
+    "boxes_csv": "7712949d582825faa70f6f6d362d697e15e6fa5f7f64a01a66570ccc5a0b8413",
+    "boxes_json": "b72228716dd6c146e464be43a09913b9c56cd3dcecb5dee39002aad456295200",
+    "config": "f259aa31765592fd6e24dbbb4f4640ef691536a0ed122c60fcac8a409aaad18c"
+  },
+  "rationalized_nondestructive_count": 27,
+  "rationalized_separate_count": 27,
+  "separate_count": 27,
+  "source_hashes": {
+    "csv": "1df1ffc3cd98acbb8cbb9d687664dd2896f9935e6d4ce25b9d9d73aed6ea8e27",
+    "json": "0e8b6c3d825bbd61ff22cdaa44ea4864620f1e0991d0be90147d3a1ffd0e5a9b"
+  },
+  "timestamp": "2026-07-09T04:02:54.157412+00:00",
+  "worst_combined_box": "s0.84_t7",
+  "worst_separate_box": "s0.84_t7"
+}

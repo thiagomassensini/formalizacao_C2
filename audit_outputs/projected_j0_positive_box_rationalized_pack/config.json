@@ -1,0 +1,28 @@
+{
+  "created_at_utc": "2026-07-09T02:18:46.399106+00:00",
+  "decimals": 12,
+  "git_head": "041f6deb14819ab2567c256f13e40fbf3bde39b5",
+  "rounding": {
+    "budget": "recomputed from rounded values",
+    "mainNormLowerConst": "down",
+    "numeratorUpperConst": "up",
+    "parallelUpperConst": "recomputed and rounded up",
+    "restUpperCombinedConst": "up",
+    "restUpperSeparateConst": "up"
+  },
+  "source_pack_dir": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_certificate_pack",
+  "summary": {
+    "certified_combined": 27,
+    "certified_separate": 27,
+    "input_boxes": 27,
+    "max_rounding_loss_combined": "0.00000000002113689",
+    "max_rounding_loss_combined_box": "s0.84_t5",
+    "max_rounding_loss_separate": "0.00000000002153838",
+    "max_rounding_loss_separate_box": "s0.84_t5",
+    "min_budget_combined": "0.041988183200",
+    "min_budget_separate": "0.041893943068",
+    "output_boxes": 27,
+    "worst_combined_box": "s0.84_t7",
+    "worst_separate_box": "s0.84_t7"
+  }
+}

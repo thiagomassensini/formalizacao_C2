@@ -1,0 +1,84 @@
+{
+  "disclaimer": "Diagnostic only. The formal Lean target uses oddDirichletChannel; the numerical values below use the continued odd-channel diagnostic mode from audit_horizontal_qratio_scanner.py.",
+  "channel_mode": "zeta_diagnostic",
+  "box": {
+    "sigma": [
+      "0.84",
+      "0.86"
+    ],
+    "t": [
+      "32.8125",
+      "32.875"
+    ]
+  },
+  "cutoff": 50,
+  "sample_shape": {
+    "sigma_divisions": 16,
+    "t_divisions": 16,
+    "local_grid": 9,
+    "subboxes": 256,
+    "points": 20736,
+    "guard_factor": "1.1"
+  },
+  "target": {
+    "odd_truncation": "7 / 180",
+    "odd_truncation_decimal": "0.0388888888888888888888889",
+    "horizontal_upper": "1 / 100",
+    "horizontal_upper_decimal": "0.01"
+  },
+  "global": {
+    "sampled_sup": "0.0306465288369729407129069",
+    "guarded_sup": "0.0337111817206702347841976",
+    "sampled_slack": "0.00824236005191594817598199",
+    "guarded_slack": "0.0051777071682186541046913",
+    "sampled_sup_over_target": "0.788053598665018475474749",
+    "guarded_sup_over_target": "0.866858958531520323022224",
+    "sampled_status": "pass",
+    "guarded_status": "pass",
+    "worst_subbox": {
+      "subbox_id": "S00_T00",
+      "sigma_box": "[0.84, 0.84125]",
+      "t_box": "[32.8125, 32.81640625]",
+      "cutoff": 50,
+      "sample_count": 81,
+      "odd_trunc_sup_sampled": "0.0306465288369729407129069",
+      "odd_trunc_guarded": "0.0337111817206702347841976",
+      "odd_trunc_target": "0.0388888888888888888888889",
+      "odd_trunc_slack_sampled": "0.00824236005191594817598199",
+      "odd_trunc_slack_guarded": "0.0051777071682186541046913",
+      "odd_trunc_sup_over_target": "0.788053598665018475474749",
+      "h_qratio_sup_sampled": "0.00663558945988876530297867",
+      "h_qratio_target": "0.01",
+      "max_q_abs_sampled": "0.279321784518054991652748",
+      "max_sigma": "0.84",
+      "max_t": "32.8125",
+      "max_raw_core_sum": "(0.553243971814843503013266 -0.0477769174993244240476671j)",
+      "max_continued_odd_target": "(0.540324554225087956241413 -0.0199866605934063176436056j)",
+      "max_odd_trunc_vector": "(0.0129194175897555467718532 -0.0277902569059181064040615j)",
+      "channel_mode": "zeta_diagnostic",
+      "status_sampled": "pass",
+      "status_guarded": "pass"
+    },
+    "worst_point": {
+      "subbox_id": "S00_T00",
+      "sigma": "0.84",
+      "t": "32.8125",
+      "cutoff": 50,
+      "q_abs": "0.279321784518054991652748",
+      "odd_trunc_norm": "0.0306465288369729407129069",
+      "odd_trunc_over_target": "0.788053598665018475474749",
+      "h_qratio": "0.00663558945988876530297867",
+      "raw_core_sum": "(0.553243971814843503013266 -0.0477769174993244240476671j)",
+      "continued_odd_target": "(0.540324554225087956241413 -0.0199866605934063176436056j)",
+      "odd_trunc_vector": "(0.0129194175897555467718532 -0.0277902569059181064040615j)",
+      "channel_mode": "zeta_diagnostic"
+    }
+  },
+  "ledger_sensitivity": {
+    "odd_from_current_horizontal_budget": "0.0388888888888888888888889",
+    "ledger_h_max_with_existing_q_anchor_cut_sector_bounds": "0.0123282",
+    "odd_from_ledger_h_max_at_q_eq_3_over_10": "0.047943",
+    "rational_above_guarded_sup": "230 / 6793",
+    "rational_above_sampled_sup": "37 / 1191"
+  }
+}

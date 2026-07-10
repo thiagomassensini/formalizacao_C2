@@ -1,0 +1,38 @@
+{
+  "bg_kmax": 12,
+  "centers": 49975,
+  "nmax": 200000,
+  "notes": [
+    "Genuine-first diagnostic; no zeta input.",
+    "Ledger C is the oriented tilt ledger: |main + tilt_main| - |rest| - tail.",
+    "Lean-style surplus uses min main/oriented main and max rest/tail over the grid, hence it is more conservative than pointwise surplus."
+  ],
+  "script": "c2_sigma_v_profile.py",
+  "sigmas": [
+    0.72,
+    0.73,
+    0.737,
+    0.74,
+    0.75
+  ],
+  "splits": [
+    "depth",
+    "core",
+    "center"
+  ],
+  "tail_mode": "none",
+  "tilt_lambda": 1.0,
+  "windows": [
+    [
+      "t1413",
+      13.780000000000001,
+      14.48
+    ],
+    [
+      "t1429",
+      14.04,
+      14.54
+    ]
+  ],
+  "x_cut": 66666.66666666667
+}

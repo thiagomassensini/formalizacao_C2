@@ -177,4 +177,49 @@ theorem bracket_tilt_zero_iff_delta_zero {δ c : ℝ} (hδlow : -1 < δ) (hc : 1
   · intro hδ0
     simpa [hδ0] using bracket_tilt_zero c
 
+/--
+Curvature-scaled tilt bracket used by the numerical center-Gaussian ledger.
+
+For positive `c`, this is a positive rescaling of `tiltBracket δ c`, so it keeps
+the same sign and the same zero set.  Numerically it removes the leading
+`c^{-2}` decay of the centered second difference.
+-/
+noncomputable def normalizedTiltCurvature (δ c : ℝ) : ℝ :=
+  c ^ (δ + 2) * tiltBracket δ c
+
+@[simp] theorem normalizedTiltCurvature_zero (c : ℝ) :
+    normalizedTiltCurvature 0 c = 0 := by
+  simp [normalizedTiltCurvature]
+
+theorem normalizedTiltCurvature_pos_of_pos {δ c : ℝ} (hδ : 0 < δ) (hc : 1 < c) :
+    0 < normalizedTiltCurvature δ c := by
+  have hc0 : 0 < c := lt_trans zero_lt_one hc
+  have hscale : 0 < c ^ (δ + 2) := Real.rpow_pos_of_pos hc0 _
+  exact mul_pos hscale (tiltBracket_pos_of_pos (δ := δ) (c := c) hδ hc)
+
+theorem normalizedTiltCurvature_neg_of_neg_one_lt {δ c : ℝ}
+    (hδ1 : -1 < δ) (hδ2 : δ < 0) (hc : 1 < c) :
+    normalizedTiltCurvature δ c < 0 := by
+  have hc0 : 0 < c := lt_trans zero_lt_one hc
+  have hscale : 0 < c ^ (δ + 2) := Real.rpow_pos_of_pos hc0 _
+  exact mul_neg_of_pos_of_neg hscale
+    (tiltBracket_neg_of_neg_one_lt (δ := δ) (c := c) hδ1 hδ2 hc)
+
+theorem normalizedTiltCurvature_zero_iff_delta_zero {δ c : ℝ}
+    (hδlow : -1 < δ) (hc : 1 < c) :
+    normalizedTiltCurvature δ c = 0 ↔ δ = 0 := by
+  constructor
+  · intro hzero
+    have hc0 : 0 < c := lt_trans zero_lt_one hc
+    have hscale_ne : c ^ (δ + 2) ≠ 0 :=
+      ne_of_gt (Real.rpow_pos_of_pos hc0 _)
+    have hcases := mul_eq_zero.mp hzero
+    rcases hcases with hscale_zero | hbracket_zero
+    · exact False.elim (hscale_ne hscale_zero)
+    · have hbracket2 : bracket2 (tilt δ) c = 0 := by
+        simpa [tiltBracket] using hbracket_zero
+      exact (bracket_tilt_zero_iff_delta_zero (δ := δ) (c := c) hδlow hc).mp hbracket2
+  · intro hδ0
+    simp [normalizedTiltCurvature, hδ0]
+
 end C2

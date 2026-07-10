@@ -1,0 +1,32 @@
+{
+  "created_at_utc": "2026-07-09T03:42:37.639477+00:00",
+  "decimals": 12,
+  "git_head": "041f6deb14819ab2567c256f13e40fbf3bde39b5",
+  "rounding": {
+    "d0_neg_re_upper": "up",
+    "mainNormLowerConst": "down",
+    "restUpperCombinedConst": "up",
+    "restUpperSeparateConst": "up"
+  },
+  "script_sha256": "da5fbdf45fa970b21485991f9a8014db5c9a5009602b4a3f72d75be3190dd996",
+  "source_boxes_csv_sha256": "1df1ffc3cd98acbb8cbb9d687664dd2896f9935e6d4ce25b9d9d73aed6ea8e27",
+  "source_boxes_json_sha256": "2d87be8c5139a1aedaefaaefb226ec235198324570e5020298d2501efccbfb2b",
+  "source_pack_dir": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_certificate_pack",
+  "summary": {
+    "certified_nondestructive": 27,
+    "certified_sector_combined": 27,
+    "certified_sector_separate": 27,
+    "input_boxes": 27,
+    "max_d0_neg_re_upper": "-0.000193680497",
+    "max_d0_neg_re_upper_box": "s0.86_t0",
+    "max_rounding_loss_combined": "0.000000000001804634",
+    "max_rounding_loss_combined_box": "s0.84_t4",
+    "max_rounding_loss_separate": "0.000000000001692154",
+    "max_rounding_loss_separate_box": "s0.85_t5",
+    "min_sector_budget_combined": "0.054086045801",
+    "min_sector_budget_separate": "0.054031343484",
+    "output_boxes": 27,
+    "worst_combined_box": "s0.84_t7",
+    "worst_separate_box": "s0.84_t7"
+  }
+}

@@ -4026,6 +4026,54 @@ Já está formalizado e compilando:
     Verificação local:
     `lake build LeanC2.Analytic.GenuineBulkConcrete LeanC2` concluiu com sucesso com 8289 jobs.
 
-  O próximo salto técnico natural fica agora concentrado numa única obrigação analítica central:
-  1. construir a obrigação uniforme de faixa média em qualquer uma das formas fortes já disponíveis, preferencialmente `explicitScalarExactZeta`, ou diretamente no alvo mínimo `C2CanonicalClosedScaledLocalData`.
-  2. aplicar diretamente `RiemannHypothesisTerminalData.ofContinuationAndMiddleLocal`, `RiemannHypothesisTerminalData.ofContinuationAndExplicitScalarExactZetaMiddleRegion`, ou os corolários correspondentes, sem plumbing extra.
+  145. A obrigação uniforme da faixa média agora também tem construtores data-level especializados à continuação em `LeanC2/Analytic/GenuineBulkConcrete.lean`:
+    - `C2CanonicalClosedScaledMiddleLocalData.ofContinuation`;
+    - `C2ExplicitScalarExactZetaMiddleRegionData.ofContinuation`.
+
+    Interpretação: se a análise produzir diretamente o witness mínimo
+    `C2CanonicalClosedScaledLocalData` ponto a ponto, ou as estimativas fortes
+    `C2OddTailContinuedBalancingSeedBulkQuartetExplicitScalarExactZetaEstimates`
+    ponto a ponto, o Lean agora monta automaticamente o pacote regional com
+    `GenuineFInfiniteNearAxisData.of_continuation` e
+    `C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty`. A passagem final
+    continua sendo feita pelos endpoints terminais já existentes; não foi
+    introduzida nenhuma hipótese matemática nova.
+
+    Verificação local:
+    `lake build LeanC2.Analytic.GenuineBulkConcrete` concluiu com sucesso; o alvo ainda emite apenas warnings de lint já conhecidos do arquivo grande.
+
+  146. A tentativa de produzir diretamente o witness canônico mínimo revelou uma
+    obstrução formal, agora registrada em
+    `LeanC2/Analytic/GenuineBulkConcrete.lean`:
+    - `c2ExpandedQuartetResidualMargin_lt_scaledVerticalDepthTail_linearCoefficient_of_offCriticalStrip`;
+    - `scaledVerticalDepthTail_linearCoefficient_le_c2CanonicalClosedScaledResidualUpper_of_offCriticalStrip`;
+    - `not_c2CanonicalClosedScaledResidualUpper_lt_residualMargin_of_offCriticalStrip`;
+    - `not_c2CanonicalClosedScaledLocalData_of_offCriticalStrip`.
+
+    Interpretação: para qualquer ponto `s` em `offCriticalStrip s`, a margem
+    residual do quarteto é estritamente menor que a contribuição vertical já
+    contida na majorante residual canônica fechada. Como
+    `c2ExpandedScalarMiddleRegion` inclui `offCriticalStrip`, o witness local
+    `C2CanonicalClosedScaledLocalData` não é apenas difícil de construir nessa
+    formulação: ele é formalmente impossível. Consequentemente, a rota
+    canônica que tenta descer uma witness forte `explicitScalarExactZeta` para
+    esse alvo mínimo também fica bloqueada na especialização fechada canônica.
+
+    Isso não elimina as rotas fortes com bounds livres já expostas pelos
+    corolários `...WithBounds`; pelo contrário, indica que o próximo passo
+    honesto é evitar a sobrecontagem vertical embutida nas constantes
+    canônicas, ou reformular o pacote local mínimo antes de tentar alimentar o
+    endpoint terminal.
+
+    Verificação local:
+    `lake build LeanC2.Analytic.GenuineBulkConcrete` e `lake build LeanC2`
+    concluíram com sucesso; restam apenas warnings de lint já existentes no
+    arquivo grande.
+
+  Depois da barreira formal acima, o próximo salto técnico natural não é mais tentar
+  construir `C2CanonicalClosedScaledLocalData` na especialização canônica. As duas
+  direções coerentes agora são:
+  1. usar as rotas `...WithBounds` e provar uma obrigação forte de faixa média com
+     constantes livres que não carreguem a sobrecontagem vertical canônica;
+  2. reformular o pacote local mínimo/canônico para que a dominância do quarteto
+     compare apenas as parcelas efetivamente necessárias.

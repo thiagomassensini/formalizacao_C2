@@ -1,0 +1,72 @@
+C2.c2ConcreteAntiMiracleResidual_eq_centralDefect_of_continuation_offCritical {coreCutoff : ℕ → ℕ} {K M : ℕ}
+  (continuation : C2.GenuineFInfiniteContinuationData) {s : ℂ} (hs : C2.offCriticalStrip s) :
+  C2.c2ConcreteAntiMiracleResidual (C2.c2OddTailBalancingSeed coreCutoff K M) coreCutoff K M s =
+    C2.genuineCentralDoubleSeries s - C2.continuedCentralOddChannel s
+C2.mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleSeparatedMainBounds {coreCutoff : ℕ → ℕ} {K M : ℕ}
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale : ℂ → ℝ}
+  (hK : 2 ≤ K) (continuation : C2.GenuineFInfiniteContinuationData)
+  (hscale :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedScalarScaleData tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio
+          cutoffScale s)
+  (hhorizontal :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedHorizontalLayerBudget coreCutoff horizontalConstant horizontalScale horizontalRatio s)
+  (hseed :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedSeedScaledBound K M horizontalConstant horizontalScale horizontalRatio tiltConstant tiltScale s)
+  (hcutoff :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedCutoffScaledBound K M cutoffConstant cutoffScale s)
+  (hdominance :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedQuartetDominance tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio
+          cutoffConstant cutoffScale s) :
+  RiemannHypothesis
+C2.C2ExpandedScalarLocalBulkData (coreCutoff : ℕ → ℕ) (K M : ℕ)
+  (tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale : ℂ → ℝ)
+  (s : ℂ) : Prop
+LeanC2/AuditActiveMainAntiMiracle.lean:6:7: error(lean.unknownIdentifier): Unknown identifier `C2.theorem`
+LeanC2/AuditActiveMainAntiMiracle.lean:7:7: error(lean.unknownIdentifier): Unknown identifier `C2.theorem`
+LeanC2/AuditActiveMainAntiMiracle.lean:8:7: error(lean.unknownIdentifier): Unknown identifier `C2.theorem`
+LeanC2/AuditActiveMainAntiMiracle.lean:9:7: error(lean.unknownIdentifier): Unknown identifier `C2.theorem`
+LeanC2/AuditActiveMainAntiMiracle.lean:10:7: error(lean.unknownIdentifier): Unknown identifier `C2.theorem`
+LeanC2/AuditActiveMainAntiMiracle.lean:11:7: error(lean.unknownIdentifier): Unknown identifier `C2.theorem`
+C2.C2ExpandedScalarLocalBulkData (coreCutoff : ℕ → ℕ) (K M : ℕ)
+  (tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale : ℂ → ℝ)
+  (s : ℂ) : Prop
+LeanC2/AuditActiveMainAntiMiracle.lean:13:7: error(lean.unknownIdentifier): Unknown identifier `C2.theorem`
+LeanC2/AuditActiveMainAntiMiracle.lean:14:7: error(lean.unknownIdentifier): Unknown identifier `C2.theorem`
+LeanC2/AuditActiveMainAntiMiracle.lean:15:7: error(lean.unknownIdentifier): Unknown identifier `C2.theorem`
+LeanC2/AuditActiveMainAntiMiracle.lean:16:7: error(lean.unknownIdentifier): Unknown identifier `C2.theorem`
+LeanC2/AuditActiveMainAntiMiracle.lean:17:7: error(lean.unknownIdentifier): Unknown identifier `C2.theorem`
+LeanC2/AuditActiveMainAntiMiracle.lean:18:7: error(lean.unknownIdentifier): Unknown identifier `C2.theorem`
+LeanC2/AuditActiveMainAntiMiracle.lean:19:7: error(lean.unknownIdentifier): Unknown identifier `C2.theorem`
+LeanC2/AuditActiveMainAntiMiracle.lean:20:7: error(lean.unknownIdentifier): Unknown identifier `C2.theorem`
+LeanC2/AuditActiveMainAntiMiracle.lean:21:7: error(lean.unknownIdentifier): Unknown identifier `C2.theorem`
+LeanC2/AuditActiveMainAntiMiracle.lean:22:7: error(lean.unknownIdentifier): Unknown identifier `C2.theorem`

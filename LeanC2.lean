@@ -8,6 +8,7 @@ import LeanC2.Operators.DirichletExamples
 import LeanC2.Operators.DirichletFormal
 import LeanC2.Operators.FiniteCancellation
 import LeanC2.Operators.Tilt
+import LeanC2.Operators.CenterGaussianTilt
 import LeanC2.Operators.TruncatedGenuine
 import LeanC2.Operators.VerticalResolvent
 import LeanC2.Route.FundamentalAlgebra
@@ -38,3 +39,9 @@ import LeanC2.Analytic.GenuineCover
 import LeanC2.Analytic.GenuineG11
 import LeanC2.Analytic.GenuineBulk
 import LeanC2.Analytic.GenuineBulkConcrete
+import LeanC2.Analytic.GenuineRawTsumObstruction
+import LeanC2.Analytic.GenuinePairedContinuation
+import LeanC2.Analytic.ProjectedJ0SuperGaussianSurrogate
+import LeanC2.Analytic.GenuineGaussianGenealogy
+import LeanC2.Route.SurrogateTransfer
+import LeanC2.PeerReview

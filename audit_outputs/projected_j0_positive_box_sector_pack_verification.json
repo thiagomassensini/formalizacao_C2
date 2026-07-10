@@ -1,0 +1,110 @@
+{
+  "boxes_count": 27,
+  "boxes_csv_hash": "1df1ffc3cd98acbb8cbb9d687664dd2896f9935e6d4ce25b9d9d73aed6ea8e27",
+  "boxes_json_hash": "2d87be8c5139a1aedaefaaefb226ec235198324570e5020298d2501efccbfb2b",
+  "certified_combined_count": 27,
+  "certified_nondestructive_count": 27,
+  "certified_separate_count": 27,
+  "checks_failed": [],
+  "checks_passed": [
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_certificate_pack/config.json",
+      "name": "exists:config.json"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_certificate_pack/boxes.csv",
+      "name": "exists:boxes.csv"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_certificate_pack/boxes.json",
+      "name": "exists:boxes.json"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_certificate_pack/commands.sh",
+      "name": "exists:commands.sh"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_certificate_pack/summary.md",
+      "name": "exists:summary.md"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_certificate_pack/README.md",
+      "name": "exists:README.md"
+    },
+    {
+      "detail": "rows=27",
+      "name": "boxes_count_27"
+    },
+    {
+      "detail": "json=27 csv=27",
+      "name": "boxes_json_count"
+    },
+    {
+      "detail": "",
+      "name": "all_certification_flags_true"
+    },
+    {
+      "detail": "",
+      "name": "sector_signs"
+    },
+    {
+      "detail": "",
+      "name": "recorded_sector_budgets_match"
+    },
+    {
+      "detail": "",
+      "name": "positive_sector_budgets"
+    },
+    {
+      "detail": "27",
+      "name": "certified_nondestructive_27"
+    },
+    {
+      "detail": "27",
+      "name": "certified_combined_27"
+    },
+    {
+      "detail": "27",
+      "name": "certified_separate_27"
+    },
+    {
+      "detail": "0",
+      "name": "rerun_exit_code_0"
+    },
+    {
+      "detail": "",
+      "name": "compare_same_box_ids"
+    },
+    {
+      "detail": "tol=1E-10",
+      "name": "compare_within_tolerance"
+    }
+  ],
+  "commands_hash": "418bcdb4f9e26b76e3bef73dbb3b738a55868745c8012ef673db0d4bc245c293",
+  "config_hash": "d9c699798461e4f06f3d2ba8fbe23b93e73b34d549ec53c8742056157bf51e49",
+  "git_head": "041f6deb14819ab2567c256f13e40fbf3bde39b5",
+  "max_abs_diffs": {
+    "d0_neg_re_upper": "0 at ",
+    "mainNormLowerConst": "0 at ",
+    "restUpperCombinedConst": "0 at ",
+    "restUpperSeparateConst": "0 at ",
+    "sectorBudgetCombined": "0 at ",
+    "sectorBudgetSeparate": "0 at "
+  },
+  "max_d0_neg_re_upper": "-0.00019368049701349772",
+  "max_d0_neg_re_upper_box": "s0.86_t0",
+  "max_internal_budget_diff": "0.000000000000000008",
+  "max_rerun_diff": "0",
+  "max_rerun_diff_box": "",
+  "max_rerun_diff_field": "",
+  "min_sector_budget_combined": "0.05408604580200366",
+  "min_sector_budget_separate": "0.05403134348437868",
+  "pack_dir": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_sector_certificate_pack",
+  "rerun_exit_code": 0,
+  "rerun_stderr_tail": "",
+  "rerun_stdout_tail": "s0.84_t7 negReUpper=-4.384676e-04 budget=5.408605e-02 status=certified_sector_combined_and_separate\n  [9/27] s0.84_t8 negReUpper=-5.509561e-04 budget=5.804244e-02 status=certified_sector_combined_and_separate\n  [10/27] s0.85_t0 negReUpper=-2.022559e-04 budget=5.965072e-02 status=certified_sector_combined_and_separate\n  [11/27] s0.85_t1 negReUpper=-2.360019e-04 budget=5.899949e-02 status=certified_sector_combined_and_separate\n  [12/27] s0.85_t2 negReUpper=-2.684591e-04 budget=5.836961e-02 status=certified_sector_combined_and_separate\n  [13/27] s0.85_t3 negReUpper=-2.995364e-04 budget=5.776263e-02 status=certified_sector_combined_and_separate\n  [14/27] s0.85_t4 negReUpper=-3.291533e-04 budget=5.718061e-02 status=certified_sector_combined_and_separate\n  [15/27] s0.85_t5 negReUpper=-3.572354e-04 budget=5.662562e-02 status=certified_sector_combined_and_separate\n  [16/27] s0.85_t6 negReUpper=-3.837081e-04 budget=5.609946e-02 status=certified_sector_combined_and_separate\n  [17/27] s0.85_t7 negReUpper=-4.084988e-04 budget=5.560425e-02 status=certified_sector_combined_and_separate\n  [18/27] s0.85_t8 negReUpper=-5.095131e-04 budget=5.932187e-02 status=certified_sector_combined_and_separate\n  [19/27] s0.86_t0 negReUpper=-1.936805e-04 budget=6.060763e-02 status=certified_sector_combined_and_separate\n  [20/27] s0.86_t1 negReUpper=-2.239228e-04 budget=6.002150e-02 status=certified_sector_combined_and_separate\n  [21/27] s0.86_t2 negReUpper=-2.530101e-04 budget=5.945575e-02 status=certified_sector_combined_and_separate\n  [22/27] s0.86_t3 negReUpper=-2.808606e-04 budget=5.891177e-02 status=certified_sector_combined_and_separate\n  [23/27] s0.86_t4 negReUpper=-3.074028e-04 budget=5.839134e-02 status=certified_sector_combined_and_separate\n  [24/27] s0.86_t5 negReUpper=-3.325705e-04 budget=5.789627e-02 status=certified_sector_combined_and_separate\n  [25/27] s0.86_t6 negReUpper=-3.562971e-04 budget=5.742811e-02 status=certified_sector_combined_and_separate\n  [26/27] s0.86_t7 negReUpper=-3.785174e-04 budget=5.698869e-02 status=certified_sector_combined_and_separate\n  [27/27] s0.86_t8 negReUpper=-4.693741e-04 budget=6.047762e-02 status=certified_sector_combined_and_separate\n------------------------------------------------------------------------\nelapsed=23.62s boxes=27\ncertified_nondestructive=27 sector_combined=27 sector_separate=27\nstatus_counts={'certified_sector_combined_and_separate': 27}\nCSV: audit_outputs/c2_projected_j0_sector_box_certifier_sector_positive_box_fast_sub32.csv\nJSON: audit_outputs/c2_projected_j0_sector_box_certifier_sector_positive_box_fast_sub32.json\n\nWorst sector budgets:\n  s0.84_t7 budget=5.408605e-02 negReUpper=-4.384676e-04 main=5.862924e-02 rest=4.543194e-03 status=certified_sector_combined_and_separate\n  s0.84_t6 budget=5.464482e-02 negReUpper=-4.108146e-04 main=5.921922e-02 rest=4.574396e-03 status=certified_sector_combined_and_separate\n  s0.84_t5 budget=5.523682e-02 negReUpper=-3.812842e-04 main=5.983903e-02 rest=4.602214e-03 status=certified_sector_combined_and_separate\n  s0.85_t7 budget=5.560425e-02 negReUpper=-4.084988e-04 main=5.974645e-02 rest=4.142194e-03 status=certified_sector_combined_and_separate\n  s0.84_t4 budget=5.585958e-02 negReUpper=-3.499574e-04 main=6.048607e-02 rest=4.626490e-03 status=certified_sector_combined_and_separate\n  s0.85_t6 budget=5.609946e-02 negReUpper=-3.837081e-04 main=6.027020e-02 rest=4.170739e-03 status=certified_sector_combined_and_separate\n  s0.84_t3 budget=5.651105e-02 negReUpper=-3.169179e-04 main=6.115837e-02 rest=4.647318e-03 status=certified_sector_combined_and_separate\n  s0.85_t5 budget=5.662562e-02 negReUpper=-3.572354e-04 main=6.082181e-02 rest=4.196187e-03 status=certified_sector_combined_and_separate\n  s0.86_t7 budget=5.698869e-02 negReUpper=-3.785174e-04 main=6.076879e-02 rest=3.780101e-03 status=certified_sector_combined_and_separate\n  s0.85_t4 budget=5.718061e-02 negReUpper=-3.291533e-04 main=6.139900e-02 rest=4.218390e-03 status=certified_sector_combined_and_separate\n",
+  "script_hash": "92c06f9dbf0e25cb25ade78ae08f1b7b21e0b1b8ec80e11ce1649790bf87f990",
+  "timestamp": "2026-07-09T03:41:54.997404+00:00",
+  "worst_combined_box": "s0.84_t7",
+  "worst_separate_box": "s0.84_t7"
+}

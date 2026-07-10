@@ -1,0 +1,153 @@
+{
+  "boxes_csv_hash": "ac0fea627d1859e74088dfbdad1dc739de043962c1b1387f80ae64d79d2dff04",
+  "boxes_json_hash": "f542f53d76208427c88237e190221a8e009f84c6c5dae5ea08146c55ef8de3c5",
+  "certifier_script_hash": "a0f9322524b491a6ed92a5de8e88c35f06f1abc577ec402ce7b4d95597788384",
+  "checks_failed": [],
+  "checks_passed": [
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_certificate_pack/config.json",
+      "name": "exists:config.json"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_certificate_pack/boxes.csv",
+      "name": "exists:boxes.csv"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_certificate_pack/boxes.json",
+      "name": "exists:boxes.json"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_certificate_pack/commands.sh",
+      "name": "exists:commands.sh"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_certificate_pack/summary.md",
+      "name": "exists:summary.md"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_certificate_pack/README.md",
+      "name": "exists:README.md"
+    },
+    {
+      "detail": "csv=27 json=27",
+      "name": "boxes_csv_json_count"
+    },
+    {
+      "detail": "source_box_id order",
+      "name": "boxes_csv_json_ids"
+    },
+    {
+      "detail": "",
+      "name": "no_duplicate_box_ids"
+    },
+    {
+      "detail": "",
+      "name": "all_combined_certified"
+    },
+    {
+      "detail": "",
+      "name": "mainNormLowerConst_positive"
+    },
+    {
+      "detail": "",
+      "name": "numeratorUpperConst_nonnegative"
+    },
+    {
+      "detail": "",
+      "name": "combined_flags_match_budget"
+    },
+    {
+      "detail": "",
+      "name": "separate_flags_match_budget"
+    },
+    {
+      "detail": "{\"budgetCombinedConst\": 0.0, \"budgetSeparateConst\": 0.0, \"parallelUpperConst\": 0.0}",
+      "name": "parallel_and_budget_identities"
+    },
+    {
+      "detail": "current=a0f9322524b491a6ed92a5de8e88c35f06f1abc577ec402ce7b4d95597788384 recorded=a0f9322524b491a6ed92a5de8e88c35f06f1abc577ec402ce7b4d95597788384",
+      "name": "certifier_script_hash_matches_config"
+    },
+    {
+      "detail": "exit=0",
+      "name": "rerun_exit_code_zero"
+    },
+    {
+      "detail": "pack=27 rerun=27",
+      "name": "compare_row_ids"
+    },
+    {
+      "detail": "{\"budgetCombinedConst\": 0.0, \"budgetSeparateConst\": 0.0, \"mainNormLowerConst\": 0.0, \"numeratorUpperConst\": 0.0, \"parallelUpperConst\": 0.0, \"restUpperCombinedConst\": 0.0, \"restUpperSeparateConst\": 0.0}",
+      "name": "compare_numeric_fields_within_tolerance"
+    },
+    {
+      "detail": "source_json_rows=27 pack_rows=27",
+      "name": "compare_source_json_row_count"
+    }
+  ],
+  "config_hash": "6c69cc3a7c222b80bd5752fe082a56dcae4f52facd426f7379286257e4fed04a",
+  "git_head": "041f6deb14819ab2567c256f13e40fbf3bde39b5",
+  "identity_diff_boxes": {
+    "budgetCombinedConst": "",
+    "budgetSeparateConst": "",
+    "parallelUpperConst": ""
+  },
+  "identity_max_abs_diffs": {
+    "budgetCombinedConst": 0.0,
+    "budgetSeparateConst": 0.0,
+    "parallelUpperConst": 0.0
+  },
+  "max_abs_diff_boxes": {
+    "budgetCombinedConst": "",
+    "budgetSeparateConst": "",
+    "mainNormLowerConst": "",
+    "numeratorUpperConst": "",
+    "parallelUpperConst": "",
+    "restUpperCombinedConst": "",
+    "restUpperSeparateConst": ""
+  },
+  "max_abs_diffs": {
+    "budgetCombinedConst": 0.0,
+    "budgetSeparateConst": 0.0,
+    "mainNormLowerConst": 0.0,
+    "numeratorUpperConst": 0.0,
+    "parallelUpperConst": 0.0,
+    "restUpperCombinedConst": 0.0,
+    "restUpperSeparateConst": 0.0
+  },
+  "min_budget_combined": 0.041988183220299534,
+  "min_budget_separate": 0.04189394308845744,
+  "modes": [
+    "verify-files",
+    "rerun",
+    "compare"
+  ],
+  "pack_dir": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_certificate_pack",
+  "pack_summary": {
+    "all_combined_certified": true,
+    "all_separate_certified": true,
+    "boxes": 27,
+    "certified_combined": 27,
+    "certified_separate": 27,
+    "min_budget_combined": 0.041988183220299534,
+    "min_budget_separate": 0.04189394308845744,
+    "worst_box_combined": "s0.84_t7",
+    "worst_box_separate": "s0.84_t7"
+  },
+  "recorded_certifier_script_hash": "a0f9322524b491a6ed92a5de8e88c35f06f1abc577ec402ce7b4d95597788384",
+  "rerun": {
+    "command": [
+      "bash",
+      "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_certificate_pack/commands.sh"
+    ],
+    "exit_code": 0,
+    "stderr_tail": "",
+    "stdout_tail": "C2 projected-j0 interval box certifier\n======================================\nlabel=interval_positive_box_sigmas084_086_t32p82_32p86_w005_fast_sub8\nboxes_csv=audit_outputs/c2_projected_j0_atlas_scout_positive_box_sigmas084_086_t32p82_32p86_w005_boxes.csv\nboxes_selected=27 mode=fast dps=50\ninflate=1e-12 subdiv_sigma=1 subdiv_t=8 main_lower_method=rect\nterm_counts=odd_core:6001, odd_ref:8001, target:27074, central_ref:33075\n  [1/27] s0.84_t0 budget=4.550177e-02 status=certified_combined_and_separate\n  [2/27] s0.84_t1 budget=4.547934e-02 status=certified_combined_and_separate\n  [3/27] s0.84_t2 budget=4.499315e-02 status=certified_combined_and_separate\n  [4/27] s0.84_t3 budget=4.433475e-02 status=certified_combined_and_separate\n  [5/27] s0.84_t4 budget=4.370322e-02 status=certified_combined_and_separate\n  [6/27] s0.84_t5 budget=4.310080e-02 status=certified_combined_and_separate\n  [7/27] s0.84_t6 budget=4.252828e-02 status=certified_combined_and_separate\n  [8/27] s0.84_t7 budget=4.198818e-02 status=certified_combined_and_separate\n  [9/27] s0.84_t8 budget=5.804244e-02 status=certified_combined_and_separate\n  [10/27] s0.85_t0 budget=4.788893e-02 status=certified_combined_and_separate\n  [11/27] s0.85_t1 budget=4.760949e-02 status=certified_combined_and_separate\n  [12/27] s0.85_t2 budget=4.699069e-02 status=certified_combined_and_separate\n  [13/27] s0.85_t3 budget=4.639461e-02 status=certified_combined_and_separate\n  [14/27] s0.85_t4 budget=4.582336e-02 status=certified_combined_and_separate\n  [15/27] s0.85_t5 budget=4.527900e-02 status=certified_combined_and_separate\n  [16/27] s0.85_t6 budget=4.476220e-02 status=certified_combined_and_separate\n  [17/27] s0.85_t7 budget=4.427530e-02 status=certified_combined_and_separate\n  [18/27] s0.85_t8 budget=5.932187e-02 status=certified_combined_and_separate\n  [19/27] s0.86_t0 budget=4.994119e-02 status=certified_combined_and_separate\n  [20/27] s0.86_t1 budget=4.936008e-02 status=certified_combined_and_separate\n  [21/27] s0.86_t2 budget=4.879982e-02 status=certified_combined_and_separate\n  [22/27] s0.86_t3 budget=4.826059e-02 status=certified_combined_and_separate\n  [23/27] s0.86_t4 budget=4.774435e-02 status=certified_combined_and_separate\n  [24/27] s0.86_t5 budget=4.725295e-02 status=certified_combined_and_separate\n  [25/27] s0.86_t6 budget=4.678698e-02 status=certified_combined_and_separate\n  [26/27] s0.86_t7 budget=4.634860e-02 status=certified_combined_and_separate\n  [27/27] s0.86_t8 budget=6.047762e-02 status=certified_combined_and_separate\n------------------------------------------------------------------------\nelapsed=6.13s boxes=27\ncertified_combined=27 certified_separate=27\nstatus_counts={'certified_combined_and_separate': 27}\nCSV: audit_outputs/c2_projected_j0_interval_box_certifier_interval_positive_box_sigmas084_086_t32p82_32p86_w005_fast_sub8.csv\nJSON: audit_outputs/c2_projected_j0_interval_box_certifier_interval_positive_box_sigmas084_086_t32p82_32p86_w005_fast_sub8.json\n\nWorst interval budgets:\n  s0.84_t7 budget=4.198818e-02 main=5.123042e-02 num=4.940656e-324 rest=9.242234e-03 status=certified_combined_and_separate\n  s0.84_t6 budget=4.252828e-02 main=5.183632e-02 num=4.940656e-324 rest=9.308038e-03 status=certified_combined_and_separate\n  s0.84_t5 budget=4.310080e-02 main=5.246816e-02 num=4.940656e-324 rest=9.367362e-03 status=certified_combined_and_separate\n  s0.84_t4 budget=4.370322e-02 main=5.312316e-02 num=4.940656e-324 rest=9.419938e-03 status=certified_combined_and_separate\n  s0.85_t7 budget=4.427530e-02 main=5.277836e-02 num=4.940656e-324 rest=8.503062e-03 status=certified_combined_and_separate\n"
+  },
+  "source_csv_hash": "ac0fea627d1859e74088dfbdad1dc739de043962c1b1387f80ae64d79d2dff04",
+  "source_json_hash": "1ffacaf952c5e8c91631b5be2779d7c8544dfae042150c2619b429c2fcd0e54f",
+  "timestamp": "2026-07-09T01:20:27.688876+00:00",
+  "tolerance": 1e-10,
+  "worst_box_combined": "s0.84_t7",
+  "worst_box_separate": "s0.84_t7"
+}

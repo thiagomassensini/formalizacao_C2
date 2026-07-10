@@ -1,0 +1,77 @@
+{
+  "boxes_count": 27,
+  "checks_failed": [],
+  "checks_passed": [
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_rationalized_pack/config.json",
+      "name": "exists:config.json"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_rationalized_pack/boxes_rationalized.csv",
+      "name": "exists:boxes_rationalized.csv"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_rationalized_pack/boxes_rationalized.json",
+      "name": "exists:boxes_rationalized.json"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_rationalized_pack/summary.md",
+      "name": "exists:summary.md"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_rationalized_pack/README.md",
+      "name": "exists:README.md"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_rationalized_pack/source_config.json",
+      "name": "exists:source_config.json"
+    },
+    {
+      "detail": "rows=27",
+      "name": "boxes_count_27"
+    },
+    {
+      "detail": "json=27 csv=27",
+      "name": "boxes_json_count"
+    },
+    {
+      "detail": "",
+      "name": "rational_signs"
+    },
+    {
+      "detail": "",
+      "name": "directional_rounding"
+    },
+    {
+      "detail": "",
+      "name": "recorded_parallel_and_budgets_match"
+    },
+    {
+      "detail": "",
+      "name": "positive_budgets"
+    },
+    {
+      "detail": "27",
+      "name": "combined_survivors_27"
+    },
+    {
+      "detail": "27",
+      "name": "separate_survivors_27"
+    }
+  ],
+  "combined_survivors": 27,
+  "git_head": "041f6deb14819ab2567c256f13e40fbf3bde39b5",
+  "max_parallel_rounding_gap": "0.0000000000009408236983969355496781996403",
+  "max_parallel_rounding_gap_box": "s0.84_t5",
+  "max_rounding_loss_combined": "0.00000000002113689",
+  "max_rounding_loss_combined_box": "s0.84_t5",
+  "max_rounding_loss_separate": "0.00000000002153838",
+  "max_rounding_loss_separate_box": "s0.84_t5",
+  "min_budget_combined_rat": "0.0419881832",
+  "min_budget_separate_rat": "0.041893943068",
+  "pack_dir": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_positive_box_rationalized_pack",
+  "separate_survivors": 27,
+  "timestamp": "2026-07-09T02:40:03.422352+00:00",
+  "worst_combined_box": "s0.84_t7",
+  "worst_separate_box": "s0.84_t7"
+}

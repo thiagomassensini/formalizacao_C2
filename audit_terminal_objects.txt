@@ -1,0 +1,29 @@
+LOW_BINDER | binders=1 | target=C2CanonicalClosedScaledMiddleLocalData | name=C2.RiemannHypothesisTerminalData.toMiddleLocalData | type=(data :
+    C2.RiemannHypothesisTerminalData) →
+  C2.C2CanonicalClosedScaledMiddleLocalData data.coreCutoff data.K data.M data.horizontalConstant data.horizontalScale
+    data.horizontalRatio
+LOW_BINDER | binders=2 | target=RiemannHypothesis | name=C2.mathlibRiemannHypothesis_of_coverData_offCriticalIdentity | type=∀
+  (data : C2.OffCriticalCoverData), C2.FundamentalIdentityOnOffCriticalStrip data.F riemannZeta → RiemannHypothesis
+LOW_BINDER | binders=2 | target=RiemannHypothesis | name=C2.mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_pinnedNearBulkBoundsEdge | type=C2.GenuineFInfiniteContinuationData →
+  ∀ (data : C2.GenuineFInfiniteNearBulkBoundsEdgeData), RiemannHypothesis
+LOW_BINDER | binders=2 | target=RiemannHypothesis | name=C2.mathlibRiemannHypothesis_of_bulkRouteData | type=∀
+  (data : C2.BulkRouteData), C2.FundamentalIdentityOnRightHalfPlane data.F riemannZeta → RiemannHypothesis
+LOW_BINDER | binders=2 | target=RiemannHypothesis | name=C2.mathlibRiemannHypothesis_of_genuineFInfiniteContinuation | type=C2.GenuineFInfiniteContinuationData →
+  C2.offCriticalStripNonvanishing C2.genuineFInfinite → RiemannHypothesis
+LOW_BINDER | binders=2 | target=RiemannHypothesis | name=C2.mathlibRiemannHypothesis_of_verticalBulkRouteData | type=∀
+  (data : C2.VerticalBulkRouteData), C2.FundamentalIdentityOnRightHalfPlane data.F riemannZeta → RiemannHypothesis
+LOW_BINDER | binders=1 | target=RiemannHypothesis | name=C2.mathlibRiemannHypothesis_of_terminalData | type=∀
+  (data : C2.RiemannHypothesisTerminalData), RiemannHypothesis
+LOW_BINDER | binders=1 | target=RiemannHypothesis | name=C2.mathlibRiemannHypothesis_of_genuineRouteData | type=∀
+  (data : C2.GenuineRouteData), RiemannHypothesis
+LOW_BINDER | binders=1 | target=C2CanonicalClosedScaledMiddleLocalData | name=C2.RiemannHypothesisTerminalData.middle | type=(self :
+    C2.RiemannHypothesisTerminalData) →
+  C2.C2CanonicalClosedScaledMiddleLocalData self.coreCutoff self.K self.M self.horizontalConstant self.horizontalScale
+    self.horizontalRatio
+LOW_BINDER | binders=2 | target=RiemannHypothesis | name=C2.mathlibRiemannHypothesis_of_genuineFInfiniteContinuation_pinnedNearBulkEdge | type=C2.GenuineFInfiniteContinuationData →
+  ∀ (data : C2.GenuineFInfiniteNearBulkEdgeData), RiemannHypothesis
+LOW_BINDER | binders=1 | target=RiemannHypothesis | name=C2.mathlibRiemannHypothesis_of_offCriticalStripNonvanishing | type=C2.offCriticalStripNonvanishing
+    riemannZeta →
+  RiemannHypothesis
+LOW_BINDER | binders=2 | target=RiemannHypothesis | name=C2.mathlibRiemannHypothesis_of_coverData | type=∀
+  (data : C2.OffCriticalCoverData), C2.FundamentalIdentityOnRightHalfPlane data.F riemannZeta → RiemannHypothesis

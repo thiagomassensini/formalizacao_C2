@@ -9593,6 +9593,148 @@ theorem not_c2CanonicalClosedScaledResidualFiniteExactZetaUpper_lt_analyticResid
     c2AnalyticBulkAllowance_sub_reserve_lt_scaledVerticalDepthTail_of_offCriticalStrip hs
   linarith
 
+-- ROUTE_TAG: FORMAL_BARRIER
+theorem
+    c2ExpandedQuartetResidualMargin_lt_scaledVerticalDepthTail_linearCoefficient_of_offCriticalStrip
+    {s : ℂ} (hs : offCriticalStrip s) :
+    c2ExpandedQuartetResidualMargin s <
+      verticalDepthTailUpper s * ((1 + ‖q s‖) * (1 - ‖q s‖)⁻¹) := by
+  have hq_nonneg : 0 ≤ ‖q s‖ := norm_nonneg _
+  have hq_pos : 0 < ‖q s‖ := by
+    have hq_ne : q s ≠ 0 := by
+      unfold q verticalRatio
+      exact complexDirichletDepthRatio_ne_zero s
+    exact norm_pos_iff.mpr hq_ne
+  have hq_lt : ‖q s‖ < 1 := q_norm_lt_one_of_offCriticalStrip s hs
+  have hgap_pos : 0 < 1 - ‖q s‖ := by
+    linarith
+  have hgap_ne : 1 - ‖q s‖ ≠ 0 := ne_of_gt hgap_pos
+  have htwo_minus_pos : 0 < 2 - ‖q s‖ := by
+    linarith
+  have hpoly_decomp :
+      2 - 2 * ‖q s‖ + 2 * ‖q s‖ ^ 2 - ‖q s‖ ^ 3 =
+        2 * (1 - ‖q s‖) + ‖q s‖ ^ 2 * (2 - ‖q s‖) := by
+    ring
+  have hpoly_pos :
+      0 < 2 - 2 * ‖q s‖ + 2 * ‖q s‖ ^ 2 - ‖q s‖ ^ 3 := by
+    rw [hpoly_decomp]
+    exact add_pos_of_pos_of_nonneg
+      (mul_pos (by norm_num : (0 : ℝ) < 2) hgap_pos)
+      (mul_nonneg (sq_nonneg _) (le_of_lt htwo_minus_pos))
+  have hmain :
+      verticalDepthTailUpper s * ((1 + ‖q s‖) * (1 - ‖q s‖)⁻¹) -
+          c2ExpandedQuartetResidualMargin s =
+        2 * ‖q s‖ ^ 3 *
+          (2 - 2 * ‖q s‖ + 2 * ‖q s‖ ^ 2 - ‖q s‖ ^ 3) *
+          ((1 - ‖q s‖)⁻¹ * (1 - ‖q s‖)⁻¹) := by
+    unfold verticalDepthTailUpper c2ExpandedQuartetResidualMargin
+      c2ExpandedQuartetK2Margin c2QuartetBulkK2Lower c2QuartetVerticalTailUpper
+    field_simp [hgap_ne]
+    ring
+  have hinv_sq_pos : 0 < (1 - ‖q s‖)⁻¹ * (1 - ‖q s‖)⁻¹ := by
+    have hinv_pos : 0 < (1 - ‖q s‖)⁻¹ := inv_pos.mpr hgap_pos
+    exact mul_pos hinv_pos hinv_pos
+  have hcube_pos : 0 < ‖q s‖ ^ 3 := by
+    positivity
+  have hprod_pos :
+      0 < 2 * ‖q s‖ ^ 3 *
+          (2 - 2 * ‖q s‖ + 2 * ‖q s‖ ^ 2 - ‖q s‖ ^ 3) *
+          ((1 - ‖q s‖)⁻¹ * (1 - ‖q s‖)⁻¹) := by
+    exact mul_pos
+      (mul_pos
+        (mul_pos (by norm_num : (0 : ℝ) < 2) hcube_pos)
+        hpoly_pos)
+      hinv_sq_pos
+  have hdiff_pos :
+      0 < verticalDepthTailUpper s * ((1 + ‖q s‖) * (1 - ‖q s‖)⁻¹) -
+          c2ExpandedQuartetResidualMargin s := by
+    simpa [hmain] using hprod_pos
+  linarith
+
+-- ROUTE_TAG: FORMAL_BARRIER
+theorem
+    scaledVerticalDepthTail_linearCoefficient_le_c2CanonicalClosedScaledResidualUpper_of_offCriticalStrip
+    {K M : ℕ}
+    {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
+    {s : ℂ} (hs : offCriticalStrip s)
+    (hscale : 0 < horizontalScale s)
+    (hconstant : 0 ≤ horizontalConstant s)
+    (hratio_lt_one : horizontalRatio s < 1) :
+    verticalDepthTailUpper s * ((1 + ‖q s‖) * (1 - ‖q s‖)⁻¹) ≤
+      c2CanonicalClosedScaledResidualUpper
+        K M horizontalConstant horizontalScale horizontalRatio s := by
+  have hq_lt : ‖q s‖ < 1 := q_norm_lt_one_of_offCriticalStrip s hs
+  have hgap_nonneg : 0 ≤ 1 - ‖q s‖ := by
+    linarith [norm_nonneg (q s), hq_lt]
+  have hcoeff_nonneg : 0 ≤ (1 + ‖q s‖) * (1 - ‖q s‖)⁻¹ := by
+    exact mul_nonneg (by positivity) (inv_nonneg.mpr hgap_nonneg)
+  have hverttail_le :
+      verticalDepthTailUpper s ≤
+        c2ContinuedVerticalResidualClosedUpper K M
+          (c2RectangularGenuineDirectBracketUpper K M)
+          c2ContinuedCentralExactUpper s := by
+    have hrect_nonneg :
+        0 ≤ c2RectangularGenuineDirectBracketUpper K M s := by
+      unfold c2RectangularGenuineDirectBracketUpper
+      positivity
+    have hcentral_nonneg : 0 ≤ c2ContinuedCentralExactUpper s := by
+      unfold c2ContinuedCentralExactUpper
+      exact norm_nonneg _
+    unfold c2ContinuedVerticalResidualClosedUpper
+    nlinarith
+  have hvertical :
+      verticalDepthTailUpper s * ((1 + ‖q s‖) * (1 - ‖q s‖)⁻¹) ≤
+        c2ContinuedVerticalResidualClosedUpper K M
+            (c2RectangularGenuineDirectBracketUpper K M)
+            c2ContinuedCentralExactUpper s *
+          ((1 + ‖q s‖) * (1 - ‖q s‖)⁻¹) :=
+    mul_le_mul_of_nonneg_right hverttail_le hcoeff_nonneg
+  have hhorizontal_nonneg :
+      0 ≤ c2HorizontalRegularizedUpper
+        horizontalConstant horizontalScale horizontalRatio s :=
+    c2HorizontalRegularizedUpper_nonneg_of_pos hscale hconstant hratio_lt_one
+  have hcoeff₂_nonneg : 0 ≤ 2 * (1 - ‖q s‖)⁻¹ := by
+    exact mul_nonneg (by norm_num : (0 : ℝ) ≤ 2) (inv_nonneg.mpr hgap_nonneg)
+  have hcutoff_nonneg : 0 ≤ c2CanonicalClosedCutoffConstant K M s := by
+    unfold c2CanonicalClosedCutoffConstant c2ContinuedCutoffClosedUpper
+      c2RectangularGenuineDirectBracketUpper c2ContinuedCentralExactUpper
+    positivity
+  rw [c2CanonicalClosedScaledResidualUpper_eq_linear_of_offCriticalStrip hs]
+  unfold c2CanonicalClosedScaledResidualLinearUpper
+  have hrest_nonneg :
+      0 ≤ c2HorizontalRegularizedUpper
+            horizontalConstant horizontalScale horizontalRatio s *
+            (2 * (1 - ‖q s‖)⁻¹) +
+          c2CanonicalClosedCutoffConstant K M s := by
+    exact add_nonneg
+      (mul_nonneg hhorizontal_nonneg hcoeff₂_nonneg)
+      hcutoff_nonneg
+  linarith
+
+-- ROUTE_TAG: FORMAL_BARRIER
+theorem not_c2CanonicalClosedScaledResidualUpper_lt_residualMargin_of_offCriticalStrip
+    {K M : ℕ}
+    {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
+    {s : ℂ} (hs : offCriticalStrip s)
+    (hscale : 0 < horizontalScale s)
+    (hconstant : 0 ≤ horizontalConstant s)
+    (hratio_lt_one : horizontalRatio s < 1) :
+    ¬ c2CanonicalClosedScaledResidualUpper
+          K M horizontalConstant horizontalScale horizontalRatio s <
+        c2ExpandedQuartetResidualMargin s := by
+  intro hlt
+  have htail_le :
+      verticalDepthTailUpper s * ((1 + ‖q s‖) * (1 - ‖q s‖)⁻¹) ≤
+        c2CanonicalClosedScaledResidualUpper
+          K M horizontalConstant horizontalScale horizontalRatio s :=
+    scaledVerticalDepthTail_linearCoefficient_le_c2CanonicalClosedScaledResidualUpper_of_offCriticalStrip
+      hs hscale hconstant hratio_lt_one
+  have htarget_lt :
+      c2ExpandedQuartetResidualMargin s <
+        verticalDepthTailUpper s * ((1 + ‖q s‖) * (1 - ‖q s‖)⁻¹) :=
+    c2ExpandedQuartetResidualMargin_lt_scaledVerticalDepthTail_linearCoefficient_of_offCriticalStrip hs
+  linarith
+
 -- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
 lemma c2CanonicalClosedVerticalUpper_nonneg_of_offCritical
     (K M : ℕ) {s : ℂ} (hs : offCriticalStrip s) :
@@ -13936,7 +14078,7 @@ noncomputable def C2CanonicalClosedScaledCoverData.toOffCriticalCoverData
             hmiddle
       · exact Or.inr <| Or.inr hedge)
 
--- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem offCriticalStripNonvanishing_of_canonicalClosedScaledCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13948,7 +14090,7 @@ theorem offCriticalStripNonvanishing_of_canonicalClosedScaledCoverData
     C2OddTailContinuedBalancingSeedBulkModelNearAxisData.toNearAxisRouteData] using
     offCriticalStripNonvanishing_of_coverData data.toOffCriticalCoverData
 
--- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_canonicalClosedScaledCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13976,7 +14118,7 @@ noncomputable def C2CanonicalClosedScaledMiddleCoverData.toCoverData
   edge := data.edge
   cover := c2ExpandedScalarMiddleRegion_cover data.near data.edge data.middle_scaled
 
--- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -13986,7 +14128,7 @@ theorem offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleCoverData
       (c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M) :=
   offCriticalStripNonvanishing_of_canonicalClosedScaledCoverData data.toCoverData
 
--- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleCoverData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -14000,6 +14142,7 @@ Regional middle-strip package directly in the preferred `canonicalClosedScaled`
 estimates. This is the most economical pointwise target for the remaining
 middle-strip analytic work.
 -/
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 structure C2CanonicalClosedScaledMiddleRegionData
     (coreCutoff : ℕ → ℕ) (K M : ℕ)
     (horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ) where
@@ -14059,7 +14202,7 @@ noncomputable def C2CanonicalClosedScaledMiddleRegionData.toCoverData
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio :=
   data.toMiddleCoverData.toCoverData
 
--- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem offCriticalStripNonvanishing_of_canonicalClosedScaledDirectMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -14070,7 +14213,7 @@ theorem offCriticalStripNonvanishing_of_canonicalClosedScaledDirectMiddleRegionD
   offCriticalStripNonvanishing_of_canonicalClosedScaledMiddleCoverData
     data.toMiddleCoverData
 
--- ROUTE_TAG: ACTIVE_OPTIONAL_REFINEMENT
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 theorem mathlibRiemannHypothesis_of_canonicalClosedScaledDirectMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
     {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
@@ -14084,6 +14227,7 @@ theorem mathlibRiemannHypothesis_of_canonicalClosedScaledDirectMiddleRegionData
 Pointwise local obligations that remain for the preferred `canonicalClosedScaled`
 route once off-criticality is already known from the ambient middle region.
 -/
+-- ROUTE_TAG: ACTIVE_MAIN_ROUTE
 structure C2CanonicalClosedScaledLocalData
     (coreCutoff : ℕ → ℕ) (K M : ℕ)
     (horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ)
@@ -14828,6 +14972,32 @@ theorem C2CanonicalClosedScaledLocalData.mem_scaledRegion_of_middle
       coreCutoff K M horizontalConstant horizontalScale horizontalRatio :=
   data.toEstimates hs.1
 
+-- ROUTE_TAG: FORMAL_BARRIER
+theorem not_c2CanonicalClosedScaledLocalData_of_offCriticalStrip
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
+    {s : ℂ} (hs : offCriticalStrip s) :
+    ¬ C2CanonicalClosedScaledLocalData
+        coreCutoff K M horizontalConstant horizontalScale horizontalRatio s := by
+  intro data
+  have hresidual_lt :
+      c2CanonicalClosedScaledResidualUpper
+          K M horizontalConstant horizontalScale horizontalRatio s <
+        c2ExpandedQuartetResidualMargin s := by
+    have hdom := data.quartet_dominance
+    simp [c2CanonicalClosedScaledResidualUpper, c2ExpandedQuartetResidualUpper,
+      c2ExpandedQuartetResidualMargin, c2ExpandedQuartetK2Margin,
+      c2QuartetBulkGUpper, c2BulkGUpper, c2BulkEUpper,
+      c2CutoffUpperFromScale] at hdom ⊢
+    linarith
+  exact
+    (not_c2CanonicalClosedScaledResidualUpper_lt_residualMargin_of_offCriticalStrip
+      hs
+      data.horizontalScale_pos
+      data.horizontalConstant_nonneg
+      data.horizontalRatio_lt_one)
+      hresidual_lt
+
 /--
 Regional middle-strip package in the minimal pointwise local obligations for the
 preferred `canonicalClosedScaled` route.
@@ -14939,6 +15109,36 @@ def C2CanonicalClosedScaledMiddleLocalData.ofExplicitScalarExactZetaMiddleRegion
   middle_local := fun _ hs =>
     C2CanonicalClosedScaledLocalData.of_mem_explicitScalarExactZetaRegion
       (hmiddle hs)
+
+noncomputable def C2CanonicalClosedScaledMiddleLocalData.ofContinuation
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ}
+    (continuation : GenuineFInfiniteContinuationData)
+    (hmiddle : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion
+        (C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
+          (coreCutoff := coreCutoff) (K := K) (M := M)
+          continuation
+          (GenuineFInfiniteNearAxisData.of_continuation continuation))
+        (C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
+          (coreCutoff := coreCutoff) (K := K) (M := M)) →
+      C2CanonicalClosedScaledLocalData
+        coreCutoff K M horizontalConstant horizontalScale horizontalRatio s) :
+    C2CanonicalClosedScaledMiddleLocalData
+      coreCutoff K M horizontalConstant horizontalScale horizontalRatio := by
+  let nearC2 :=
+    C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
+      (coreCutoff := coreCutoff) (K := K) (M := M)
+      continuation
+      (GenuineFInfiniteNearAxisData.of_continuation continuation)
+  let edgeC2 :=
+    C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
+      (coreCutoff := coreCutoff) (K := K) (M := M)
+  exact {
+    near := nearC2
+    edge := edgeC2
+    middle_local := fun _ hs => hmiddle hs
+  }
 
 def C2CanonicalClosedScaledMiddleLocalData.toMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}
@@ -15554,6 +15754,44 @@ theorem C2ExplicitScalarExactZetaMiddleRegionData.mem_explicitScalarExactZetaReg
       horizontalConstant horizontalScale horizontalRatio
       cutoffConstant cutoffScale :=
   data.middle_local hs
+
+noncomputable def C2ExplicitScalarExactZetaMiddleRegionData.ofContinuation
+    {coreCutoff : ℕ → ℕ} {K M : ℕ}
+    {tiltConstant tiltScale
+      horizontalConstant horizontalScale horizontalRatio
+      cutoffConstant cutoffScale : ℂ → ℝ}
+    (continuation : GenuineFInfiniteContinuationData)
+    (hmiddle : ∀ ⦃s : ℂ⦄,
+      s ∈ c2ExpandedScalarMiddleRegion
+        (C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
+          (coreCutoff := coreCutoff) (K := K) (M := M)
+          continuation
+          (GenuineFInfiniteNearAxisData.of_continuation continuation))
+        (C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
+          (coreCutoff := coreCutoff) (K := K) (M := M)) →
+      C2OddTailContinuedBalancingSeedBulkQuartetExplicitScalarExactZetaEstimates
+        coreCutoff K M
+        tiltConstant tiltScale
+        horizontalConstant horizontalScale horizontalRatio
+        cutoffConstant cutoffScale s) :
+    C2ExplicitScalarExactZetaMiddleRegionData
+      coreCutoff K M
+      tiltConstant tiltScale
+      horizontalConstant horizontalScale horizontalRatio
+      cutoffConstant cutoffScale := by
+  let nearC2 :=
+    C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
+      (coreCutoff := coreCutoff) (K := K) (M := M)
+      continuation
+      (GenuineFInfiniteNearAxisData.of_continuation continuation)
+  let edgeC2 :=
+    C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty
+      (coreCutoff := coreCutoff) (K := K) (M := M)
+  exact {
+    near := nearC2
+    edge := edgeC2
+    middle_local := fun _ hs => hmiddle hs
+  }
 
 def C2ExplicitScalarExactZetaMiddleRegionData.toExpandedScalarMiddleRegionData
     {coreCutoff : ℕ → ℕ} {K M : ℕ}

@@ -1,0 +1,31 @@
+ZERO_RELEVANT | name=riemannZeta_one | type=riemannZeta 1 =
+  (↑Real.eulerMascheroniConstant - Complex.log (4 * ↑Real.pi)) / 2
+ZERO_RELEVANT | name=HurwitzZeta.hurwitzZeta_zero | type=HurwitzZeta.hurwitzZeta 0 = riemannZeta
+ZERO_RELEVANT | name=riemannZeta.eq_1 | type=riemannZeta = HurwitzZeta.hurwitzZetaEven 0
+ZERO_RELEVANT | name=riemannZeta_residue_one | type=Filter.Tendsto (fun s => (s - 1) * riemannZeta s)
+  (nhdsWithin 1 {1}ᶜ) (nhds 1)
+ZERO_RELEVANT | name=tendsto_riemannZeta_sub_one_div | type=Filter.Tendsto (fun s => riemannZeta s - 1 / (s - 1))
+  (nhdsWithin 1 {1}ᶜ) (nhds ↑Real.eulerMascheroniConstant)
+ZERO_RELEVANT | name=ZetaAsymptotics.tendsto_riemannZeta_sub_one_div_Gammaℝ | type=Filter.Tendsto
+  (fun s => riemannZeta s - 1 / s.Gammaℝ / (s - 1)) (nhdsWithin 1 {1}ᶜ)
+  (nhds ((↑Real.eulerMascheroniConstant - Complex.log (4 * ↑Real.pi)) / 2))
+ZERO_RELEVANT | name=HurwitzZeta.hurwitzZetaEven_zero | type=HurwitzZeta.hurwitzZetaEven 0 = riemannZeta
+ZERO_RELEVANT | name=HurwitzZeta.cosZeta_zero | type=HurwitzZeta.cosZeta 0 = riemannZeta
+ZERO_RELEVANT | name=HurwitzZeta.expZeta_zero | type=HurwitzZeta.expZeta 0 = riemannZeta
+ZERO_RELEVANT | name=C2.continuedCentralOddChannel_fundamentalIdentity | type=C2.FundamentalIdentityOnRightHalfPlane
+  C2.continuedCentralOddChannel riemannZeta
+ZERO_RELEVANT | name=riemannZeta_one_ne_zero | type=riemannZeta 1 ≠ 0
+ZERO_RELEVANT | name=riemannZeta_two | type=riemannZeta 2 = ↑Real.pi ^ 2 / 6
+ZERO_RELEVANT | name=riemannZeta_zero | type=riemannZeta 0 = -1 / 2
+ZERO_RELEVANT | name=EisensteinSeries.E2.eq_1 | type=EisensteinSeries.E2 =
+  (1 / (2 * riemannZeta 2)) • EisensteinSeries.G2
+ZERO_RELEVANT | name=ZetaAsymptotics.tendsto_riemannZeta_sub_one_div_nhds_right | type=Filter.Tendsto
+  (fun s => riemannZeta ↑s - 1 / (↑s - 1)) (nhdsWithin 1 (Set.Ioi 1)) (nhds ↑Real.eulerMascheroniConstant)
+ZERO_RELEVANT | name=riemannZeta_four | type=riemannZeta 4 = ↑Real.pi ^ 4 / 90
+ZERO_RELEVANT | name=C2.genuineFInfinite_identity_on_oneLtHalfPlane | type=C2.C2IdentityOn C2.oneLtHalfPlane
+  C2.genuineFInfinite riemannZeta
+ZERO_RELEVANT | name=C2.riemannZeta_analyticOnNhd_punctured | type=AnalyticOnNhd ℂ riemannZeta
+  C2.puncturedOpenRightHalfPlane
+LeanC2/AuditZeroCertificates.lean:58:19: warning: unused variable `result`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`

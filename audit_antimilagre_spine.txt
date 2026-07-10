@@ -1,0 +1,874 @@
+C2.offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle {coreCutoff : ℕ → ℕ} {K M : ℕ}
+  (continuation : C2.GenuineFInfiniteContinuationData)
+  (comparison : C2.C2OddTailBalancingSeedBulkModelComparisonFromOneLtData coreCutoff K M)
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale : ℂ → ℝ}
+  (hscale :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedScalarScaleData tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio
+          cutoffScale s)
+  (hhorizontal :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedHorizontalLayerBudget coreCutoff horizontalConstant horizontalScale horizontalRatio s)
+  (hseed :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2OddTailBalancingSeed coreCutoff K M s‖ ≤ tiltConstant s / tiltScale s)
+  (hcutoff :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteCutoffError K M s‖ * cutoffScale s ≤ cutoffConstant s)
+  (hdominance :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.c2ConcreteAntiMiracleAdjustedMain (C2.c2OddTailBalancingSeed coreCutoff K M) s -
+              C2.c2ConcreteAntiMiracleAdjustedDefect coreCutoff s -
+            C2.c2ConcreteAntiMiracleAdjustedTailScaledUpper tiltConstant tiltScale horizontalConstant horizontalScale
+              horizontalRatio cutoffConstant cutoffScale s >
+          0) :
+  C2.offCriticalStripNonvanishing (C2.c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M)
+C2.mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle {coreCutoff : ℕ → ℕ} {K M : ℕ}
+  (continuation : C2.GenuineFInfiniteContinuationData)
+  (comparison : C2.C2OddTailBalancingSeedBulkModelComparisonFromOneLtData coreCutoff K M)
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale : ℂ → ℝ}
+  (hscale :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedScalarScaleData tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio
+          cutoffScale s)
+  (hhorizontal :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedHorizontalLayerBudget coreCutoff horizontalConstant horizontalScale horizontalRatio s)
+  (hseed :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2OddTailBalancingSeed coreCutoff K M s‖ ≤ tiltConstant s / tiltScale s)
+  (hcutoff :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteCutoffError K M s‖ * cutoffScale s ≤ cutoffConstant s)
+  (hdominance :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.c2ConcreteAntiMiracleAdjustedMain (C2.c2OddTailBalancingSeed coreCutoff K M) s -
+              C2.c2ConcreteAntiMiracleAdjustedDefect coreCutoff s -
+            C2.c2ConcreteAntiMiracleAdjustedTailScaledUpper tiltConstant tiltScale horizontalConstant horizontalScale
+              horizontalRatio cutoffConstant cutoffScale s >
+          0) :
+  RiemannHypothesis
+C2.offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_atOne {coreCutoff : ℕ → ℕ}
+  {K M : ℕ} (continuation : C2.GenuineFInfiniteContinuationData)
+  (comparison : C2.C2OddTailBalancingSeedBulkModelComparisonFromOneLtAtOneData coreCutoff K M)
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale : ℂ → ℝ}
+  (hscale :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedScalarScaleData tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio
+          cutoffScale s)
+  (hhorizontal :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedHorizontalLayerBudget coreCutoff horizontalConstant horizontalScale horizontalRatio s)
+  (hseed :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2OddTailBalancingSeed coreCutoff K M s‖ ≤ tiltConstant s / tiltScale s)
+  (hcutoff :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteCutoffError K M s‖ * cutoffScale s ≤ cutoffConstant s)
+  (hdominance :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.c2ConcreteAntiMiracleAdjustedMain (C2.c2OddTailBalancingSeed coreCutoff K M) s -
+              C2.c2ConcreteAntiMiracleAdjustedDefect coreCutoff s -
+            C2.c2ConcreteAntiMiracleAdjustedTailScaledUpper tiltConstant tiltScale horizontalConstant horizontalScale
+              horizontalRatio cutoffConstant cutoffScale s >
+          0) :
+  C2.offCriticalStripNonvanishing (C2.c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M)
+C2.mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_atOne {coreCutoff : ℕ → ℕ} {K M : ℕ}
+  (continuation : C2.GenuineFInfiniteContinuationData)
+  (comparison : C2.C2OddTailBalancingSeedBulkModelComparisonFromOneLtAtOneData coreCutoff K M)
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale : ℂ → ℝ}
+  (hscale :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedScalarScaleData tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio
+          cutoffScale s)
+  (hhorizontal :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedHorizontalLayerBudget coreCutoff horizontalConstant horizontalScale horizontalRatio s)
+  (hseed :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2OddTailBalancingSeed coreCutoff K M s‖ ≤ tiltConstant s / tiltScale s)
+  (hcutoff :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteCutoffError K M s‖ * cutoffScale s ≤ cutoffConstant s)
+  (hdominance :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.c2ConcreteAntiMiracleAdjustedMain (C2.c2OddTailBalancingSeed coreCutoff K M) s -
+              C2.c2ConcreteAntiMiracleAdjustedDefect coreCutoff s -
+            C2.c2ConcreteAntiMiracleAdjustedTailScaledUpper tiltConstant tiltScale horizontalConstant horizontalScale
+              horizontalRatio cutoffConstant cutoffScale s >
+          0) :
+  RiemannHypothesis
+C2.offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound
+  {coreCutoff : ℕ → ℕ} {K M : ℕ} (continuation : C2.GenuineFInfiniteContinuationData)
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale residualUpper :
+    ℂ → ℝ}
+  (hscale :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedScalarScaleData tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio
+          cutoffScale s)
+  (hhorizontal :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedHorizontalLayerBudget coreCutoff horizontalConstant horizontalScale horizontalRatio s)
+  (hseed :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2OddTailBalancingSeed coreCutoff K M s‖ ≤ tiltConstant s / tiltScale s)
+  (hcutoff :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteCutoffError K M s‖ * cutoffScale s ≤ cutoffConstant s)
+  (hresidual :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteAntiMiracleResidual (C2.c2OddTailBalancingSeed coreCutoff K M) coreCutoff K M s‖ ≤
+          residualUpper s)
+  (hdominance :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.c2ConcreteAntiMiracleAdjustedMain (C2.c2OddTailBalancingSeed coreCutoff K M) s -
+                C2.c2ConcreteAntiMiracleAdjustedDefect coreCutoff s -
+              C2.c2ConcreteAntiMiracleAdjustedTailScaledUpper tiltConstant tiltScale horizontalConstant horizontalScale
+                horizontalRatio cutoffConstant cutoffScale s -
+            residualUpper s >
+          0) :
+  C2.offCriticalStripNonvanishing (C2.c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M)
+C2.mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound {coreCutoff : ℕ → ℕ}
+  {K M : ℕ} (continuation : C2.GenuineFInfiniteContinuationData)
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale residualUpper :
+    ℂ → ℝ}
+  (hscale :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedScalarScaleData tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio
+          cutoffScale s)
+  (hhorizontal :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedHorizontalLayerBudget coreCutoff horizontalConstant horizontalScale horizontalRatio s)
+  (hseed :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2OddTailBalancingSeed coreCutoff K M s‖ ≤ tiltConstant s / tiltScale s)
+  (hcutoff :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteCutoffError K M s‖ * cutoffScale s ≤ cutoffConstant s)
+  (hresidual :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteAntiMiracleResidual (C2.c2OddTailBalancingSeed coreCutoff K M) coreCutoff K M s‖ ≤
+          residualUpper s)
+  (hdominance :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.c2ConcreteAntiMiracleAdjustedMain (C2.c2OddTailBalancingSeed coreCutoff K M) s -
+                C2.c2ConcreteAntiMiracleAdjustedDefect coreCutoff s -
+              C2.c2ConcreteAntiMiracleAdjustedTailScaledUpper tiltConstant tiltScale horizontalConstant horizontalScale
+                horizontalRatio cutoffConstant cutoffScale s -
+            residualUpper s >
+          0) :
+  RiemannHypothesis
+C2.offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_centralDefectBound
+  {coreCutoff : ℕ → ℕ} {K M : ℕ} (continuation : C2.GenuineFInfiniteContinuationData)
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale
+    centralDefectUpper : ℂ → ℝ}
+  (hscale :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedScalarScaleData tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio
+          cutoffScale s)
+  (hhorizontal :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedHorizontalLayerBudget coreCutoff horizontalConstant horizontalScale horizontalRatio s)
+  (hseed :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2OddTailBalancingSeed coreCutoff K M s‖ ≤ tiltConstant s / tiltScale s)
+  (hcutoff :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteCutoffError K M s‖ * cutoffScale s ≤ cutoffConstant s)
+  (hcentralDefect :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.genuineCentralDoubleSeries s - C2.continuedCentralOddChannel s‖ ≤ centralDefectUpper s)
+  (hdominance :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.c2ConcreteAntiMiracleAdjustedAnalyticMargin (C2.c2OddTailBalancingSeed coreCutoff K M) coreCutoff
+            tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale
+            centralDefectUpper s >
+          0) :
+  C2.offCriticalStripNonvanishing (C2.c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M)
+C2.mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_centralDefectBound
+  {coreCutoff : ℕ → ℕ} {K M : ℕ} (continuation : C2.GenuineFInfiniteContinuationData)
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale
+    centralDefectUpper : ℂ → ℝ}
+  (hscale :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedScalarScaleData tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio
+          cutoffScale s)
+  (hhorizontal :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedHorizontalLayerBudget coreCutoff horizontalConstant horizontalScale horizontalRatio s)
+  (hseed :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2OddTailBalancingSeed coreCutoff K M s‖ ≤ tiltConstant s / tiltScale s)
+  (hcutoff :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteCutoffError K M s‖ * cutoffScale s ≤ cutoffConstant s)
+  (hcentralDefect :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.genuineCentralDoubleSeries s - C2.continuedCentralOddChannel s‖ ≤ centralDefectUpper s)
+  (hdominance :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.c2ConcreteAntiMiracleAdjustedAnalyticMargin (C2.c2OddTailBalancingSeed coreCutoff K M) coreCutoff
+            tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale
+            centralDefectUpper s >
+          0) :
+  RiemannHypothesis
+C2.offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_separatedCentralBounds
+  {coreCutoff : ℕ → ℕ} {K M : ℕ} (continuation : C2.GenuineFInfiniteContinuationData)
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale
+    genuineCentralUpper continuedCentralUpper : ℂ → ℝ}
+  (hscale :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedScalarScaleData tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio
+          cutoffScale s)
+  (hhorizontal :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedHorizontalLayerBudget coreCutoff horizontalConstant horizontalScale horizontalRatio s)
+  (hseed :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2OddTailBalancingSeed coreCutoff K M s‖ ≤ tiltConstant s / tiltScale s)
+  (hcutoff :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteCutoffError K M s‖ * cutoffScale s ≤ cutoffConstant s)
+  (hgenuineCombined :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2GenuineCentralBound genuineCentralUpper s)
+  (hcontinued :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ContinuedCentralBound continuedCentralUpper s)
+  (hdominance :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.c2ConcreteAntiMiracleAdjustedAnalyticMargin (C2.c2OddTailBalancingSeed coreCutoff K M) coreCutoff
+            tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale
+            (C2.c2CentralDefectTriangleUpper genuineCentralUpper continuedCentralUpper) s >
+          0) :
+  C2.offCriticalStripNonvanishing (C2.c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M)
+C2.mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_separatedCentralBounds
+  {coreCutoff : ℕ → ℕ} {K M : ℕ} (continuation : C2.GenuineFInfiniteContinuationData)
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale
+    genuineCentralUpper continuedCentralUpper : ℂ → ℝ}
+  (hscale :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedScalarScaleData tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio
+          cutoffScale s)
+  (hhorizontal :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedHorizontalLayerBudget coreCutoff horizontalConstant horizontalScale horizontalRatio s)
+  (hseed :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2OddTailBalancingSeed coreCutoff K M s‖ ≤ tiltConstant s / tiltScale s)
+  (hcutoff :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteCutoffError K M s‖ * cutoffScale s ≤ cutoffConstant s)
+  (hgenuineCombined :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2GenuineCentralBound genuineCentralUpper s)
+  (hcontinued :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ContinuedCentralBound continuedCentralUpper s)
+  (hdominance :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.c2ConcreteAntiMiracleAdjustedAnalyticMargin (C2.c2OddTailBalancingSeed coreCutoff K M) coreCutoff
+            tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale
+            (C2.c2CentralDefectTriangleUpper genuineCentralUpper continuedCentralUpper) s >
+          0) :
+  RiemannHypothesis
+C2.offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryResidualBound
+  {coreCutoff : ℕ → ℕ} {K M : ℕ} (continuation : C2.GenuineFInfiniteContinuationData)
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale remainderUpper :
+    ℂ → ℝ}
+  {oscillatoryMoment : ℕ → ℂ → ℂ} {J : ℕ}
+  (hscale :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedScalarScaleData tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio
+          cutoffScale s)
+  (hhorizontal :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedHorizontalLayerBudget coreCutoff horizontalConstant horizontalScale horizontalRatio s)
+  (hseed :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2OddTailBalancingSeed coreCutoff K M s‖ ≤ tiltConstant s / tiltScale s)
+  (hcutoff :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteCutoffError K M s‖ * cutoffScale s ≤ cutoffConstant s)
+  (hresidual :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteAntiMiracleResidual (C2.c2OddTailBalancingSeed coreCutoff K M) coreCutoff K M s‖ ≤
+          C2.c2ConcreteAntiMiraclePointwiseOscillatoryResidualUpper oscillatoryMoment J cutoffScale remainderUpper s)
+  (hdominance :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.c2ConcreteAntiMiracleAdjustedPointwiseOscillatoryMargin (C2.c2OddTailBalancingSeed coreCutoff K M) coreCutoff
+            tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale
+            remainderUpper oscillatoryMoment J s >
+          0) :
+  C2.offCriticalStripNonvanishing (C2.c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M)
+C2.mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_pointwiseOscillatoryResidualBound
+  {coreCutoff : ℕ → ℕ} {K M : ℕ} (continuation : C2.GenuineFInfiniteContinuationData)
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale remainderUpper :
+    ℂ → ℝ}
+  {oscillatoryMoment : ℕ → ℂ → ℂ} {J : ℕ}
+  (hscale :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedScalarScaleData tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio
+          cutoffScale s)
+  (hhorizontal :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedHorizontalLayerBudget coreCutoff horizontalConstant horizontalScale horizontalRatio s)
+  (hseed :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2OddTailBalancingSeed coreCutoff K M s‖ ≤ tiltConstant s / tiltScale s)
+  (hcutoff :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteCutoffError K M s‖ * cutoffScale s ≤ cutoffConstant s)
+  (hresidual :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteAntiMiracleResidual (C2.c2OddTailBalancingSeed coreCutoff K M) coreCutoff K M s‖ ≤
+          C2.c2ConcreteAntiMiraclePointwiseOscillatoryResidualUpper oscillatoryMoment J cutoffScale remainderUpper s)
+  (hdominance :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.c2ConcreteAntiMiracleAdjustedPointwiseOscillatoryMargin (C2.c2OddTailBalancingSeed coreCutoff K M) coreCutoff
+            tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale
+            remainderUpper oscillatoryMoment J s >
+          0) :
+  RiemannHypothesis
+C2.offCriticalStripNonvanishing_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialResidualBound
+  {coreCutoff : ℕ → ℕ} {K M : ℕ} (continuation : C2.GenuineFInfiniteContinuationData)
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale mellinGammaUpper
+    dirichletShiftUpper secondOrderUpper : ℂ → ℝ}
+  (hscale :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedScalarScaleData tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio
+          cutoffScale s)
+  (hhorizontal :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedHorizontalLayerBudget coreCutoff horizontalConstant horizontalScale horizontalRatio s)
+  (hseed :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2OddTailBalancingSeed coreCutoff K M s‖ ≤ tiltConstant s / tiltScale s)
+  (hcutoff :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteCutoffError K M s‖ * cutoffScale s ≤ cutoffConstant s)
+  (hresidual :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteAntiMiracleResidual (C2.c2OddTailBalancingSeed coreCutoff K M) coreCutoff K M s‖ ≤
+          C2.c2ConcreteAntiMiracleExponentialResidualUpper mellinGammaUpper dirichletShiftUpper secondOrderUpper
+            cutoffScale s)
+  (hdominance :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.c2ConcreteAntiMiracleAdjustedExponentialMargin (C2.c2OddTailBalancingSeed coreCutoff K M) coreCutoff
+            tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale
+            mellinGammaUpper dirichletShiftUpper secondOrderUpper s >
+          0) :
+  C2.offCriticalStripNonvanishing (C2.c2OddTailContinuedBalancingSeedBulkModel coreCutoff K M)
+C2.mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_exponentialResidualBound
+  {coreCutoff : ℕ → ℕ} {K M : ℕ} (continuation : C2.GenuineFInfiniteContinuationData)
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale mellinGammaUpper
+    dirichletShiftUpper secondOrderUpper : ℂ → ℝ}
+  (hscale :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedScalarScaleData tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio
+          cutoffScale s)
+  (hhorizontal :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedHorizontalLayerBudget coreCutoff horizontalConstant horizontalScale horizontalRatio s)
+  (hseed :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2OddTailBalancingSeed coreCutoff K M s‖ ≤ tiltConstant s / tiltScale s)
+  (hcutoff :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteCutoffError K M s‖ * cutoffScale s ≤ cutoffConstant s)
+  (hresidual :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        ‖C2.c2ConcreteAntiMiracleResidual (C2.c2OddTailBalancingSeed coreCutoff K M) coreCutoff K M s‖ ≤
+          C2.c2ConcreteAntiMiracleExponentialResidualUpper mellinGammaUpper dirichletShiftUpper secondOrderUpper
+            cutoffScale s)
+  (hdominance :
+    ∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.c2ConcreteAntiMiracleAdjustedExponentialMargin (C2.c2OddTailBalancingSeed coreCutoff K M) coreCutoff
+            tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale
+            mellinGammaUpper dirichletShiftUpper secondOrderUpper s >
+          0) :
+  RiemannHypothesis
+theorem C2.mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle : ∀ {coreCutoff : ℕ → ℕ}
+  {K M : ℕ} (continuation : C2.GenuineFInfiniteContinuationData),
+  C2.C2OddTailBalancingSeedBulkModelComparisonFromOneLtData coreCutoff K M →
+    ∀ {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale : ℂ → ℝ},
+      (∀ ⦃s : ℂ⦄,
+          s ∈
+              C2.c2ExpandedScalarMiddleRegion
+                (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+                  (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+                C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+            C2.C2ExpandedScalarScaleData tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio
+              cutoffScale s) →
+        (∀ ⦃s : ℂ⦄,
+            s ∈
+                C2.c2ExpandedScalarMiddleRegion
+                  (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+                    (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+                  C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+              C2.C2ExpandedHorizontalLayerBudget coreCutoff horizontalConstant horizontalScale horizontalRatio s) →
+          (∀ ⦃s : ℂ⦄,
+              s ∈
+                  C2.c2ExpandedScalarMiddleRegion
+                    (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+                      (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+                    C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+                ‖C2.c2OddTailBalancingSeed coreCutoff K M s‖ ≤ tiltConstant s / tiltScale s) →
+            (∀ ⦃s : ℂ⦄,
+                s ∈
+                    C2.c2ExpandedScalarMiddleRegion
+                      (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
+                        continuation (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+                      C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+                  ‖C2.c2ConcreteCutoffError K M s‖ * cutoffScale s ≤ cutoffConstant s) →
+              (∀ ⦃s : ℂ⦄,
+                  s ∈
+                      C2.c2ExpandedScalarMiddleRegion
+                        (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
+                          continuation (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+                        C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+                    C2.c2ConcreteAntiMiracleAdjustedMain (C2.c2OddTailBalancingSeed coreCutoff K M) s -
+                          C2.c2ConcreteAntiMiracleAdjustedDefect coreCutoff s -
+                        C2.c2ConcreteAntiMiracleAdjustedTailScaledUpper tiltConstant tiltScale horizontalConstant
+                          horizontalScale horizontalRatio cutoffConstant cutoffScale s >
+                      0) →
+                RiemannHypothesis :=
+fun {coreCutoff} {K M} continuation comparison
+    {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale} hscale
+    hhorizontal hseed hcutoff hdominance =>
+  C2.mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle_of_residualBound continuation hscale
+    hhorizontal hseed hcutoff
+    (fun {s} hs =>
+      have hsOpen := id hs.left.left;
+      have hres_eq := C2.c2ConcreteAntiMiracleResidual_eq_zero_of_oddTailBalancingSeed_of_comparison comparison hsOpen;
+      of_eq_true
+        (Eq.trans (congrFun' (congrArg LE.le (Eq.trans (congrArg norm hres_eq) norm_zero)) 0) (Std.le_refl._simp_1 0)))
+    fun {s} hs =>
+    Eq.mpr
+      (id
+        (Eq.trans
+          (Eq.trans
+            (congrFun'
+              (congrArg GT.gt
+                (sub_zero
+                  (C2.c2ConcreteAntiMiracleAdjustedMain (C2.c2OddTailBalancingSeed coreCutoff K M) s -
+                      C2.c2ConcreteAntiMiracleAdjustedDefect coreCutoff s -
+                    C2.c2ConcreteAntiMiracleAdjustedTailScaledUpper tiltConstant tiltScale horizontalConstant
+                      horizontalScale horizontalRatio cutoffConstant cutoffScale s)))
+              0)
+            gt_iff_lt._simp_1)
+          sub_pos._simp_1))
+      (Eq.mp (Eq.trans gt_iff_lt._simp_1 sub_pos._simp_1) (hdominance hs))
+'C2.mathlibRiemannHypothesis_of_continuationAndOddTailBalancingAntiMiracleMiddle' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

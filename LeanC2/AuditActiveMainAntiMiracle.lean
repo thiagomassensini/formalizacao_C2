@@ -1,0 +1,22 @@
+import LeanC2.Analytic.GenuineBulkConcrete
+
+#check C2.c2ConcreteAntiMiracleResidual_eq_centralDefect_of_continuation_offCritical
+#check C2.mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleSeparatedMainBounds
+#check C2.C2ExpandedScalarLocalBulkData
+#check C2.theorem
+#check C2.theorem
+#check C2.theorem
+#check C2.theorem
+#check C2.theorem
+#check C2.theorem
+#check C2.C2ExpandedScalarLocalBulkData
+#check C2.theorem
+#check C2.theorem
+#check C2.theorem
+#check C2.theorem
+#check C2.theorem
+#check C2.theorem
+#check C2.theorem
+#check C2.theorem
+#check C2.theorem
+#check C2.theorem

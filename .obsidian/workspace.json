@@ -1,0 +1,203 @@
+{
+  "main": {
+    "id": "db22b6ecf66c8520",
+    "type": "split",
+    "children": [
+      {
+        "id": "4e6ecce084676eb9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "62d6290918ab5954",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ROTA_GEOMETRICA_BRANCH_TILT_QUARTET_MIDDLE.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "ROTA_GEOMETRICA_BRANCH_TILT_QUARTET_MIDDLE"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6c39b85f302f7318",
+    "type": "split",
+    "children": [
+      {
+        "id": "7dfa528e3bdc4205",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "94711dbe965cb4c0",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de arquivos"
+            }
+          },
+          {
+            "id": "1a5cb1f02757375d",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Procurar"
+            }
+          },
+          {
+            "id": "dbc52e9d791d8324",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "2fc8780fb9c53914",
+    "type": "split",
+    "children": [
+      {
+        "id": "a1475986a6e9cef0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3dd024cadfc158f4",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Links inversos"
+            }
+          },
+          {
+            "id": "b07aabff51babade",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Links de saída"
+            }
+          },
+          {
+            "id": "15b0d89f49b57c4e",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "248c200a2a26cee0",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas as propriedades"
+            }
+          },
+          {
+            "id": "0fbcec392d050e69",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Sumário"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir a troca rápida": false,
+      "graph:Abrir visualização em gráfico": false,
+      "canvas:Criar novo canvas": false,
+      "daily-notes:Abrir a nota de hoje": false,
+      "templates:Inserir modelo": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Criar nova base": false
+    }
+  },
+  "active": "62d6290918ab5954",
+  "lastOpenFiles": [
+    "MAPA_ROTAS_MIDDLE_GENUINE_ATUAL.md",
+    "ORIENTACAO_MIDDLE_GENUINE.md",
+    "operadores",
+    "AUDIT_ROTAS_MIDDLE_GENUINE.md",
+    "HANDOFF_NOVO_CHAT_MIDDLE_GENUINE.md",
+    "AVANCOS_MIDDLE_GENUINE.md",
+    "TEMP_STATUS_MIDDLE_GENUINE.md",
+    "AUDIT_MIDDLE_ROUTE_LEDGER_CURRENT.md",
+    "modelo_livro_caixa_middle.md",
+    "middle_canonico_extraido.md",
+    "C2_CENTER_GAUSSIAN_CARRIER_STATUS.md",
+    "NEXT_ACTIVE_STEP.md",
+    "AUDIT_ADJUSTED_QUARTET_TODO.md",
+    "AUDIT_ANCHOR_DIRECT_BALANCED_REPORT.md",
+    "AUDIT_ANCHOR_ANATOMY_WIDE_REPORT.md",
+    "AUDIT_ANCHOR_ANATOMY_REPORT.md",
+    "AUDIT_ADJUSTED_QUARTET_ROUTE.md"
+  ]
+}

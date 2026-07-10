@@ -1,0 +1,182 @@
+theorem C2.mathlibRiemannHypothesis_of_expandedScalarMiddleRegion : ∀ {coreCutoff : ℕ → ℕ} {K M : ℕ}
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale : ℂ → ℝ}
+  (near : C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+  (edge : C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M),
+  (∀ ⦃s : ℂ⦄,
+      s ∈ C2.c2ExpandedScalarMiddleRegion near edge →
+        s ∈
+          C2.c2ExpandedExactZetaScalarRegion coreCutoff K M tiltConstant tiltScale horizontalConstant horizontalScale
+            horizontalRatio cutoffConstant cutoffScale) →
+    RiemannHypothesis :=
+fun {coreCutoff} {K M}
+    {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale} near edge
+    hmiddle =>
+  C2.mathlibRiemannHypothesis_of_expandedScalarCanonicalScalarCover near edge fun s hs =>
+    if hnear : s ∈ C2.nearAxisRegion riemannZeta near.near_axis.radius then Or.inl hnear
+    else if hedge : s ∈ edge.edgeRegion then Or.inr (Or.inr hedge) else Or.inr (Or.inl (hmiddle ⟨hs, ⟨hnear, hedge⟩⟩))
+'C2.mathlibRiemannHypothesis_of_expandedScalarMiddleRegion' depends on axioms: [propext, Classical.choice, Quot.sound]
+theorem C2.mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegionWithBounds : ∀ {coreCutoff : ℕ → ℕ}
+  {K M : ℕ}
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale : ℂ → ℝ}
+  (continuation : C2.GenuineFInfiniteContinuationData),
+  (∀ ⦃s : ℂ⦄,
+      s ∈
+          C2.c2ExpandedScalarMiddleRegion
+            (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+              (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+            C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+        C2.C2ExpandedScalarLocalBulkData coreCutoff K M tiltConstant tiltScale horizontalConstant horizontalScale
+          horizontalRatio cutoffConstant cutoffScale s) →
+    RiemannHypothesis :=
+fun {coreCutoff} {K M}
+    {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale} continuation
+    hmiddle =>
+  C2.mathlibRiemannHypothesis_of_expandedScalarMiddleRegionData
+    (C2.C2ExpandedScalarMiddleRegionData.ofContinuation continuation hmiddle)
+'C2.mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegionWithBounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+theorem C2.mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteCover : ∀
+  {coreCutoff : ℕ → ℕ} {K M : ℕ}
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale : ℂ → ℝ}
+  (near : C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData coreCutoff K M)
+  (edge : C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData coreCutoff K M),
+  (∀ (s : ℂ),
+      C2.offCriticalStrip s →
+        s ∈ C2.nearAxisRegion riemannZeta near.near_axis.radius ∨
+          s ∈
+              C2.c2OddTailContinuedBalancingSeedBulkQuartetConcreteRegion coreCutoff K M tiltConstant tiltScale
+                horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale ∨
+            s ∈ edge.edgeRegion) →
+    RiemannHypothesis :=
+fun {coreCutoff} {K M}
+    {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale} near edge
+    cover =>
+  C2.mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_bulkRegionCover near
+    (C2.c2OddTailContinuedBalancingSeedBulkQuartetConcreteBulkRegionData coreCutoff K M tiltConstant tiltScale
+      horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale)
+    edge cover
+'C2.mathlibRiemannHypothesis_of_oddTailContinuedBalancingSeedBulkModel_quartetConcreteCover' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+theorem C2.mathlibRiemannHypothesis_of_F_nonvanishing_offCriticalIdentity : ∀ {F : ℂ → ℂ},
+  C2.FundamentalIdentityOnOffCriticalStrip F riemannZeta → C2.offCriticalStripNonvanishing F → RiemannHypothesis :=
+fun {F} hId hF =>
+  C2.mathlibRiemannHypothesis_of_offCriticalStripNonvanishing fun s hs hz =>
+    have hEq := hId s hs;
+    hF s hs
+      (Eq.mp (congrArg (fun _a => F s = _a) (mul_zero (C2.c0 s)))
+        (Eq.mp (congrArg (fun _a => F s = C2.c0 s * _a) hz) hEq))
+'C2.mathlibRiemannHypothesis_of_F_nonvanishing_offCriticalIdentity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+def C2.RiemannHypothesisTerminalData.ofContinuationAndMiddleLocal : {coreCutoff : ℕ → ℕ} →
+  {K M : ℕ} →
+    {horizontalConstant horizontalScale horizontalRatio : ℂ → ℝ} →
+      (continuation : C2.GenuineFInfiniteContinuationData) →
+        (∀ ⦃s : ℂ⦄,
+            s ∈
+                C2.c2ExpandedScalarMiddleRegion
+                  (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+                    (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+                  C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+              C2.C2CanonicalClosedScaledLocalData coreCutoff K M horizontalConstant horizontalScale horizontalRatio s) →
+          C2.RiemannHypothesisTerminalData :=
+fun {coreCutoff} {K M} {horizontalConstant horizontalScale horizontalRatio} continuation hmiddle =>
+  let nearC2 :=
+    C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+      (C2.GenuineFInfiniteNearAxisData.of_continuation continuation);
+  let edgeC2 := C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty;
+  C2.RiemannHypothesisTerminalData.ofMiddleLocalData { near := nearC2, edge := edgeC2, middle_local := ⋯ }
+theorem C2.mathlibRiemannHypothesis_of_terminalData : ∀ (data : C2.RiemannHypothesisTerminalData), RiemannHypothesis :=
+fun data => C2.mathlibRiemannHypothesis_of_canonicalClosedScaledMiddleLocalData data.middle
+'C2.mathlibRiemannHypothesis_of_terminalData' depends on axioms: [propext, Classical.choice, Quot.sound]
+theorem C2.mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddlePointwiseBounds : ∀ {coreCutoff : ℕ → ℕ}
+  {K M : ℕ}
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale : ℂ → ℝ},
+  2 ≤ K →
+    ∀ (continuation : C2.GenuineFInfiniteContinuationData),
+      (∀ ⦃s : ℂ⦄,
+          s ∈
+              C2.c2ExpandedScalarMiddleRegion
+                (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+                  (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+                C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+            C2.C2ExpandedScalarScaleData tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio
+              cutoffScale s) →
+        (∀ ⦃s : ℂ⦄,
+            s ∈
+                C2.c2ExpandedScalarMiddleRegion
+                  (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+                    (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+                  C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+              C2.C2ExpandedHorizontalLayerBudget coreCutoff horizontalConstant horizontalScale horizontalRatio s) →
+          (∀ ⦃s : ℂ⦄,
+              s ∈
+                  C2.c2ExpandedScalarMiddleRegion
+                    (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+                      (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+                    C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+                C2.C2ExpandedScalarMainInequalities K M tiltConstant tiltScale horizontalConstant horizontalScale
+                  horizontalRatio cutoffConstant cutoffScale s) →
+            RiemannHypothesis :=
+fun {coreCutoff} {K M}
+    {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale} hK
+    continuation hscale hhorizontal hmain =>
+  C2.mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleRegionWithBounds continuation fun x hs =>
+    { two_le_K := hK, offCritical := hs.left, scale := hscale hs, horizontal := hhorizontal hs, main := hmain hs }
+'C2.mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddlePointwiseBounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+theorem C2.mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleSeparatedMainBounds : ∀ {coreCutoff : ℕ → ℕ}
+  {K M : ℕ}
+  {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale : ℂ → ℝ},
+  2 ≤ K →
+    ∀ (continuation : C2.GenuineFInfiniteContinuationData),
+      (∀ ⦃s : ℂ⦄,
+          s ∈
+              C2.c2ExpandedScalarMiddleRegion
+                (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+                  (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+                C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+            C2.C2ExpandedScalarScaleData tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio
+              cutoffScale s) →
+        (∀ ⦃s : ℂ⦄,
+            s ∈
+                C2.c2ExpandedScalarMiddleRegion
+                  (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+                    (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+                  C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+              C2.C2ExpandedHorizontalLayerBudget coreCutoff horizontalConstant horizontalScale horizontalRatio s) →
+          (∀ ⦃s : ℂ⦄,
+              s ∈
+                  C2.c2ExpandedScalarMiddleRegion
+                    (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData continuation
+                      (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+                    C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+                C2.C2ExpandedSeedScaledBound K M horizontalConstant horizontalScale horizontalRatio tiltConstant
+                  tiltScale s) →
+            (∀ ⦃s : ℂ⦄,
+                s ∈
+                    C2.c2ExpandedScalarMiddleRegion
+                      (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
+                        continuation (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+                      C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+                  C2.C2ExpandedCutoffScaledBound K M cutoffConstant cutoffScale s) →
+              (∀ ⦃s : ℂ⦄,
+                  s ∈
+                      C2.c2ExpandedScalarMiddleRegion
+                        (C2.C2OddTailContinuedBalancingSeedBulkModelNearAxisData.ofGenuineFInfiniteNearAxisData
+                          continuation (C2.GenuineFInfiniteNearAxisData.of_continuation continuation))
+                        C2.C2OddTailContinuedBalancingSeedBulkModelEdgeData.empty →
+                    C2.C2ExpandedQuartetDominance tiltConstant tiltScale horizontalConstant horizontalScale
+                      horizontalRatio cutoffConstant cutoffScale s) →
+                RiemannHypothesis :=
+fun {coreCutoff} {K M}
+    {tiltConstant tiltScale horizontalConstant horizontalScale horizontalRatio cutoffConstant cutoffScale} hK
+    continuation hscale hhorizontal hseed hcutoff hdominance =>
+  C2.mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddlePointwiseBounds hK continuation hscale hhorizontal
+    fun x hs => C2.C2ExpandedScalarMainInequalities.ofComponents (hseed hs) (hcutoff hs) (hdominance hs)
+'C2.mathlibRiemannHypothesis_of_continuationAndExpandedScalarMiddleSeparatedMainBounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

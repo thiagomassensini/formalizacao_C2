@@ -1,0 +1,21 @@
+import LeanC2.Analytic.GenuineGaussianGenealogy
+
+/-!
+# Axiom audit for the exact center-Gaussian genealogy
+
+This audit concerns the exact-real mathematical SG model.  It does not assert
+that the floating-point term list used by the external rectangle producer is
+equal to that model.
+-/
+
+#print C2.c2CenterGaussianSeriesAddressTerm_eq_genuineCentralRawFamily_mul_window
+#print C2.projectedJ0SG_centralFinite_two_eq_c2CenterGaussianRectangle
+#print C2.projectedJ0SG_reference_eq_c2CenterGaussianRectangle
+#print C2.projectedJ0SG_reference_eq_superGaussianFiniteGenuineRectangle
+#print C2.projectedJ0SG_totalFinite_eq_c2CenterGaussianRectangle
+
+#print axioms C2.c2CenterGaussianSeriesAddressTerm_eq_genuineCentralRawFamily_mul_window
+#print axioms C2.projectedJ0SG_centralFinite_two_eq_c2CenterGaussianRectangle
+#print axioms C2.projectedJ0SG_reference_eq_c2CenterGaussianRectangle
+#print axioms C2.projectedJ0SG_reference_eq_superGaussianFiniteGenuineRectangle
+#print axioms C2.projectedJ0SG_totalFinite_eq_c2CenterGaussianRectangle

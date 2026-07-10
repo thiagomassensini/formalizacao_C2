@@ -1,0 +1,153 @@
+{
+  "boxes_csv_hash": "d848fb5beab545e50e3bfda8cc9c9382d0fbf26d1af7fa57633860234d085290",
+  "boxes_json_hash": "469bdc529ef66af43b8ffac64522a6adf56658a61cde8e4437e4f85cff217911",
+  "certifier_script_hash": "a0f9322524b491a6ed92a5de8e88c35f06f1abc577ec402ce7b4d95597788384",
+  "checks_failed": [],
+  "checks_passed": [
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_seed_hurts_certificate_pack/config.json",
+      "name": "exists:config.json"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_seed_hurts_certificate_pack/boxes.csv",
+      "name": "exists:boxes.csv"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_seed_hurts_certificate_pack/boxes.json",
+      "name": "exists:boxes.json"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_seed_hurts_certificate_pack/commands.sh",
+      "name": "exists:commands.sh"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_seed_hurts_certificate_pack/summary.md",
+      "name": "exists:summary.md"
+    },
+    {
+      "detail": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_seed_hurts_certificate_pack/README.md",
+      "name": "exists:README.md"
+    },
+    {
+      "detail": "csv=6 json=6",
+      "name": "boxes_csv_json_count"
+    },
+    {
+      "detail": "source_box_id order",
+      "name": "boxes_csv_json_ids"
+    },
+    {
+      "detail": "",
+      "name": "no_duplicate_box_ids"
+    },
+    {
+      "detail": "",
+      "name": "all_combined_certified"
+    },
+    {
+      "detail": "",
+      "name": "mainNormLowerConst_positive"
+    },
+    {
+      "detail": "",
+      "name": "numeratorUpperConst_nonnegative"
+    },
+    {
+      "detail": "",
+      "name": "combined_flags_match_budget"
+    },
+    {
+      "detail": "",
+      "name": "separate_flags_match_budget"
+    },
+    {
+      "detail": "{\"budgetCombinedConst\": 0.0, \"budgetSeparateConst\": 0.0, \"parallelUpperConst\": 0.0}",
+      "name": "parallel_and_budget_identities"
+    },
+    {
+      "detail": "current=a0f9322524b491a6ed92a5de8e88c35f06f1abc577ec402ce7b4d95597788384 recorded=a0f9322524b491a6ed92a5de8e88c35f06f1abc577ec402ce7b4d95597788384",
+      "name": "certifier_script_hash_matches_config"
+    },
+    {
+      "detail": "exit=0",
+      "name": "rerun_exit_code_zero"
+    },
+    {
+      "detail": "pack=6 rerun=6",
+      "name": "compare_row_ids"
+    },
+    {
+      "detail": "{\"budgetCombinedConst\": 0.0, \"budgetSeparateConst\": 0.0, \"mainNormLowerConst\": 0.0, \"numeratorUpperConst\": 0.0, \"parallelUpperConst\": 0.0, \"restUpperCombinedConst\": 0.0, \"restUpperSeparateConst\": 0.0}",
+      "name": "compare_numeric_fields_within_tolerance"
+    },
+    {
+      "detail": "source_json_rows=6 pack_rows=6",
+      "name": "compare_source_json_row_count"
+    }
+  ],
+  "config_hash": "364b75a590226baff977c996c68860bdf71095ab732033a2c1cf8ef47889972f",
+  "git_head": "041f6deb14819ab2567c256f13e40fbf3bde39b5",
+  "identity_diff_boxes": {
+    "budgetCombinedConst": "",
+    "budgetSeparateConst": "",
+    "parallelUpperConst": ""
+  },
+  "identity_max_abs_diffs": {
+    "budgetCombinedConst": 0.0,
+    "budgetSeparateConst": 0.0,
+    "parallelUpperConst": 0.0
+  },
+  "max_abs_diff_boxes": {
+    "budgetCombinedConst": "",
+    "budgetSeparateConst": "",
+    "mainNormLowerConst": "",
+    "numeratorUpperConst": "",
+    "parallelUpperConst": "",
+    "restUpperCombinedConst": "",
+    "restUpperSeparateConst": ""
+  },
+  "max_abs_diffs": {
+    "budgetCombinedConst": 0.0,
+    "budgetSeparateConst": 0.0,
+    "mainNormLowerConst": 0.0,
+    "numeratorUpperConst": 0.0,
+    "parallelUpperConst": 0.0,
+    "restUpperCombinedConst": 0.0,
+    "restUpperSeparateConst": 0.0
+  },
+  "min_budget_combined": 0.00017189821247432305,
+  "min_budget_separate": -0.0006216336919868774,
+  "modes": [
+    "verify-files",
+    "rerun",
+    "compare"
+  ],
+  "pack_dir": "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_seed_hurts_certificate_pack",
+  "pack_summary": {
+    "all_combined_certified": true,
+    "all_separate_certified": false,
+    "boxes": 6,
+    "certified_combined": 6,
+    "certified_separate": 5,
+    "min_budget_combined": 0.00017189821247432305,
+    "min_budget_separate": -0.0006216336919868774,
+    "worst_box_combined": "s0.74_t45",
+    "worst_box_separate": "s0.74_t45"
+  },
+  "recorded_certifier_script_hash": "a0f9322524b491a6ed92a5de8e88c35f06f1abc577ec402ce7b4d95597788384",
+  "rerun": {
+    "command": [
+      "bash",
+      "/home/thlinux/formalizacao_C2/audit_outputs/projected_j0_seed_hurts_certificate_pack/commands.sh"
+    ],
+    "exit_code": 0,
+    "stderr_tail": "",
+    "stdout_tail": "C2 projected-j0 interval box certifier\n======================================\nlabel=interval_seed_hurts_sigma0740_t14p25_14p35_w002_pass_fast_sub512\nboxes_csv=audit_outputs/c2_projected_j0_atlas_scout_seed_hurts_sigma0740_t14p25_14p35_w002_boxes.csv\nboxes_selected=6 mode=fast dps=50\ninflate=1e-12 subdiv_sigma=1 subdiv_t=512 main_lower_method=rect\nterm_counts=odd_core:6001, odd_ref:8001, target:27074, central_ref:33075\n  [1/6] s0.74_t45 budget=1.718982e-04 status=certified_combined\n  [2/6] s0.74_t46 budget=8.317710e-04 status=certified_combined_and_separate\n  [3/6] s0.74_t47 budget=1.486159e-03 status=certified_combined_and_separate\n  [4/6] s0.74_t48 budget=2.135179e-03 status=certified_combined_and_separate\n  [5/6] s0.74_t49 budget=2.778921e-03 status=certified_combined_and_separate\n  [6/6] s0.74_t50 budget=4.250812e-03 status=certified_combined_and_separate\n------------------------------------------------------------------------\nelapsed=77.35s boxes=6\ncertified_combined=6 certified_separate=5\nstatus_counts={'certified_combined': 1, 'certified_combined_and_separate': 5}\nCSV: audit_outputs/c2_projected_j0_interval_box_certifier_interval_seed_hurts_sigma0740_t14p25_14p35_w002_pass_fast_sub512.csv\nJSON: audit_outputs/c2_projected_j0_interval_box_certifier_interval_seed_hurts_sigma0740_t14p25_14p35_w002_pass_fast_sub512.json\n\nWorst interval budgets:\n  s0.74_t45 budget=1.718982e-04 main=8.956918e-02 num=6.378075e-03 rest=1.818892e-02 status=certified_combined\n  s0.74_t46 budget=8.317710e-04 main=9.048278e-02 num=6.466329e-03 rest=1.818627e-02 status=certified_combined_and_separate\n  s0.74_t47 budget=1.486159e-03 main=9.138885e-02 num=6.554313e-03 rest=1.818374e-02 status=certified_combined_and_separate\n  s0.74_t48 budget=2.135179e-03 main=9.228725e-02 num=6.641983e-03 rest=1.818132e-02 status=certified_combined_and_separate\n  s0.74_t49 budget=2.778921e-03 main=9.317785e-02 num=6.729296e-03 rest=1.817902e-02 status=certified_combined_and_separate\n  s0.74_t50 budget=4.250812e-03 main=9.416402e-02 num=6.759392e-03 rest=1.813004e-02 status=certified_combined_and_separate\n"
+  },
+  "source_csv_hash": "d848fb5beab545e50e3bfda8cc9c9382d0fbf26d1af7fa57633860234d085290",
+  "source_json_hash": "bf0c71920e7af7dc730878baefbc60dd591dba522e28fc1890ca10dad8bc4741",
+  "timestamp": "2026-07-09T01:20:39.789869+00:00",
+  "tolerance": 1e-10,
+  "worst_box_combined": "s0.74_t45",
+  "worst_box_separate": "s0.74_t45"
+}

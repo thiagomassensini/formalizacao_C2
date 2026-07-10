@@ -4353,6 +4353,13 @@ theorem superGaussianFiniteGenuineRectangle_three_norm_lower_of_cutoffResidualUp
     le_trans hraw (le_trans htri (add_le_add (le_refl _) hdist))
   linarith
 
+/-- Unit-strip scalar core margin used by the finite two-core route. -/
+noncomputable abbrev superGaussianFiniteTwoCoreUnitStripScalarMargin
+    (s : ℂ) : ℝ :=
+  (3 / 40 : ℝ) *
+    ((s.re * Real.log (3 : ℝ)) /
+      (1 + s.re * Real.log (3 : ℝ)))
+
 /-- Unit-strip finite two-core lower profile: the explicit raw scalar margin
 minus the dyadic cutoff residual scale upper. -/
 noncomputable def superGaussianFiniteTwoCoreUnitStripNormLower
@@ -5896,6 +5903,187 @@ noncomputable def superGaussianTwoCoreDepthLimit
     (X : ℝ) (s : ℂ) : ℂ :=
   ∑' j : ℕ, superGaussianTwoCoreDepthLayer X s j
 
+/-- Defect from the genuine central object to the two-core depth limit at the
+dyadic reciprocal cutoff selected by the current `K`. -/
+noncomputable abbrev twoCoreDepthLimitDefectAt
+    (K : ℕ) (s : ℂ) : ℝ :=
+  ‖genuineCentralDoubleSeries s -
+    superGaussianTwoCoreDepthLimit
+      (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s‖
+
+/-- Certified depth-stable gap used by the two-core limit-defect criterion at
+the dyadic reciprocal cutoff selected by the current `K`. -/
+noncomputable abbrev twoCoreDepthStableGapAt
+    (K : ℕ) (s : ℂ) : ℝ :=
+  superGaussianFiniteTwoCoreUnitStripNormLower K
+    (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s -
+    8 * ((1 / 2 : ℝ) ^ (K + 1))
+
+/-- Named budget consumed by the current two-core limit-defect criterion. -/
+noncomputable def C2TwoCoreDepthLimitDefectBudget
+    (K : ℕ) (s : ℂ) : Prop :=
+  twoCoreDepthLimitDefectAt K s < twoCoreDepthStableGapAt K s
+
+/-- Scalar-margin payment form for the two-core limit-defect budget.  It
+separates the true two-core defect from the dyadic64 tax: one scale-loss unit
+and eight post-depth tail units. -/
+noncomputable def C2TwoCoreDepthLimitDefectScalarMarginBudget
+    (K : ℕ) (s : ℂ) : Prop :=
+  twoCoreDepthLimitDefectAt K s +
+      9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+    superGaussianFiniteTwoCoreUnitStripScalarMargin s
+
+/-- The scalar-margin defect budget already contains the old dyadic64
+`marginNine` trigger, because the defect term is a norm and hence nonnegative. -/
+theorem C2TwoCoreDepthLimitDefectScalarMarginBudget.marginNine
+    {K : ℕ} {s : ℂ}
+    (h : C2TwoCoreDepthLimitDefectScalarMarginBudget K s) :
+    9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+      superGaussianFiniteTwoCoreUnitStripScalarMargin s := by
+  have hnonneg : 0 ≤ twoCoreDepthLimitDefectAt K s := by
+    simp [twoCoreDepthLimitDefectAt]
+  have hle :
+      9 * ((1 / 2 : ℝ) ^ (K + 1)) ≤
+        twoCoreDepthLimitDefectAt K s +
+          9 * ((1 / 2 : ℝ) ^ (K + 1)) := by
+    linarith
+  exact
+    lt_of_le_of_lt hle
+      (by
+        simpa [C2TwoCoreDepthLimitDefectScalarMarginBudget] using h)
+
+/-- Any upper bound for the two-core limit defect can pay the scalar-margin
+budget once that upper, plus the dyadic64 tax, is below the scalar margin. -/
+theorem C2TwoCoreDepthLimitDefectScalarMarginBudget.of_defectUpper
+    {K : ℕ} {s : ℂ} {D : ℝ}
+    (hD : twoCoreDepthLimitDefectAt K s ≤ D)
+    (hpay :
+      D + 9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+        superGaussianFiniteTwoCoreUnitStripScalarMargin s) :
+    C2TwoCoreDepthLimitDefectScalarMarginBudget K s := by
+  have hle :
+      twoCoreDepthLimitDefectAt K s +
+          9 * ((1 / 2 : ℝ) ^ (K + 1)) ≤
+        D + 9 * ((1 / 2 : ℝ) ^ (K + 1)) := by
+    linarith
+  exact
+    lt_of_le_of_lt hle
+      (by
+        simpa using hpay)
+
+/-- Eventual defect upper route to the scalar-margin budget.  This is the
+honest asymptotic surface: if the two-core defect is eventually bounded by
+some `D` below the scalar margin, a large dyadic depth also absorbs the
+`9 * tail` tax. -/
+theorem exists_twoCoreDepthLimitDefectScalarMarginBudget_of_eventually_defectUpper_lt_margin
+    {s : ℂ} {D : ℝ}
+    (hD :
+      ∀ᶠ K : ℕ in Filter.atTop,
+        twoCoreDepthLimitDefectAt K s ≤ D)
+    (hpay : D < superGaussianFiniteTwoCoreUnitStripScalarMargin s) :
+    ∃ K : ℕ,
+      2 ≤ K ∧
+        C2TwoCoreDepthLimitDefectScalarMarginBudget K s := by
+  let margin : ℝ := superGaussianFiniteTwoCoreUnitStripScalarMargin s
+  have hgap_pos : 0 < (margin - D) / 9 := by
+    have hmargin : D < margin := by
+      simpa [margin] using hpay
+    have hdiff : 0 < margin - D := by
+      linarith
+    positivity
+  obtain ⟨K0, hK0⟩ := Filter.eventually_atTop.1 hD
+  obtain ⟨n, hn⟩ :=
+    exists_pow_lt_of_lt_one
+      hgap_pos
+      (by norm_num : (1 / 2 : ℝ) < 1)
+  let K : ℕ := max K0 (n + 2)
+  refine ⟨K, ?_, ?_⟩
+  · exact le_trans (by omega : 2 ≤ n + 2) (Nat.le_max_right K0 (n + 2))
+  · have hdef : twoCoreDepthLimitDefectAt K s ≤ D :=
+      hK0 K (Nat.le_max_left K0 (n + 2))
+    have hnK : n ≤ K + 1 := by
+      have hn_le_K : n ≤ K := by
+        exact le_trans (by omega : n ≤ n + 2) (Nat.le_max_right K0 (n + 2))
+      omega
+    have hpow_le :
+        (1 / 2 : ℝ) ^ (K + 1) ≤ (1 / 2 : ℝ) ^ n := by
+      exact
+        pow_le_pow_of_le_one
+          (by norm_num : 0 ≤ (1 / 2 : ℝ))
+          (by norm_num : (1 / 2 : ℝ) ≤ 1)
+          hnK
+    have htail_small :
+        (1 / 2 : ℝ) ^ (K + 1) < (margin - D) / 9 :=
+      lt_of_le_of_lt hpow_le hn
+    have hpayK :
+        D + 9 * ((1 / 2 : ℝ) ^ (K + 1)) < margin := by
+      nlinarith
+    exact
+      C2TwoCoreDepthLimitDefectScalarMarginBudget.of_defectUpper
+        (K := K) (s := s) hdef
+        (by
+          simpa [margin] using hpayK)
+
+/-- Any named upper bound for the two-core limit defect can pay the current
+depth-stable budget once that upper bound is below the certified gap. -/
+theorem C2TwoCoreDepthLimitDefectBudget.of_upper
+    {K : ℕ} {s : ℂ} {D : ℝ}
+    (hD : twoCoreDepthLimitDefectAt K s ≤ D)
+    (hpay : D < twoCoreDepthStableGapAt K s) :
+    C2TwoCoreDepthLimitDefectBudget K s := by
+  exact lt_of_le_of_lt hD hpay
+
+/-- Unfold the named two-core limit-defect budget back to the raw inequality
+consumed by the existing gap criterion. -/
+theorem C2TwoCoreDepthLimitDefectBudget.raw
+    {K : ℕ} {s : ℂ}
+    (h : C2TwoCoreDepthLimitDefectBudget K s) :
+    ‖genuineCentralDoubleSeries s -
+        superGaussianTwoCoreDepthLimit
+          (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s‖ <
+      superGaussianFiniteTwoCoreUnitStripNormLower K
+        (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s -
+        8 * ((1 / 2 : ℝ) ^ (K + 1)) := by
+  simpa [C2TwoCoreDepthLimitDefectBudget,
+    twoCoreDepthLimitDefectAt,
+    twoCoreDepthStableGapAt] using h
+
+/-- The scalar-margin payment implies the explicit depth-stable gap budget:
+the dyadic64 scale loss costs at most one tail unit, and the post-depth tail
+costs eight more. -/
+theorem C2TwoCoreDepthLimitDefectBudget.of_scalarMarginBudget
+    {K : ℕ} {s : ℂ} (hK : 2 ≤ K)
+    (hs0 : 0 < s.re) (hs1 : s.re ≤ 1)
+    (h : C2TwoCoreDepthLimitDefectScalarMarginBudget K s) :
+    C2TwoCoreDepthLimitDefectBudget K s := by
+  let X : ℝ := superGaussianFiniteTwoCoreReciprocalCutoffScale K s
+  let tail : ℝ := (1 / 2 : ℝ) ^ (K + 1)
+  have hscale :
+      superGaussianFiniteTwoCoreUnitStripScaleUpper K X ≤ tail := by
+    dsimp [X, tail]
+    exact
+      superGaussianFiniteTwoCoreUnitStripScaleUpper_le_reciprocalDyadic64_tailUnit
+        hK
+        (superGaussianFiniteTwoCoreReciprocalDyadic64ScaleRegion_at_scale
+          (K := K) (s := s) hs0 hs1)
+  have hraw :
+      twoCoreDepthLimitDefectAt K s + 9 * tail <
+        superGaussianFiniteTwoCoreUnitStripScalarMargin s := by
+    simpa [C2TwoCoreDepthLimitDefectScalarMarginBudget, tail] using h
+  have hgap_lower :
+      superGaussianFiniteTwoCoreUnitStripScalarMargin s - 9 * tail ≤
+        twoCoreDepthStableGapAt K s := by
+    dsimp [twoCoreDepthStableGapAt,
+      superGaussianFiniteTwoCoreUnitStripNormLower,
+      superGaussianFiniteTwoCoreUnitStripScalarMargin,
+      X, tail]
+    linarith
+  have hdefect_lt :
+      twoCoreDepthLimitDefectAt K s <
+        superGaussianFiniteTwoCoreUnitStripScalarMargin s - 9 * tail := by
+    linarith
+  exact lt_of_lt_of_le hdefect_lt hgap_lower
+
 /-- The regularized two-core depth layers are absolutely summable in the right
 half-plane, uniformly dominated by the dyadic depth tail. -/
 theorem summable_superGaussianTwoCoreDepthLayer_norm
@@ -6326,6 +6514,164 @@ theorem superGaussianFiniteCoreDepthLimit_three_eq_twoCoreDepthLimit
       superGaussianTwoCoreDepthLimit X s := by
   rfl
 
+/-- Finite two-core approximation error plus the regularized depth-tail upper
+at the dyadic reciprocal cutoff selected by `K`. -/
+noncomputable abbrev finiteApproxDepthTailThreeUpperAt
+    (K L : ℕ) (s : ℂ) : ℝ :=
+  ‖genuineCentralDoubleSeries s -
+      superGaussianFiniteGenuineRectangle 2
+        (superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+        s (L + 1) 3‖ +
+    superGaussianFiniteCoreDepthTailNormUpper 3
+      (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s L
+
+/-- Named finite-depth-tail payment against the explicit two-core stable gap. -/
+def C2FiniteApproxDepthTailThreeGapBudget
+    (K L : ℕ) (s : ℂ) : Prop :=
+  finiteApproxDepthTailThreeUpperAt K L s < twoCoreDepthStableGapAt K s
+
+/-- The named two-core limit defect is bounded by the finite two-core
+approximation error plus the regularized finite-core depth tail.  This is the
+minimal `M = 3` anatomy upper for the explicit-gap budget. -/
+theorem twoCoreDepthLimitDefectAt_le_finiteApproxDepthTail_three
+    {K L : ℕ} {s : ℂ} (hs : 0 < s.re) :
+    twoCoreDepthLimitDefectAt K s ≤
+      finiteApproxDepthTailThreeUpperAt K L s := by
+  have h :=
+    genuineCentral_sub_finiteCoreDepthLimit_norm_le_approx_add_depthTail
+      3
+      (X := superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+      (s := s)
+      hs L
+  simpa [twoCoreDepthLimitDefectAt,
+    finiteApproxDepthTailThreeUpperAt,
+    superGaussianFiniteCoreDepthLimit_three_eq_twoCoreDepthLimit] using h
+
+/-- Finite-depth-tail version of the named two-core limit-defect budget at the
+minimal horizontal cutoff `M = 3`.  The only remaining payment is the scalar
+comparison of the finite approximation plus depth tail against the stable gap. -/
+theorem C2TwoCoreDepthLimitDefectBudget.of_finiteApproxDepthTail_three
+    {K L : ℕ} {s : ℂ} (hs : 0 < s.re)
+    (hpay :
+      finiteApproxDepthTailThreeUpperAt K L s <
+        twoCoreDepthStableGapAt K s) :
+    C2TwoCoreDepthLimitDefectBudget K s := by
+  exact
+    C2TwoCoreDepthLimitDefectBudget.of_upper
+      (twoCoreDepthLimitDefectAt_le_finiteApproxDepthTail_three
+        (K := K) (L := L) hs)
+      hpay
+
+/-- Named-budget spelling of the finite-depth-tail payment. -/
+theorem C2TwoCoreDepthLimitDefectBudget.of_finiteApproxDepthTailThreeGapBudget
+    {K L : ℕ} {s : ℂ} (hs : 0 < s.re)
+    (hpay : C2FiniteApproxDepthTailThreeGapBudget K L s) :
+    C2TwoCoreDepthLimitDefectBudget K s := by
+  exact
+    C2TwoCoreDepthLimitDefectBudget.of_finiteApproxDepthTail_three
+      (K := K) (L := L) (s := s) hs
+      (by
+        simpa [C2FiniteApproxDepthTailThreeGapBudget] using hpay)
+
+/-- The finite approximation plus depth-tail upper converges to the actual
+two-core limit defect.  Thus the finite payment is an approximation to the
+same two-core defect, not a separate vanishing-tail shortcut. -/
+theorem tendsto_finiteApproxDepthTailThreeUpperAt
+    {K : ℕ} {s : ℂ} (hs : 0 < s.re) :
+    Filter.Tendsto
+      (fun L : ℕ => finiteApproxDepthTailThreeUpperAt K L s)
+      Filter.atTop
+      (nhds (twoCoreDepthLimitDefectAt K s)) := by
+  have hrect :
+      Filter.Tendsto
+        (fun L : ℕ =>
+          superGaussianFiniteGenuineRectangle 2
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+            s (L + 1) 3)
+        Filter.atTop
+        (nhds
+          (superGaussianTwoCoreDepthLimit
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s)) :=
+    tendsto_superGaussianFiniteGenuineRectangle_three_succ_to_depthLimit
+      (X := superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+      (s := s)
+      hs
+  have hnorm :
+      Filter.Tendsto
+        (fun L : ℕ =>
+          ‖genuineCentralDoubleSeries s -
+            superGaussianFiniteGenuineRectangle 2
+              (superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+              s (L + 1) 3‖)
+        Filter.atTop
+        (nhds (twoCoreDepthLimitDefectAt K s)) := by
+    simpa [twoCoreDepthLimitDefectAt] using
+      (hrect.const_sub (genuineCentralDoubleSeries s)).norm
+  have htail :
+      Filter.Tendsto
+        (fun L : ℕ =>
+          superGaussianFiniteCoreDepthTailNormUpper 3
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s L)
+        Filter.atTop
+        (nhds 0) := by
+    simpa using
+      superGaussianFiniteCoreDepthTailNormUpper_tendsto_zero
+        3 (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s
+  simpa [finiteApproxDepthTailThreeUpperAt] using hnorm.add htail
+
+/-- If the limiting two-core defect fits below the stable gap, then the finite
+`D_fine` surface eventually fits below the same gap. -/
+theorem eventually_finiteApproxDepthTailThreeGapBudget_of_twoCoreDepthLimitDefectBudget
+    {K : ℕ} {s : ℂ} (hs : 0 < s.re)
+    (hbudget : C2TwoCoreDepthLimitDefectBudget K s) :
+    ∀ᶠ L : ℕ in Filter.atTop,
+      C2FiniteApproxDepthTailThreeGapBudget K L s := by
+  have hlim :
+      Filter.Tendsto
+        (fun L : ℕ => finiteApproxDepthTailThreeUpperAt K L s)
+        Filter.atTop
+        (nhds (twoCoreDepthLimitDefectAt K s)) :=
+    tendsto_finiteApproxDepthTailThreeUpperAt (K := K) (s := s) hs
+  have hraw :
+      twoCoreDepthLimitDefectAt K s < twoCoreDepthStableGapAt K s := by
+    simpa [C2TwoCoreDepthLimitDefectBudget] using hbudget
+  have hevent :
+      ∀ᶠ L : ℕ in Filter.atTop,
+        finiteApproxDepthTailThreeUpperAt K L s <
+          twoCoreDepthStableGapAt K s := by
+    simpa using hlim (isOpen_Iio.mem_nhds hraw)
+  exact hevent.mono (fun L hL => by
+    simpa [C2FiniteApproxDepthTailThreeGapBudget] using hL)
+
+/-- Existence form of the eventual finite `D_fine` gap budget. -/
+theorem exists_finiteApproxDepthTailThreeGapBudget_of_twoCoreDepthLimitDefectBudget
+    {K : ℕ} {s : ℂ} (hs : 0 < s.re)
+    (hbudget : C2TwoCoreDepthLimitDefectBudget K s) :
+    ∃ L : ℕ, C2FiniteApproxDepthTailThreeGapBudget K L s := by
+  have hevent :=
+    eventually_finiteApproxDepthTailThreeGapBudget_of_twoCoreDepthLimitDefectBudget
+      (K := K) (s := s) hs hbudget
+  rw [Filter.eventually_atTop] at hevent
+  obtain ⟨L0, hL0⟩ := hevent
+  exact ⟨L0, hL0 L0 (le_refl L0)⟩
+
+/-- The finite `D_fine` gap surface exists exactly when the limiting two-core
+defect budget holds.  Thus large finite depth does not create extra slack; it
+only approximates the same limiting defect budget. -/
+theorem exists_finiteApproxDepthTailThreeGapBudget_iff_twoCoreDepthLimitDefectBudget
+    {K : ℕ} {s : ℂ} (hs : 0 < s.re) :
+    (∃ L : ℕ, C2FiniteApproxDepthTailThreeGapBudget K L s) ↔
+      C2TwoCoreDepthLimitDefectBudget K s := by
+  constructor
+  · rintro ⟨L, hL⟩
+    exact
+      C2TwoCoreDepthLimitDefectBudget.of_finiteApproxDepthTailThreeGapBudget
+        (K := K) (L := L) (s := s) hs hL
+  · intro hbudget
+    exact
+      exists_finiteApproxDepthTailThreeGapBudget_of_twoCoreDepthLimitDefectBudget
+        (K := K) (s := s) hs hbudget
+
 /-- Exact layerwise saldo upper between a finite horizontal-core depth limit and
 the certified two-core depth limit.  This is intentionally not closed-form: it
 keeps the real geometric saldo visible as the sum of the norms of the actual
@@ -6639,6 +6985,1054 @@ theorem superGaussianFiniteCoreDepthLimit_eq_twoCore_add_extra_add_band
           superGaussianFiniteCoreBandDepthLimit M N X s := by
   rw [superGaussianFiniteCoreDepthLimit_eq_lower_add_band hMN hs]
   rw [superGaussianFiniteCoreDepthLimit_eq_twoCore_add_extra hM hs]
+
+/-- Named finite fine upper for the central-to-two-core defect at the canonical
+dyadic reciprocal cutoff.  This is the visible ledger: finite approximation,
+depth tail, finite horizontal band, and extra-core saldo. -/
+noncomputable abbrev finiteApproxDepthTailBandExtraUpperAt
+    (K M N L : ℕ) (s : ℂ) : ℝ :=
+  ‖genuineCentralDoubleSeries s -
+      superGaussianFiniteGenuineRectangle 2
+        (superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+        s (L + 1) N‖ +
+    superGaussianFiniteCoreDepthTailNormUpper N
+      (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s L +
+    superGaussianFiniteCoreBandSaldoNormUpper M N
+      (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s +
+    superGaussianFiniteCoreExtraSaldoNormUpper M
+      (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s
+
+/-- Scalar-margin payment budget for the named finite fine upper. -/
+noncomputable def C2FiniteApproxDepthTailBandExtraScalarMarginBudget
+    (K M N L : ℕ) (s : ℂ) : Prop :=
+  finiteApproxDepthTailBandExtraUpperAt K M N L s +
+      9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+    superGaussianFiniteTwoCoreUnitStripScalarMargin s
+
+/-- Any upper bound for the named finite fine ledger can pay the scalar-margin
+budget once that upper plus the dyadic64 tax is below the scalar margin. -/
+theorem C2FiniteApproxDepthTailBandExtraScalarMarginBudget.of_upper
+    {K M N L : ℕ} {s : ℂ} {D : ℝ}
+    (hD : finiteApproxDepthTailBandExtraUpperAt K M N L s ≤ D)
+    (hpay :
+      D + 9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+        superGaussianFiniteTwoCoreUnitStripScalarMargin s) :
+    C2FiniteApproxDepthTailBandExtraScalarMarginBudget K M N L s := by
+  have hle :
+      finiteApproxDepthTailBandExtraUpperAt K M N L s +
+          9 * ((1 / 2 : ℝ) ^ (K + 1)) ≤
+        D + 9 * ((1 / 2 : ℝ) ^ (K + 1)) := by
+    linarith
+  exact lt_of_le_of_lt hle hpay
+
+/-- Componentwise ledger adapter for the finite fine upper.  It separates the
+finite approximation error, depth tail, finite band saldo, and extra-core saldo
+before paying the scalar margin. -/
+theorem C2FiniteApproxDepthTailBandExtraScalarMarginBudget.of_componentUpper
+    {K M N L : ℕ} {s : ℂ} {A B C E : ℝ}
+    (hA :
+      ‖genuineCentralDoubleSeries s -
+          superGaussianFiniteGenuineRectangle 2
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+            s (L + 1) N‖ ≤ A)
+    (hB :
+      superGaussianFiniteCoreDepthTailNormUpper N
+        (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s L ≤ B)
+    (hC :
+      superGaussianFiniteCoreBandSaldoNormUpper M N
+        (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s ≤ C)
+    (hE :
+      superGaussianFiniteCoreExtraSaldoNormUpper M
+        (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s ≤ E)
+    (hpay :
+      A + B + C + E +
+          9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+        superGaussianFiniteTwoCoreUnitStripScalarMargin s) :
+    C2FiniteApproxDepthTailBandExtraScalarMarginBudget K M N L s := by
+  refine
+    C2FiniteApproxDepthTailBandExtraScalarMarginBudget.of_upper
+      (D := A + B + C + E) ?_ ?_
+  · dsimp [finiteApproxDepthTailBandExtraUpperAt]
+    linarith
+  · exact hpay
+
+/-- The depth-tail component of the finite fine ledger can be made smaller
+than any positive external allowance by increasing the depth cutoff. -/
+theorem exists_finiteApproxDepthTailBandExtra_depthTailComponent_lt
+    (K N : ℕ) (s : ℂ) {B : ℝ} (hB : 0 < B) :
+    ∃ L : ℕ,
+      superGaussianFiniteCoreDepthTailNormUpper N
+        (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s L < B := by
+  exact
+    exists_superGaussianFiniteCoreDepthTailNormUpper_lt
+      N (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s hB
+
+/-- Non-strict version of the depth-tail component allowance. -/
+theorem exists_finiteApproxDepthTailBandExtra_depthTailComponent_le
+    (K N : ℕ) (s : ℂ) {B : ℝ} (hB : 0 < B) :
+    ∃ L : ℕ,
+      superGaussianFiniteCoreDepthTailNormUpper N
+        (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s L ≤ B := by
+  obtain ⟨L, hL⟩ :=
+    exists_finiteApproxDepthTailBandExtra_depthTailComponent_lt
+      K N s hB
+  exact ⟨L, le_of_lt hL⟩
+
+/-- Band component of the finite fine ledger vanishes when the two horizontal
+cutoffs agree. -/
+theorem finiteApproxDepthTailBandExtra_bandComponent_self_eq_zero
+    (K M : ℕ) (s : ℂ) :
+    superGaussianFiniteCoreBandSaldoNormUpper M M
+      (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s = 0 := by
+  simpa using
+    superGaussianFiniteCoreBandSaldoNormUpper_self_eq_zero
+      M (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s
+
+/-- Extra-core component of the finite fine ledger vanishes at the certified
+two-core horizontal cutoff. -/
+theorem finiteApproxDepthTailBandExtra_extraComponent_three_eq_zero
+    (K : ℕ) (s : ℂ) :
+    superGaussianFiniteCoreExtraSaldoNormUpper 3
+      (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s = 0 := by
+  simpa using
+    superGaussianFiniteCoreExtraSaldoNormUpper_three_eq_zero
+      (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s
+
+/-- Component adapter for the self-band route.  This keeps `M = N` flexible:
+the band component is zero, while the extra-core component remains visible. -/
+theorem C2FiniteApproxDepthTailBandExtraScalarMarginBudget.of_bandZero
+    {K M L : ℕ} {s : ℂ} {A B E : ℝ}
+    (hA :
+      ‖genuineCentralDoubleSeries s -
+          superGaussianFiniteGenuineRectangle 2
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+            s (L + 1) M‖ ≤ A)
+    (hB :
+      superGaussianFiniteCoreDepthTailNormUpper M
+        (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s L ≤ B)
+    (hE :
+      superGaussianFiniteCoreExtraSaldoNormUpper M
+        (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s ≤ E)
+    (hpay :
+      A + B + E +
+          9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+        superGaussianFiniteTwoCoreUnitStripScalarMargin s) :
+    C2FiniteApproxDepthTailBandExtraScalarMarginBudget K M M L s := by
+  refine
+    C2FiniteApproxDepthTailBandExtraScalarMarginBudget.of_componentUpper
+      (K := K) (M := M) (N := M) (L := L) (s := s)
+      (A := A) (B := B) (C := 0) (E := E)
+      hA hB ?_ hE ?_
+  · simp [finiteApproxDepthTailBandExtra_bandComponent_self_eq_zero]
+  · linarith
+
+/-- External extra-core upper interface for the flexible self-band route.  It
+does not estimate the extra saldo; it only names the remaining `E` component
+for the `M = N` ledger. -/
+def C2ExtraSaldoUpperBudget
+    (K N : ℕ) (s : ℂ) (E : ℝ) : Prop :=
+  superGaussianFiniteCoreExtraSaldoNormUpper N
+    (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s ≤ E
+
+/-- Explicit self-band route with an external upper for the extra-core saldo.
+This is the flexible route: `M = N`, so the band component is zero, while the
+extra component remains visible through `E`. -/
+theorem C2FiniteApproxDepthTailBandExtraScalarMarginBudget.of_bandZero_extraUpper
+    {K N L : ℕ} {s : ℂ} {A B E : ℝ}
+    (hA :
+      ‖genuineCentralDoubleSeries s -
+          superGaussianFiniteGenuineRectangle 2
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+            s (L + 1) N‖ ≤ A)
+    (hB :
+      superGaussianFiniteCoreDepthTailNormUpper N
+        (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s L ≤ B)
+    (hE :
+      superGaussianFiniteCoreExtraSaldoNormUpper N
+        (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s ≤ E)
+    (hpay :
+      A + B + E +
+          9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+        superGaussianFiniteTwoCoreUnitStripScalarMargin s) :
+    C2FiniteApproxDepthTailBandExtraScalarMarginBudget K N N L s :=
+  C2FiniteApproxDepthTailBandExtraScalarMarginBudget.of_bandZero
+    (K := K) (M := N) (L := L) (s := s)
+    (A := A) (B := B) (E := E)
+    hA hB hE hpay
+
+/-- Flexible self-band route consuming the named extra-core upper interface. -/
+theorem C2FiniteApproxDepthTailBandExtraScalarMarginBudget.of_bandZero_extraBudget
+    {K N L : ℕ} {s : ℂ} {A B E : ℝ}
+    (hA :
+      ‖genuineCentralDoubleSeries s -
+          superGaussianFiniteGenuineRectangle 2
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+            s (L + 1) N‖ ≤ A)
+    (hB :
+      superGaussianFiniteCoreDepthTailNormUpper N
+        (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s L ≤ B)
+    (hE : C2ExtraSaldoUpperBudget K N s E)
+    (hpay :
+      A + B + E +
+          9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+        superGaussianFiniteTwoCoreUnitStripScalarMargin s) :
+    C2FiniteApproxDepthTailBandExtraScalarMarginBudget K N N L s :=
+  C2FiniteApproxDepthTailBandExtraScalarMarginBudget.of_bandZero_extraUpper
+    (K := K) (N := N) (L := L) (s := s)
+    (A := A) (B := B) (E := E)
+    hA hB
+    (by
+      simpa [C2ExtraSaldoUpperBudget] using hE)
+    hpay
+
+/-- Existential flexible self-band route with a depth-tail allowance.  The
+finite depth `L` is chosen so that the depth-tail component is at most `β`,
+while the finite approximation error is required only eventually in `L`. -/
+theorem exists_flexibleSelfBandBudget_of_depthTailAllowance
+    {K N : ℕ} {s : ℂ} {A E β : ℝ}
+    (hβ : 0 < β)
+    (hA :
+      ∀ᶠ L : ℕ in Filter.atTop,
+        ‖genuineCentralDoubleSeries s -
+            superGaussianFiniteGenuineRectangle 2
+              (superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+              s (L + 1) N‖ ≤ A)
+    (hE : C2ExtraSaldoUpperBudget K N s E)
+    (hpay :
+      A + β + E +
+          9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+        superGaussianFiniteTwoCoreUnitStripScalarMargin s) :
+    ∃ L : ℕ,
+      C2FiniteApproxDepthTailBandExtraScalarMarginBudget K N N L s := by
+  have hB_event :
+      ∀ᶠ L : ℕ in Filter.atTop,
+        superGaussianFiniteCoreDepthTailNormUpper N
+          (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s L ≤ β := by
+    have hlim :
+        Filter.Tendsto
+          (fun L : ℕ =>
+            superGaussianFiniteCoreDepthTailNormUpper N
+              (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s L)
+          Filter.atTop (nhds 0) := by
+      simpa using
+        superGaussianFiniteCoreDepthTailNormUpper_tendsto_zero
+          N (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s
+    have hlt :
+        ∀ᶠ L : ℕ in Filter.atTop,
+          superGaussianFiniteCoreDepthTailNormUpper N
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s L < β := by
+      simpa using hlim (isOpen_Iio.mem_nhds hβ)
+    exact hlt.mono (fun _ hL => le_of_lt hL)
+  have hboth := hA.and hB_event
+  rw [Filter.eventually_atTop] at hboth
+  obtain ⟨L, hL⟩ := hboth
+  obtain ⟨hA_L, hB_L⟩ := hL L (le_refl L)
+  refine ⟨L, ?_⟩
+  exact
+    C2FiniteApproxDepthTailBandExtraScalarMarginBudget.of_bandZero_extraBudget
+      (K := K) (N := N) (L := L) (s := s)
+      (A := A) (B := β) (E := E)
+      hA_L hB_L hE hpay
+
+/-- Named scalar-margin tradeoff for the flexible self-band route.  The point
+is to balance the finite approximation upper `A` against the accumulated
+extra-core upper `E`, while `β` pays the depth tail and the dyadic64 tax pays
+scale/depth stability. -/
+def C2FlexibleSelfBandApproxExtraMarginBudget
+    (K N : ℕ) (s : ℂ) (A E β : ℝ) : Prop :=
+  0 < β ∧
+    C2ExtraSaldoUpperBudget K N s E ∧
+      A + β + E +
+          9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+        superGaussianFiniteTwoCoreUnitStripScalarMargin s
+
+/-- Consume the named flexible self-band tradeoff budget.  This is the current
+component-level route surface before proving any new estimate for `A` or `E`. -/
+theorem exists_flexibleSelfBandBudget_of_approxExtraMarginBudget
+    {K N : ℕ} {s : ℂ} {A E β : ℝ}
+    (hA :
+      ∀ᶠ L : ℕ in Filter.atTop,
+        ‖genuineCentralDoubleSeries s -
+            superGaussianFiniteGenuineRectangle 2
+              (superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+              s (L + 1) N‖ ≤ A)
+    (hbudget :
+      C2FlexibleSelfBandApproxExtraMarginBudget K N s A E β) :
+    ∃ L : ℕ,
+      C2FiniteApproxDepthTailBandExtraScalarMarginBudget K N N L s := by
+  rcases hbudget with ⟨hβ, hE, hpay⟩
+  exact
+    exists_flexibleSelfBandBudget_of_depthTailAllowance
+      (K := K) (N := N) (s := s)
+      (A := A) (E := E) (β := β)
+      hβ hA hE hpay
+
+/-- Finite-depth approximation error against a fixed finite horizontal core. -/
+noncomputable abbrev finiteApproxErrorAt
+    (K N L : ℕ) (s : ℂ) : ℝ :=
+  ‖genuineCentralDoubleSeries s -
+    superGaussianFiniteGenuineRectangle 2
+      (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s (L + 1) N‖
+
+/-- Exact raw rectangular tail between the genuine central object and the
+unregularized finite C2 rectangle.  This is the finite-approximation obstruction
+left after separating the super-Gaussian cutoff residual. -/
+noncomputable abbrev rawCentralRectangleTailAt
+    (N L : ℕ) (s : ℂ) : ℝ :=
+  ‖genuineCentralDoubleSeries s - rectangularGenuine s (L + 1) N‖
+
+/-- The finite approximation error splits into the raw central rectangular tail
+plus the super-Gaussian cutoff residual on the same finite rectangle. -/
+theorem finiteApproxErrorAt_le_rawCentralRectangleTail_add_cutoffResidual
+    {K N L : ℕ} {s : ℂ} :
+    finiteApproxErrorAt K N L s ≤
+      rawCentralRectangleTailAt N L s +
+        superGaussianFiniteGenuineCutoffResidualNormUpper 2 (L + 1) N
+          (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s := by
+  let X : ℝ := superGaussianFiniteTwoCoreReciprocalCutoffScale K s
+  let sg : ℂ := superGaussianFiniteGenuineRectangle 2 X s (L + 1) N
+  let raw : ℂ := rectangularGenuine s (L + 1) N
+  let central : ℂ := genuineCentralDoubleSeries s
+  have htri :
+      ‖central - sg‖ ≤ ‖central - raw‖ + ‖raw - sg‖ := by
+    calc
+      ‖central - sg‖ = ‖(central - raw) + (raw - sg)‖ := by
+        ring_nf
+      _ ≤ ‖central - raw‖ + ‖raw - sg‖ := norm_add_le _ _
+  have hcut :
+      ‖raw - sg‖ ≤
+        superGaussianFiniteGenuineCutoffResidualNormUpper 2 (L + 1) N X s := by
+    simpa [sg, raw, norm_sub_rev] using
+      superGaussianFiniteGenuineRectangle_sub_rectangularGenuine_norm_le_cutoffResidualUpper
+        2 X s (L + 1) N
+  calc
+    finiteApproxErrorAt K N L s = ‖central - sg‖ := by
+      simp [finiteApproxErrorAt, central, sg, X]
+    _ ≤ ‖central - raw‖ + ‖raw - sg‖ := htri
+    _ ≤ ‖central - raw‖ +
+        superGaussianFiniteGenuineCutoffResidualNormUpper 2 (L + 1) N X s := by
+      exact add_le_add (le_refl _) hcut
+    _ =
+        rawCentralRectangleTailAt N L s +
+          superGaussianFiniteGenuineCutoffResidualNormUpper 2 (L + 1) N
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s := by
+      simp [rawCentralRectangleTailAt, central, raw, X]
+
+/-- Algebraic version of the finite approximation split.  The cutoff residual
+is paid by the explicit Taylor-style algebraic upper for the super-Gaussian
+weight, leaving only the raw rectangular central tail as the analytic
+obstruction. -/
+theorem finiteApproxErrorAt_le_rawCentralRectangleTail_add_cutoffResidualAlgebraicUpper
+    {K N L : ℕ} {s : ℂ} (hs : 0 < s.re) :
+    finiteApproxErrorAt K N L s ≤
+      rawCentralRectangleTailAt N L s +
+        superGaussianFiniteGenuineCutoffResidualAlgebraicUpper 2 (L + 1) N
+          (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s := by
+  let X : ℝ := superGaussianFiniteTwoCoreReciprocalCutoffScale K s
+  have hX : 0 < X := by
+    have hApos : 0 < 64 * (2 : ℝ) ^ (K + 1) := by
+      positivity
+    dsimp [X]
+    unfold superGaussianFiniteTwoCoreReciprocalCutoffScale
+      superGaussianTwoCoreReciprocalCutoffScale
+    exact div_pos hApos hs
+  have hraw :
+      finiteApproxErrorAt K N L s ≤
+        rawCentralRectangleTailAt N L s +
+          superGaussianFiniteGenuineCutoffResidualNormUpper 2 (L + 1) N X s := by
+    simpa [X] using
+      finiteApproxErrorAt_le_rawCentralRectangleTail_add_cutoffResidual
+        (K := K) (N := N) (L := L) (s := s)
+  have hcut :
+      superGaussianFiniteGenuineCutoffResidualNormUpper 2 (L + 1) N X s ≤
+        superGaussianFiniteGenuineCutoffResidualAlgebraicUpper 2 (L + 1) N X s :=
+    superGaussianFiniteGenuineCutoffResidualNormUpper_le_algebraicUpper
+      (p := 2) (K := L + 1) (M := N) (X := X) hX s
+  calc
+    finiteApproxErrorAt K N L s ≤
+        rawCentralRectangleTailAt N L s +
+          superGaussianFiniteGenuineCutoffResidualNormUpper 2 (L + 1) N X s :=
+      hraw
+    _ ≤ rawCentralRectangleTailAt N L s +
+        superGaussianFiniteGenuineCutoffResidualAlgebraicUpper 2 (L + 1) N X s := by
+      exact add_le_add (le_refl _) hcut
+    _ =
+        rawCentralRectangleTailAt N L s +
+          superGaussianFiniteGenuineCutoffResidualAlgebraicUpper 2 (L + 1) N
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s := by
+      simp [X]
+
+/-- The address bracket is the weighted second-difference expression at the two
+C2 descendants and their center.  This is the bracket-decay object; it is kept
+separate from the central remainder term. -/
+theorem genuineBracketAddressTerm_eq_weighted_secondDifference
+    (s : ℂ) (p : ℕ × ℕ) :
+    genuineBracketAddressTerm s p =
+      algebraMap ℚ ℂ (dyadicWeight (p.1 + 2)) *
+        (complexDirichletCoeff s
+            (natDescendant (p.1 + 2) BranchSign.minus (2 * p.2 + 1)) +
+          complexDirichletCoeff s
+            (natDescendant (p.1 + 2) BranchSign.plus (2 * p.2 + 1)) -
+          2 * complexDirichletCoeff s
+            (c2Center (p.1 + 2) (2 * p.2 + 1))) := by
+  rfl
+
+/-- Pointwise post-cancellation identity for one infinite C2 address.  The
+central explicit address term is the local lateral remainder, not a norm split
+of the direct and bracket terms. -/
+theorem genuineCentralExplicitAddressTerm_eq_lateral_sub_bracket
+    (s : ℂ) (p : ℕ × ℕ) :
+    genuineCentralExplicitAddressTerm s p =
+      genuineDirectAddressTerm s p - genuineBracketAddressTerm s p := by
+  have hcenter :
+      genuineCentralExplicitAddressTerm s p =
+        genuineCentralAddressTerm s p := by
+    simpa [genuineCentralExplicitAddressTerm] using
+      (genuineCentralAddressTerm_eq_explicit s p).symm
+  rw [hcenter]
+  exact (genuine_address_lateral_cancellation s p).symm
+
+/-- Local correction between the current central explicit address family and the
+weighted bracket second-difference family.  Naming this term keeps bracket-decay
+honest: decay of `genuineBracketAddressTerm` alone does not bound the current
+central address family unless this correction is also controlled or shown to
+telescopes. -/
+noncomputable def genuineCentralBracketBridgeCorrectionTerm
+    (s : ℂ) (p : ℕ × ℕ) : ℂ :=
+  genuineCentralExplicitAddressTerm s p - genuineBracketAddressTerm s p
+
+/-- Tautological bridge through the named correction. -/
+theorem genuineCentralExplicitAddressTerm_eq_bracket_add_bridgeCorrection
+    (s : ℂ) (p : ℕ × ℕ) :
+    genuineCentralExplicitAddressTerm s p =
+      genuineBracketAddressTerm s p +
+        genuineCentralBracketBridgeCorrectionTerm s p := by
+  unfold genuineCentralBracketBridgeCorrectionTerm
+  ring
+
+/-- Expanded form of the bridge correction.  Pointwise, the mismatch between
+the current central explicit term and the bracket-decay term is not zero; it is
+the weighted residual `4 * center - minus - plus`. -/
+theorem genuineCentralBracketBridgeCorrectionTerm_eq_weighted_residual
+    (s : ℂ) (p : ℕ × ℕ) :
+    genuineCentralBracketBridgeCorrectionTerm s p =
+      algebraMap ℚ ℂ (dyadicWeight (p.1 + 2)) *
+        (4 * complexDirichletCoeff s
+            (c2Center (p.1 + 2) (2 * p.2 + 1)) -
+          complexDirichletCoeff s
+            (natDescendant (p.1 + 2) BranchSign.minus (2 * p.2 + 1)) -
+          complexDirichletCoeff s
+            (natDescendant (p.1 + 2) BranchSign.plus (2 * p.2 + 1))) := by
+  have hcenter :
+      genuineCentralExplicitAddressTerm s p =
+        algebraMap ℚ ℂ (dyadicWeight (p.1 + 2)) *
+          (2 * complexDirichletCoeff s
+            (c2Center (p.1 + 2) (2 * p.2 + 1))) := by
+    rcases p with ⟨j, n⟩
+    have h := (genuineCentralAddressTerm_eq_explicit s (j, n)).symm
+    simpa [genuineCentralExplicitAddressTerm, genuineCentralAddressTerm,
+      centerRemainderTerm] using h
+  rw [genuineCentralBracketBridgeCorrectionTerm]
+  rw [hcenter]
+  rw [genuineBracketAddressTerm_eq_weighted_secondDifference]
+  ring
+
+/-- Bracket-decay address term in the same finite `C2Address` coordinates used
+by `rectangularGenuine_eq_addressSet_sum`. -/
+noncomputable def genuineBracketAddressTermAt
+    (s : ℂ) (a : C2Address) : ℂ :=
+  bracketTerm (complexDirichletCoeff s) a.1 a.2
+
+/-- Finite-address correction between the current raw central rectangle term
+and the bracket-decay address term. -/
+noncomputable def genuineCentralBracketBridgeCorrectionAddressTerm
+    (s : ℂ) (a : C2Address) : ℂ :=
+  genuineAddressTermAt s a - genuineBracketAddressTermAt s a
+
+/-- Pointwise finite-address bridge.  This is deliberately finite and local:
+it does not assert any infinite tail split. -/
+theorem genuineAddressTermAt_eq_bracketAddressTerm_add_bridgeCorrectionAddressTerm
+    (s : ℂ) (a : C2Address) :
+    genuineAddressTermAt s a =
+      genuineBracketAddressTermAt s a +
+        genuineCentralBracketBridgeCorrectionAddressTerm s a := by
+  unfold genuineCentralBracketBridgeCorrectionAddressTerm
+  ring
+
+/-- Finite bracket-decay sum over the raw C2 rectangle. -/
+noncomputable def genuineBracketRectangleSum
+    (s : ℂ) (K M : ℕ) : ℂ :=
+  ∑ a ∈ superGaussianFiniteGenuineAddressSet K M,
+    genuineBracketAddressTermAt s a
+
+/-- Finite bridge-correction sum over the raw C2 rectangle. -/
+noncomputable def genuineCentralBracketBridgeCorrectionRectangleSum
+    (s : ℂ) (K M : ℕ) : ℂ :=
+  ∑ a ∈ superGaussianFiniteGenuineAddressSet K M,
+    genuineCentralBracketBridgeCorrectionAddressTerm s a
+
+/-- Finite raw rectangle ledger in bracket-decay currency plus the visible
+bridge correction.  This is the next honest accounting surface before any
+attempt to estimate the raw central tail. -/
+theorem rectangularGenuine_eq_bracketRectangle_add_bridgeCorrectionRectangle
+    (s : ℂ) (K M : ℕ) :
+    rectangularGenuine s K M =
+      genuineBracketRectangleSum s K M +
+        genuineCentralBracketBridgeCorrectionRectangleSum s K M := by
+  calc
+    rectangularGenuine s K M =
+        ∑ a ∈ superGaussianFiniteGenuineAddressSet K M,
+          genuineAddressTermAt s a :=
+      rectangularGenuine_eq_addressSet_sum s K M
+    _ =
+        ∑ a ∈ superGaussianFiniteGenuineAddressSet K M,
+          (genuineBracketAddressTermAt s a +
+            genuineCentralBracketBridgeCorrectionAddressTerm s a) := by
+          refine Finset.sum_congr rfl ?_
+          intro a _ha
+          exact genuineAddressTermAt_eq_bracketAddressTerm_add_bridgeCorrectionAddressTerm s a
+    _ =
+        genuineBracketRectangleSum s K M +
+          genuineCentralBracketBridgeCorrectionRectangleSum s K M := by
+          simp [genuineBracketRectangleSum,
+            genuineCentralBracketBridgeCorrectionRectangleSum,
+            Finset.sum_add_distrib]
+
+/-- Explicit residual form of the finite-address bridge correction. -/
+noncomputable def genuineCentralBracketBridgeCorrectionResidualAddressTerm
+    (s : ℂ) (a : C2Address) : ℂ :=
+  algebraMap ℚ ℂ (dyadicWeight a.1) *
+    (4 * complexDirichletCoeff s (c2Center a.1 a.2) -
+      complexDirichletCoeff s (natDescendant a.1 BranchSign.minus a.2) -
+      complexDirichletCoeff s (natDescendant a.1 BranchSign.plus a.2))
+
+/-- In a valid C2 address, the named bridge correction is the explicit weighted
+residual `4 * center - minus - plus`. -/
+theorem genuineCentralBracketBridgeCorrectionAddressTerm_eq_residual
+    (s : ℂ) {a : C2Address} (ha : IsValidC2Address a) :
+    genuineCentralBracketBridgeCorrectionAddressTerm s a =
+      genuineCentralBracketBridgeCorrectionResidualAddressTerm s a := by
+  have hcenter :
+      genuineAddressTermAt s a =
+        centerRemainderTerm (complexDirichletCoeff s) a.1 a.2 := by
+    have h :=
+      (centerRemainderTerm_eq_genuineCentralRectangularAddressTerm
+        s (a := a) ha).symm
+    calc
+      genuineAddressTermAt s a =
+          (2 : ℂ) * (q s ^ a.1 * complexDirichletCoeff s a.2) := by
+            unfold genuineAddressTermAt
+            ring
+      _ = centerRemainderTerm (complexDirichletCoeff s) a.1 a.2 := by
+            simpa [genuineCentralRectangularAddressTerm,
+              C2Address.depth, C2Address.core] using h
+  unfold genuineCentralBracketBridgeCorrectionAddressTerm
+    genuineBracketAddressTermAt
+    genuineCentralBracketBridgeCorrectionResidualAddressTerm
+    bracketTerm
+  rw [hcenter]
+  unfold centerRemainderTerm
+  ring
+
+/-- The finite bridge-correction rectangle can be written as a finite sum of
+the explicit weighted residual terms. -/
+theorem genuineCentralBracketBridgeCorrectionRectangleSum_eq_residual_sum
+    (s : ℂ) (K M : ℕ) :
+    genuineCentralBracketBridgeCorrectionRectangleSum s K M =
+      ∑ a ∈ superGaussianFiniteGenuineAddressSet K M,
+        genuineCentralBracketBridgeCorrectionResidualAddressTerm s a := by
+  unfold genuineCentralBracketBridgeCorrectionRectangleSum
+  refine Finset.sum_congr rfl ?_
+  intro a ha
+  have hvalid : IsValidC2Address a :=
+    c2Rectangle_valid K M a
+      (by
+        simpa [c2Rectangle, superGaussianFiniteGenuineAddressSet] using ha)
+  exact genuineCentralBracketBridgeCorrectionAddressTerm_eq_residual s hvalid
+
+/-- Finite norm upper for the visible bridge-correction rectangle.  This is
+only a local finite upper; it does not claim decay of any infinite tail. -/
+noncomputable def genuineCentralBracketBridgeCorrectionRectangleNormUpper
+    (s : ℂ) (K M : ℕ) : ℝ :=
+  ∑ a ∈ superGaussianFiniteGenuineAddressSet K M,
+    ‖genuineCentralBracketBridgeCorrectionResidualAddressTerm s a‖
+
+/-- The visible bridge-correction rectangle is bounded by its finite norm
+ledger. -/
+theorem norm_genuineCentralBracketBridgeCorrectionRectangleSum_le_normUpper
+    (s : ℂ) (K M : ℕ) :
+    ‖genuineCentralBracketBridgeCorrectionRectangleSum s K M‖ ≤
+      genuineCentralBracketBridgeCorrectionRectangleNormUpper s K M := by
+  rw [genuineCentralBracketBridgeCorrectionRectangleSum_eq_residual_sum]
+  exact norm_sum_le (superGaussianFiniteGenuineAddressSet K M)
+    (genuineCentralBracketBridgeCorrectionResidualAddressTerm s)
+
+/-- Equivalently, the difference between the raw central rectangle and the
+bracket-decay rectangle is exactly the visible bridge-correction rectangle. -/
+theorem rectangularGenuine_sub_bracketRectangle_eq_bridgeCorrectionRectangle
+    (s : ℂ) (K M : ℕ) :
+    rectangularGenuine s K M - genuineBracketRectangleSum s K M =
+      genuineCentralBracketBridgeCorrectionRectangleSum s K M := by
+  rw [rectangularGenuine_eq_bracketRectangle_add_bridgeCorrectionRectangle]
+  ring
+
+/-- Local upper for the raw-vs-bracket finite rectangle mismatch. -/
+theorem norm_rectangularGenuine_sub_bracketRectangle_le_bridgeCorrectionNormUpper
+    (s : ℂ) (K M : ℕ) :
+    ‖rectangularGenuine s K M - genuineBracketRectangleSum s K M‖ ≤
+      genuineCentralBracketBridgeCorrectionRectangleNormUpper s K M := by
+  rw [rectangularGenuine_sub_bracketRectangle_eq_bridgeCorrectionRectangle]
+  exact norm_genuineCentralBracketBridgeCorrectionRectangleSum_le_normUpper s K M
+
+/-- Limit finite-core defect after sending the depth cutoff to infinity. -/
+noncomputable abbrev finiteCoreLimitDefectAt
+    (K N : ℕ) (s : ℂ) : ℝ :=
+  ‖genuineCentralDoubleSeries s -
+    superGaussianFiniteCoreDepthLimit N
+      (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s‖
+
+/-- Structural upper for the central-to-finite-core limit defect: a finite
+rectangle approximation error plus the visible finite-core depth tail. -/
+noncomputable abbrev centralFiniteCoreTailUpper
+    (K N L : ℕ) (s : ℂ) : ℝ :=
+  finiteApproxErrorAt K N L s +
+    superGaussianFiniteCoreDepthTailNormUpper N
+      (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s L
+
+/-- The endpoint-level finite-core defect has a genuine-first structural upper
+by finite approximation error plus finite-core depth tail. -/
+theorem finiteCoreLimitDefectAt_le_centralFiniteCoreTailUpper
+    {K N L : ℕ} {s : ℂ} (hs : 0 < s.re) :
+    finiteCoreLimitDefectAt K N s ≤
+      centralFiniteCoreTailUpper K N L s := by
+  simpa [finiteCoreLimitDefectAt, centralFiniteCoreTailUpper,
+    finiteApproxErrorAt] using
+    genuineCentral_sub_finiteCoreDepthLimit_norm_le_approx_add_depthTail
+      N
+      (X := superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+      (s := s)
+      hs
+      L
+
+/-- The finite-depth approximation error converges to the finite-core limit
+defect for the same horizontal cutoff. -/
+theorem tendsto_finiteApproxErrorAt
+    {K N : ℕ} {s : ℂ} (hs : 0 < s.re) :
+    Filter.Tendsto
+      (fun L : ℕ => finiteApproxErrorAt K N L s)
+      Filter.atTop
+      (nhds (finiteCoreLimitDefectAt K N s)) := by
+  have hrect :
+      Filter.Tendsto
+        (fun L : ℕ =>
+          superGaussianFiniteGenuineRectangle 2
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+            s (L + 1) N)
+        Filter.atTop
+        (nhds
+          (superGaussianFiniteCoreDepthLimit N
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s)) :=
+    tendsto_superGaussianFiniteGenuineRectangle_succ_to_finiteCoreDepthLimit
+      N
+      (X := superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+      (s := s)
+      hs
+  simpa [finiteApproxErrorAt, finiteCoreLimitDefectAt] using
+    (hrect.const_sub (genuineCentralDoubleSeries s)).norm
+
+/-- Eventual upper for the finite-depth approximation error by its limiting
+finite-core defect plus a positive allowance. -/
+theorem eventually_finiteApproxErrorAt_le_limitDefect_add_allowance
+    {K N : ℕ} {s : ℂ} {α : ℝ}
+    (hs : 0 < s.re) (hα : 0 < α) :
+    ∀ᶠ L : ℕ in Filter.atTop,
+      finiteApproxErrorAt K N L s ≤
+        finiteCoreLimitDefectAt K N s + α := by
+  have hlim :=
+    tendsto_finiteApproxErrorAt (K := K) (N := N) (s := s) hs
+  have hlt :
+      ∀ᶠ L : ℕ in Filter.atTop,
+        finiteApproxErrorAt K N L s <
+          finiteCoreLimitDefectAt K N s + α := by
+    have hmem :
+        finiteCoreLimitDefectAt K N s ∈
+          Set.Iio (finiteCoreLimitDefectAt K N s + α) := by
+      exact lt_add_of_pos_right _ hα
+    exact hlim (isOpen_Iio.mem_nhds hmem)
+  exact hlt.mono (fun _ hL => le_of_lt hL)
+
+/-- Limit-defect form of the flexible self-band tradeoff.  This removes `L`
+from the finite approximation error by paying a positive allowance `α`. -/
+theorem exists_flexibleSelfBandBudget_of_limitApproxExtraMarginBudget
+    {K N : ℕ} {s : ℂ} {α β E : ℝ}
+    (hs : 0 < s.re) (hα : 0 < α) (hβ : 0 < β)
+    (hE : C2ExtraSaldoUpperBudget K N s E)
+    (hpay :
+      finiteCoreLimitDefectAt K N s + α + β + E +
+          9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+        superGaussianFiniteTwoCoreUnitStripScalarMargin s) :
+    ∃ L : ℕ,
+      C2FiniteApproxDepthTailBandExtraScalarMarginBudget K N N L s := by
+  let A : ℝ := finiteCoreLimitDefectAt K N s + α
+  have hA :
+      ∀ᶠ L : ℕ in Filter.atTop,
+        ‖genuineCentralDoubleSeries s -
+            superGaussianFiniteGenuineRectangle 2
+              (superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+              s (L + 1) N‖ ≤ A := by
+    simpa [A, finiteApproxErrorAt] using
+      eventually_finiteApproxErrorAt_le_limitDefect_add_allowance
+        (K := K) (N := N) (s := s) hs hα
+  have hbudget :
+      C2FlexibleSelfBandApproxExtraMarginBudget K N s A E β := by
+    refine ⟨hβ, hE, ?_⟩
+    simpa [A] using hpay
+  exact
+    exists_flexibleSelfBandBudget_of_approxExtraMarginBudget
+      (K := K) (N := N) (s := s)
+      (A := A) (E := E) (β := β)
+      hA hbudget
+
+/-- Limit-level flexible self-band ledger: the raw two-core depth-limit defect is
+bounded by the finite-core limit defect plus an external upper for the visible
+extra-core saldo. -/
+theorem twoCoreDepthLimitDefectAt_le_finiteCoreLimitDefect_extraSaldo
+    {K N : ℕ} {s : ℂ} {E : ℝ}
+    (hN : 3 ≤ N) (hs : 0 < s.re)
+    (hE : C2ExtraSaldoUpperBudget K N s E) :
+    twoCoreDepthLimitDefectAt K s ≤
+      finiteCoreLimitDefectAt K N s + E := by
+  let X : ℝ := superGaussianFiniteTwoCoreReciprocalCutoffScale K s
+  have hE' : superGaussianFiniteCoreExtraSaldoNormUpper N X s ≤ E := by
+    simpa [C2ExtraSaldoUpperBudget, X] using hE
+  have hsub :
+      superGaussianFiniteCoreDepthLimit N X s -
+          superGaussianTwoCoreDepthLimit X s =
+        superGaussianFiniteCoreExtraDepthLimit N X s :=
+    superGaussianFiniteCoreDepthLimit_sub_twoCoreDepthLimit_eq_extra
+      hN (X := X) (s := s) hs
+  have hsplit :
+      genuineCentralDoubleSeries s - superGaussianTwoCoreDepthLimit X s =
+        (genuineCentralDoubleSeries s -
+            superGaussianFiniteCoreDepthLimit N X s) +
+          (superGaussianFiniteCoreDepthLimit N X s -
+            superGaussianTwoCoreDepthLimit X s) := by
+    ring
+  calc
+    twoCoreDepthLimitDefectAt K s =
+        ‖genuineCentralDoubleSeries s - superGaussianTwoCoreDepthLimit X s‖ := by
+          simp [twoCoreDepthLimitDefectAt, X]
+    _ =
+        ‖(genuineCentralDoubleSeries s -
+            superGaussianFiniteCoreDepthLimit N X s) +
+          (superGaussianFiniteCoreDepthLimit N X s -
+            superGaussianTwoCoreDepthLimit X s)‖ := by
+          rw [hsplit]
+    _ ≤
+        ‖genuineCentralDoubleSeries s -
+            superGaussianFiniteCoreDepthLimit N X s‖ +
+          ‖superGaussianFiniteCoreDepthLimit N X s -
+            superGaussianTwoCoreDepthLimit X s‖ :=
+          norm_add_le _ _
+    _ = finiteCoreLimitDefectAt K N s +
+          ‖superGaussianFiniteCoreExtraDepthLimit N X s‖ := by
+          simp [finiteCoreLimitDefectAt, X, hsub]
+    _ ≤ finiteCoreLimitDefectAt K N s +
+          superGaussianFiniteCoreExtraSaldoNormUpper N X s := by
+          exact add_le_add (le_refl (finiteCoreLimitDefectAt K N s))
+            (superGaussianFiniteCoreExtraDepthLimit_norm_le_extraSaldoUpper
+              hN (X := X) (s := s) hs)
+    _ ≤ finiteCoreLimitDefectAt K N s + E := by
+          exact add_le_add (le_refl (finiteCoreLimitDefectAt K N s)) hE'
+
+/-- Direct limit-level scalar-margin consumer for the flexible self-band route.
+It removes the finite-depth allowances from the active payment: the remaining
+balance is the finite-core limit defect plus the visible extra-core upper and
+the dyadic64 tax. -/
+theorem C2TwoCoreDepthLimitDefectScalarMarginBudget.of_finiteCoreLimitDefect_extraSaldo
+    {K N : ℕ} {s : ℂ} {E : ℝ}
+    (hN : 3 ≤ N) (hs : 0 < s.re)
+    (hE : C2ExtraSaldoUpperBudget K N s E)
+    (hpay :
+      finiteCoreLimitDefectAt K N s + E +
+          9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+        superGaussianFiniteTwoCoreUnitStripScalarMargin s) :
+    C2TwoCoreDepthLimitDefectScalarMarginBudget K s := by
+  exact
+    C2TwoCoreDepthLimitDefectScalarMarginBudget.of_defectUpper
+      (K := K) (s := s)
+      (D := finiteCoreLimitDefectAt K N s + E)
+      (twoCoreDepthLimitDefectAt_le_finiteCoreLimitDefect_extraSaldo
+        (K := K) (N := N) (s := s) (E := E) hN hs hE)
+      hpay
+
+/-- Canonical self upper for the visible extra-core saldo.  This removes the
+external `E` parameter from the terminal limit-level payment. -/
+theorem C2ExtraSaldoUpperBudget.self
+    (K N : ℕ) (s : ℂ) :
+    C2ExtraSaldoUpperBudget K N s
+      (superGaussianFiniteCoreExtraSaldoNormUpper N
+        (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s) := by
+  simp [C2ExtraSaldoUpperBudget]
+
+/-- Canonical limit-level debt for the flexible two-core route: finite-core
+limit defect plus the visible extra-core saldo at the same horizontal cutoff. -/
+noncomputable abbrev finiteCoreLimitExtraDebtAt
+    (K N : ℕ) (s : ℂ) : ℝ :=
+  finiteCoreLimitDefectAt K N s +
+    superGaussianFiniteCoreExtraSaldoNormUpper N
+      (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s
+
+/-- Terminal scalar-margin budget for the canonical limit-level flexible debt. -/
+noncomputable def C2FiniteCoreLimitExtraScalarMarginBudget
+    (K N : ℕ) (s : ℂ) : Prop :=
+  finiteCoreLimitExtraDebtAt K N s +
+      9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+    superGaussianFiniteTwoCoreUnitStripScalarMargin s
+
+/-- Structural-upper payment for the canonical limit-level debt.  It replaces
+`finiteCoreLimitDefectAt` by the finite rectangle approximation error plus the
+visible finite-core depth tail, leaving the finite approximation error exposed
+as the next real obligation. -/
+theorem C2FiniteCoreLimitExtraScalarMarginBudget.of_centralFiniteCoreTailUpper
+    {K N L : ℕ} {s : ℂ} (hs : 0 < s.re)
+    (hpay :
+      centralFiniteCoreTailUpper K N L s +
+          superGaussianFiniteCoreExtraSaldoNormUpper N
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s +
+          9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+        superGaussianFiniteTwoCoreUnitStripScalarMargin s) :
+    C2FiniteCoreLimitExtraScalarMarginBudget K N s := by
+  have hA :
+      finiteCoreLimitDefectAt K N s ≤
+        centralFiniteCoreTailUpper K N L s :=
+    finiteCoreLimitDefectAt_le_centralFiniteCoreTailUpper
+      (K := K) (N := N) (L := L) (s := s) hs
+  dsimp [C2FiniteCoreLimitExtraScalarMarginBudget, finiteCoreLimitExtraDebtAt]
+  linarith
+
+/-- Honest interface for the raw central rectangle tail.  This deliberately
+does not assert a complement-sum formula for `genuineCentralDoubleSeries`; it
+records exactly the remaining analytic obligation after the finite cutoff
+residual has been separated. -/
+def C2RawCentralRectangleTailUpperBudget
+    (N L : ℕ) (s : ℂ) (R : ℝ) : Prop :=
+  rawCentralRectangleTailAt N L s ≤ R
+
+/-- Payment adapter for the exposed raw central rectangle tail.  If an external
+genuine-first estimate supplies `R` for `rawCentralRectangleTailAt`, then the
+cutoff residual, finite-core depth tail, extra-core saldo, and dyadic64 tax give
+the canonical finite-core/extra scalar-margin budget. -/
+theorem C2FiniteCoreLimitExtraScalarMarginBudget.of_rawCentralTailBudget_cutoffAlgebraic
+    {K N L : ℕ} {s : ℂ} {R : ℝ}
+    (hs : 0 < s.re)
+    (hraw : C2RawCentralRectangleTailUpperBudget N L s R)
+    (hpay :
+      R +
+          superGaussianFiniteGenuineCutoffResidualAlgebraicUpper 2 (L + 1) N
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s +
+          superGaussianFiniteCoreDepthTailNormUpper N
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s L +
+          superGaussianFiniteCoreExtraSaldoNormUpper N
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s +
+          9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+        superGaussianFiniteTwoCoreUnitStripScalarMargin s) :
+    C2FiniteCoreLimitExtraScalarMarginBudget K N s := by
+  have happrox :
+      finiteApproxErrorAt K N L s ≤
+        rawCentralRectangleTailAt N L s +
+          superGaussianFiniteGenuineCutoffResidualAlgebraicUpper 2 (L + 1) N
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s :=
+    finiteApproxErrorAt_le_rawCentralRectangleTail_add_cutoffResidualAlgebraicUpper
+      (K := K) (N := N) (L := L) (s := s) hs
+  have hcentral :
+      centralFiniteCoreTailUpper K N L s +
+          superGaussianFiniteCoreExtraSaldoNormUpper N
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s +
+          9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+        superGaussianFiniteTwoCoreUnitStripScalarMargin s := by
+    dsimp [centralFiniteCoreTailUpper, C2RawCentralRectangleTailUpperBudget] at *
+    linarith
+  exact
+    C2FiniteCoreLimitExtraScalarMarginBudget.of_centralFiniteCoreTailUpper
+      (K := K) (N := N) (L := L) (s := s) hs hcentral
+
+/-- Canonical limit-level flexible route consumer.  The endpoint obligation is
+now a single scalar-margin payment for `finiteCoreLimitExtraDebtAt`. -/
+theorem C2TwoCoreDepthLimitDefectScalarMarginBudget.of_finiteCoreLimitExtra
+    {K N : ℕ} {s : ℂ}
+    (hN : 3 ≤ N) (hs : 0 < s.re)
+    (hbudget : C2FiniteCoreLimitExtraScalarMarginBudget K N s) :
+    C2TwoCoreDepthLimitDefectScalarMarginBudget K s := by
+  exact
+    C2TwoCoreDepthLimitDefectScalarMarginBudget.of_finiteCoreLimitDefect_extraSaldo
+      (K := K) (N := N) (s := s)
+      (E :=
+        superGaussianFiniteCoreExtraSaldoNormUpper N
+          (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s)
+      hN hs
+      (C2ExtraSaldoUpperBudget.self K N s)
+      (by
+        simpa [C2FiniteCoreLimitExtraScalarMarginBudget,
+          finiteCoreLimitExtraDebtAt, add_assoc] using hbudget)
+
+/-- Component adapter for the certified two-core horizontal cutoff.  This
+zeros the extra-core component while leaving the band component visible. -/
+theorem C2FiniteApproxDepthTailBandExtraScalarMarginBudget.of_extraZero
+    {K N L : ℕ} {s : ℂ} {A B C : ℝ}
+    (hA :
+      ‖genuineCentralDoubleSeries s -
+          superGaussianFiniteGenuineRectangle 2
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+            s (L + 1) N‖ ≤ A)
+    (hB :
+      superGaussianFiniteCoreDepthTailNormUpper N
+        (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s L ≤ B)
+    (hC :
+      superGaussianFiniteCoreBandSaldoNormUpper 3 N
+        (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s ≤ C)
+    (hpay :
+      A + B + C +
+          9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+        superGaussianFiniteTwoCoreUnitStripScalarMargin s) :
+    C2FiniteApproxDepthTailBandExtraScalarMarginBudget K 3 N L s := by
+  refine
+    C2FiniteApproxDepthTailBandExtraScalarMarginBudget.of_componentUpper
+      (K := K) (M := 3) (N := N) (L := L) (s := s)
+      (A := A) (B := B) (C := C) (E := 0)
+      hA hB hC ?_ ?_
+  · simp [finiteApproxDepthTailBandExtra_extraComponent_three_eq_zero]
+  · linarith
+
+/-- Minimal `M = N = 3` sanity specialization.  This removes band and extra
+components, but intentionally does not make this specialization the route. -/
+theorem C2FiniteApproxDepthTailBandExtraScalarMarginBudget.of_bandExtraZero_three
+    {K L : ℕ} {s : ℂ} {A B : ℝ}
+    (hA :
+      ‖genuineCentralDoubleSeries s -
+          superGaussianFiniteGenuineRectangle 2
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+            s (L + 1) 3‖ ≤ A)
+    (hB :
+      superGaussianFiniteCoreDepthTailNormUpper 3
+        (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s L ≤ B)
+    (hpay :
+      A + B +
+          9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+        superGaussianFiniteTwoCoreUnitStripScalarMargin s) :
+    C2FiniteApproxDepthTailBandExtraScalarMarginBudget K 3 3 L s := by
+  refine
+    C2FiniteApproxDepthTailBandExtraScalarMarginBudget.of_componentUpper
+      (K := K) (M := 3) (N := 3) (L := L) (s := s)
+      (A := A) (B := B) (C := 0) (E := 0)
+      hA hB ?_ ?_ ?_
+  · simp [finiteApproxDepthTailBandExtra_bandComponent_self_eq_zero]
+  · simp [finiteApproxDepthTailBandExtra_extraComponent_three_eq_zero]
+  · linarith
+
+/-- Fine finite-cutoff anatomy for the two-core depth-limit defect.  The
+central-to-two-core defect is bounded by the finite genuine approximation
+error, the finite-core depth tail, and the visible band/extra saldos. -/
+theorem twoCoreDepthLimitDefectAt_le_finiteApproxDepthTail_bandExtraSaldo
+    {K M N L : ℕ} {s : ℂ}
+    (hM : 3 ≤ M) (hMN : M ≤ N) (hs : 0 < s.re) :
+    twoCoreDepthLimitDefectAt K s ≤
+      ‖genuineCentralDoubleSeries s -
+          superGaussianFiniteGenuineRectangle 2
+            (superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+            s (L + 1) N‖ +
+        superGaussianFiniteCoreDepthTailNormUpper N
+          (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s L +
+        superGaussianFiniteCoreBandSaldoNormUpper M N
+          (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s +
+        superGaussianFiniteCoreExtraSaldoNormUpper M
+          (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) s := by
+  let X : ℝ := superGaussianFiniteTwoCoreReciprocalCutoffScale K s
+  have hcentral :
+      ‖genuineCentralDoubleSeries s -
+          superGaussianFiniteCoreDepthLimit N X s‖ ≤
+        ‖genuineCentralDoubleSeries s -
+            superGaussianFiniteGenuineRectangle 2 X s (L + 1) N‖ +
+          superGaussianFiniteCoreDepthTailNormUpper N X s L :=
+    genuineCentral_sub_finiteCoreDepthLimit_norm_le_approx_add_depthTail
+      N (X := X) hs L
+  have htwoStep :
+      ‖genuineCentralDoubleSeries s -
+          superGaussianTwoCoreDepthLimit X s‖ ≤
+        ‖genuineCentralDoubleSeries s -
+            superGaussianFiniteCoreDepthLimit N X s‖ +
+          ‖superGaussianFiniteCoreDepthLimit N X s -
+            superGaussianTwoCoreDepthLimit X s‖ := by
+    calc
+      ‖genuineCentralDoubleSeries s -
+          superGaussianTwoCoreDepthLimit X s‖ =
+        ‖(genuineCentralDoubleSeries s -
+            superGaussianFiniteCoreDepthLimit N X s) +
+          (superGaussianFiniteCoreDepthLimit N X s -
+            superGaussianTwoCoreDepthLimit X s)‖ := by
+            ring_nf
+      _ ≤
+        ‖genuineCentralDoubleSeries s -
+            superGaussianFiniteCoreDepthLimit N X s‖ +
+          ‖superGaussianFiniteCoreDepthLimit N X s -
+            superGaussianTwoCoreDepthLimit X s‖ := norm_add_le _ _
+  have hfinite :
+      ‖superGaussianFiniteCoreDepthLimit N X s -
+          superGaussianTwoCoreDepthLimit X s‖ ≤
+        superGaussianFiniteCoreBandSaldoNormUpper M N X s +
+          superGaussianFiniteCoreExtraSaldoNormUpper M X s := by
+    have hband :
+        ‖superGaussianFiniteCoreBandDepthLimit M N X s‖ ≤
+          superGaussianFiniteCoreBandSaldoNormUpper M N X s :=
+      superGaussianFiniteCoreBandDepthLimit_norm_le_bandSaldoUpper
+        hMN (X := X) hs
+    have hextra :
+        ‖superGaussianFiniteCoreExtraDepthLimit M X s‖ ≤
+          superGaussianFiniteCoreExtraSaldoNormUpper M X s :=
+      superGaussianFiniteCoreExtraDepthLimit_norm_le_extraSaldoUpper
+        hM (X := X) hs
+    calc
+      ‖superGaussianFiniteCoreDepthLimit N X s -
+          superGaussianTwoCoreDepthLimit X s‖ =
+        ‖superGaussianFiniteCoreExtraDepthLimit M X s +
+          superGaussianFiniteCoreBandDepthLimit M N X s‖ := by
+            rw [superGaussianFiniteCoreDepthLimit_eq_twoCore_add_extra_add_band
+              hM hMN hs]
+            ring_nf
+      _ ≤
+        ‖superGaussianFiniteCoreExtraDepthLimit M X s‖ +
+          ‖superGaussianFiniteCoreBandDepthLimit M N X s‖ := norm_add_le _ _
+      _ ≤
+        superGaussianFiniteCoreBandSaldoNormUpper M N X s +
+          superGaussianFiniteCoreExtraSaldoNormUpper M X s := by
+            linarith
+  dsimp [twoCoreDepthLimitDefectAt]
+  change
+    ‖genuineCentralDoubleSeries s -
+        superGaussianTwoCoreDepthLimit X s‖ ≤
+      ‖genuineCentralDoubleSeries s -
+          superGaussianFiniteGenuineRectangle 2 X s (L + 1) N‖ +
+        superGaussianFiniteCoreDepthTailNormUpper N X s L +
+        superGaussianFiniteCoreBandSaldoNormUpper M N X s +
+        superGaussianFiniteCoreExtraSaldoNormUpper M X s
+  linarith
+
+/-- The finite fine ledger pays the two-core scalar-margin budget once its
+named upper plus the dyadic64 tax is below the scalar margin. -/
+theorem C2TwoCoreDepthLimitDefectScalarMarginBudget.of_finiteApproxDepthTailBandExtra
+    {K M N L : ℕ} {s : ℂ}
+    (hM : 3 ≤ M) (hMN : M ≤ N) (hs : 0 < s.re)
+    (h :
+      C2FiniteApproxDepthTailBandExtraScalarMarginBudget K M N L s) :
+    C2TwoCoreDepthLimitDefectScalarMarginBudget K s := by
+  exact
+    C2TwoCoreDepthLimitDefectScalarMarginBudget.of_defectUpper
+      (twoCoreDepthLimitDefectAt_le_finiteApproxDepthTail_bandExtraSaldo
+        (K := K) (M := M) (N := N) (L := L)
+        hM hMN hs)
+      (by
+        simpa [C2FiniteApproxDepthTailBandExtraScalarMarginBudget,
+          finiteApproxDepthTailBandExtraUpperAt] using h)
 
 /-- A larger finite horizontal-core limit cannot cancel if the exact
 intermediate extra saldo plus the exact outer finite band stays below the
@@ -7642,6 +9036,96 @@ theorem genuineCentralNoCancellation_of_twoCoreDepthLimitDefect_lt_gap
   exact
     genuineCentralNoCancellation_of_depthStableSuccApprox_tendsto_lt_gap
       hK hstable hdiff hdefect
+
+/-- Named-budget wrapper for the two-core limit-defect criterion at the
+dyadic reciprocal cutoff used by the current middle route. -/
+theorem genuineCentralNoCancellation_of_twoCoreDepthLimitDefectBudget
+    {K : ℕ} {s : ℂ} (hK : 2 ≤ K)
+    (hstable :
+      superGaussianFiniteTwoCoreDepthStableRegion K s
+        (superGaussianFiniteTwoCoreReciprocalCutoffScale K s))
+    (hbudget : C2TwoCoreDepthLimitDefectBudget K s) :
+    GenuineCentralNoCancellation s := by
+  exact
+    genuineCentralNoCancellation_of_twoCoreDepthLimitDefect_lt_gap
+      (K := K)
+      (X := superGaussianFiniteTwoCoreReciprocalCutoffScale K s)
+      (s := s)
+      hK hstable
+      (C2TwoCoreDepthLimitDefectBudget.raw hbudget)
+
+/-- Scalar-margin wrapper for the current two-core route.  The scalar budget
+recovers depth-stability internally through `marginNine`, then pays the
+explicit two-core limit-defect budget. -/
+theorem genuineCentralNoCancellation_of_twoCoreDepthLimitDefectScalarMarginBudget
+    {K : ℕ} {s : ℂ} (hK : 2 ≤ K)
+    (hs0 : 0 < s.re) (hs1 : s.re ≤ 1)
+    (h : C2TwoCoreDepthLimitDefectScalarMarginBudget K s) :
+    GenuineCentralNoCancellation s := by
+  have hmarginNine :
+      9 * ((1 / 2 : ℝ) ^ (K + 1)) <
+        3 / 40 * (s.re * Real.log 3 / (1 + s.re * Real.log 3)) := by
+    simpa [superGaussianFiniteTwoCoreUnitStripScalarMargin] using
+      C2TwoCoreDepthLimitDefectScalarMarginBudget.marginNine
+        (K := K) (s := s) h
+  have hstable :
+      superGaussianFiniteTwoCoreDepthStableRegion K s
+        (superGaussianFiniteTwoCoreReciprocalCutoffScale K s) :=
+    superGaussianFiniteTwoCoreDepthStableRegion_at_dyadic64_of_marginNine
+      (K := K) (s := s) hs0 hs1 hK hmarginNine
+  exact
+    genuineCentralNoCancellation_of_twoCoreDepthLimitDefectBudget
+      (K := K) (s := s)
+      hK hstable
+      (C2TwoCoreDepthLimitDefectBudget.of_scalarMarginBudget
+        (K := K) (s := s) hK hs0 hs1 h)
+
+/-- Existential scalar-margin wrapper: the next active middle obligation is to
+produce one dyadic depth whose defect plus dyadic64 tax is below the scalar
+margin. -/
+theorem genuineCentralNoCancellation_of_exists_twoCoreDepthLimitDefectScalarMarginBudget
+    {s : ℂ} (hs0 : 0 < s.re) (hs1 : s.re ≤ 1)
+    (h :
+      ∃ K : ℕ,
+        2 ≤ K ∧
+        C2TwoCoreDepthLimitDefectScalarMarginBudget K s) :
+    GenuineCentralNoCancellation s := by
+  rcases h with ⟨K, hK, hbudget⟩
+  exact
+    genuineCentralNoCancellation_of_twoCoreDepthLimitDefectScalarMarginBudget
+      (K := K) (s := s) hK hs0 hs1 hbudget
+
+/-- Canonical finite-core/extra debt wrapper for the active flexible route.
+Once the canonical debt pays the scalar margin at some dyadic depth and finite
+horizontal cutoff, the genuine central object cannot cancel. -/
+theorem genuineCentralNoCancellation_of_finiteCoreLimitExtraScalarMarginBudget
+    {K N : ℕ} {s : ℂ}
+    (hK : 2 ≤ K) (hN : 3 ≤ N)
+    (hs0 : 0 < s.re) (hs1 : s.re ≤ 1)
+    (hbudget : C2FiniteCoreLimitExtraScalarMarginBudget K N s) :
+    GenuineCentralNoCancellation s := by
+  exact
+    genuineCentralNoCancellation_of_twoCoreDepthLimitDefectScalarMarginBudget
+      (K := K) (s := s) hK hs0 hs1
+      (C2TwoCoreDepthLimitDefectScalarMarginBudget.of_finiteCoreLimitExtra
+        (K := K) (N := N) (s := s) hN hs0 hbudget)
+
+/-- Existential form of the canonical flexible route: it is enough to find one
+dyadic depth `K` and one finite horizontal cutoff `N` whose canonical
+finite-core/extra debt pays the scalar margin. -/
+theorem genuineCentralNoCancellation_of_exists_finiteCoreLimitExtraScalarMarginBudget
+    {s : ℂ} (hs0 : 0 < s.re) (hs1 : s.re ≤ 1)
+    (h :
+      ∃ K : ℕ,
+        ∃ N : ℕ,
+          2 ≤ K ∧
+          3 ≤ N ∧
+          C2FiniteCoreLimitExtraScalarMarginBudget K N s) :
+    GenuineCentralNoCancellation s := by
+  rcases h with ⟨K, N, hK, hN, hbudget⟩
+  exact
+    genuineCentralNoCancellation_of_finiteCoreLimitExtraScalarMarginBudget
+      (K := K) (N := N) (s := s) hK hN hs0 hs1 hbudget
 
 /-- Direct two-core accounting criterion.  This is the minimal no-cancellation
 shape: the central object is a certified two-core limit plus a saldo; if that
